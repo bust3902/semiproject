@@ -10,7 +10,6 @@
 
     <style>
       .nav-item {
-      		color: darkgray !important;
 			font-size:13.5px;
 			font-weight: bold;
       }
@@ -45,8 +44,8 @@
     </div>
   </nav>
   
-  <header class="py-2 mb-4">
-    <div class="container d-flex flex-wrap justify-content-center">
+  <header class="py-2 mb-2">
+    <div class="container d-flex flex-wrap justify-content-center mt-1">
 	    <a href="/semiproject/home.jsp" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
 	    	<Strong class="fs-3 bi me-2"><span class="text-primary">HTA</span>BOOKS</Strong>
 	    </a>
