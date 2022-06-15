@@ -8,13 +8,14 @@
 	User user = (User) session.getAttribute("LOGINED_USER");
 %>
 
-    <style>
-      .nav-item {
-      		color: darkgray !important;
-			font-size:13.5px;
-			font-weight: bold;
-      }
-    </style>
+  <style>
+    .nav-item {
+    		color: darkgray !important;
+	font-size:13.5px;
+	font-weight: bold;
+    }
+  </style>
+
 
   <nav class="bg-white border-bottom">
     <div class="container d-flex flex-wrap">
@@ -47,8 +48,8 @@
   
   <header class="py-2 mb-4">
     <div class="container d-flex flex-wrap justify-content-center">
-	    <a href="/semiproject/home.jsp" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
-	    	<Strong class="fs-3 bi me-2"><span class="text-primary">HTA</span>BOOKS</Strong>
+	    <a href="/semiproject/home.jsp" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none" style="font-family: 'Kanit', sans-serif; font-size:34px;">
+	    	<span class="me-2"><span style="color:var(--logo-color);">HTA</span>BOOKS</span>
 	    </a>
 	    <!-- 
 	    <form class="col-12 col-lg-auto mb-3 mb-lg-0">
@@ -67,7 +68,4 @@
 		</div>
     </div>
   </header>
-
-
-</html>
     

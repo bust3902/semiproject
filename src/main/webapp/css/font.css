@@ -1,0 +1,7 @@
+@charset "UTF-8";
+
+@import url(//cdn.jsdelivr.net/font-nanum/1.0/nanumgothic/nanumgothic.css);
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@600&display=swap');
+body {
+	font-family: "나눔고딕", Nanum Gothic;
+}

@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-  </head>
-  <body>
     
 <div class="container border-top mt-auto">
   <footer class="py-4">
@@ -49,7 +46,5 @@
    <span style="color:gray; font-size:10px;"><img src="/semiproject/img/wrench.svg" width="10" height="10" /> HTA 코퍼레이션</span>
   </footer>
  </div>
-  
-</body>
-</html>
+
     
