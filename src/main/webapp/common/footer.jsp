@@ -6,9 +6,9 @@
 		<div class="row">
 			<div class="col-2">
 				<ul class="nav flex-column">
-					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">고객센터 <img src="/semiproject/images/headset.svg" width="14" height="14" /></a></li>
+					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">고객센터 <img src="/semiproject/img/headset.svg" width="14" height="14" /></a></li>
 					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"></a></li>
-					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">공지사항<img src="/semiproject/images/volume-down.svg" width="24" height="24" class="mb-1"/></a></li>
+					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">공지사항<img src="/semiproject/img/volume-down.svg" width="24" height="24" class="mb-1"/></a></li>
 					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"></a></li>
 					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"></a></li>
 				</ul>
@@ -29,9 +29,9 @@
 
 			<div class="col-3">
 			<ul class="nav justify-content-end">
-				<li class="ms-3"><a class="text-muted" href="https://www.facebook.com/official.RIDI/"><img src="/semiproject/images/facebook.svg" width="24" height="24" /></a></li>
-				<li class="ms-3"><a class="text-muted" href="https://www.instagram.com/ridi_webtoon/"><img src="/semiproject/images/instagram.svg" width="24" height="24" /></a></li>
-				<li class="ms-3"><a class="text-muted" href="https://www.youtube.com/user/ridibooks0331"><img src="/semiproject/images/youtube.svg" width="24" height="24" /></a></li>
+				<li class="ms-3"><a class="text-muted" href="https://www.facebook.com/official.RIDI/"><img src="/semiproject/img/facebook.svg" width="24" height="24" /></a></li>
+				<li class="ms-3"><a class="text-muted" href="https://www.instagram.com/ridi_webtoon/"><img src="/semiproject/img/instagram.svg" width="24" height="24" /></a></li>
+				<li class="ms-3"><a class="text-muted" href="https://www.youtube.com/user/ridibooks0331"><img src="/semiproject/img/youtube.svg" width="24" height="24" /></a></li>
 			</ul>
 			</div>
 		</div>

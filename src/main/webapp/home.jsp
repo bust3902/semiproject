@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HTA BOOKS</title>
-<link href="images/Hfavicon.ico" rel="icon" type="image/x-icon" />
+<link href="img/Hfavicon.ico" rel="icon" type="image/x-icon" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 <jsp:include page="common/header.jsp">
 	<jsp:param name="menu" value="board"/>
@@ -24,7 +24,7 @@
 		<div class="row">
 			<div class="col-2 mb-1"><span class="text-primary fs-4 fw-bolder">도서</span></div>
 			<div class="col-8 mb-1"></div>
-			<div class="col-2 mb-1"><a href="#" class="nav-link p-0 text-muted mx-2" style="float:right;"><img src="/semiproject/images/justify.svg"/> 카테고리</a></div>
+			<div class="col-2 mb-1"><a href="#" class="nav-link p-0 text-muted mx-2" style="float:right;"><img src="/semiproject/img/justify.svg"/> 카테고리</a></div>
 		</div>
 	</div>
 
@@ -36,13 +36,13 @@
 	  </div>
 	  <div class="carousel-inner">
 	    <div class="carousel-item active">
-	      <img src="images/banner01.jpg" class="d-block w-100" alt="..." style="border-radius: 10px;">
+	      <img src="img/banner01.jpg" class="d-block w-100" alt="..." style="border-radius: 10px;">
 	</div>
 	<div class="carousel-item">
-		<img src="images/banner02.jpg" class="d-block w-100" alt="..." style="border-radius: 10px;">
+		<img src="img/banner02.jpg" class="d-block w-100" alt="..." style="border-radius: 10px;">
 	</div>
 	<div class="carousel-item">
-		<img src="images/banner03.jpg" class="d-block w-100" alt="..." style="border-radius: 10px;">
+		<img src="img/banner03.jpg" class="d-block w-100" alt="..." style="border-radius: 10px;">
 	</div>
 	</div>
 		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
@@ -58,27 +58,27 @@
 	<div class="container mb-5">
 		<a href="" class="nav-link text-muted"><span class="fs-5 text-dark fw-bold">베스트 셀러 ></span></a>
 		<div class="row">
-			<div class="col-1 px-0 mb-1"><img src="images/testBook02.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-1 px-0 mb-1"><img src="img/testBook02.jpg" style="max-width:100%; height:auto;"></div>
 			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="images/testBook01.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
 			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="images/testBook02.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-		</div>
-		<div class="row">
-			<div class="col-1 px-0 mb-1"><img src="images/testBook02.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="images/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="images/testBook02.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-1 px-0 mb-1"><img src="img/testBook02.jpg" style="max-width:100%; height:auto;"></div>
 			<div class="col-3 mb-1"></div>
 		</div>
 		<div class="row">
-			<div class="col-1 px-0 mb-1"><img src="images/testBook02.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-1 px-0 mb-1"><img src="img/testBook02.jpg" style="max-width:100%; height:auto;"></div>
 			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="images/testBook01.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
 			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="images/testBook02.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-1 px-0 mb-1"><img src="img/testBook02.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-3 mb-1"></div>
+		</div>
+		<div class="row">
+			<div class="col-1 px-0 mb-1"><img src="img/testBook02.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-3 mb-1"></div>
+			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-3 mb-1"></div>
+			<div class="col-1 px-0 mb-1"><img src="img/testBook02.jpg" style="max-width:100%; height:auto;"></div>
 			<div class="col-3 mb-1"></div>
 		</div>
 	</div>
@@ -86,39 +86,39 @@
 	<div class="container mb-5 mb-5">
 		<a href="" class="nav-link text-muted"><span class="fs-5 text-dark fw-bold">MD's PICK ></span></a>
 		<div class="row">
-			<div class="col-2 pr-1 mb-1"><img src="images/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-2 pr-1 mb-1"><img src="images/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-2 pr-1 mb-1"><img src="images/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-2 pr-1 mb-1"><img src="images/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-2 pr-1 mb-1"><img src="images/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-2 pr-1 mb-1"><img src="images/testBook01.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-2 pr-1 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-2 pr-1 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-2 pr-1 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-2 pr-1 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-2 pr-1 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-2 pr-1 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
 		</div>
 	</div>
 
 	<div class="container mb-5">
 		<a href="" class="nav-link text-muted"><span class="fs-5 text-dark fw-bold">베스트 셀러 ></span></a>
 		<div class="row">
-			<div class="col-1 px-0 mb-1"><img src="images/testBook01.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
 			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="images/testBook01.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
 			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="images/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-		</div>
-		<div class="row">
-			<div class="col-1 px-0 mb-1"><img src="images/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="images/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="images/testBook01.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
 			<div class="col-3 mb-1"></div>
 		</div>
 		<div class="row">
-			<div class="col-1 px-0 mb-1"><img src="images/testBook01.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
 			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="images/testBook01.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
 			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="images/testBook01.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-3 mb-1"></div>
+		</div>
+		<div class="row">
+			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-3 mb-1"></div>
+			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-3 mb-1"></div>
+			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
 			<div class="col-3 mb-1"></div>
 		</div>
 	</div>

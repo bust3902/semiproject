@@ -53,12 +53,12 @@
 		-->
 		<div class="mx-2 mt-1">
 			<a href="/semiproject/cart/mycart.jsp">
-				<img src="/semiproject/images/cart.svg" class="img-center" width="26" height="26" />
+				<img src="/semiproject/img/cart.svg" class="img-center" width="26" height="26" />
 			</a>
 		</div>
 		<div class="mx-2 mt-1">
 			<a href="/semiproject/user/mypage.jsp">
-				<img src="/semiproject/images/person.svg" class="img-center" width="28" height="28" />
+				<img src="/semiproject/img/person.svg" class="img-center" width="28" height="28" />
 			</a>
 		</div>
 	</div>
