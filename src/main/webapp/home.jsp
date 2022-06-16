@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HTA BOOKS</title>
-<link href="/semiproject/img/Hfavicon.ico" rel="icon" type="image/x-icon" />
+<link href="img/Hfavicon.ico" rel="icon" type="image/x-icon" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="/semiproject/css/home.css" rel="stylesheet" />;
 </head>
@@ -17,7 +17,9 @@
 </head>
 
 <style>
-	.container {width:75%;}
+	.container { width:75%; }
+	
+	img { border-radius: 5px; }
 </style>
 
 <body>
@@ -59,27 +61,27 @@
 	<div class="container mb-5">
 		<a href="" class="nav-link text-muted"><span class="fs-5 text-dark fw-bold">베스트 셀러 ></span></a>
 		<div class="row">
-			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-1 px-0 mb-1"><img src="img/testBook02.jpg" style="max-width:100%; height:auto;"></div>
 			<div class="col-3 mb-1"></div>
 			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
 			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-		</div>
-		<div class="row">
-			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-1 px-0 mb-1"><img src="img/testBook02.jpg" style="max-width:100%; height:auto;"></div>
 			<div class="col-3 mb-1"></div>
 		</div>
 		<div class="row">
-			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-1 px-0 mb-1"><img src="img/testBook02.jpg" style="max-width:100%; height:auto;"></div>
 			<div class="col-3 mb-1"></div>
 			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
 			<div class="col-3 mb-1"></div>
+			<div class="col-1 px-0 mb-1"><img src="img/testBook02.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-3 mb-1"></div>
+		</div>
+		<div class="row">
+			<div class="col-1 px-0 mb-1"><img src="img/testBook02.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-3 mb-1"></div>
 			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
+			<div class="col-3 mb-1"></div>
+			<div class="col-1 px-0 mb-1"><img src="img/testBook02.jpg" style="max-width:100%; height:auto;"></div>
 			<div class="col-3 mb-1"></div>
 		</div>
 	</div>
@@ -126,8 +128,8 @@
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
 <jsp:include page="common/footer.jsp">
 	<jsp:param name="menu" value="board"/>
 </jsp:include>
+</body>
 </html>
