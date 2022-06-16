@@ -8,10 +8,12 @@
 <title>HTA BOOKS</title>
 <link href="img/Hfavicon.ico" rel="icon" type="image/x-icon" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <link href="/semiproject/css/home.css" rel="stylesheet" />
 <jsp:include page="/common/header.jsp">
 	<jsp:param name="menu" value="board"/>
 </jsp:include>
+
 </head>
 
 <style>
@@ -26,6 +28,7 @@
 			<div class="col-2 mb-1"><span class="text-primary fs-4 fw-bolder">도서</span></div>
 			<div class="col-8 mb-1"></div>
 			<div class="col-2 mb-1"><a href="list/categories.jsp" class="nav-link p-0 text-muted mx-2" style="float:right;"><img src="/semiproject/img/justify.svg"/> 카테고리</a></div>
+
 		</div>
 	</div>
 
