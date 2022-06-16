@@ -13,7 +13,7 @@
 	.img-center { display: flex; justify-content:center;}
 </style>
 
-<nav class="bg-white border-bottom">
+<nav class="bg-white border-bottom" style="min-width:1094px;">
 	<div class="container d-flex flex-wrap">
 		<ul class="nav me-auto">
 			<li class="nav-item"><a href="#" class="nav-link link-dark px-2 active" aria-current="page"></a></li>
@@ -42,10 +42,10 @@
 </nav>
 
 
-  <header class="py-2 mb-4">
-    <div class="container d-flex flex-wrap justify-content-center">
-	    <a href="/semiproject/home.jsp" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none" style="font-family: 'Kanit', sans-serif; font-size:34px;">
-	    	<span class="me-2"><span style="color:var(--logo-color);">HTA</span>BOOKS</span>
+<header class="py-2 mb-4">
+	<div class="container d-flex flex-wrap justify-content-center mt-1" style="min-width:1094px;">
+		<a href="/semiproject/home.jsp" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-decoration-none" style="font-family: 'Kanit', sans-serif; font-size:34px;">
+	    	<strong class="fs-3 bi me-2">HTA<span class="text-dark">BOOKS</span></strong>
 
 	    </a>
 	    <!-- 
@@ -53,17 +53,7 @@
 	    	<input type="search" class="form-control" placeholder="Search..." aria-label="Search">
 	    </form>
 		 -->
-		<div class="mx-2">
-<header class="py-2 mb-2">
-	<div class="container d-flex flex-wrap justify-content-center mt-1">
-		<a href="/semiproject/home.jsp" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
-			<Strong class="fs-3 bi me-2"><span class="text-primary">HTA</span>BOOKS</Strong>
-		</a>
-		<!-- 
-		<form class="col-12 col-lg-auto mb-3 mb-lg-0">
-		<input type="search" class="form-control" placeholder="Search..." aria-label="Search">
-		</form>
-		-->
+
 		<div class="mx-2 mt-1">
 			<a href="/semiproject/cart/mycart.jsp">
 				<img src="/semiproject/img/cart.svg" class="img-center" width="26" height="26" />
@@ -74,7 +64,6 @@
 				<img src="/semiproject/img/person.svg" class="img-center" width="28" height="28" />
 			</a>
 		</div>
-
 	</div>
 </header>
 </html>

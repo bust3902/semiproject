@@ -9,6 +9,8 @@
 <link href="../img/Hfavicon.ico" rel="icon" type="image/x-icon" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 
+<link href="/semiproject/css/home.css" rel="stylesheet" />
+
 <jsp:include page="../common/header.jsp">
 	<jsp:param name="menu" value="board"/>
 </jsp:include>
@@ -39,7 +41,9 @@
 </head>
 
 <body>
-<div class="container my-4">
+
+<div class="container my-4" style="min-width:900px;">
+
 	<div class="row">
 		
 		<div class="col-2 border p-0 rounded-start">
@@ -220,7 +224,9 @@
 				<a class="list-group-item show-category-dummy">ㅤ</a>
 				<a class="list-group-item show-category-dummy">ㅤ</a>
 				<a class="list-group-item show-category-dummy">ㅤ</a>
-				<a href="#" class="list-group-item show-category">컴퓨터/IT 전체</a>
+
+				<a href="itmainlist.jsp" class="list-group-item show-category">컴퓨터/IT 전체</a>
+
 				<a href="#" class="list-group-item show-category">IT 비즈니스</a>
 				<a href="#" class="list-group-item show-category">개발/프로그래밍</a>
 				<a href="#" class="list-group-item show-category">컴퓨터/앱 활용</a>
