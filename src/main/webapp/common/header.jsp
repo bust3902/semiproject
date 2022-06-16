@@ -41,6 +41,19 @@
 	</div>
 </nav>
 
+
+  <header class="py-2 mb-4">
+    <div class="container d-flex flex-wrap justify-content-center">
+	    <a href="/semiproject/home.jsp" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none" style="font-family: 'Kanit', sans-serif; font-size:34px;">
+	    	<span class="me-2"><span style="color:var(--logo-color);">HTA</span>BOOKS</span>
+
+	    </a>
+	    <!-- 
+	    <form class="col-12 col-lg-auto mb-3 mb-lg-0">
+	    	<input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+	    </form>
+		 -->
+		<div class="mx-2">
 <header class="py-2 mb-2">
 	<div class="container d-flex flex-wrap justify-content-center mt-1">
 		<a href="/semiproject/home.jsp" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
@@ -61,6 +74,7 @@
 				<img src="/semiproject/img/person.svg" class="img-center" width="28" height="28" />
 			</a>
 		</div>
+
 	</div>
 </header>
 </html>

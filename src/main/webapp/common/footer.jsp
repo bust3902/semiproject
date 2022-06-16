@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
     
 <footer class="border-top">
 	<div class="container py-4 mt-auto">
@@ -26,6 +27,7 @@
 
 			<div class="col-5">
 			</div>
+
 
 			<div class="col-3">
 			<ul class="nav justify-content-end">
