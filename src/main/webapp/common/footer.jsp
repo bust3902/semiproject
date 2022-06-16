@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+
+<style>
+	.container { 
+	@media (min-width: 768px) {  .container {    width: 750px;  }}
+	@media (min-width: 992px) {  .container {    width: 970px;  }}
+	@media (min-width: 1200px) {  .container {    width: 1170px;  }}
+	}
+</style>
+
+
+
     
 <div class="container border-top mt-auto">
   <footer class="py-4">
