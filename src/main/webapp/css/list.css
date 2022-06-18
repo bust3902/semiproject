@@ -1,0 +1,33 @@
+@charset "UTF-8";
+@import "font.css";
+@import "variables.css";
+
+.card-title {
+	font-size:13px;
+	font-weight:bold;
+}
+
+p.card-text {
+	font-size:12px;
+}
+
+span.card-text {
+	font-family:Arial, sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	color:#0d6efd;
+}
+
+.btn-dark {
+ 	font-weight:bold;
+	font-size:14px;
+}
+
+li.rank {
+	font-size:12px;
+}
+
+img.thumbnail {
+	height:auto;
+	width:110px;
+}

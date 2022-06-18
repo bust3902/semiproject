@@ -45,7 +45,7 @@
 <header class="py-2 mb-4">
 	<div class="container d-flex flex-wrap justify-content-center mt-1" style="min-width:1094px;">
 		<a href="/semiproject/home.jsp" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-decoration-none" style="font-family: 'Kanit', sans-serif; font-size:34px;">
-	    	<strong class="fs-3 bi me-2">HTA<span class="text-dark">BOOKS</span></strong>
+	    	<strong class="bi me-2 text-primary" style="font-size:32px;">HTA<span class="text-dark">BOOKS</span></strong>
 	    </a>
 	    <!-- 
 	    <form class="col-12 col-lg-auto mb-3 mb-lg-0">
