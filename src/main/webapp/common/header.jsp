@@ -52,6 +52,7 @@
 	    	<input type="search" class="form-control" placeholder="Search..." aria-label="Search">
 	    </form>
 		 -->
+
 		<div class="mx-2 mt-1">
 			<a href="/semiproject/cart/mycart.jsp">
 				<img src="/semiproject/img/cart.svg" class="img-center" width="26" height="26" />
