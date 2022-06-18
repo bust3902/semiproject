@@ -9,7 +9,8 @@
 <link href="../img/Hfavicon.ico" rel="icon" type="image/x-icon" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<link href="/semiproject/css/home.css" rel="stylesheet" />
+<link href="/semiproject/css/list.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
 <jsp:include page="../common/header.jsp">
 	<jsp:param name="menu" value="board"/>
@@ -41,9 +42,7 @@
 </head>
 
 <body>
-
-<div class="container my-4" style="min-width:900px;">
-
+<div class="container my-4" style="min-width:1094px;">
 	<div class="row">
 		
 		<div class="col-2 border p-0 rounded-start">
