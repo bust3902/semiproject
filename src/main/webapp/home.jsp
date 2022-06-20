@@ -19,14 +19,15 @@
 	.container { width:72%; }
 	
 	img { border-radius: 5px; }
+	
 </style>
 
 <body>
 	<div class="container border-bottom mb-5" style="min-width:1094px;">
 		<div class="row">
-			<div class="col-2 mb-1"><span class="text-primary fw-bolder" style="font-size:24px;">도서</span></div>
-			<div class="col-8 mb-1"></div>
-			<div class="col-2 mb-1"><a href="list/categories.jsp" class="nav-link p-0 text-muted mx-2" style="float:right;"><img src="/semiproject/img/justify.svg"/> 카테고리</a></div>
+			<div class="col-2 mb-3"><span class="text-primary fw-bolder" style="font-size:24px;">도서</span></div>
+			<div class="col-8 mb-3"></div>
+			<div class="col-2 mb-3"><a href="list/categories.jsp" class="nav-link text-muted mx-2 mt-3" style="float:right;"><img src="/semiproject/img/justify.svg" class="pb-2"/> 카테고리</a></div>
 		</div>
 	</div>
 
@@ -58,7 +59,7 @@
 	</div>
 
 	<div class="container mb-5">
-		<a href="" class="nav-link text-muted"><span class="fs-5 text-dark fw-bold">베스트 셀러 ></span></a>
+		<a href="" class="nav-link text-muted mb-3"><span class="fs-2 text-dark fw-bold">베스트 셀러 ></span></a>
 		<div class="row">
 			<div class="col-1 px-0 mb-1"><img src="img/testBook02.jpg" style="max-width:100%; height:auto;"></div>
 			<div class="col-3 mb-1"></div>
@@ -86,7 +87,7 @@
 	</div>
 
 	<div class="container mb-5 mb-5">
-		<a href="" class="nav-link text-muted"><span class="fs-5 text-dark fw-bold">MD's PICK ></span></a>
+		<a href="" class="nav-link text-muted mb-3"><span class="fs-2 text-dark fw-bold">MD's PICK ></span></a>
 		<div class="row">
 			<div class="col-2 pr-1 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
 			<div class="col-2 pr-1 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
@@ -97,33 +98,6 @@
 		</div>
 	</div>
 
-	<div class="container mb-5">
-		<a href="" class="nav-link text-muted"><span class="fs-5 text-dark fw-bold">베스트 셀러 ></span></a>
-		<div class="row">
-			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-		</div>
-		<div class="row">
-			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-		</div>
-		<div class="row">
-			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-		</div>
-	</div>
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>

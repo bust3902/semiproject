@@ -74,322 +74,322 @@
 					<div class="container d-flex flex-wrap p-0" style="width:100%;">
 						<div class="col-10 p-0">
 							<ul class="nav justify-content-start m-0">
-								<li class="nav-item rank"><a href="#" class="nav-link p-2" style="color:gray">인기순</a></li>
+								<li class="nav-item rank"><a href="#" class="nav-link p-2 font-weight-bold" style="color:gray">인기순</a></li>
 								<li class="nav-item rank"><a href="#" class="nav-link p-2" style="color:gray">최신순</a></li>
-								<li class="nav-item"><a href="#" class="nav-link" style="color:gray"></a></li>
-								<li class="nav-item"><a href="#" class="nav-link" style="color:gray"></a></li>
 							</ul>
 						</div>
 						<div class="col-2 position-relative">
 							<div class="btn-group btn-group-sm position-absolute end-0" role="group">
-								<button type="button" class="btn btn-default border">
+								<button type="button" class="btn btn-default border" onclick="showList()">
 									<span class="glyphicon glyphicon-th-list"></span>
 								</button>
-								<button type="button" class="btn btn-default border">
+								<button type="button" class="btn btn-default border" onclick="showGrid()">
 									<span class="glyphicon glyphicon-th-large"></span>
 								</button>
 							</div>
 						</div>
 					</div>
 				</div>
-				
-				<!-- <div class="col mt-5">
-					<div class="card border-0" style="height:auto; width:120px;">
-						<a href="detail.jsp"><img src="../img/testBook02.jpg" class="card-img-top" alt="..."></a>
-						<div class="card-body p-0">
-							<strong class="card-title">제목</strong>
-							<p class="card-text m-0">저자</p>
-							<p class="card-text m-0">구매 <span class="card-text m-0">20,000원</span></p>
-							
+
+				<div class="row" id="list">
+					<div class="row mt-3 border-bottom">
+						<div class="col-2 mb-3">
+							<img class="thumbnail" alt="" src="../img/testBook02.jpg">
+						</div>
+						<div class="col-10 ps-4">
+							<h6>프로그래머로 살아본 1년</h6>
+							<p class="book-info">박윤종,백지현 외 1명<span class="partition"> | </span>씨익북스<span class="partition"> | </span>에세이</p>
+							<p class="book-introduction">&lt;책소개&gt;초급개발자 3인의 에세이입니다.
+								기획자의 길을 걷다 38살에 Front-end 개발자로 전직한 박윤종.
+								Backend 개발자로 일을 시작한 유지니.
+								그리고, DevOps 개발자의 길을 걷게된 백지현의 이야기를 들어봅시다.
+							</p>
+							<p class="book-introduction">구매 <span class="card-text">1,900원</span></p>
+						</div>
+					</div>
+					
+					<div class="row mt-3 border-bottom">
+						<div class="col-2 mb-3">
+							<img class="thumbnail" alt="" src="../img/testBook02.jpg">
+						</div>
+						<div class="col-10 ps-4">
+							<h6>프로그래머로 살아본 1년</h6>
+							<p class="book-info">박윤종,백지현 외 1명<span class="partition"> | </span>씨익북스<span class="partition"> | </span>에세이</p>
+							<p class="book-introduction">&lt;책소개&gt;초급개발자 3인의 에세이입니다.
+								기획자의 길을 걷다 38살에 Front-end 개발자로 전직한 박윤종.
+								Backend 개발자로 일을 시작한 유지니.
+								그리고, DevOps 개발자의 길을 걷게된 백지현의 이야기를 들어봅시다.
+							</p>
+							<p class="book-introduction">구매 <span class="card-text">1,900원</span></p>
+						</div>
+					</div>
+					
+					<div class="row mt-3 border-bottom">
+						<div class="col-2 mb-3">
+							<img class="thumbnail" alt="" src="../img/testBook02.jpg">
+						</div>
+						<div class="col-10 ps-4">
+							<h6>프로그래머로 살아본 1년</h6>
+							<p class="book-info">박윤종,백지현 외 1명<span class="partition"> | </span>씨익북스<span class="partition"> | </span>에세이</p>
+							<p class="book-introduction">&lt;책소개&gt;초급개발자 3인의 에세이입니다.
+								기획자의 길을 걷다 38살에 Front-end 개발자로 전직한 박윤종.
+								Backend 개발자로 일을 시작한 유지니.
+								그리고, DevOps 개발자의 길을 걷게된 백지현의 이야기를 들어봅시다.
+							</p>
+							<p class="book-introduction">구매 <span class="card-text">1,900원</span></p>
+						</div>
+					</div>
+					
+					<div class="row mt-3 border-bottom">
+						<div class="col-2 mb-3">
+							<img class="thumbnail" alt="" src="../img/testBook02.jpg">
+						</div>
+						<div class="col-10 ps-4">
+							<h6>프로그래머로 살아본 1년</h6>
+							<p class="book-info">박윤종,백지현 외 1명<span class="partition"> | </span>씨익북스<span class="partition"> | </span>에세이</p>
+							<p class="book-introduction">&lt;책소개&gt;초급개발자 3인의 에세이입니다.
+								기획자의 길을 걷다 38살에 Front-end 개발자로 전직한 박윤종.
+								Backend 개발자로 일을 시작한 유지니.
+								그리고, DevOps 개발자의 길을 걷게된 백지현의 이야기를 들어봅시다.
+							</p>
+							<p class="book-introduction">구매 <span class="card-text">1,900원</span></p>
+						</div>
+					</div>
+					
+					<div class="row mt-3 border-bottom">
+						<div class="col-2 mb-3">
+							<img class="thumbnail" alt="" src="../img/testBook02.jpg">
+						</div>
+						<div class="col-10 ps-4">
+							<h6>프로그래머로 살아본 1년</h6>
+							<p class="book-info">박윤종,백지현 외 1명<span class="partition"> | </span>씨익북스<span class="partition"> | </span>에세이</p>
+							<p class="book-introduction">&lt;책소개&gt;초급개발자 3인의 에세이입니다.
+								기획자의 길을 걷다 38살에 Front-end 개발자로 전직한 박윤종.
+								Backend 개발자로 일을 시작한 유지니.
+								그리고, DevOps 개발자의 길을 걷게된 백지현의 이야기를 들어봅시다.
+							</p>
+							<p class="book-introduction">구매 <span class="card-text">1,900원</span></p>
+						</div>
+					</div>
+					
+					<div class="row mt-3 border-bottom">
+						<div class="col-2 mb-3">
+							<img class="thumbnail" alt="" src="../img/testBook02.jpg">
+						</div>
+						<div class="col-10 ps-4">
+							<h6>프로그래머로 살아본 1년</h6>
+							<p class="book-info">박윤종,백지현 외 1명<span class="partition"> | </span>씨익북스<span class="partition"> | </span>에세이</p>
+							<p class="book-introduction">&lt;책소개&gt;초급개발자 3인의 에세이입니다.
+								기획자의 길을 걷다 38살에 Front-end 개발자로 전직한 박윤종.
+								Backend 개발자로 일을 시작한 유지니.
+								그리고, DevOps 개발자의 길을 걷게된 백지현의 이야기를 들어봅시다.
+							</p>
+							<p class="book-introduction">구매 <span class="card-text">1,900원</span></p>
+						</div>
+					</div>
+					
+					<div class="row mt-3 border-bottom">
+						<div class="col-2 mb-3">
+							<img class="thumbnail" alt="" src="../img/testBook02.jpg">
+						</div>
+						<div class="col-10 ps-4">
+							<h6>프로그래머로 살아본 1년</h6>
+							<p class="book-info">박윤종,백지현 외 1명<span class="partition"> | </span>씨익북스<span class="partition"> | </span>에세이</p>
+							<p class="book-introduction">&lt;책소개&gt;초급개발자 3인의 에세이입니다.
+								기획자의 길을 걷다 38살에 Front-end 개발자로 전직한 박윤종.
+								Backend 개발자로 일을 시작한 유지니.
+								그리고, DevOps 개발자의 길을 걷게된 백지현의 이야기를 들어봅시다.
+							</p>
+							<p class="book-introduction">구매 <span class="card-text">1,900원</span></p>
+						</div>
+					</div>
+					
+					<div class="row mt-3 border-bottom">
+						<div class="col-2 mb-3">
+							<img class="thumbnail" alt="" src="../img/testBook02.jpg">
+						</div>
+						<div class="col-10 ps-4">
+							<h6>프로그래머로 살아본 1년</h6>
+							<p class="book-info">박윤종,백지현 외 1명<span class="partition"> | </span>씨익북스<span class="partition"> | </span>에세이</p>
+							<p class="book-introduction">&lt;책소개&gt;초급개발자 3인의 에세이입니다.
+								기획자의 길을 걷다 38살에 Front-end 개발자로 전직한 박윤종.
+								Backend 개발자로 일을 시작한 유지니.
+								그리고, DevOps 개발자의 길을 걷게된 백지현의 이야기를 들어봅시다.
+							</p>
+							<p class="book-introduction">구매 <span class="card-text">1,900원</span></p>
+						</div>
+					</div>
+					
+					<div class="row mt-3 border-bottom">
+						<div class="col-2 mb-3">
+							<img class="thumbnail" alt="" src="../img/testBook02.jpg">
+						</div>
+						<div class="col-10 ps-4">
+							<h6>프로그래머로 살아본 1년</h6>
+							<p class="book-info">박윤종,백지현 외 1명<span class="partition"> | </span>씨익북스<span class="partition"> | </span>에세이</p>
+							<p class="book-introduction">&lt;책소개&gt;초급개발자 3인의 에세이입니다.
+								기획자의 길을 걷다 38살에 Front-end 개발자로 전직한 박윤종.
+								Backend 개발자로 일을 시작한 유지니.
+								그리고, DevOps 개발자의 길을 걷게된 백지현의 이야기를 들어봅시다.
+							</p>
+							<p class="book-introduction">구매 <span class="card-text">1,900원</span></p>
+						</div>
+					</div>
+					
+					<div class="row mt-3 border-bottom">
+						<div class="col-2 mb-3">
+							<img class="thumbnail" alt="" src="../img/testBook02.jpg">
+						</div>
+						<div class="col-10 ps-4">
+							<h6>프로그래머로 살아본 1년</h6>
+							<p class="book-info">박윤종,백지현 외 1명<span class="partition"> | </span>씨익북스<span class="partition"> | </span>에세이</p>
+							<p class="book-introduction">&lt;책소개&gt;초급개발자 3인의 에세이입니다.
+								기획자의 길을 걷다 38살에 Front-end 개발자로 전직한 박윤종.
+								Backend 개발자로 일을 시작한 유지니.
+								그리고, DevOps 개발자의 길을 걷게된 백지현의 이야기를 들어봅시다.
+							</p>
+							<p class="book-introduction">구매 <span class="card-text">1,900원</span></p>
+						</div>
+					</div>
+					
+					<div class="row mt-3 border-bottom">
+						<div class="col-2 mb-3">
+							<img class="thumbnail" alt="" src="../img/testBook02.jpg">
+						</div>
+						<div class="col-10 ps-4">
+							<h6>프로그래머로 살아본 1년</h6>
+							<p class="book-info">박윤종,백지현 외 1명<span class="partition"> | </span>씨익북스<span class="partition"> | </span>에세이</p>
+							<p class="book-introduction">&lt;책소개&gt;초급개발자 3인의 에세이입니다.
+								기획자의 길을 걷다 38살에 Front-end 개발자로 전직한 박윤종.
+								Backend 개발자로 일을 시작한 유지니.
+								그리고, DevOps 개발자의 길을 걷게된 백지현의 이야기를 들어봅시다.
+							</p>
+							<p class="book-introduction">구매 <span class="card-text">1,900원</span></p>
 						</div>
 					</div>
 				</div>
-			
-				<div class="col mt-5">
-					<div class="card border-0" style="height:auto; width:120px;">
-						<a href="detail.jsp"><img src="../img/testBook02.jpg" class="card-img-top" alt="..."></a>
-						<div class="card-body p-0">
-							<strong class="card-title">제목</strong>
-							<p class="card-text m-0">저자</p>
-							<p class="card-text m-0">구매 <span class="card-text m-0">20,000원</span></p>
-							
+				
+				<div class="row hidden" id="grid">
+					<div class="col mt-5">
+						<div class="card border-0" style="height:auto; width:120px;">
+							<a href="detail.jsp"><img src="../img/testBook02.jpg" class="card-img-top" alt="..."></a>
+							<div class="card-body p-0">
+								<strong class="card-title">제목</strong>
+								<p class="card-text m-0">저자</p>
+								<p class="card-text m-0">구매 <span class="card-text m-0">20,000원</span></p>
+								
+							</div>
+						</div>
+					</div>
+				
+					<div class="col mt-5">
+						<div class="card border-0" style="height:auto; width:120px;">
+							<a href="detail.jsp"><img src="../img/testBook02.jpg" class="card-img-top" alt="..."></a>
+							<div class="card-body p-0">
+								<strong class="card-title">제목</strong>
+								<p class="card-text m-0">저자</p>
+								<p class="card-text m-0">구매 <span class="card-text m-0">20,000원</span></p>
+								
+							</div>
+						</div>
+					</div>
+				
+					<div class="col mt-5">
+						<div class="card border-0" style="height:auto; width:120px;">
+							<a href="detail.jsp"><img src="../img/testBook02.jpg" class="card-img-top" alt="..."></a>
+							<div class="card-body p-0">
+								<strong class="card-title">제목</strong>
+								<p class="card-text m-0">저자</p>
+								<p class="card-text m-0">구매 <span class="card-text m-0">20,000원</span></p>
+								
+							</div>
+						</div>
+					</div>
+				
+					<div class="col mt-5">
+						<div class="card border-0" style="height:auto; width:120px;">
+							<a href="detail.jsp"><img src="../img/testBook02.jpg" class="card-img-top" alt="..."></a>
+							<div class="card-body p-0">
+								<strong class="card-title">제목</strong>
+								<p class="card-text m-0">저자</p>
+								<p class="card-text m-0">구매 <span class="card-text m-0">20,000원</span></p>
+								
+							</div>
+						</div>
+					</div>
+				
+					<div class="col mt-5">
+						<div class="card border-0" style="height:auto; width:120px;">
+							<a href="detail.jsp"><img src="../img/testBook02.jpg" class="card-img-top" alt="..."></a>
+							<div class="card-body p-0">
+								<strong class="card-title">제목</strong>
+								<p class="card-text m-0">저자</p>
+								<p class="card-text m-0">구매 <span class="card-text m-0">20,000원</span></p>
+								
+							</div>
+						</div>
+					</div>
+				
+					<div class="col mt-5">
+						<div class="card border-0" style="height:auto; width:120px;">
+							<a href="detail.jsp"><img src="../img/testBook02.jpg" class="card-img-top" alt="..."></a>
+							<div class="card-body p-0">
+								<strong class="card-title">제목</strong>
+								<p class="card-text m-0">저자</p>
+								<p class="card-text m-0">구매 <span class="card-text m-0">20,000원</span></p>
+								
+							</div>
+						</div>
+					</div>
+				
+					<div class="col mt-5">
+						<div class="card border-0" style="height:auto; width:120px;">
+							<a href="detail.jsp"><img src="../img/testBook02.jpg" class="card-img-top" alt="..."></a>
+							<div class="card-body p-0">
+								<strong class="card-title">제목</strong>
+								<p class="card-text m-0">저자</p>
+								<p class="card-text m-0">구매 <span class="card-text m-0">20,000원</span></p>
+								
+							</div>
+						</div>
+					</div>
+				
+					<div class="col mt-5">
+						<div class="card border-0" style="height:auto; width:120px;">
+							<a href="detail.jsp"><img src="../img/testBook02.jpg" class="card-img-top" alt="..."></a>
+							<div class="card-body p-0">
+								<strong class="card-title">제목</strong>
+								<p class="card-text m-0">저자</p>
+								<p class="card-text m-0">구매 <span class="card-text m-0">20,000원</span></p>
+								
+							</div>
+						</div>
+					</div>
+				
+					<div class="col mt-5">
+						<div class="card border-0" style="height:auto; width:120px;">
+							<a href="detail.jsp"><img src="../img/testBook02.jpg" class="card-img-top" alt="..."></a>
+							<div class="card-body p-0">
+								<strong class="card-title">제목</strong>
+								<p class="card-text m-0">저자</p>
+								<p class="card-text m-0">구매 <span class="card-text m-0">20,000원</span></p>
+								
+							</div>
+						</div>
+					</div>
+				
+					<div class="col mt-5">
+						<div class="card border-0" style="height:auto; width:120px;">
+							<a href="detail.jsp"><img src="../img/testBook02.jpg" class="card-img-top" alt="..."></a>
+							<div class="card-body p-0">
+								<strong class="card-title">제목</strong>
+								<p class="card-text m-0">저자</p>
+								<p class="card-text m-0">구매 <span class="card-text m-0">20,000원</span></p>
+								
+							</div>
 						</div>
 					</div>
 				</div>
-			
-				<div class="col mt-5">
-					<div class="card border-0" style="height:auto; width:120px;">
-						<a href="detail.jsp"><img src="../img/testBook02.jpg" class="card-img-top" alt="..."></a>
-						<div class="card-body p-0">
-							<strong class="card-title">제목</strong>
-							<p class="card-text m-0">저자</p>
-							<p class="card-text m-0">구매 <span class="card-text m-0">20,000원</span></p>
-							
-						</div>
-					</div>
-				</div>
-			
-				<div class="col mt-5">
-					<div class="card border-0" style="height:auto; width:120px;">
-						<a href="detail.jsp"><img src="../img/testBook02.jpg" class="card-img-top" alt="..."></a>
-						<div class="card-body p-0">
-							<strong class="card-title">제목</strong>
-							<p class="card-text m-0">저자</p>
-							<p class="card-text m-0">구매 <span class="card-text m-0">20,000원</span></p>
-							
-						</div>
-					</div>
-				</div>
-			
-				<div class="col mt-5">
-					<div class="card border-0" style="height:auto; width:120px;">
-						<a href="detail.jsp"><img src="../img/testBook02.jpg" class="card-img-top" alt="..."></a>
-						<div class="card-body p-0">
-							<strong class="card-title">제목</strong>
-							<p class="card-text m-0">저자</p>
-							<p class="card-text m-0">구매 <span class="card-text m-0">20,000원</span></p>
-							
-						</div>
-					</div>
-				</div>
-			
-				<div class="col mt-5">
-					<div class="card border-0" style="height:auto; width:120px;">
-						<a href="detail.jsp"><img src="../img/testBook02.jpg" class="card-img-top" alt="..."></a>
-						<div class="card-body p-0">
-							<strong class="card-title">제목</strong>
-							<p class="card-text m-0">저자</p>
-							<p class="card-text m-0">구매 <span class="card-text m-0">20,000원</span></p>
-							
-						</div>
-					</div>
-				</div>
-			
-				<div class="col mt-5">
-					<div class="card border-0" style="height:auto; width:120px;">
-						<a href="detail.jsp"><img src="../img/testBook02.jpg" class="card-img-top" alt="..."></a>
-						<div class="card-body p-0">
-							<strong class="card-title">제목</strong>
-							<p class="card-text m-0">저자</p>
-							<p class="card-text m-0">구매 <span class="card-text m-0">20,000원</span></p>
-							
-						</div>
-					</div>
-				</div>
-			
-				<div class="col mt-5">
-					<div class="card border-0" style="height:auto; width:120px;">
-						<a href="detail.jsp"><img src="../img/testBook02.jpg" class="card-img-top" alt="..."></a>
-						<div class="card-body p-0">
-							<strong class="card-title">제목</strong>
-							<p class="card-text m-0">저자</p>
-							<p class="card-text m-0">구매 <span class="card-text m-0">20,000원</span></p>
-							
-						</div>
-					</div>
-				</div>
-			
-				<div class="col mt-5">
-					<div class="card border-0" style="height:auto; width:120px;">
-						<a href="detail.jsp"><img src="../img/testBook02.jpg" class="card-img-top" alt="..."></a>
-						<div class="card-body p-0">
-							<strong class="card-title">제목</strong>
-							<p class="card-text m-0">저자</p>
-							<p class="card-text m-0">구매 <span class="card-text m-0">20,000원</span></p>
-							
-						</div>
-					</div>
-				</div>
-			
-				<div class="col mt-5">
-					<div class="card border-0" style="height:auto; width:120px;">
-						<a href="detail.jsp"><img src="../img/testBook02.jpg" class="card-img-top" alt="..."></a>
-						<div class="card-body p-0">
-							<strong class="card-title">제목</strong>
-							<p class="card-text m-0">저자</p>
-							<p class="card-text m-0">구매 <span class="card-text m-0">20,000원</span></p>
-							
-						</div>
-					</div>
-				</div> -->
-				
-				
-				<div class="row mt-3 border-bottom">
-					<div class="col-2 mb-3">
-						<img class="thumbnail" alt="" src="../img/testBook02.jpg">
-					</div>
-					<div class="col-10 ps-4">
-						<h6>프로그래머로 살아본 1년</h6>
-						<p class="book-info">박윤종,백지현 외 1명<span class="partition"> | </span>씨익북스<span class="partition"> | </span>에세이</p>
-						<p class="book-introduction">&lt;책소개&gt;초급개발자 3인의 에세이입니다.
-							기획자의 길을 걷다 38살에 Front-end 개발자로 전직한 박윤종.
-							Backend 개발자로 일을 시작한 유지니.
-							그리고, DevOps 개발자의 길을 걷게된 백지현의 이야기를 들어봅시다.
-						</p>
-						<p class="book-introduction">구매 <span class="card-text">1,900원</span></p>
-					</div>
-				</div>
-				
-				<div class="row mt-3 border-bottom">
-					<div class="col-2 mb-3">
-						<img class="thumbnail" alt="" src="../img/testBook02.jpg">
-					</div>
-					<div class="col-10 ps-4">
-						<h6>프로그래머로 살아본 1년</h6>
-						<p class="book-info">박윤종,백지현 외 1명<span class="partition"> | </span>씨익북스<span class="partition"> | </span>에세이</p>
-						<p class="book-introduction">&lt;책소개&gt;초급개발자 3인의 에세이입니다.
-							기획자의 길을 걷다 38살에 Front-end 개발자로 전직한 박윤종.
-							Backend 개발자로 일을 시작한 유지니.
-							그리고, DevOps 개발자의 길을 걷게된 백지현의 이야기를 들어봅시다.
-						</p>
-						<p class="book-introduction">구매 <span class="card-text">1,900원</span></p>
-					</div>
-				</div>
-				
-				<div class="row mt-3 border-bottom">
-					<div class="col-2 mb-3">
-						<img class="thumbnail" alt="" src="../img/testBook02.jpg">
-					</div>
-					<div class="col-10 ps-4">
-						<h6>프로그래머로 살아본 1년</h6>
-						<p class="book-info">박윤종,백지현 외 1명<span class="partition"> | </span>씨익북스<span class="partition"> | </span>에세이</p>
-						<p class="book-introduction">&lt;책소개&gt;초급개발자 3인의 에세이입니다.
-							기획자의 길을 걷다 38살에 Front-end 개발자로 전직한 박윤종.
-							Backend 개발자로 일을 시작한 유지니.
-							그리고, DevOps 개발자의 길을 걷게된 백지현의 이야기를 들어봅시다.
-						</p>
-						<p class="book-introduction">구매 <span class="card-text">1,900원</span></p>
-					</div>
-				</div>
-				
-				<div class="row mt-3 border-bottom">
-					<div class="col-2 mb-3">
-						<img class="thumbnail" alt="" src="../img/testBook02.jpg">
-					</div>
-					<div class="col-10 ps-4">
-						<h6>프로그래머로 살아본 1년</h6>
-						<p class="book-info">박윤종,백지현 외 1명<span class="partition"> | </span>씨익북스<span class="partition"> | </span>에세이</p>
-						<p class="book-introduction">&lt;책소개&gt;초급개발자 3인의 에세이입니다.
-							기획자의 길을 걷다 38살에 Front-end 개발자로 전직한 박윤종.
-							Backend 개발자로 일을 시작한 유지니.
-							그리고, DevOps 개발자의 길을 걷게된 백지현의 이야기를 들어봅시다.
-						</p>
-						<p class="book-introduction">구매 <span class="card-text">1,900원</span></p>
-					</div>
-				</div>
-				
-				<div class="row mt-3 border-bottom">
-					<div class="col-2 mb-3">
-						<img class="thumbnail" alt="" src="../img/testBook02.jpg">
-					</div>
-					<div class="col-10 ps-4">
-						<h6>프로그래머로 살아본 1년</h6>
-						<p class="book-info">박윤종,백지현 외 1명<span class="partition"> | </span>씨익북스<span class="partition"> | </span>에세이</p>
-						<p class="book-introduction">&lt;책소개&gt;초급개발자 3인의 에세이입니다.
-							기획자의 길을 걷다 38살에 Front-end 개발자로 전직한 박윤종.
-							Backend 개발자로 일을 시작한 유지니.
-							그리고, DevOps 개발자의 길을 걷게된 백지현의 이야기를 들어봅시다.
-						</p>
-						<p class="book-introduction">구매 <span class="card-text">1,900원</span></p>
-					</div>
-				</div>
-				
-				<div class="row mt-3 border-bottom">
-					<div class="col-2 mb-3">
-						<img class="thumbnail" alt="" src="../img/testBook02.jpg">
-					</div>
-					<div class="col-10 ps-4">
-						<h6>프로그래머로 살아본 1년</h6>
-						<p class="book-info">박윤종,백지현 외 1명<span class="partition"> | </span>씨익북스<span class="partition"> | </span>에세이</p>
-						<p class="book-introduction">&lt;책소개&gt;초급개발자 3인의 에세이입니다.
-							기획자의 길을 걷다 38살에 Front-end 개발자로 전직한 박윤종.
-							Backend 개발자로 일을 시작한 유지니.
-							그리고, DevOps 개발자의 길을 걷게된 백지현의 이야기를 들어봅시다.
-						</p>
-						<p class="book-introduction">구매 <span class="card-text">1,900원</span></p>
-					</div>
-				</div>
-				
-				<div class="row mt-3 border-bottom">
-					<div class="col-2 mb-3">
-						<img class="thumbnail" alt="" src="../img/testBook02.jpg">
-					</div>
-					<div class="col-10 ps-4">
-						<h6>프로그래머로 살아본 1년</h6>
-						<p class="book-info">박윤종,백지현 외 1명<span class="partition"> | </span>씨익북스<span class="partition"> | </span>에세이</p>
-						<p class="book-introduction">&lt;책소개&gt;초급개발자 3인의 에세이입니다.
-							기획자의 길을 걷다 38살에 Front-end 개발자로 전직한 박윤종.
-							Backend 개발자로 일을 시작한 유지니.
-							그리고, DevOps 개발자의 길을 걷게된 백지현의 이야기를 들어봅시다.
-						</p>
-						<p class="book-introduction">구매 <span class="card-text">1,900원</span></p>
-					</div>
-				</div>
-				
-				<div class="row mt-3 border-bottom">
-					<div class="col-2 mb-3">
-						<img class="thumbnail" alt="" src="../img/testBook02.jpg">
-					</div>
-					<div class="col-10 ps-4">
-						<h6>프로그래머로 살아본 1년</h6>
-						<p class="book-info">박윤종,백지현 외 1명<span class="partition"> | </span>씨익북스<span class="partition"> | </span>에세이</p>
-						<p class="book-introduction">&lt;책소개&gt;초급개발자 3인의 에세이입니다.
-							기획자의 길을 걷다 38살에 Front-end 개발자로 전직한 박윤종.
-							Backend 개발자로 일을 시작한 유지니.
-							그리고, DevOps 개발자의 길을 걷게된 백지현의 이야기를 들어봅시다.
-						</p>
-						<p class="book-introduction">구매 <span class="card-text">1,900원</span></p>
-					</div>
-				</div>
-				
-				<div class="row mt-3 border-bottom">
-					<div class="col-2 mb-3">
-						<img class="thumbnail" alt="" src="../img/testBook02.jpg">
-					</div>
-					<div class="col-10 ps-4">
-						<h6>프로그래머로 살아본 1년</h6>
-						<p class="book-info">박윤종,백지현 외 1명<span class="partition"> | </span>씨익북스<span class="partition"> | </span>에세이</p>
-						<p class="book-introduction">&lt;책소개&gt;초급개발자 3인의 에세이입니다.
-							기획자의 길을 걷다 38살에 Front-end 개발자로 전직한 박윤종.
-							Backend 개발자로 일을 시작한 유지니.
-							그리고, DevOps 개발자의 길을 걷게된 백지현의 이야기를 들어봅시다.
-						</p>
-						<p class="book-introduction">구매 <span class="card-text">1,900원</span></p>
-					</div>
-				</div>
-				
-				<div class="row mt-3 border-bottom">
-					<div class="col-2 mb-3">
-						<img class="thumbnail" alt="" src="../img/testBook02.jpg">
-					</div>
-					<div class="col-10 ps-4">
-						<h6>프로그래머로 살아본 1년</h6>
-						<p class="book-info">박윤종,백지현 외 1명<span class="partition"> | </span>씨익북스<span class="partition"> | </span>에세이</p>
-						<p class="book-introduction">&lt;책소개&gt;초급개발자 3인의 에세이입니다.
-							기획자의 길을 걷다 38살에 Front-end 개발자로 전직한 박윤종.
-							Backend 개발자로 일을 시작한 유지니.
-							그리고, DevOps 개발자의 길을 걷게된 백지현의 이야기를 들어봅시다.
-						</p>
-						<p class="book-introduction">구매 <span class="card-text">1,900원</span></p>
-					</div>
-				</div>
-				
-				<div class="row mt-3 border-bottom">
-					<div class="col-2 mb-3">
-						<img class="thumbnail" alt="" src="../img/testBook02.jpg">
-					</div>
-					<div class="col-10 ps-4">
-						<h6>프로그래머로 살아본 1년</h6>
-						<p class="book-info">박윤종,백지현 외 1명<span class="partition"> | </span>씨익북스<span class="partition"> | </span>에세이</p>
-						<p class="book-introduction">&lt;책소개&gt;초급개발자 3인의 에세이입니다.
-							기획자의 길을 걷다 38살에 Front-end 개발자로 전직한 박윤종.
-							Backend 개발자로 일을 시작한 유지니.
-							그리고, DevOps 개발자의 길을 걷게된 백지현의 이야기를 들어봅시다.
-						</p>
-						<p class="book-introduction">구매 <span class="card-text">1,900원</span></p>
-					</div>
-				</div>
-				
 			</div>
 			<div class="col-1"></div>
 		</div>	
@@ -399,5 +399,16 @@
 <jsp:include page="../common/footer.jsp">
 	<jsp:param name="menu" value="board"/>
 </jsp:include>
+<script>
+function showGrid() {
+    document.querySelector('#grid').classList.remove("hidden");
+    document.querySelector('#list').classList.add("hidden");
+};
+
+function showList() {
+    document.querySelector('#list').classList.remove("hidden");
+    document.querySelector('#grid').classList.add("hidden");
+};
+</script>
 </body>
 </html>

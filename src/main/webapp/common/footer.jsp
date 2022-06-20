@@ -3,13 +3,13 @@
 
     
 <footer class="border-top mt-5">
-	<div class="container py-4 mt-auto" style="min-width:1094px; max-width:1094px;">
+	<div class="container py-4 mt-5" style="min-width:1094px; max-width:1094px;">
 		<div class="row">
 			<div class="col-2">
 				<ul class="nav flex-column">
-					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">고객센터 <img src="/semiproject/img/headset.svg" width="14" height="14" /></a></li>
+					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"><img src="/semiproject/img/headset.svg" width="14" height="14" />  고객센터</a></li>
 					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"></a></li>
-					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">공지사항<img src="/semiproject/img/volume-down.svg" width="24" height="24" class="mb-1"/></a></li>
+					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"><img src="/semiproject/img/volume-down.svg" width="20" height="24" class="mb-1"/>공지사항</a></li>
 					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"></a></li>
 					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"></a></li>
 				</ul>
@@ -25,8 +25,7 @@
 				</ul>
 			</div>
 
-			<div class="col-5">
-			</div>
+			<div class="col-5"></div>
 
 
 			<div class="col-3">
@@ -37,9 +36,9 @@
 				</ul>
 			</div>
 		</div>
-		<div class="mt-3">
+		<div class="mt-5">
 			<span class="mt-1" style="color:gray; font-size:12px; font-weight:bold;">세미프로젝트 HTABooks</span><br>
-			<span style="color:gray; font-size:10px;"><img src="/semiproject/img/wrench.svg" width="10" height="10" /> HTA 코퍼레이션</span>
+			<span style="color:gray; font-size:10px;"><img src="/semiproject/img/wrench.svg" width="9" height="9" /> SemiProject ThirdTeam</span>
 		</div>
 	</div>
 </footer>
