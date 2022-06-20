@@ -1,0 +1,101 @@
+@charset "UTF-8";
+@import "variables.css";
+@import "font.css";
+
+p {
+  margin: 0;
+}
+
+section {
+  width: 980px;
+}
+
+img {
+  width: 60px;
+}
+
+.check-icon {
+  width: 15px;
+}
+.check-icon + span {
+  color: #5382b9;
+}
+
+.summary_info_wrapper {
+  font-size: 13px;
+  font-weight: 700;
+  border: 1px solid #87b4e9;
+}
+
+.summary_info_wrapper p {
+  color: #738096;
+}
+
+.summary_total_wrapper {
+  background: #ebf6ff;
+}
+.summary_total_wrapper span {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--main-color);
+}
+
+.buy_button_wrapper {
+  height: 54px;
+}
+
+#buy_button {
+  background: var(--main-color);
+  border: 1px solid var(--main-color);
+  box-shadow: 0 2px 4px 0 rgb(31 140 230 / 30%);
+}
+
+#buy_button:focus,
+#buy_button:hover {
+  background: #0077d9;
+}
+
+.cart_wrapper {
+  position: relative;
+}
+
+.cart_nav,
+form {
+  width: 618px;
+}
+
+form > div {
+  padding: 0px 20px;
+}
+
+input[type=checkbox] {
+	width:18px;
+	height:18px;
+	margin-right:6px;
+}
+
+.btn-outline-secondary{
+	--bs-btn-font-weight: 800;
+	--bs-btn-padding-x: 10px;
+	--bs-btn-padding-y: 5px;
+	font-size:12px;
+	border: 1px solid var(--bs-gray-400);
+}
+
+form label, form span {
+	font-size: 14px;
+}
+
+del {
+	font-size: 10px;
+}
+
+
+#cart_summary_wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 290px;
+  height: 100%;
+}
+
