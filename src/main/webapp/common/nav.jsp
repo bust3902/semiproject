@@ -26,7 +26,7 @@
 		<%
 			if (user == null) {
 		%>
-        <li class="nav-item"><a href="/semiproject/login/loginform.jsp" class="btn btn-outline-light btn-sm m-2" role="button">로그인</a></button></li>
+        <li class="nav-item"><a href="/semiproject/login/loginform.jsp" class="btn btn-outline-light btn-sm m-2" role="button">로그인</a></li>
 		<%
 			} else {
 		%>
