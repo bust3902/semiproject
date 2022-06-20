@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    
+
 <footer class="border-top mt-5">
 	<div class="container py-4 mt-5" style="min-width:1094px; max-width:1094px;">
 		<div class="row">

@@ -23,6 +23,7 @@ public class BookDao {
 	 */
 	private DaoHelper helper = DaoHelper.getInstance();
 
+
 	/**
 	 * 책 번호로 책 데이터를 검색
 	 * @return 책 데이터
@@ -262,8 +263,7 @@ public class BookDao {
 			book.setCategoryGroupNo(rs.getInt("CATEGORY_GROUP_NO"));
 			return book;
 		}, categoryGroupNo, categoryNo);
-		
+
 	}
-	
 	
 }
