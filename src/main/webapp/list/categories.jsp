@@ -224,7 +224,7 @@
 				<a class="list-group-item show-category-dummy">ㅤ</a>
 				<a class="list-group-item show-category-dummy">ㅤ</a>
 
-				<a href="itmainlist.jsp" class="list-group-item show-category">컴퓨터/IT 전체</a>
+				<a href="itmainlist.jsp?categoryGroupNo=1100" class="list-group-item show-category">컴퓨터/IT 전체</a>
 
 				<a href="#" class="list-group-item show-category">IT 비즈니스</a>
 				<a href="#" class="list-group-item show-category">개발/프로그래밍</a>

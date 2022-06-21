@@ -174,12 +174,12 @@
 				<button class="btn link-dark main-category nav-link rounded" data-bs-toggle="collapse" data-bs-target="#cate11" onclick="hideOthers(event)">컴퓨터/IT</button>
 				<div class="collapse" id="cate11">
 					<ul class="btn-toggle-nav list-unstyled fw-normal">
-						<li><a href="#" class="link-dark nav-link sub-category">컴퓨터/IT 전체</a></li>
-						<li><a href="#" class="link-dark nav-link sub-category">IT 비즈니스</a></li>
-						<li><a href="#" class="link-dark nav-link sub-category">개발/프로그래밍</a></li>
-						<li><a href="#" class="link-dark nav-link sub-category">컴퓨터/앱 활용</a></li>
-						<li><a href="#" class="link-dark nav-link sub-category">IT 자격증</a></li>
-						<li><a href="#" class="link-dark nav-link sub-category">IT 해외원서</a></li>
+						<li><a href="/semiproject/list/itmainlist.jsp?categoryGroupNo=1100" class="link-dark nav-link sub-category">컴퓨터/IT 전체</a></li>
+						<li><a href="/semiproject/list/itmainlist.jsp?categoryGroupNo=1102" class="link-dark nav-link sub-category">IT 비즈니스</a></li>
+						<li><a href="/semiproject/list/itmainlist.jsp?categoryGroupNo=1103" class="link-dark nav-link sub-category">개발/프로그래밍</a></li>
+						<li><a href="/semiproject/list/itmainlist.jsp?categoryGroupNo=1104" class="link-dark nav-link sub-category">컴퓨터/앱 활용</a></li>
+						<li><a href="/semiproject/list/itmainlist.jsp?categoryGroupNo=1105" class="link-dark nav-link sub-category">IT 자격증</a></li>
+						<li><a href="/semiproject/list/itmainlist.jsp?categoryGroupNo=1106" class="link-dark nav-link sub-category">IT 해외원서</a></li>
 					</ul>
 				</div>
 			</li>

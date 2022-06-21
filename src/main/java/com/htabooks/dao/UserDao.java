@@ -17,10 +17,12 @@ public class UserDao {
 	
 	public void insertUser(User user) throws SQLException{
 		String sql = "insert into ridi_users"
+
 				+ "(user_no, user_id, user_password, user_name, user_email, user_birth_date, user_gender )"
 				+ "values "
 				+ "(ridi_users_seq.nextval, ?, ?, ?, ?, ?, ? )";
 		helper.insert(sql, user.getId(), user.getPassword(), user.getName(), user.getEmail(), user.getBirthDate(), user.getGender());
+
 	}
 	
 	public User getUserById(String id) throws SQLException{
@@ -35,6 +37,7 @@ public class UserDao {
 			user.setPassword(rs.getString("user_password"));
 			user.setName(rs.getString("user_name"));
 			user.setEmail(rs.getString("user_email"));
+
 			user.setBirthDate(rs.getString("user_birth_date"));
 			user.setGender(rs.getString("user_gender"));
 			user.setCreatedDate(rs.getDate("user_created_date"));
@@ -60,6 +63,7 @@ public class UserDao {
 			user.setPassword(rs.getString("user_password"));
 			user.setName(rs.getString("user_name"));
 			user.setEmail(rs.getString("user_email"));
+
 			user.setBirthDate(rs.getString("user_birth_date"));
 			user.setGender(rs.getString("user_gender"));
 			user.setCreatedDate(rs.getDate("user_created_date"));
