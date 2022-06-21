@@ -16,7 +16,10 @@ public class BookDto {
 	private int discountRate;
 	private String imgFileName;
 	private int bookSalesRate;
+	private String bookPublisher;
+	private String categoryName;
 	private int categoryGroupNo;
+	private String categoryGroupName;
 	
 	public BookDto() {}
 
@@ -140,6 +143,22 @@ public class BookDto {
 		this.bookSalesRate = bookSalesRate;
 	}
 	
+	public String getBookPublisher() {
+		return bookPublisher;
+	}
+	
+	public void setBookPublisher(String bookPublisher) {
+		this.bookPublisher = bookPublisher;
+	}
+	
+	public String getCategoryName() {
+		return categoryName;
+	}
+	
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+	
 	public int getCategoryGroupNo() {
 		return categoryGroupNo;
 	}
@@ -147,5 +166,14 @@ public class BookDto {
 	public void setCategoryGroupNo(int categoryGroupNo) {
 		this.categoryGroupNo = categoryGroupNo;
 	}
+	
+	public String getCategoryGroupName() {
+		return categoryGroupName;
+	}
+	
+	public void setCategoryGroupName(String categoryGroupName) {
+		this.categoryGroupName = categoryGroupName;
+	}
+	
 
 }
