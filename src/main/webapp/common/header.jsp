@@ -52,16 +52,40 @@
 	    	<input type="search" class="form-control" placeholder="Search..." aria-label="Search">
 	    </form>
 		 -->
-		<div class="mx-2 mt-3">
+
+		<%
+		if (user== null){
+		%>
+		<div class="mx-2">
+			<a href="/semiproject/login/loginform.jsp">
+				<img src="/semiproject/img/cart.svg" width="32" height="32" />
+			</a>
+		</div>
+		
+		<div class="mx-2" >
+			<a href="/semiproject/login/loginform.jsp">
+				<img src="/semiproject/img/person.svg" width="32" height="32" />
+			</a>
+		</div>
+		
+		<%
+		} else {
+		%>
+		
+		<div class="mx-2">
+
 			<a href="/semiproject/cart/mycart.jsp">
-				<img src="/semiproject/img/cart.svg" class="img-center" width="26" height="26" />
+				<img src="/semiproject/img/cart.svg" width="32" height="32" />
 			</a>
 		</div>
-		<div class="mx-2 mt-3">
+		
+		<div class="mx-2" >
+
 			<a href="/semiproject/user/mypage.jsp">
-				<img src="/semiproject/img/person.svg" class="img-center" width="28" height="28" />
+				<img src="/semiproject/img/person.svg" width="32" height="32" />
 			</a>
 		</div>
+		<%} %>
 	</div>
 </header>
 </html>
