@@ -54,16 +54,16 @@
 			<div class="row border-bottom">
 				<ul class="nav justify-content-start">
 					<li class="nav-item border-bottom border-primary border-3"><a href="itmainlist.jsp?categoryGroupNo=1100" class="nav-link p-2" style="color:gray">홈</a></li>
-					<li class="nav-item"><a href="itnewlist.jsp?categoryGroupNo=1100" class="nav-link p-2" style="color:gray">신간</a></li>
-					<li class="nav-item"><a href="itbestsellerlist.jsp?categoryGroupNo=1100" class="nav-link p-2" style="color:gray">베스트셀러</a></li>
-					<li class="nav-item"><a href="italllist.jsp?categoryGroupNo=1100" class="nav-link p-2" style="color:gray">전체</a></li>
+					<li class="nav-item"><a href="itnewlist.jsp?categoryGroupNo=1100&order=best&view=list" class="nav-link p-2" style="color:gray">신간</a></li>
+					<li class="nav-item"><a href="itbestsellerlist.jsp?categoryGroupNo=1100&order=week&view=list" class="nav-link p-2" style="color:gray">베스트셀러</a></li>
+					<li class="nav-item"><a href="italllist.jsp?categoryGroupNo=1100&page=1&view=list" class="nav-link p-2" style="color:gray">전체</a></li>
 				</ul>
 			</div>
 			
 			<div class="row mt-5">
 				<div class="col-3 m-0 p-0"><strong style="font-size:17px;">컴퓨터/IT 인기 신간</strong></div>
 				<div class="col-7 m-0"><hr></div>
-				<div class="col-2"><a href="itnewlist.jsp?categoryGroupNo=1100" class="btn btn-dark" type="button"><strong>전체보기</strong></a></div>
+				<div class="col-2"><a href="itnewlist.jsp?categoryGroupNo=1100&order=best" class="btn btn-dark" type="button"><strong>전체보기</strong></a></div>
 			</div>
 			
 			
@@ -89,7 +89,7 @@
 				<div class="row mt-5">
 					<div class="col-3 m-0 p-0"><strong style="font-size:17px;">컴퓨터/IT 베스트셀러</strong></div>
 					<div class="col-7 m-0"><hr></div>
-					<div class="col-2"><a href="itbestsellerlist.jsp?categoryGroupNo=1100" class="btn btn-dark justify-content-end" type="button"><strong>전체보기</strong></a></div>
+					<div class="col-2"><a href="itbestsellerlist.jsp?categoryGroupNo=1100&order=week" class="btn btn-dark justify-content-end" type="button"><strong>전체보기</strong></a></div>
 				</div>
 				
 					

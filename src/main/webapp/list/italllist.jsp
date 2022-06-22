@@ -53,7 +53,52 @@
 
 			int categoryGroupNo = StringUtil.stringToInt(request.getParameter("categoryGroupNo"));
 			
-			List<BookDto> allBookSortBest = bookDao.getBestAllBooks(categoryGroupNo);
+			String viewStyle  = request.getParameter("view");
+			if (viewStyle == null) {
+				viewStyle = "list";
+			}
+			
+			int rows = 10;
+			
+			int pages = 5;
+			
+			int records = bookDao.getTotalRowsCount();
+			
+			int totalPages = (int) (Math.ceil((double) records/rows));
+			
+			int totalBlocks = (int) (Math.ceil((double) totalPages/pages));
+			
+			String pageNum = request.getParameter("page");
+			if (pageNum == null) {
+				pageNum = "1";
+			}
+			int currentPage = Integer.parseInt(request.getParameter("page"));
+			
+			if (currentPage <= 0 || currentPage > totalPages) {
+				response.sendRedirect("italllist.jsp?categoryGroupNo=1100");
+				return;
+			}
+			
+			int currentBlock = (int) (Math.ceil((double) currentPage/pages));
+			
+			int beginPage = (currentBlock -1)*pages + 1;
+			int endPage = (currentBlock == totalBlocks ? totalPages : currentBlock&pages);
+			
+			int beginIndex = (currentPage-1)*rows +1;
+			int endIndex = currentPage*rows;
+			
+			String orderCateory = request.getParameter("order");
+			if (orderCateory == null) {
+				orderCateory = "best";
+			}
+
+			List<BookDto> booksSort= null;
+			
+			if ("best".equals(orderCateory)) {
+				booksSort = bookDao.getSortBestAllBooks(categoryGroupNo, beginIndex, endIndex);
+			} else if ("insert".equals(orderCateory)) {
+				booksSort = bookDao.getSortInsertAllBooks(categoryGroupNo, beginIndex, endIndex);
+			}
 		%>
 		<div class="col-3">
 			<aside>
@@ -74,9 +119,9 @@
 			<div class="row mb-3 border-bottom">
 				<ul class="nav justify-content-start">
 					<li class="nav-item"><a href="itmainlist.jsp?categoryGroupNo=1100" class="nav-link p-2" style="color:gray">홈</a></li>
-					<li class="nav-item"><a href="itnewlist.jsp?categoryGroupNo=1100" class="nav-link p-2" style="color:gray">신간</a></li>
-					<li class="nav-item"><a href="itbestsellerlist.jsp?categoryGroupNo=1100" class="nav-link p-2" style="color:gray">베스트셀러</a></li>
-					<li class="nav-item border-bottom border-primary border-3"><a href="italllist.jsp?categoryGroupNo=1100" class="nav-link p-2" style="color:gray">전체</a></li>
+					<li class="nav-item"><a href="itnewlist.jsp?categoryGroupNo=1100&order=best&view=list" class="nav-link p-2" style="color:gray">신간</a></li>
+					<li class="nav-item"><a href="itbestsellerlist.jsp?categoryGroupNo=1100&order=week&view=list" class="nav-link p-2" style="color:gray">베스트셀러</a></li>
+					<li class="nav-item border-bottom border-primary border-3"><a href="italllist.jsp?categoryGroupNo=1100&page=1&view=list" class="nav-link p-2" style="color:gray">전체</a></li>
 				</ul>
 			</div>
 
@@ -85,26 +130,26 @@
 					<div class="container d-flex flex-wrap p-0" style="width:100%;">
 						<div class="col-10 p-0">
 							<ul class="nav justify-content-start m-0">
-								<li class="nav-item rank"><a href="#" class="nav-link p-2 font-weight-bold" style="color:gray">인기순</a></li>
-								<li class="nav-item rank"><a href="#" class="nav-link p-2" style="color:gray">최신순</a></li>
+								<li class="nav-item rank"><a href="italllist.jsp?categoryGroupNo=1100&order=best&view=<%=viewStyle %>&page=<%=pageNum %>" class="nav-link p-2 font-weight-bold" style="color:gray">인기순</a></li>
+								<li class="nav-item rank"><a href="italllist.jsp?categoryGroupNo=1100&order=insert&view=<%=viewStyle %>&page=<%=pageNum %>" class="nav-link p-2" style="color:gray">최신순</a></li>
 							</ul>
 						</div>
 						<div class="col-2 position-relative">
 							<div class="btn-group btn-group-sm position-absolute end-0" role="group">
-								<button type="button" class="btn btn-default border" onclick="showList()">
+								<a class="btn btn-default border" href="italllist.jsp?categoryGroupNo=1100&view=list&page=<%=pageNum %>" role="button">
 									<span class="glyphicon glyphicon-th-list"></span>
-								</button>
-								<button type="button" class="btn btn-default border" onclick="showGrid()">
+								</a>
+								<a class="btn btn-default border" href="italllist.jsp?categoryGroupNo=1100&view=grid&page=<%=pageNum %>" role="button">
 									<span class="glyphicon glyphicon-th-large"></span>
-								</button>
+								</a>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<div class="row" id="list">
+				<div class="row <%="list".equals(viewStyle) ? "" : "d-none" %>" id="list">
 					<%
-						for (BookDto book: allBookSortBest) {
+						for (BookDto book: booksSort) {
 					%>
 					<div class="row mt-3 border-bottom">
 						<div class="col-2 mb-3">
@@ -123,12 +168,33 @@
 					<%
 						}
 					%>
+					<div class="row">
+						<nav>
+							<ul class="pagination justify-content-center">
+								<li class="page-item">
+									<a class="page-link <%=currentPage <= 1 ? "disabled" : "" %>" href="italllist.jsp?categoryGroupNo=<%=categoryGroupNo%>&view=<%=viewStyle %>&page=<%=currentPage -1 %>">이전</a>
+								</li>
+							<%
+								for (int num = beginPage; num <= endPage; num++) {
+							%>
+								<li class="page-item <%=currentPage == num ? "active" : "" %>">
+									<a class="page-link" href="italllist.jsp?categoryGroupNo=<%=categoryGroupNo%>&view=<%=viewStyle %>&page=<%=num %>"><%=num %></a>
+								</li>
+							<%
+								}
+							%>
+								<li class="page-item">
+									<a class="page-link <%=currentPage >= totalPages ? "disabled" : "" %>" href="italllist.jsp?categoryGroupNo=<%=categoryGroupNo%>&view=<%=viewStyle %>&page=<%=currentPage + 1 %>">다음</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
 
 				</div>
 				
-				<div class="row hidden" id="grid">
+				<div class="row <%="grid".equals(viewStyle) ? "" : "d-none" %>" id="grid">
 					<%
-						for (BookDto book: allBookSortBest) {
+						for (BookDto book: booksSort) {
 					%>
 					<div class="col mt-5">
 						<div class="card border-0" style="height:auto; width:120px;">
@@ -144,6 +210,27 @@
 					<%
 						}
 					%>
+				<div class="row">
+					<nav>
+						<ul class="pagination justify-content-center">
+							<li class="page-item">
+								<a class="page-link <%=currentPage <= 1 ? "disabled" : "" %>" href="italllist.jsp?categoryGroupNo=<%=categoryGroupNo%>&order=<%=orderCateory %>&view=<%=viewStyle %>&page=<%=currentPage -1 %>">이전</a>
+							</li>
+						<%
+							for (int num = beginPage; num <= endPage; num++) {
+						%>
+							<li class="page-item <%=currentPage == num ? "active" : "" %>">
+								<a class="page-link" href="italllist.jsp?categoryGroupNo=<%=categoryGroupNo%>&order=<%=orderCateory %>&view=<%=viewStyle %>&page=<%=num %>"><%=num %></a>
+							</li>
+						<%
+							}
+						%>
+							<li class="page-item">
+								<a class="page-link <%=currentPage >= totalPages ? "disabled" : "" %>" href="italllist.jsp?categoryGroupNo=<%=categoryGroupNo%>&order=<%=orderCateory %>&view=<%=viewStyle %>&page=<%=currentPage + 1 %>">다음</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
 				</div>
 			</div>
 			<div class="col-1"></div>
@@ -155,7 +242,7 @@
 	<jsp:param name="menu" value="board"/>
 </jsp:include>
 <script>
-function showGrid() {
+/* function showGrid() {
     document.querySelector('#grid').classList.remove("hidden");
     document.querySelector('#list').classList.add("hidden");
 };
@@ -163,7 +250,7 @@ function showGrid() {
 function showList() {
     document.querySelector('#list').classList.remove("hidden");
     document.querySelector('#grid').classList.add("hidden");
-};
+}; */
 </script>
 </body>
 </html>

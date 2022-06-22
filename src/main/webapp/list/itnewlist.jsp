@@ -52,10 +52,24 @@
 			BookDao bookDao = BookDao.getInstance();
 
 			int categoryGroupNo = StringUtil.stringToInt(request.getParameter("categoryGroupNo"));
+
+			String viewStyle  = request.getParameter("view");
+			if (viewStyle == null) {
+				viewStyle = "list";
+			}
 			
-			List<BookDto> newBestSalesListBook = bookDao.getNewBestBooks(categoryGroupNo);
+			String orderCategory = request.getParameter("order");
 			
-			List<BookDto> newBestSalesGridBook = bookDao.getNewBestBooks(categoryGroupNo);
+			List<BookDto> listBookList = null;
+			List<BookDto> listBookGrid = null;
+			
+			if (orderCategory.equals("new")) {
+				listBookList = bookDao.getNewBooks(categoryGroupNo);
+				listBookGrid = bookDao.getNewBooks(categoryGroupNo);
+			} else {
+				listBookList = bookDao.getNewBestBooks(categoryGroupNo);
+				listBookGrid = bookDao.getNewBestBooks(categoryGroupNo);
+			}
 		%>
 		<div class="col-3">
 			<aside>
@@ -76,9 +90,9 @@
 			<div class="row mb-3 border-bottom">
 				<ul class="nav justify-content-start">
 					<li class="nav-item"><a href="itmainlist.jsp?categoryGroupNo=1100" class="nav-link p-2" style="color:gray">홈</a></li>
-					<li class="nav-item border-bottom border-primary border-3"><a href="itnewlist.jsp?categoryGroupNo=1100" class="nav-link p-2" style="color:gray">신간</a></li>
-					<li class="nav-item"><a href="itbestsellerlist.jsp?categoryGroupNo=1100" class="nav-link p-2" style="color:gray">베스트셀러</a></li>
-					<li class="nav-item"><a href="italllist.jsp?categoryGroupNo=1100" class="nav-link p-2" style="color:gray">전체</a></li>
+					<li class="nav-item border-bottom border-primary border-3"><a href="itnewlist.jsp?categoryGroupNo=1100&order=best&view=list" class="nav-link p-2" style="color:gray">신간</a></li>
+					<li class="nav-item"><a href="itbestsellerlist.jsp?categoryGroupNo=1100&order=week&view=list" class="nav-link p-2" style="color:gray">베스트셀러</a></li>
+					<li class="nav-item"><a href="italllist.jsp?categoryGroupNo=1100&page=1&view=list" class="nav-link p-2" style="color:gray">전체</a></li>
 				</ul>
 			</div>
 
@@ -87,39 +101,39 @@
 					<div class="container d-flex flex-wrap p-0" style="width:100%;">
 						<div class="col-10 p-0">
 							<ul class="nav justify-content-start m-0">
-								<li class="nav-item rank"><a href="#" class="nav-link p-2" style="color:gray">인기순</a></li>
-								<li class="nav-item rank"><a href="#" class="nav-link p-2" style="color:gray">최신순</a></li>
+								<li class="nav-item rank"><a href="itnewlist.jsp?categoryGroupNo=1100&order=best" class="nav-link p-2" style="color:gray">인기순</a></li>
+								<li class="nav-item rank"><a href="itnewlist.jsp?categoryGroupNo=1100&order=new" class="nav-link p-2" style="color:gray">최신순</a></li>
 							</ul>
 						</div>
 						<div class="col-2 position-relative">
 							<div class="btn-group btn-group-sm position-absolute end-0" role="group">
-								<button type="button" class="btn btn-default border" onclick="showList(event)">
+								<a class="btn btn-default border" href="itnewlist.jsp?categoryGroupNo=1100&order=best&view=list" role="button">
 									<span class="glyphicon glyphicon-th-list"></span>
-								</button>
-								<button type="button" class="btn btn-default border" onclick="showGrid(event)">
+								</a>
+								<a class="btn btn-default border" href="itnewlist.jsp?categoryGroupNo=1100&order=best&view=grid" role="button">
 									<span class="glyphicon glyphicon-th-large"></span>
-								</button>
+								</a>
 							</div>
 						</div>
 					</div>
 				</div>
 				
-				<div class="row" id="list">
+				<div class="row <%="list".equals(viewStyle) ? "" : "d-none" %>" id="list">
 					<%
-						for (BookDto book: newBestSalesListBook) {
+						for (BookDto listBook: listBookList) {
 					%>
 					<div class="row mt-3 border-bottom">
 						<div class="col-2">
-							<a href="detail.jsp?bookNo=<%=book.getNo() %>">
-								<img class="thumbnail" alt="" src="/semiproject/img/<%=book.getImgFileName() %>">
+							<a href="detail.jsp?bookNo=<%=listBook.getNo() %>">
+								<img class="thumbnail" alt="" src="/semiproject/img/<%=listBook.getImgFileName() %>">
 							</a>
 						</div>
 						<div class="col-10 ps-4">
-							<h6><%=book.getTitle() %></h6>
-							<p class="book-info"><%=book.getWriter() %><span class="partition"> | </span><%=book.getBookPublisher() %><span class="partition"> | </span><%=book.getCategoryName() %></p>
-							<p class="book-introduction">&lt;책소개&gt; <%=book.getIntroduce() %>
+							<h6><%=listBook.getTitle() %></h6>
+							<p class="book-info"><%=listBook.getWriter() %><span class="partition"> | </span><%=listBook.getBookPublisher() %><span class="partition"> | </span><%=listBook.getCategoryName() %></p>
+							<p class="book-introduction">&lt;책소개&gt; <%=listBook.getIntroduce() %>
 							</p>
-							<p class="book-introduction">구매 <span class="card-text"><%=book.getBookPrice() %>원</span></p>
+							<p class="book-introduction">구매 <span class="card-text"><%=listBook.getBookPrice() %>원</span></p>
 						</div>
 					</div>
 					<%
@@ -127,30 +141,31 @@
 					%>
 				</div>
 					
-				<div class="row visually-hidden" id="grid">
+				<div class="row  <%="grid".equals(viewStyle) ? "" : "d-none" %>" id="grid">
 				<%
-					for (BookDto book: newBestSalesGridBook) {
+					for (BookDto gridBook: listBookGrid) {
 				%>
 			
 					<div class="col mt-5">
 						<div class="card border-0" style="height:auto; width:120px;">
-							<a href="detail.jsp?bookNo=<%=book.getNo() %>"><img src="../img/<%=book.getImgFileName() %>" class="card-img-top" alt="..."></a>
+							<a href="detail.jsp?bookNo=<%=gridBook.getNo() %>"><img src="../img/<%=gridBook.getImgFileName() %>" class="card-img-top" alt="..."></a>
 							<div class="card-body p-0">
-								<strong class="card-title"><%=book.getTitle() %></strong>
-								<p class="card-text m-0"><%=book.getWriter() %></p>
-								<p class="card-text m-0">구매 <span class="card-text m-0"><%=book.getBookPrice() %>원</span></p>
+								<strong class="card-title"><%=gridBook.getTitle() %></strong>
+								<p class="card-text m-0"><%=gridBook.getWriter() %></p>
+								<p class="card-text m-0">구매 <span class="card-text m-0"><%=gridBook.getBookPrice() %>원</span></p>
 								
 							</div>
 						</div>
 					</div>
 				<%
 					}
+				
 				%>
-				</div>
-
+		
+				<div class="col-1"></div>
+				</div>	
 			</div>
-			<div class="col-1"></div>
-		</div>	
+		</div>
 	</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
@@ -158,15 +173,15 @@
 	<jsp:param name="menu" value="board"/>
 </jsp:include>
 <script>
-function showGrid(event) {
-    document.querySelector('#grid').classList.remove("visually-hidden");
-    document.querySelector('#list').classList.add("visually-hidden");
+/* function showGrid(event) {
+   document.querySelector('#grid').classList.remove("visually-hidden");
+   document.querySelector('#list').classList.add("visually-hidden");
 };
 
 function showList(event) {
     document.querySelector('#list').classList.remove("visually-hidden");
     document.querySelector('#grid').classList.add("visually-hidden");
-};
+}; */
 </script>
 </body>
 </html>

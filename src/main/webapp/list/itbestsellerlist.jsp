@@ -62,9 +62,59 @@
 
 			int categoryGroupNo = StringUtil.stringToInt(request.getParameter("categoryGroupNo"));
 			
-			List<BookDto> newBestsellerListBook = bookDao.getBestSellerBooks(categoryGroupNo);
+			String viewStyle = request.getParameter("view");
+			if (viewStyle == null) {
+				viewStyle = "list";
+			}
 			
-			List<BookDto> newBestsellerGridBook = bookDao.getBestSellerBooks(categoryGroupNo);
+			String orderCategory = request.getParameter("order");
+			if (orderCategory == null) {
+				orderCategory = "week";
+			}
+			
+			List<BookDto> newBestsellerListBook = null;
+			List<BookDto> newBestsellerGridBook = null;
+
+			int rows = 10;
+			
+			int pages = 5;
+			
+			int records = bookDao.getTotalRowsCount();
+			
+			int totalPages = (int) (Math.ceil((double) records/rows));
+			
+			int totalBlocks = (int) (Math.ceil((double) totalPages/pages));
+			
+			String pageNum = request.getParameter("page");
+			if (pageNum == null) {
+				pageNum = "1";
+			}
+			int currentPage = Integer.parseInt(pageNum);
+			
+			if (currentPage <= 0 || currentPage > totalPages) {
+				response.sendRedirect("itbestsellerlist.jsp?categoryGroupNo=1100&page=1");
+				return;
+			}
+			
+			int currentBlock = (int) (Math.ceil((double) currentPage/pages));
+			
+			int beginPage = (currentBlock -1)*pages + 1;
+			int endPage = (currentBlock == totalBlocks ? totalPages : currentBlock&pages);
+			
+			int beginIndex = (currentPage-1)*rows +1;
+			int endIndex = currentPage*rows;
+			
+			if ("week".equals(orderCategory)) {
+				newBestsellerListBook = bookDao.getWeekBestSeller(categoryGroupNo, beginIndex, endIndex);
+				newBestsellerGridBook = bookDao.getWeekBestSeller(categoryGroupNo, beginIndex, endIndex);
+			} else if ("month".equals(orderCategory)) {
+				newBestsellerListBook = bookDao.getMonthBestSeller(categoryGroupNo, beginIndex, endIndex);
+				newBestsellerGridBook = bookDao.getMonthBestSeller(categoryGroupNo, beginIndex, endIndex);
+			} else if ("steady".equals(orderCategory)){
+				newBestsellerListBook = bookDao.getSteadySeller(categoryGroupNo, beginIndex, endIndex);
+				newBestsellerGridBook = bookDao.getSteadySeller(categoryGroupNo, beginIndex, endIndex);
+			}
+
 		%>
 				<div class="col nav-item mb-2">
 					<a href="itmainlist.jsp?categoryGroupNo=1100" class="link-dark nav-link">
@@ -76,38 +126,39 @@
 			<div class="row mb-3 border-bottom">
 				<ul class="nav justify-content-start">
 					<li class="nav-item"><a href="itmainlist.jsp?categoryGroupNo=1100" class="nav-link p-2" style="color:gray">홈</a></li>
-					<li class="nav-item"><a href="itnewlist.jsp?categoryGroupNo=1100" class="nav-link p-2" style="color:gray">신간</a></li>
-					<li class="nav-item border-bottom border-primary border-3"><a href="itbestsellerlist.jsp?categoryGroupNo=1100" class="nav-link p-2" style="color:gray">베스트셀러</a></li>
-					<li class="nav-item"><a href="italllist.jsp?categoryGroupNo=1100" class="nav-link p-2" style="color:gray">전체</a></li>
+					<li class="nav-item"><a href="itnewlist.jsp?categoryGroupNo=1100&order=best&view=list" class="nav-link p-2" style="color:gray">신간</a></li>
+					<li class="nav-item border-bottom border-primary border-3"><a href="itbestsellerlist.jsp?categoryGroupNo=1100&view=list" class="nav-link p-2" style="color:gray">베스트셀러</a></li>
+					<li class="nav-item"><a href="italllist.jsp?categoryGroupNo=1100&page=1&view=list" class="nav-link p-2" style="color:gray">전체</a></li>
 				</ul>
 			</div>
 
 			<div class="row">
 				<div class="row">
 					<div class="container d-flex flex-wrap p-0" style="width:100%;">
-						<div class="col-10 p-3">
-							<!-- <ul class="nav justify-content-start m-0">
-								<li class="nav-item rank"><a href="#" class="nav-link p-2" style="color:gray">인기순</a></li>
-								<li class="nav-item rank"><a href="#" class="nav-link p-2" style="color:gray">최신순</a></li>
-							</ul> -->
+						<div class="col-10 p-0">
+							<ul class="nav justify-content-start m-0">
+								<li class="nav-item rank"><a href="itbestsellerlist.jsp?categoryGroupNo=1100&order=week&page=1" class="nav-link p-2" style="color:gray">주간베스트셀러</a></li>
+								<li class="nav-item rank"><a href="itbestsellerlist.jsp?categoryGroupNo=1100&order=month&page=1" class="nav-link p-2" style="color:gray">월간베스트셀러</a></li>
+								<li class="nav-item rank"><a href="itbestsellerlist.jsp?categoryGroupNo=1100&order=steady&page=1" class="nav-link p-2" style="color:gray">스테디셀러</a></li>
+							</ul>
 						</div>
 						<div class="col-2 position-relative">
 							<div class="btn-group btn-group-sm position-absolute end-0" role="group">
-								<button type="button" class="btn btn-default border" onclick="showList(event)">
+								<a class="btn btn-default border" href="itbestsellerlist.jsp?categoryGroupNo=1100&order=<%=orderCategory %>&view=list&page=<%=pageNum %>" role="button">
 									<span class="glyphicon glyphicon-th-list"></span>
-								</button>
-								<button type="button" class="btn btn-default border" onclick="showGrid(event)">
+								</a>
+								<a class="btn btn-default border" href="itbestsellerlist.jsp?categoryGroupNo=1100&order=<%=orderCategory %>&view=grid&page=<%=pageNum %>" role="button">
 									<span class="glyphicon glyphicon-th-large"></span>
-								</button>
+								</a>
 							</div>
 						</div>
 					</div>
 				</div>
 				
 				
-				<div class="row" id="list">
+				<div class="row <%="list".equals(viewStyle) ? "" : "d-none" %>" id="list">
 					<%
-						int listRankNum=0;
+						int listRankNum = StringUtil.stringToInt(currentPage-1+"0");
 						for (BookDto book: newBestsellerListBook) {
 							listRankNum++;
 					%>
@@ -129,10 +180,31 @@
 					<%
 						}
 					%>
+					<div class="row">
+						<nav>
+							<ul class="pagination justify-content-center">
+								<li class="page-item">
+									<a class="page-link <%=currentPage <= 1 ? "disabled" : "" %>" href="itbestsellerlist.jsp?categoryGroupNo=<%=categoryGroupNo%>&order=<%=orderCategory %>&view=<%=viewStyle %>&page=<%=currentPage -1 %>">이전</a>
+								</li>
+							<%
+								for (int num = beginPage; num <= endPage; num++) {
+							%>
+								<li class="page-item <%=currentPage == num ? "active" : "" %>">
+									<a class="page-link" href="itbestsellerlist.jsp?categoryGroupNo=<%=categoryGroupNo%>&order=<%=orderCategory %>&view=<%=viewStyle %>&page=<%=num %>"><%=num %></a>
+								</li>
+							<%
+								}
+							%>
+								<li class="page-item">
+									<a class="page-link <%=currentPage >= totalPages ? "disabled" : "" %>" href="itbestsellerlist.jsp?categoryGroupNo=<%=categoryGroupNo%>&order=<%=orderCategory %>&view=<%=viewStyle %>&page=<%=currentPage + 1 %>">다음</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
 
 				</div>
 				
-				<div class="row hidden" id="grid">
+				<div class="row  <%="grid".equals(viewStyle) ? "" : "d-none" %>" id="grid">
 					<%
 						int gridRankNum = 0;
 						for (BookDto book: newBestsellerGridBook) {
@@ -153,6 +225,27 @@
 					<%
 						}
 					%>
+					<div class="row">
+						<nav>
+							<ul class="pagination justify-content-center">
+								<li class="page-item">
+									<a class="page-link <%=currentPage <= 1 ? "disabled" : "" %>" href="itbestsellerlist.jsp?categoryGroupNo=<%=categoryGroupNo%>&order=<%=orderCategory %>&view=<%=viewStyle %>&page=<%=currentPage -1 %>">이전</a>
+								</li>
+							<%
+								for (int num = beginPage; num <= endPage; num++) {
+							%>
+								<li class="page-item <%=currentPage == num ? "active" : "" %>">
+									<a class="page-link" href="itbestsellerlist.jsp?categoryGroupNo=<%=categoryGroupNo%>&order=<%=orderCategory %>&view=<%=viewStyle %>&page=<%=num %>"><%=num %></a>
+								</li>
+							<%
+								}
+							%>
+								<li class="page-item">
+									<a class="page-link <%=currentPage >= totalPages ? "disabled" : "" %>" href="itbestsellerlist.jsp?categoryGroupNo=<%=categoryGroupNo%>&order=<%=orderCategory %>&view=<%=viewStyle %>&page=<%=currentPage + 1 %>">다음</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
 
 				</div>
 			</div>
@@ -165,7 +258,7 @@
 	<jsp:param name="menu" value="board"/>
 </jsp:include>
 <script>
-function showGrid(event) {
+/* function showGrid(event) {
     document.querySelector('#grid').classList.remove("hidden");
     document.querySelector('#list').classList.add("hidden");
 };
@@ -173,7 +266,7 @@ function showGrid(event) {
 function showList(event) {
     document.querySelector('#list').classList.remove("hidden");
     document.querySelector('#grid').classList.add("hidden");
-};
+}; */
 </script>
 </body>
 </html>
