@@ -92,7 +92,7 @@
 			int currentPage = Integer.parseInt(pageNum);
 			
 			if (currentPage <= 0 || currentPage > totalPages) {
-				response.sendRedirect("itbestsellerlist.jsp?categoryGroupNo=1100&page=1");
+				response.sendRedirect("itbestsellerlist.jsp?categoryGroupNo=1100&order=best&view=list&page=1");
 				return;
 			}
 			
@@ -206,7 +206,7 @@
 				
 				<div class="row  <%="grid".equals(viewStyle) ? "" : "d-none" %>" id="grid">
 					<%
-						int gridRankNum = 0;
+						int gridRankNum = StringUtil.stringToInt(currentPage-1+"0");
 						for (BookDto book: newBestsellerGridBook) {
 							gridRankNum++;
 					%>

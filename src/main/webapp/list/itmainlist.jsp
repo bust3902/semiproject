@@ -55,8 +55,8 @@
 				<ul class="nav justify-content-start">
 					<li class="nav-item border-bottom border-primary border-3"><a href="itmainlist.jsp?categoryGroupNo=1100" class="nav-link p-2" style="color:gray">홈</a></li>
 					<li class="nav-item"><a href="itnewlist.jsp?categoryGroupNo=1100&order=best&view=list" class="nav-link p-2" style="color:gray">신간</a></li>
-					<li class="nav-item"><a href="itbestsellerlist.jsp?categoryGroupNo=1100&order=week&view=list" class="nav-link p-2" style="color:gray">베스트셀러</a></li>
-					<li class="nav-item"><a href="italllist.jsp?categoryGroupNo=1100&page=1&view=list" class="nav-link p-2" style="color:gray">전체</a></li>
+					<li class="nav-item"><a href="itbestsellerlist.jsp?categoryGroupNo=1100&order=week&view=list&page=1" class="nav-link p-2" style="color:gray">베스트셀러</a></li>
+					<li class="nav-item"><a href="italllist.jsp?categoryGroupNo=1100&order=best&view=list&page=1" class="nav-link p-2" style="color:gray">전체</a></li>
 				</ul>
 			</div>
 			
