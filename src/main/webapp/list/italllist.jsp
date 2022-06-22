@@ -136,10 +136,10 @@
 						</div>
 						<div class="col-2 position-relative">
 							<div class="btn-group btn-group-sm position-absolute end-0" role="group">
-								<a class="btn btn-default border" href="italllist.jsp?categoryGroupNo=1100&view=list&page=<%=pageNum %>" role="button">
+								<a class="btn btn-default border" href="italllist.jsp?categoryGroupNo=1100&order=<%=orderCateory %>&view=list&page=<%=pageNum %>" role="button">
 									<span class="glyphicon glyphicon-th-list"></span>
 								</a>
-								<a class="btn btn-default border" href="italllist.jsp?categoryGroupNo=1100&view=grid&page=<%=pageNum %>" role="button">
+								<a class="btn btn-default border" href="italllist.jsp?categoryGroupNo=1100&order=<%=orderCateory %>&view=grid&page=<%=pageNum %>" role="button">
 									<span class="glyphicon glyphicon-th-large"></span>
 								</a>
 							</div>

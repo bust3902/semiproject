@@ -101,16 +101,16 @@
 					<div class="container d-flex flex-wrap p-0" style="width:100%;">
 						<div class="col-10 p-0">
 							<ul class="nav justify-content-start m-0">
-								<li class="nav-item rank"><a href="itnewlist.jsp?categoryGroupNo=1100&order=best" class="nav-link p-2" style="color:gray">인기순</a></li>
-								<li class="nav-item rank"><a href="itnewlist.jsp?categoryGroupNo=1100&order=new" class="nav-link p-2" style="color:gray">최신순</a></li>
+								<li class="nav-item rank"><a href="itnewlist.jsp?categoryGroupNo=1100&order=best&view=<%=viewStyle %>" class="nav-link p-2" style="color:gray">인기순</a></li>
+								<li class="nav-item rank"><a href="itnewlist.jsp?categoryGroupNo=1100&order=new&view=<%=viewStyle %>" class="nav-link p-2" style="color:gray">최신순</a></li>
 							</ul>
 						</div>
 						<div class="col-2 position-relative">
 							<div class="btn-group btn-group-sm position-absolute end-0" role="group">
-								<a class="btn btn-default border" href="itnewlist.jsp?categoryGroupNo=1100&order=best&view=list" role="button">
+								<a class="btn btn-default border" href="itnewlist.jsp?categoryGroupNo=1100&order=<%=orderCategory %>&view=list" role="button">
 									<span class="glyphicon glyphicon-th-list"></span>
 								</a>
-								<a class="btn btn-default border" href="itnewlist.jsp?categoryGroupNo=1100&order=best&view=grid" role="button">
+								<a class="btn btn-default border" href="itnewlist.jsp?categoryGroupNo=1100&order=<%=orderCategory %>&view=grid" role="button">
 									<span class="glyphicon glyphicon-th-large"></span>
 								</a>
 							</div>

@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.htabooks.dto.BookDto;
 import com.htabooks.helper.DaoHelper;
-import com.htabooks.vo.Book;
 
 public class BookDao {
 	
@@ -62,6 +61,29 @@ public class BookDao {
 			book.setCategoryGroupName(rs.getString("CNAME"));
 			return book;
 		}, bookNo);
+		
+	}
+	
+	/**
+	 * home.jsp 의 베스트셀러에 출력될 9권
+	 * @return 판매량 높은 책 9권
+	 * @throws SQLException
+	 */
+	public List<BookDto> getHomeBest() throws SQLException{
+		String sql = "SELECT  BOOK_TITLE, BOOK_WRITER, IMG_FILE_NAME, BOOK_PUBLISHER "
+				   + "FROM (SELECT BOOK_TITLE, BOOK_WRITER, IMG_FILE_NAME, BOOK_PUBLISHER "
+				   + "      FROM RIDI_BOOKS "
+				   + "      ORDER BY BOOK_SALES_RATE DESC) "
+				   + "WHERE ROWNUM <=9 ";
+		
+		return helper.selectList(sql, rs -> {
+			BookDto book = new BookDto();
+			book.setTitle(rs.getString("BOOK_TITLE"));
+			book.setWriter(rs.getString("BOOK_WRITER"));
+			book.setImgFileName(rs.getString("IMG_FILE_NAME"));
+			book.setBookPublisher(rs.getString("BOOK_PUBLISHER"));
+			return book;
+		} );
 		
 	}
 

@@ -1,3 +1,7 @@
+<%@page import="com.htabooks.dto.BookDto"%>
+<%@page import="java.util.List"%>
+<%@page import="com.htabooks.util.StringUtil"%>
+<%@page import="com.htabooks.dao.BookDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -22,11 +26,26 @@
 	
 	img { border-radius: 5px; }
 	
+	p.title-name {
+		font-size:12px;
+		display: -webkit-box;
+		text-overflow: ellipsis;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 1;
+		overflow: hidden;
+	}
 </style>
 
 <body>
 	<div class="container border-bottom mb-5" style="min-width:1094px;">
 		<div class="row">
+			<%
+				BookDao bookDao = BookDao.getInstance();
+	
+				int categoryGroupNo = StringUtil.stringToInt(request.getParameter("categoryGroupNo"));
+				
+				List<BookDto> books = bookDao.getHomeBest();
+			%>
 			<div class="col-2 mb-3"><span class="text-primary fw-bolder" style="font-size:24px;">도서</span></div>
 			<div class="col-8 mb-3"></div>
 			<div class="col-2 mb-3"><a href="list/categories.jsp" class="nav-link text-muted mx-2 mt-3" style="float:right;"><img src="/semiproject/img/justify.svg" class="pb-2"/> 카테고리</a></div>
@@ -61,30 +80,23 @@
 	</div>
 
 	<div class="container mb-5">
-		<a href="" class="nav-link text-muted mb-3"><span class="fs-2 text-dark fw-bold">베스트 셀러 ></span></a>
+		<a href="list/itbestsellerlist.jsp?categoryGroupNo=1100&order=week&view=list&page=1" class="nav-link text-muted mb-3"><span class="fs-2 text-dark fw-bold">베스트 셀러 ></span></a>
 		<div class="row">
-			<div class="col-1 px-0 mb-1"><img src="img/testBook02.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="img/testBook02.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-		</div>
-		<div class="row">
-			<div class="col-1 px-0 mb-1"><img src="img/testBook02.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="img/testBook02.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-		</div>
-		<div class="row">
-			<div class="col-1 px-0 mb-1"><img src="img/testBook02.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
-			<div class="col-1 px-0 mb-1"><img src="img/testBook02.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-3 mb-1"></div>
+		<%
+			int num = 0;
+			for (BookDto book : books) {
+				num++;
+		%>
+			<div class="col-1 px-1 mb-3"><img src="img/<%=book.getImgFileName() %>" style="max-width:100%; height:auto;"></div>
+			<div class="col-1 mb-3 text-center align-self-center"><p style="font-size:20px; font-weight:bold"><%=num %></p></div>
+			<div class="col-2 ps-0 mb-3 text-center align-self-center">
+				<p class="title-name" style="font-size:14px; font-weight:bold"><%=book.getTitle() %></p>
+				<p class="title-name"><%=book.getWriter() %></p>
+				<p class="title-name"><%=book.getBookPublisher() %></p>
+			</div>
+		<%
+			}
+		%>
 		</div>
 	</div>
 
