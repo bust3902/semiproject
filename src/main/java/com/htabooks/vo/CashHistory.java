@@ -5,10 +5,12 @@ import java.util.Date;
 public class CashHistory {
 
 	private int no;
-	private User userNo;
+	private User user;
 	private String reason;
 	private int amount;
+	private int currentAmount;
 	private Date createdDate;
+	private Date updatedDate;
 	
 	public CashHistory() {}
 
@@ -20,12 +22,12 @@ public class CashHistory {
 		this.no = no;
 	}
 
-	public User getUserNo() {
-		return userNo;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserNo(User userNo) {
-		this.userNo = userNo;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getReason() {
@@ -44,6 +46,12 @@ public class CashHistory {
 		this.amount = amount;
 	}
 
+	public int getCurrentAmount() {
+		return currentAmount;
+	}
+	public void setCurrentAmount(int currentAmount) {
+		this.currentAmount = currentAmount;
+	}
 	public Date getCreatedDate() {
 		return createdDate;
 	}
@@ -51,6 +59,15 @@ public class CashHistory {
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
+
+	public Date getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+
 	
 	
 }
