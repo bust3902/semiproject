@@ -11,7 +11,6 @@ public class User {
 		private String birthDate;
 		private String gender;
 		private Date createdDate;
-		private Date updatedDate;
 		private int cash;
 		private String admin;
 		private String reject;
@@ -83,14 +82,6 @@ public class User {
 			this.createdDate = createdDate;
 		}
 
-		public Date getUpdatedDate() {
-			return updatedDate;
-		}
-
-		public void setUpdatedDate(Date updatedDate) {
-			this.updatedDate = updatedDate;
-		}
-
 		public int getCash() {
 			return cash;
 		}
@@ -123,5 +114,7 @@ public class User {
 			this.bookCount = bookCount;
 		}
 
+		
+		
 		
 }
