@@ -71,15 +71,20 @@
 			if (orderCategory == null) {
 				orderCategory = "week";
 			}
-			
-			List<BookDto> newBestsellerListBook = null;
-			List<BookDto> newBestsellerGridBook = null;
 
 			int rows = 10;
 			
 			int pages = 5;
 			
-			int records = bookDao.getTotalRowsCount();
+			int records = 0;			
+			if ("week".equals(orderCategory)) {
+				records = bookDao.getWeekBestSellerCnt(categoryGroupNo).size();
+			} else if ("month".equals(orderCategory)) {
+				records = bookDao.getMonthBestSellerCnt(categoryGroupNo).size();
+			} else if ("steady".equals(orderCategory)){
+				records = bookDao.getSteadySellerCnt(categoryGroupNo).size();
+			}
+			
 			
 			int totalPages = (int) (Math.ceil((double) records/rows));
 			
@@ -99,10 +104,13 @@
 			int currentBlock = (int) (Math.ceil((double) currentPage/pages));
 			
 			int beginPage = (currentBlock -1)*pages + 1;
-			int endPage = (currentBlock == totalBlocks ? totalPages : currentBlock&pages);
+			int endPage = (currentBlock == totalBlocks ? totalPages : currentBlock*pages);
 			
 			int beginIndex = (currentPage-1)*rows +1;
 			int endIndex = currentPage*rows;
+			
+			List<BookDto> newBestsellerListBook = null;
+			List<BookDto> newBestsellerGridBook = null;
 			
 			if ("week".equals(orderCategory)) {
 				newBestsellerListBook = bookDao.getWeekBestSeller(categoryGroupNo, beginIndex, endIndex);
@@ -180,9 +188,9 @@
 					<%
 						}
 					%>
-					<div class="row">
+					<div class="row text-center">
 						<nav>
-							<ul class="pagination justify-content-center">
+							<ul class="pagination">
 								<li class="page-item">
 									<a class="page-link <%=currentPage <= 1 ? "disabled" : "" %>" href="itbestsellerlist.jsp?categoryGroupNo=<%=categoryGroupNo%>&order=<%=orderCategory %>&view=<%=viewStyle %>&page=<%=currentPage -1 %>">이전</a>
 								</li>
@@ -225,9 +233,9 @@
 					<%
 						}
 					%>
-					<div class="row">
+					<div class="row text-center">
 						<nav>
-							<ul class="pagination justify-content-center">
+							<ul class="pagination">
 								<li class="page-item">
 									<a class="page-link <%=currentPage <= 1 ? "disabled" : "" %>" href="itbestsellerlist.jsp?categoryGroupNo=<%=categoryGroupNo%>&order=<%=orderCategory %>&view=<%=viewStyle %>&page=<%=currentPage -1 %>">이전</a>
 								</li>
