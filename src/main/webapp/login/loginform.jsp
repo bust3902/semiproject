@@ -15,7 +15,7 @@
 
 <body>
 	<jsp:include page="/common/navcenter.jsp">
-		<jsp:param name="menu" value="login"/>
+		<jsp:param name="menu" value="loginform"/>
 	</jsp:include>
 
 

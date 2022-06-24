@@ -32,7 +32,7 @@
 			<%
 				} else {
 			%>
-				<li class="nav-item"><a href="/semiproject/login/cash.jsp" class="nav-link" style="color:gray">캐쉬충전</a></li>
+				<li class="nav-item"><a href="/semiproject/cash/chargingform.jsp" class="nav-link" style="color:gray">캐시충전</a></li>
 				<li class="nav-item"><a href="/semiproject/login/logout.jsp" class="nav-link" style="color:gray">로그아웃</a></li>
 			<%
 				}
@@ -47,12 +47,7 @@
 		<a href="/semiproject/home.jsp" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-decoration-none" style="font-family: 'Kanit', sans-serif; font-size:34px;">
 	    	<strong class="bi me-2 text-primary" style="font-size:35px;">HTA<span class="text-dark">BOOKS</span></strong>
 	    </a>
-	    <!-- 
-	    <form class="col-12 col-lg-auto mb-3 mb-lg-0">
-	    	<input type="search" class="form-control" placeholder="Search..." aria-label="Search">
-	    </form>
-		 -->
-
+	    
 		<%
 		if (user== null){
 		%>
