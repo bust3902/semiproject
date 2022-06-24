@@ -32,7 +32,7 @@
 			<%
 				} else {
 			%>
-				<li class="nav-item"><a href="/semiproject/login/cash.jsp" class="nav-link" style="color:gray">캐쉬충전</a></li>
+				<li class="nav-item"><a href="/semiproject/cash/chargingform.jsp" class="nav-link" style="color:gray">캐시충전</a></li>
 				<li class="nav-item"><a href="/semiproject/login/logout.jsp" class="nav-link" style="color:gray">로그아웃</a></li>
 			<%
 				}
@@ -58,14 +58,17 @@
 	    
 		<div class="mx-2 mt-3">
 			<a href="/semiproject/cart/mycart.jsp">
-				<img src="/semiproject/img/cart.svg" class="img-center" width="26" height="26" />
+				<img src="/semiproject/img/cart.svg" width="32" height="32" />
 			</a>
 		</div>
-		<div class="mx-2 mt-3">
+		
+		<div class="mx-2" >
+
 			<a href="/semiproject/user/mypage.jsp">
-				<img src="/semiproject/img/person.svg" class="img-center" width="28" height="28" />
+				<img src="/semiproject/img/person.svg" width="32" height="32" />
 			</a>
 		</div>
+		<%} %>
 	</div>
 </header>
 </html>
