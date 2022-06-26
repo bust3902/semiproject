@@ -45,30 +45,32 @@
 				int categoryGroupNo = StringUtil.stringToInt(request.getParameter("categoryGroupNo"));
 				
 				List<BookDto> books = bookDao.getHomeBest();
+
+				List<BookDto> newbooks = bookDao.getHomeNew();
 			%>
-			<div class="col-2 mb-3"><span class="text-primary fw-bolder" style="font-size:24px;">도서</span></div>
+			<div class="col-2 mb-3"><span class="fw-bolder" style="font-size:24px; color:#00AFFF;">도서</span></div>
 			<div class="col-8 mb-3"></div>
 			<div class="col-2 mb-3"><a href="list/categories.jsp" class="nav-link text-muted mx-2 mt-3" style="float:right;"><img src="/semiproject/img/justify.svg" class="pb-2"/> 카테고리</a></div>
 		</div>
 	</div>
 
 	<div id="carouselExampleCaptions" class="carousel slide container mb-5" data-bs-ride="carousel">
-	  <div class="carousel-indicators">
-	    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-	    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-	    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-	  </div>
-	  <div class="carousel-inner">
-	    <div class="carousel-item active">
-	      <img src="img/banner01.jpg" class="d-block w-100" alt="..." style="border-radius: 10px;">
-	</div>
-	<div class="carousel-item">
-		<img src="img/banner02.jpg" class="d-block w-100" alt="..." style="border-radius: 10px;">
-	</div>
-	<div class="carousel-item">
-		<img src="img/banner03.jpg" class="d-block w-100" alt="..." style="border-radius: 10px;">
-	</div>
-	</div>
+		<div class="carousel-indicators">
+		    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+		    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+		    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+		</div>
+		<div class="carousel-inner">
+		    <div class="carousel-item active">
+				<a href="list/detail.jsp?bookNo=10"><img src="img/banner01.jpg" class="d-block w-100" alt="..." style="border-radius: 10px;"></a>
+			</div>
+			<div class="carousel-item">
+				<a href="list/detail.jsp?bookNo=6"><img src="img/banner02.jpg" class="d-block w-100" alt="..." style="border-radius: 10px;"></a>
+			</div>
+			<div class="carousel-item">
+				<a href="list/detail.jsp?bookNo=1"><img src="img/banner03.jpg" class="d-block w-100" alt="..." style="border-radius: 10px;"></a>
+			</div>
+		</div>
 		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
 			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 			<span class="visually-hidden">Previous</span>
@@ -79,6 +81,9 @@
 		</button>
 	</div>
 
+	<!-- 여유되면 메뉴 넣을 자리 -->
+	<div style="width:100%; height:80px;"></div>
+	
 	<div class="container mb-5">
 		<a href="list/itbestsellerlist.jsp?categoryGroupNo=1100&order=week&view=list&page=1" class="nav-link text-muted mb-3"><span class="fs-2 text-dark fw-bold">베스트 셀러 ></span></a>
 		<div class="row">
@@ -87,12 +92,37 @@
 			for (BookDto book : books) {
 				num++;
 		%>
-			<div class="col-1 px-1 mb-3"><img src="img/<%=book.getImgFileName() %>" style="max-width:100%; height:auto;"></div>
+			<div class="col-1 px-1 mb-3">
+				<a href="list/detail.jsp?bookNo=<%=book.getNo() %>"><img src="img/<%=book.getImgFileName() %>" style="max-width:100%; height:auto;"></a>
+			</div>
 			<div class="col-1 mb-3 text-center align-self-center"><p style="font-size:20px; font-weight:bold"><%=num %></p></div>
 			<div class="col-2 ps-0 mb-3 text-center align-self-center">
-				<p class="title-name" style="font-size:14px; font-weight:bold"><%=book.getTitle() %></p>
-				<p class="title-name"><%=book.getWriter() %></p>
-				<p class="title-name"><%=book.getBookPublisher() %></p>
+				<p class="title-name" style="font-size:14px; font-weight:bold"><a href="list/detail.jsp?bookNo=<%=book.getNo() %>" style="text-decoration:none; color:black;"><%=book.getTitle() %></a></p>
+				<p class="title-name"><a href="list/detail.jsp?bookNo=<%=book.getNo() %>" style="text-decoration:none; color:gray"><%=book.getWriter() %></a></p>
+				<p class="title-name"><a href="list/detail.jsp?bookNo=<%=book.getNo() %>" style="text-decoration:none; color:gray"><%=book.getBookPublisher() %></a></p>
+			</div>
+		<%
+			}
+		%>
+		</div>
+	</div>
+	
+	<div class="container mb-5">
+		<a href="list/itnewlist.jsp?categoryGroupNo=1100&order=best&view=list" class="nav-link text-muted mb-3"><span class="fs-2 text-dark fw-bold">화제의 신간 ></span></a>
+		<div class="row">
+		<%
+			int numb = 0;
+			for (BookDto book : newbooks) {
+				numb++;
+		%>
+			<div class="col-1 px-1 mb-3">
+				<a href="list/detail.jsp?bookNo=<%=book.getNo() %>"><img src="img/<%=book.getImgFileName() %>" style="max-width:100%; height:auto;"></a>
+			</div>
+			<div class="col-1 mb-3 text-center align-self-center"><p style="font-size:20px; font-weight:bold"><%=numb %></p></div>
+			<div class="col-2 ps-0 mb-3 text-center align-self-center">
+				<p class="title-name" style="font-size:14px; font-weight:bold"><a href="list/detail.jsp?bookNo=<%=book.getNo() %>" style="text-decoration:none; color:black;"><%=book.getTitle() %></a></p>
+				<p class="title-name"><a href="list/detail.jsp?bookNo=<%=book.getNo() %>" style="text-decoration:none; color:gray"><%=book.getWriter() %></a></p>
+				<p class="title-name"><a href="list/detail.jsp?bookNo=<%=book.getNo() %>" style="text-decoration:none; color:gray"><%=book.getBookPublisher() %></a></p>
 			</div>
 		<%
 			}
@@ -100,17 +130,13 @@
 		</div>
 	</div>
 
-	<div class="container mb-5 mb-5">
-		<a href="" class="nav-link text-muted mb-3"><span class="fs-2 text-dark fw-bold">MD's PICK ></span></a>
-		<div class="row">
-			<div class="col-2 pr-1 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-2 pr-1 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-2 pr-1 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-2 pr-1 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-2 pr-1 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-			<div class="col-2 pr-1 mb-1"><img src="img/testBook01.jpg" style="max-width:100%; height:auto;"></div>
-		</div>
+	<div style="width:100%; height:80px;"></div>
+<!-- 	<div class="container mb-5 mb-5">
+		<a href="" class="#"><span class="fs-2 text-dark fw-bold">MD's PICK ></span></a>
+		<span class="fs-2 text-dark fw-bold">MD's PICK ></span>
+
 	</div>
+	<div style="width:100%; height:80px;"></div> -->
 
 </body>
 

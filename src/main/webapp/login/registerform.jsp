@@ -11,7 +11,7 @@
 </head>
 <body>
 <jsp:include page="/common/navcenter.jsp">
-	<jsp:param name="menu" value="register"/>
+	<jsp:param name="menu" value="registerform"/>
 </jsp:include>
 <div class="container-fluid mb-5 bg-info" style="--bs-bg-opacity: .1;">
 
@@ -319,14 +319,6 @@
 			
 		}
 			
-		/* let agreeCheckAll = document.querySelector('input[name=agree_all]');
-		agreeCheckAll.addEventLister('change',(e) => {
-			let agreeCheck = document.querySelector('input[name=agree]');
-			for(let i=0; i <agreeCheck.length; i++){
-				agreeCheck[i].checked = e.target.checked;
-			}
-		});
-	 */
 		function goRegisterForm() {
 			
 			let idField = document.querySelector("input[name=id]");
