@@ -1,5 +1,7 @@
 package com.htabooks.util;
 
+import java.text.DecimalFormat;
+
 public class StringUtil {
 	
 
@@ -79,5 +81,22 @@ public class StringUtil {
 		} catch (NumberFormatException e) {
 			return defaultValue;
 		}
+	}
+	
+	/**
+	 * int를 가격 표시 형태로 변환한다.
+	 * @param price
+	 * @return 가격 표시 형태
+	 */
+	public static String priceFormat(int price) {
+		DecimalFormat df = new DecimalFormat("#,###");
+		
+		return df.format(price); 
+	}
+	
+	public static String bookImgNoFormat(int no) {
+		DecimalFormat df = new DecimalFormat("000");
+		
+		return df.format(no);
 	}
 }

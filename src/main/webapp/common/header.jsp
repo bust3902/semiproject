@@ -28,7 +28,7 @@
 				if (user == null) {
 			%>
 				<li class="nav-item"><a href="/semiproject/login/registerform.jsp" class="nav-link" style="color:gray">회원가입</a></li>
-				<li class="nav-item"><a href="/semiproject/login/loginform.jsp" class="nav-link" style="color:gray">로그인</a></li>
+				<li class="nav-item"><a href="/semiproject/login/loginform.jsp?<%=request.getParameter("redirect") %>" class="nav-link" style="color:gray">로그인</a></li>
 			<%
 				} else {
 			%>
@@ -52,25 +52,6 @@
 	    	<input type="search" class="form-control" placeholder="Search..." aria-label="Search">
 	    </form>
 		 -->
-
-		<%
-		if (user== null){
-		%>
-		<div class="mx-2">
-			<a href="/semiproject/login/loginform.jsp">
-				<img src="/semiproject/img/cart.svg" width="32" height="32" />
-			</a>
-		</div>
-		
-		<div class="mx-2" >
-			<a href="/semiproject/login/loginform.jsp">
-				<img src="/semiproject/img/person.svg" width="32" height="32" />
-			</a>
-		</div>
-		
-		<%
-		} else {
-		%>
 		
 		<div class="mx-2">
 
@@ -85,8 +66,7 @@
 				<img src="/semiproject/img/person.svg" width="32" height="32" />
 			</a>
 		</div>
-		<%} %>
+
 	</div>
 </header>
-</html>
     
