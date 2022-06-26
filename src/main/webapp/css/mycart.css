@@ -2,16 +2,19 @@
 @import "variables.css";
 @import "font.css";
 
+
 p {
   margin: 0;
 }
 
 section {
   width: 980px;
+  min-height: 400px;
 }
 
-img {
-  width: 60px;
+.book_img {
+  width: 68px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .check-icon {
@@ -97,5 +100,24 @@ del {
   right: 0;
   width: 290px;
   height: 100%;
+}
+
+.rent_empty {
+	height:400px;
+}
+
+.rent_empty img {
+	width:80px;
+	opacity:10%;
+}
+
+.cart_book_price {
+	width: 40%;
+}
+
+footer div.col-3 a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
 }
 

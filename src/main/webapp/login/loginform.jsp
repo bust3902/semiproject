@@ -25,12 +25,12 @@
 		<div class="col-6 p-5">
 		
 		
-			<form class="" method="post" action="login.jsp" onsubmit="return submitLoginForm()">
+			<form class="" method="post" action="login.jsp?redirect=<%=request.getParameter("redirect") %>" onsubmit="return submitLoginForm()">
 				<div class="p-0 m-0">
 					<input type="text" class="form-control rounded-0 " name="id" placeholder="아이디"/>
 				</div>
 				<div class="p-0 m-0 ">
-					<input type="password" class="form-control rounded-0 " name="password" placeholder="비밀번호 "/>
+					<input type="password" class="form-control rounded-0 " name="password" placeholder="비밀번호"/>
 				</div>
 				
 				<%

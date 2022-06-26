@@ -1,13 +1,21 @@
 package com.htabooks.vo;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class CartItem {
-	int no;
-	int userNo;
-	int bookNo;
-	Date createdDate;
-	
+	private int no;
+	private int userNo;
+	private int bookNo;
+	private String title;
+	private String writer;
+	private int paperBookPrice;
+	private int bookPrice;
+	private int discountRate;
+	private Date createdDate;
+
+
+
 	public int getNo() {
 		return no;
 	}
@@ -26,12 +34,42 @@ public class CartItem {
 	public void setBookNo(int bookNo) {
 		this.bookNo = bookNo;
 	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+	public int getPaperBookPrice() {
+		return paperBookPrice;
+	}
+	public void setPaperBookPrice(int paperBookPrice) {
+		this.paperBookPrice = paperBookPrice;
+	}
+	public int getBookPrice() {
+		return bookPrice;
+	}
+	public void setBookPrice(int bookPrice) {
+		this.bookPrice = bookPrice;
+	}
+	public int getDiscountRate() {
+		return discountRate;
+	}
+	public void setDiscountRate(int discountRate) {
+		this.discountRate = discountRate;
+	}
+
 	public Date getCreatedDate() {
 		return createdDate;
 	}
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
-	
-	
+
 }
