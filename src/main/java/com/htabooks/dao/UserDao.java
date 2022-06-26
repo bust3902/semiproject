@@ -78,7 +78,6 @@ public class UserDao {
 	}
 	
 	//유저 정보 업데이트
-	
 	public void updateUser(User user) throws SQLException{
 		String sql = "update ridi_users "
 				+ "set "
@@ -90,7 +89,6 @@ public class UserDao {
 				+ "where user_no = ? ";
 		
 		helper.update(sql, user.getCash(), user.getAdmin(), user.getReject(), user.getBookCount(), user.getNo());
-				
 	}
 	
 }
