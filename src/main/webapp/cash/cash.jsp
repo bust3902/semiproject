@@ -25,16 +25,18 @@
 
 <body>
 
+	<!-- 로그인 된 유저 정보를 불러온다 -->
 	<%
 	User user = (User) session.getAttribute("LOGINED_USER");
 	
 	UserDao userDao = UserDao.getInstance();
-	
 	user = userDao.getUserById(user.getId());
 	%>
-		<div class="container justify-content-center ">
-		<div class="row">
-			<div class="col-3 ps-3 justify-content-center " style="width:20%;">
+	
+	<!-- 사이드 메뉴 -->
+		<div class="container justify-content-center">
+			<div class="row ">
+							<div class="col-3 ps-3 justify-content-center " style="width:20%;">
 				<span class="h5 m-2" style="font-size:20px;"><strong>마이리디</strong></span>
 				<div class="border-bottom p-2 mt-1" style="font-size:17px;">
 					<a href="../user/mypage.jsp" class="text-decoration-none text-primary mx-2"> 
@@ -48,7 +50,8 @@
 						</small>
 					</a>
 				</div>
-
+				
+				<!-- 사이드 메뉴 : 책 -->
 				<div class="mx-2 de-flex p-2 flex-col text-decoration-none text-secondary border-bottom" style="font-size:17px;">
 					<small>
 						<svg xmlns="http://www.w3.org/2000/svg" width="17"
@@ -69,6 +72,7 @@
 					</div>
 				</div>
 
+				<!-- 사이드메뉴 : 구매/혜택 -->
 				<div class="mx-2 de-flex p-2 flex-col text-decoration-none text-secondary border-bottom" style="font-size:17px;">
 					<small> 
 						<svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -91,6 +95,8 @@
 						<a href="" class="text-decoration-none text-secondary"><small>쿠폰</small></a>
 					</div>
 				</div>
+				
+				<!-- 사이드 메뉴 : 개인 -->
 				<div class=" mx-2 de-flex p-2 flex-col text-decoration-none text-secondary" style="font-size:17px;">
 					<small> 
 						<svg xmlns="http://www.w3.org/2000/svg" width="18"
@@ -107,37 +113,41 @@
 						<a href="" class="text-decoration-none text-secondary"><small>내 리뷰 관리</small></a>
 					</div>
 					<div class="mx-3 my-1 mb-3 text-decoration-none text-secondary" style="font-size:17px;">
-						<a href="" class="text-decoration-none text-secondary"><small>결제 내역</small></a>
+						<a href="../cash/cashList.jsp" class="text-decoration-none text-secondary"><small>캐시 변동 내역</small></a>
 					</div>
 				</div>
 			</div>
 				
+				<!-- 유저 정보 메인 창 -->
 				
-				
-				<div class="col-7 justify-content-center ms-3">
+				<div class="col-7 justify-content-center ms-3 ">
 					<div class="border row border-dark border-2 pb-0">
-						<table class="table table-borderless mb-0">
+						<table class="table table-borderless mb-0" >
 							<colgroup>
 								<col width="25%">
 								<col width="75%">
-								
 							</colgroup>
+							
+							<!-- 유저 정보 메인 창 : 아이디 + side menu -->
+							
 							<tbody>
-								<tr class="border-bottom">
+								<tr class="border-bottom ">
 									<td class="text-center p-3 table-primary" ><%=user.getId() %>님 
 									
-									<div class="mt-5 mb-1">
-									<small style="font-size: 15px;"> 
-												<a href="../cash/cash.jsp" class="text-decoration-none text-dark">내 정보 >></a>
-											</small></div>
-									<div class="mb-1">
-									<small style="font-size: 15px;"> 
-												<a href="../cash/xxxx.jsp" class="text-decoration-none text-dark">캐시 변동 내역 >></a>
-											</small></div>
-									
-									
+										<div class="mt-5 mb-1">
+										<small style="font-size: 15px;"> 
+													<a href="../cash/cash.jsp" class="text-decoration-none text-dark">내 정보 >></a>
+												</small></div>
+										<div class="mb-1">
+										<small style="font-size: 15px;"> 
+													<a href="../cash/cashList.jsp" class="text-decoration-none text-dark">캐시 변동 내역 >></a>
+												</small></div>
+										
 									
 									</td>
+									
+									<!-- 이름 / 아이디 / 이메일 / 보유캐시 정보 -->
+									
 									<td class="text-start align-middle p-3 px-4 ">
 										<div class="mb-2" style="font-size:16px;">이름 : <%=user.getName() %></div>
 										<div class="mb-2" style="font-size:16px;">아이디 : <%=user.getId() %></div>

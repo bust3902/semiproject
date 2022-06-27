@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="com.htabooks.vo.CashPagination"%>
+<%@page import="com.htabooks.util.StringUtil"%>
 <%@page import="com.htabooks.dao.UserDao"%>
 <%@page import="com.htabooks.dao.CashHistoryDao"%>
 <%@page import="com.htabooks.vo.CashHistory"%>
@@ -8,23 +11,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HTA BOOKS</title>
-<link href="../img/Hfavicon.ico" rel="icon" type="image/x-icon" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="/semiproject/css/home.css" rel="stylesheet" />
-</head>
-<jsp:include page="/common/htaheader.jsp">
-	<jsp:param name="menu" value="charging" />
-</jsp:include>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link href="../img/Hfavicon.ico" rel="icon" type="image/x-icon" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/semiproject/css/home.css" rel="stylesheet" />
+	
+	<jsp:include page="/common/htaheader.jsp">
+		<jsp:param name="menu" value="cashList" />
+	</jsp:include>
 
 </head>
+<style>
 
-<!-- 캐시 충전하기 페이지 -->
+a:active { color: red; }
+</style>
+
+<!-- 보유 캐시[충전하기] / 날짜 / 캐시 충전 여부 / 충전금액 을 포함하는 cashList 페이지 이다.   -->
 
 <body>
-	
+
 	<!-- 로그인 된 유저 정보를 불러온다 -->
 	<%
 	User user = (User) session.getAttribute("LOGINED_USER");
@@ -144,60 +151,69 @@
 												</small></div>
 									</td>
 									
-								<!-- 캐시 충전 하기 -->
-								<!-- 금액을 입력하고 충전하기 버튼을 누른다 -->
-								
-									<td class="text-start  align-middle p-3 ">
-										<div class="mb-5 pb-2 border-bottom text-secondary" style="font-size:18px;">[ 캐시 충전하기 ]</div>
-										<div class="mb-2 text-danger" style="font-size:16px;"><strong>보유 캐시 : <%=user.getCash() %>원</strong></div>
+									<td class="text-start align-middle p-3 px-4 ">
+										<div class="mt-1 mb-5 text-danger" style="font-size:16px; font-weight:bold">보유캐시 : <%=user.getCash() %> 원
+											<a href="../cash/chargingform.jsp" class="btn btn-outline-primary btn-sm" style="font-size:13px;">충전하기</a>
+										</div>
 										
-										<form class="row row-cols-lg-auto g-3 align-items-center"  method="post" action="charging.jsp" onsubmit="return gochargingForm()">
-											<div class="col-12">
-												<label class="mb-2"  style="font-size:14px;" >충전금액 : </label>
-											</div>
-											<div class="col-12 ">
-												<input type="number" class="form-control form-control-sm rounded-0 mb-2" style="font-size:14px; width:240px;" name="cashcharging" maxlength="6" min="1000" max="1000000" placeholder="숫자입력 	ex)5000 "/>
+										<% 
+										 
+										 
+										int no = StringUtil.stringToInt(request.getParameter("no"));
+								   		//int currentPage = StringUtil.stringToInt(request.getParameter("page"),1);
+										int rows = StringUtil.stringToInt(request.getParameter("rows"),10);	//default값 
+								   		
+										CashHistoryDao cashHistoryDao = CashHistoryDao.getInstance();
 										
-											</div>
-											<div class="col-12 ">
-												<button type="submit" class="btn btn-outline-primary btn-sm mb-2" style="width:80px; height:27px; font-size:13px;">충전하기</button>
-											</div>
-										</form>
-												<p class="text-secondary " style="font-size:13px;">1회 충전 최소 금액은 1000원, 최대 금액은 1,000,000원 입니다. </p>
+										List<CashHistory> cashHistoryList = cashHistoryDao.getCashHistoriesByNo(user.getNo());
+										
+										%>  
+										
+										 
+										 
+										<table class="table " style="font-size:14px;">
+											<colgroup>
+												<col width="40%">
+												<col width="30%">
+												<col width="30%">
+												
+											</colgroup>
+											<thead>
+												<tr class=" border-bottom ">
+													<th>날짜</th>
+													<th>구분</th>
+													<th>금액</th>
+													
+												</tr>
+											</thead>
+											<tbody class="table-group-divider" style="border-none;">
+											
+										 <%for (CashHistory cashHistory : cashHistoryList) {%>
+										
+										<tr>
+											<td><%=cashHistory.getUpdatedDate() %></td>
+											<td><%=cashHistory.getReason() %></td>
+											<td><%=cashHistory.getAmount() %>원</td>
+										</tr>
+										
+										 <%
+										}
+										%> 
+										
+									</tbody>
+									</table>
 									</td>
-								</tr>
+								
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
 		</div>
-		
-		
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-			<script type="text/javascript">
-			
-				function gochargingForm(){
-					
-					let chargingFiled = document.querySelector("input[name=cashcharging]");
-					
-					if(chargingFiled.value === '') {
-						alert("금액을 입력하세요");
-						chargingFiled.focus();
-						return false;
-					}
-					
-					alert("충전이 완료되었습니다!");
-					return true;
-					
-				}
-			
-			
-			</script>
-			
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 		<jsp:include page="/common/footer.jsp">
-			<jsp:param name="menu" value="chargingform"/>
-		</jsp:include>
-	</body>
+		<jsp:param name="menu" value="cash"/>
+	</jsp:include>
+</body>
 </html>

@@ -8,14 +8,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HTA BOOKS</title>
-<link href="images/Hfavicon.ico" rel="icon" type="image/x-icon" />
+<link href="../img/Hfavicon.ico" rel="icon" type="image/x-icon" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
+<style>
 
+html, body {
+height:100%;
+}
+
+.container-fluid {
+height:100%;
+}
+
+</style>
+<!-- 로그인 폼 -->
 <body>
 	<jsp:include page="/common/navcenter.jsp">
-		<jsp:param name="menu" value="loginform"/>
+		<jsp:param name="menu" value="login"/>
 	</jsp:include>
 
 
@@ -24,7 +35,7 @@
 	<div class="row justify-content-center">
 		<div class="col-6 p-5">
 		
-		
+		<!-- 아이디 / 비밀번호 입력 -->
 			<form class="" method="post" action="login.jsp" onsubmit="return submitLoginForm()">
 				<div class="p-0 m-0">
 					<input type="text" class="form-control rounded-0 " name="id" placeholder="아이디"/>
@@ -59,7 +70,7 @@
 					}
 				%> 
 				
-				
+				<!-- 로그인 상태유지 체크박스 -->
 			 	<div class="mb-3 border p-2 d-flex justify-content-between">
 			 		<div class="form-check form-check-inline">
 			 			<input class="form-check-input " type="checkbox" name="" value="" style="width:16px; height:16px; margin-top:7px;">
@@ -71,6 +82,7 @@
 			 		</div>
 			 	</div>
 			 	
+			 	<!-- 로그인 / 회원가입 버튼 -->
 			 	<div class="d-grid gap-2">
 			 		<button type="submit" class="btn btn-primary">로그인</button>
 			 		<a href="registerform.jsp" class="btn btn-outline-secondary">회원가입</a>
@@ -84,7 +96,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript">
 	
-	
+	/* 로그인 체크 */
 		function submitLoginForm() {
 			
 			let idField = document.querySelector("input[name=id]");

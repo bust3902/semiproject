@@ -8,19 +8,25 @@
     pageEncoding="UTF-8"%>
 
     <% 
+    // 로그인 정보를 가져온다 
     User user = (User) session.getAttribute("LOGINED_USER");
     
     UserDao userDao = UserDao.getInstance();
     
+    // 아이디로 유저 정보를 가져온다 
     user = userDao.getUserById(user.getId());
-	int cash = StringUtil.stringToInt(request.getParameter("cashcharging"));
+    
+    // name이 cashcharging인 input값을 가져와 cash에 담는다 
+	int cash = StringUtil.stringToInt(request.getParameter("cashcharging")); 
 	user.setCash(user.getCash()+ cash);
 	
+	// userDao에 저장 
 	userDao.updateUser(user);
 
 	
 	CashHistoryDao cashHistoryDao = CashHistoryDao.getInstance();
 	
+	//cashHistory에 캐시 충전 정보를 저장 
 	CashHistory cashHistory = new CashHistory();
 	cashHistory.setUser(user);
 	cashHistory.setReason("캐시 충전");
