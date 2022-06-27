@@ -42,10 +42,11 @@
 		</div>
 		<div class="col">
 		<%
-		
+		// 파라미터 조회
 		int bookNo =StringUtil.stringToInt(request.getParameter("no"));
 		int currentPage = StringUtil.stringToInt(request.getParameter("page"), 1);
 		
+		// 게시글 정보 조회
 		BookDao bookDao = BookDao.getInstance();
 		BookDto book = bookDao.getBookByNo(bookNo); 
 		
@@ -55,30 +56,33 @@
 			<div class="title">상품정보변경</div>
 		</div>
 		<form class="row my-5" method="post" action="updateproduct.jsp" enctype="multipart/form-data">
-		
 			<div class="text-center my-3">
 				  <img src="/semiproject/img/<%=book.getImgFileName() %>" style="height:200px; weight:200px; border:1px solid black;">
 			</div>
 			<hr>
 			<div class="col-4 mt-2 mb-2">
 				<div class="form-floating mb-2">
-					<input type="text" class="form-control" id="bookTitle" value="<%=book.getTitle()%>">
+					<input type="text" class="form-control" name="bookNo" id="bookNo" value="<%=book.getNo()%>" disabled readonly>
+					<label for="bookNo">도서번호</label>
+				</div>
+				<div class="form-floating mb-2">
+					<input type="text" class="form-control" name="bookTitle" id="bookTitle" value="<%=book.getTitle()%>">
 					<label for="bookTitle">도서명</label>
 				</div>
 				<div class="form-floating mb-2">
-					<input type="text" class="form-control" id="bookWriter" value="<%=book.getWriter()%>">
+					<input type="text" class="form-control" name="bookWriter" id="bookWriter" value="<%=book.getWriter()%>">
 					<label for="bookWriter">저자</label>
 				</div>
 				<div class="form-floating mb-2">
-					<input type="text" class="form-control" id="publisher" value="<%=book.getBookPublisher()%>">
+					<input type="text" class="form-control" name="publisher" id="publisher" value="<%=book.getBookPublisher()%>">
 					<label for="publisher">출판사</label>
 				</div>
 				<div class="form-floating mb-2">
-					<input type="text" class="form-control" id="bookPrice" value="<%=book.getPaperBookPrice()%>">
+					<input type="text" class="form-control" name="bookPrice" id="bookPrice" value="<%=book.getPaperBookPrice()%>">
 					<label for="bookPrice">도서 가격</label>
 				</div>
 				<div class="form-floating mb-2">
-					<input type="text" class="form-control" id="bookDiscountPrice" value="<%=book.getBookPrice()%>">
+					<input type="text" class="form-control" name="bookDiscountPrice" id="bookDiscountPrice" value="<%=book.getBookPrice()%>">
 					<label for="bookDiscountPrice">판매 가격</label>
 				</div>
 				<div class="form-floating mb-2">
@@ -121,7 +125,7 @@
 					<div class="row">
 						<div class="col">
 							<div class="form-floating">
-								<textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 340px"></textarea>
+								<textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 400px"></textarea>
 								<label for="floatingTextarea2 " ><%=book.getIntroduce() %></label>
 							</div>
 						</div>	
@@ -141,6 +145,22 @@
 		</div>
 	</div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js">
+function submitModifyForm() {
+	let titleField = document.querySelector("input[name=title]");
+	if (titleField.value === '') {
+		alert("제목은 필수입력값입니다.");
+		titleField.focus();
+		return false;
+	}
+	let contentField = document.querySelector("textarea[name=content]");
+	if (contentField.value === '') {
+		alert("내용은 필수입력값입니다.");
+		contentField.focus();
+		return false;
+	}
+	return true;
+}
+</script>
 </body>
 </html>

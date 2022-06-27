@@ -7,7 +7,7 @@
 <%
 //  공지삭제 페이지
 
-// 로그인 후 사용가능한 서비스 (세션에 저장된 관리자정보 조회)
+/* // 로그인 후 사용가능한 서비스 (세션에 저장된 관리자정보 조회)
 	User admin = (User) session.getAttribute("LOGINED_ADMIN");
 	if(admin == null){
 		response.sendRedirect("(사용자정보 오류 페이지)");
@@ -19,7 +19,7 @@
 	int currentPage = StringUtil.stringToInt(request.getParameter("page"), 1);
 
 	// 게시글번호에 해당하는 게시글 정보를 조회한다.
-	NoticeBoardDao noticeBoardDao = NoticeBoardDao.getInstance();
+	noticeBoardDao noticeBoardDao = NoticeBoardDao.getInstance();
 	NoticeBoard board = NoticeBoardDao.getBoardByNo();
 		
 	// 게시글정보가 없으면 재요청 URL을 응답으로보낸다.
@@ -36,7 +36,7 @@
 	// 게시글목록을 재요청하는 URL을 응답으로 보낸다.
 	response.sendRedirect("noticeboardlist.jsp");	
 		
-		
+		 */
 		
 		
 		

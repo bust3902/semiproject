@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-// 공지사항 등록 페이지
+/* // 공지사항 등록 페이지
 
 	// 로그인 후 사용가능한 서비스 (세션에 저장된 관리자정보 조회)
 	User admin = (User) session.getAttribute("LOGINED_ADMIN");
@@ -28,5 +28,5 @@
 	
 	// 재요청URL응답
 	response.sendRedirect("");
-		
-}
+		 */
+%>

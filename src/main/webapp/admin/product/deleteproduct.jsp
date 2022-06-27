@@ -20,7 +20,7 @@
 		return; 
 }
 	BookDao bookDao = BookDao.getInstance();
-	AdminDao adminDao =AdminDao.getInstance();
+	AdminDao adminDao = AdminDao.getInstance();
 	
 	BookDto book = bookDao.getBookByNo(bookNo);	
 	
@@ -37,7 +37,7 @@
 	*/
 	
 	// 변경된정보를 데이터베이스에 반영
-	 adminDao.updateItem(book);
+	 adminDao.updateBook(book);
 	
 	// 상품 리스트페이지로 돌아가기
 	response.sendRedirect("productlist.jsp");

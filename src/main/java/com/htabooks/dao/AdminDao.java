@@ -1,6 +1,7 @@
 package com.htabooks.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.htabooks.dto.BookDto;
 import com.htabooks.helper.DaoHelper;
@@ -25,12 +26,14 @@ public class AdminDao {
 	public void insertBook(BookDto book) throws SQLException{
 		String sql = "INSERT INTO RIDI_BOOKS "
 				   + "(BOOK_NO, BOOK_TITLE, CATEGORY_NO, BOOK_WRITER, PAPER_BOOK_PRICE, "
-				   + " BOOK_PRICE, BOOK_INTRODUCE, BOOK_PUBLISHER, IMG_FILE_NAME ) "
+				   + " BOOK_PRICE, BOOK_INTRODUCE, BOOK_PUBLISHER, IMG_FILE_NAME, BOOK_SALES_RATE ) "
 				   + "values "
-				   + "(ridi_books_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ? ) ";
+				   + "(ridi_books_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, 0 ) ";
 		
 		helper.insert(sql,book.getTitle(),book.getCategoryNo(),book.getWriter(),book.getPaperBookPrice(),book.getBookPrice(),book.getIntroduce(),book.getBookPublisher(),book.getImgFileName() );
 	}
+	
+	
 	// 상품정보 수정 - > updateproductform.jsp ->updateproduct.jsp
 	
 	/**
@@ -59,7 +62,7 @@ public class AdminDao {
 		String sql="select * "
 				+ "from ridi_users "
 				+ "where user_id= ? "
-				+ "and admin='y'";
+				+ "and user_admin='y'";
 		
 		return helper.selectOne(sql, rs -> {
 			User user = new User();
@@ -155,14 +158,137 @@ public class AdminDao {
 				   + "		PAPER_BOOK_PRICE = ?,"
 				   + "		BOOK_PRICE = ?, "
 				   + "		BOOK_INTRODUCE = ?, "
-				   + "		IMG_FILE_NAME = ?"
+				   + "		IMG_FILE_NAME = ? "
 				   + "where book_no = ? ";
-		helper.update(sql, book.getNo(),book.getTitle(),book.getCategoryNo(),book.getWriter(),book.getPaperBookPrice(),book.getBookPrice(),book.getIntroduce(),book.getImgFileName());
+		helper.update(sql, book.getTitle(),book.getCategoryNo(),book.getWriter(),book.getPaperBookPrice(),book.getBookPrice(),book.getIntroduce(),book.getImgFileName(),book.getNo());
 				   
 	}
 	
-	
-	
+	public List<BookDto> getAllBooks(int beginIndex, int endIndex)throws SQLException{
+		String sql = "SELECT B.BOOK_NO, B.BOOK_TITLE, B.CATEGORY_NO, B.BOOK_WRITER, "
+				+ "       B.PAPER_BOOK_PRICE, B.BOOK_PRICE, B.BOOK_INTRODUCE, B.BOOK_CREATED_DATE, "
+				+ "       B.BOOK_UPDATED_DATE, B.DISCOUNT_RATE, B.IMG_FILE_NAME, B.BOOK_SALES_RATE, "
+				+ "       B.BOOK_PUBLISHER, C.CATEGORY_NAME, C.CATEGORY_GROUP_NO "
+				+ "FROM (SELECT ROW_NUMBER() OVER (ORDER BY BOOK_NO ASC) ROW_NUMBER, "
+				+ "      BOOK_NO, BOOK_TITLE, CATEGORY_NO, BOOK_WRITER, PAPER_BOOK_PRICE, "
+				+ "      BOOK_PRICE, BOOK_INTRODUCE, BOOK_CREATED_DATE, BOOK_UPDATED_DATE, DISCOUNT_RATE, "
+				+ "      IMG_FILE_NAME, BOOK_SALES_RATE, BOOK_PUBLISHER, CATEGORY_GROUP_NO "
+				+ "      FROM RIDI_BOOKS) B, RIDI_BOOK_CATEGORIES C "
+				+ "WHERE B.CATEGORY_NO = C.CATEGORY_NO "
+				+ "AND ROW_NUMBER >= ? AND ROW_NUMBER <= ? "
+				+ "ORDER BY BOOK_NO ASC ";			   
+		
+		return helper.selectList(sql, rs -> {
+			BookDto book = new BookDto();
+			book.setNo(rs.getInt("BOOK_NO"));
+			book.setTitle(rs.getString("BOOK_TITLE"));
+			book.setCategoryNo(rs.getInt("CATEGORY_NO"));
+			book.setWriter(rs.getString("BOOK_WRITER"));
+			book.setPaperBookPrice(rs.getInt("PAPER_BOOK_PRICE"));
+			book.setBookPrice(rs.getInt("BOOK_PRICE"));
+			book.setIntroduce(rs.getString("BOOK_INTRODUCE"));
+			book.setCreatedDate(rs.getDate("BOOK_CREATED_DATE"));
+			book.setUpdatedDate(rs.getDate("BOOK_UPDATED_DATE"));
+			book.setDiscountRate(rs.getInt("DISCOUNT_RATE"));
+			book.setImgFileName(rs.getString("IMG_FILE_NAME"));
+			book.setBookSalesRate(rs.getInt("BOOK_SALES_RATE"));
+			book.setBookPublisher(rs.getString("BOOK_PUBLISHER"));
+			book.setCategoryGroupNo(rs.getInt("CATEGORY_GROUP_NO"));
+			return book;
+		}, beginIndex,endIndex);
+	}
+	public List<BookDto> getAllBooks(int beginIndex, int endIndex, String keyword)throws SQLException{
+		String sql = "SELECT B.BOOK_NO, B.BOOK_TITLE, B.CATEGORY_NO, B.BOOK_WRITER, "
+				+ "       B.PAPER_BOOK_PRICE, B.BOOK_PRICE, B.BOOK_INTRODUCE, B.BOOK_CREATED_DATE, "
+				+ "       B.BOOK_UPDATED_DATE, B.DISCOUNT_RATE, B.IMG_FILE_NAME, B.BOOK_SALES_RATE, "
+				+ "       B.BOOK_PUBLISHER, C.CATEGORY_NAME, C.CATEGORY_GROUP_NO "
+				+ "FROM (SELECT ROW_NUMBER() OVER (ORDER BY BOOK_NO ASC) ROW_NUMBER, "
+				+ "      BOOK_NO, BOOK_TITLE, CATEGORY_NO, BOOK_WRITER, PAPER_BOOK_PRICE, "
+				+ "      BOOK_PRICE, BOOK_INTRODUCE, BOOK_CREATED_DATE, BOOK_UPDATED_DATE, DISCOUNT_RATE, "
+				+ "      IMG_FILE_NAME, BOOK_SALES_RATE, BOOK_PUBLISHER, CATEGORY_GROUP_NO "
+				+ "      FROM RIDI_BOOKS) B, RIDI_BOOK_CATEGORIES C "
+				+ "WHERE BOOK_TITLE LIKE '%' || ? || '%' "
+				+ "AND B.CATEGORY_NO = C.CATEGORY_NO "
+				+ "AND ROW_NUMBER >= ? AND ROW_NUMBER <= ? "
+				+ "ORDER BY BOOK_NO ASC ";
+		
+		return helper.selectList(sql, rs -> {
+			BookDto book = new BookDto();
+			book.setNo(rs.getInt("BOOK_NO"));
+			book.setTitle(rs.getString("BOOK_TITLE"));
+			book.setCategoryNo(rs.getInt("CATEGORY_NO"));
+			book.setWriter(rs.getString("BOOK_WRITER"));
+			book.setPaperBookPrice(rs.getInt("PAPER_BOOK_PRICE"));
+			book.setBookPrice(rs.getInt("BOOK_PRICE"));
+			book.setIntroduce(rs.getString("BOOK_INTRODUCE"));
+			book.setCreatedDate(rs.getDate("BOOK_CREATED_DATE"));
+			book.setUpdatedDate(rs.getDate("BOOK_UPDATED_DATE"));
+			book.setDiscountRate(rs.getInt("DISCOUNT_RATE"));
+			book.setImgFileName(rs.getString("IMG_FILE_NAME"));
+			book.setBookSalesRate(rs.getInt("BOOK_SALES_RATE"));
+			book.setBookPublisher(rs.getString("BOOK_PUBLISHER"));
+			book.setCategoryGroupNo(rs.getInt("CATEGORY_GROUP_NO"));
+			return book;
+		}, keyword, beginIndex, endIndex);
+	}
+	public List<User> getAllUsers(int beginIndex, int endIndex)throws SQLException{
+		String sql	= "SELECT 	USER_NO, USER_ID, USER_PASSWORD, USER_EMAIL, USER_BIRTH_DATE, USER_GENDER, "
+					+ "			USER_CREATED_DATE,USER_CASH,USER_ADMIN,USER_REJECT,USER_BOOK_COUNT,USER_NAME,USER_UPDATED_DATE "
+					+ "FROM (SELECT ROW_NUMBER() OVER (ORDER BY USER_NO ASC) ROW_NUMBER, "
+					+ "			USER_NO, USER_ID, USER_PASSWORD, USER_EMAIL, USER_BIRTH_DATE, USER_GENDER,"
+					+ "			USER_CREATED_DATE, USER_CASH, USER_ADMIN, USER_REJECT, USER_BOOK_COUNT, USER_NAME, USER_UPDATED_DATE "
+					+ "		FROM RIDI_USERS ) "
+					+ "WHERE ROW_NUMBER >= ? AND ROW_NUMBER <= ? ";
+		
+		return helper.selectList(sql, rs -> {
+			User user = new User();
+			user.setNo(rs.getInt("USER_NO"));
+			user.setId(rs.getString("USER_ID"));
+			user.setPassword(rs.getString("USER_PASSWORD"));
+			user.setEmail(rs.getString("user_email"));
+			user.setBirthDate(rs.getString("USER_BIRTH_DATE"));
+			user.setGender(rs.getString("USER_GENDER"));
+			user.setCreatedDate(rs.getDate("USER_CREATED_DATE"));
+			user.setCash(rs.getInt("USER_CASH"));
+			user.setAdmin(rs.getString("USER_ADMIN"));
+			user.setReject(rs.getString("USER_REJECT"));
+			user.setBookCount(rs.getInt("USER_BOOK_COUNT"));
+			user.setName(rs.getString("USER_NAME"));
+			
+			return user;
+			
+		},beginIndex,endIndex);
+	}
+	public List<User> getAllUsers(int beginIndex, int endIndex, String keyword)throws SQLException{
+		String sql	= "SELECT 	USER_NO, USER_ID, USER_PASSWORD, USER_EMAIL, USER_BIRTH_DATE, USER_GENDER, USER_CREATED_DATE, USER_CASH, USER_ADMIN,"
+					+ "			USER_REJECT, USER_BOOK_COUNT, USER_NAME, USER_UPDATED_DATE "
+					+ "FROM (SELECT ROW_NUMBER() OVER(ORDER BY USER_NO ASC) ROW_NUMBER, "
+					+ "				USER_NO, USER_ID, USER_PASSWORD, USER_EMAIL, USER_BIRTH_DATE, USER_GENDER, "
+					+ "				USER_CREATED_DATE, USER_CASH, USER_ADMIN, USER_REJECT, USER_BOOK_COUNT, USER_NAME, USER_UPDATED_DATE  "
+					+ "		FROM RIDI_USERS ) "
+					+ "WHERE ROW_NUMBER >= ? AND ROW_NUMBER <= ? "
+					+ "AND USER_NAME LIKE '%' || ? || '%' ";
+		
+		return helper.selectList(sql, rs -> {
+			User user = new User();
+			user.setNo(rs.getInt("user_no"));
+			user.setId(rs.getString("user_id"));
+			user.setPassword(rs.getString("user_password"));
+			user.setName(rs.getString("user_name"));
+			user.setEmail(rs.getString("user_email"));
+			
+			user.setBirthDate(rs.getString("user_birth_date"));
+			user.setGender(rs.getString("user_gender"));
+			user.setCreatedDate(rs.getDate("user_created_date"));
+			user.setCash(rs.getInt("user_cash"));
+			user.setAdmin(rs.getString("user_admin"));
+			user.setReject(rs.getString("user_reject"));
+			user.setBookCount(rs.getInt("user_book_count"));
+			
+			return user;
+			
+		},beginIndex, endIndex, keyword);
+	}
 	// 알림메세지 보내기
 	
 	// 총 수익률내기 (책 구매 수익률) 총수익률을 기록할 vo파일 생성/ DB생성

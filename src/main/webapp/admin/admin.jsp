@@ -18,10 +18,7 @@
 <style type="text/css">
 	
 </style>
-
 </head>
-
-   
 <body>
 <div class="col-12">
 	<jsp:include page="../common/adminheader.jsp"></jsp:include>
