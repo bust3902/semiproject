@@ -105,6 +105,10 @@
 				records = bookDao.getSteadySellerCnt(categoryGroupNo).size();
 			}
 			
+			if (records == 0) {
+				records +=1;
+			}
+			
 			
 			int totalPages = (int) (Math.ceil((double) records/rows));
 			
@@ -116,10 +120,10 @@
 			}
 			int currentPage = Integer.parseInt(pageNum);
 			// 오작동시 1페이지로 보냄
-			if (currentPage <= 0 || currentPage > totalPages) {
+			/* if (currentPage <= 0 || currentPage > totalPages) {
 				response.sendRedirect("itbestsellerlist.jsp?categoryGroupNo=1100&order=best&view=list&page=1");
 				return;
-			}
+			} */
 			
 			int currentBlock = (int) (Math.ceil((double) currentPage/pages));
 			
