@@ -1,3 +1,4 @@
+<%@page import="com.htabooks.dao.AdminDao"%>
 <%@page import="java.io.Console"%>
 <%@page import="com.htabooks.vo.Pagination"%>
 <%@page import="com.htabooks.util.StringUtil"%>
@@ -19,6 +20,7 @@
 <body>
 		<%
 		BookDao bookDao = BookDao.getInstance();
+		AdminDao adminDao = AdminDao.getInstance();
 		
 		int currentPage = StringUtil.stringToInt(request.getParameter("page"), 1);
 		int rows = StringUtil.stringToInt(request.getParameter("rows"),15);	
@@ -32,9 +34,9 @@
 		
 		List<BookDto> bookList = null; 
 		if(keyword.isEmpty()){
-			bookList = bookDao.getAllBooks(pagination.getBeginIndex(),pagination.getEndIndex());
+			bookList = adminDao.getAllBooks(pagination.getBeginIndex(),pagination.getEndIndex());
 		}else{
-			bookList = bookDao.getAllBooks(pagination.getBeginIndex(), pagination.getEndIndex(), keyword);
+			bookList = adminDao.getAllBooks(pagination.getBeginIndex(), pagination.getEndIndex(), keyword);
 		}
 		%>
 <div class="col-12">

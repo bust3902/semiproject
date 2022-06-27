@@ -1,3 +1,4 @@
+<%@page import="com.htabooks.dao.AdminDao"%>
 <%@page import="com.htabooks.vo.Pagination"%>
 <%@page import="com.htabooks.util.StringUtil"%>
 <%@page import="com.htabooks.vo.User"%>
@@ -20,7 +21,8 @@
 <body>
 <%
 		UserDao userDao = UserDao.getInstance();
-
+		AdminDao adminDao = AdminDao.getInstance();
+		
 		int currentPage = StringUtil.stringToInt(request.getParameter("page"), 1);
 		int rows = StringUtil.stringToInt(request.getParameter("rows"),10);	
 		String keyword = StringUtil.nullToBlank(request.getParameter("keyword"));
@@ -33,9 +35,9 @@
 		
 		List<User> userList = null; 
 		if(keyword.isEmpty()){
-			userList = userDao.getAllUsers(pagination.getBeginIndex(),pagination.getEndIndex());
+			userList = adminDao.getAllUsers(pagination.getBeginIndex(),pagination.getEndIndex());
 		}else{
-			userList = userDao.getAllUsers(pagination.getBeginIndex(), pagination.getEndIndex(), keyword);
+			userList = adminDao.getAllUsers(pagination.getBeginIndex(), pagination.getEndIndex(), keyword);
 		}
 		%>
 
