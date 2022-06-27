@@ -19,16 +19,12 @@
 
 <!-- 부트스트랩 CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
 <!-- 팀 CSS -->
 <link href="/semiproject/css/home.css" rel="stylesheet" />
-<jsp:include page="/common/header.jsp">
-	<jsp:param name="menu" value="board"/>
-</jsp:include>
-
+<link href="images/Hfavicon.ico" rel="icon" type="image/x-icon" />
+<title>HTA BOOKS</title>
 </head>
-
 <style>
 	.container { width:72%; }
 	
@@ -49,6 +45,8 @@
 </style>
 
 <body>
+	<jsp:include page="/common/header.jsp">
+	</jsp:include>
 	<div class="container border-bottom mb-5" style="min-width:1094px;">
 		<div class="row">
 			<%
@@ -206,7 +204,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- 풋터 -->
-<jsp:include page="common/footer.jsp">
+<jsp:include page="../common/footer.jsp">
 	<jsp:param name="menu" value="board"/>
 </jsp:include>
 </body>
