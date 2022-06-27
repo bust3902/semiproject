@@ -648,6 +648,82 @@ public class BookDao {
 		}, categoryGroupNo, beginIndex, endIndex);
 		
 	}
+	/**
+	 * 책 전체리스트 도서번호순으로 출력 페이징기능
+	 * @param beginIndex
+	 * @param endIndex
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<BookDto> getAllBooks(int beginIndex, int endIndex)throws SQLException{
+		
+		String sql = "SELECT B.BOOK_NO, B.BOOK_TITLE, B.CATEGORY_NO, B.BOOK_WRITER, "
+				+ "       B.PAPER_BOOK_PRICE, B.BOOK_PRICE, B.BOOK_INTRODUCE, B.BOOK_CREATED_DATE, "
+				+ "       B.BOOK_UPDATED_DATE, B.DISCOUNT_RATE, B.IMG_FILE_NAME, B.BOOK_SALES_RATE, "
+				+ "       B.BOOK_PUBLISHER, C.CATEGORY_NAME, C.CATEGORY_GROUP_NO "
+				+ "FROM (SELECT ROW_NUMBER() OVER (ORDER BY BOOK_NO ASC) ROW_NUMBER, "
+				+ "      BOOK_NO, BOOK_TITLE, CATEGORY_NO, BOOK_WRITER, PAPER_BOOK_PRICE, "
+				+ "      BOOK_PRICE, BOOK_INTRODUCE, BOOK_CREATED_DATE, BOOK_UPDATED_DATE, DISCOUNT_RATE, "
+				+ "      IMG_FILE_NAME, BOOK_SALES_RATE, BOOK_PUBLISHER, CATEGORY_GROUP_NO "
+				+ "      FROM RIDI_BOOKS) B, RIDI_BOOK_CATEGORIES C "
+				+ "WHERE B.CATEGORY_NO = C.CATEGORY_NO "
+				+ "AND ROW_NUMBER >= ? AND ROW_NUMBER <= ? "
+				+ "ORDER BY BOOK_NO ASC ";			   
+		
+		return helper.selectList(sql, rs -> {
+			BookDto book = new BookDto();
+			book.setNo(rs.getInt("BOOK_NO"));
+			book.setTitle(rs.getString("BOOK_TITLE"));
+			book.setCategoryNo(rs.getInt("CATEGORY_NO"));
+			book.setWriter(rs.getString("BOOK_WRITER"));
+			book.setPaperBookPrice(rs.getInt("PAPER_BOOK_PRICE"));
+			book.setBookPrice(rs.getInt("BOOK_PRICE"));
+			book.setIntroduce(rs.getString("BOOK_INTRODUCE"));
+			book.setCreatedDate(rs.getDate("BOOK_CREATED_DATE"));
+			book.setUpdatedDate(rs.getDate("BOOK_UPDATED_DATE"));
+			book.setDiscountRate(rs.getInt("DISCOUNT_RATE"));
+			book.setImgFileName(rs.getString("IMG_FILE_NAME"));
+			book.setBookSalesRate(rs.getInt("BOOK_SALES_RATE"));
+			book.setBookPublisher(rs.getString("BOOK_PUBLISHER"));
+			book.setCategoryGroupNo(rs.getInt("CATEGORY_GROUP_NO"));
+			return book;
+		}, beginIndex,endIndex);
+	}
+	public List<BookDto> getAllBooks(int beginIndex, int endIndex, String keyword)throws SQLException{
+		
+		String sql = "SELECT B.BOOK_NO, B.BOOK_TITLE, B.CATEGORY_NO, B.BOOK_WRITER, "
+				+ "       B.PAPER_BOOK_PRICE, B.BOOK_PRICE, B.BOOK_INTRODUCE, B.BOOK_CREATED_DATE, "
+				+ "       B.BOOK_UPDATED_DATE, B.DISCOUNT_RATE, B.IMG_FILE_NAME, B.BOOK_SALES_RATE, "
+				+ "       B.BOOK_PUBLISHER, C.CATEGORY_NAME, C.CATEGORY_GROUP_NO "
+				+ "FROM (SELECT ROW_NUMBER() OVER (ORDER BY BOOK_NO ASC) ROW_NUMBER, "
+				+ "      BOOK_NO, BOOK_TITLE, CATEGORY_NO, BOOK_WRITER, PAPER_BOOK_PRICE, "
+				+ "      BOOK_PRICE, BOOK_INTRODUCE, BOOK_CREATED_DATE, BOOK_UPDATED_DATE, DISCOUNT_RATE, "
+				+ "      IMG_FILE_NAME, BOOK_SALES_RATE, BOOK_PUBLISHER, CATEGORY_GROUP_NO "
+				+ "      FROM RIDI_BOOKS) B, RIDI_BOOK_CATEGORIES C "
+				+ "WHERE BOOK_TITLE LIKE '%' || ? || '%' "
+				+ "AND B.CATEGORY_NO = C.CATEGORY_NO "
+				+ "AND ROW_NUMBER >= ? AND ROW_NUMBER <= ? "
+				+ "ORDER BY BOOK_NO ASC ";
+		
+		return helper.selectList(sql, rs -> {
+			BookDto book = new BookDto();
+			book.setNo(rs.getInt("BOOK_NO"));
+			book.setTitle(rs.getString("BOOK_TITLE"));
+			book.setCategoryNo(rs.getInt("CATEGORY_NO"));
+			book.setWriter(rs.getString("BOOK_WRITER"));
+			book.setPaperBookPrice(rs.getInt("PAPER_BOOK_PRICE"));
+			book.setBookPrice(rs.getInt("BOOK_PRICE"));
+			book.setIntroduce(rs.getString("BOOK_INTRODUCE"));
+			book.setCreatedDate(rs.getDate("BOOK_CREATED_DATE"));
+			book.setUpdatedDate(rs.getDate("BOOK_UPDATED_DATE"));
+			book.setDiscountRate(rs.getInt("DISCOUNT_RATE"));
+			book.setImgFileName(rs.getString("IMG_FILE_NAME"));
+			book.setBookSalesRate(rs.getInt("BOOK_SALES_RATE"));
+			book.setBookPublisher(rs.getString("BOOK_PUBLISHER"));
+			book.setCategoryGroupNo(rs.getInt("CATEGORY_GROUP_NO"));
+			return book;
+		}, keyword, beginIndex, endIndex);
+	}
 	
 	/**
 	 * 키워드를 입력받아 책 데이터를 검색.
