@@ -3,6 +3,7 @@
 <%@page import="com.htabooks.dao.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%
 	String id = request.getParameter("id");
 	String password = request.getParameter("password");
@@ -11,6 +12,7 @@
 	String birthDate = request.getParameter("birthDate");	
 	String gender = request.getParameter("gender");	
 	UserDao userDao = UserDao.getInstance();
+	
 	
 	User savedUser = userDao.getUserById(id);
 	if(savedUser != null){
@@ -26,7 +28,6 @@
 	
 	//비밀번호 암호화 
 	String secretPassword = PasswordUtil.generateSecretPassword(id, password);
-//	System.out.println(secretPassword);
 	
 	User user = new User();
 	user.setId(id);

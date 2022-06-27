@@ -7,7 +7,7 @@ public class NoticeBoard {
 	private int no;
 	private String title;
 	private String contents;
-	private String deleted;
+	private String deletedDate;
 	private Date createdDate;
 	
 	public NoticeBoard() {}
@@ -36,19 +36,19 @@ public class NoticeBoard {
 		this.contents = contents;
 	}
 
-	public String getDeleted() {
-		return deleted;
+	public String getDeletedDate() {
+		return deletedDate;
 	}
 
-	public void setDeleted(String deleted) {
-		this.deleted = deleted;
+	public void setDeletedDate(String deletedDate) {
+		this.deletedDate = deletedDate;
 	}
 
 	public Date getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(Date createdDate) {
+	public void setCreatedDate(Date createdDateDate) {
 		this.createdDate = createdDate;
 	}
 	
