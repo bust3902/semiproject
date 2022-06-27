@@ -1,3 +1,4 @@
+<%@page import="com.htabooks.util.MultipartRequest"%>
 <%@page import="com.htabooks.dto.BookDto"%>
 <%@page import="com.htabooks.util.StringUtil"%>
 <%@page import="com.htabooks.dao.AdminDao"%>
@@ -18,15 +19,17 @@
 } */
 	// 요청 파라미터에서 책번호,책제목,저자,설명,가격의 이름을 조회
 	
-	int bookNo 				= StringUtil.stringToInt(request.getParameter("bookNo"));
-	int categoryNo			= StringUtil.stringToInt(request.getParameter("categoryNo"));
-	int paperBookPrice		= StringUtil.stringToInt(request.getParameter("paperBookPrice"));
-	int bookPrice			= StringUtil.stringToInt(request.getParameter("bookPrice"));
-	String title 			= StringUtil.nullToBlank(request.getParameter("title"));
-	String writer 			= StringUtil.nullToBlank(request.getParameter("writer"));
-	String bookIntroduce 	= StringUtil.nullToBlank(request.getParameter("bookIntroduce"));
-	String bookPublisher 	= StringUtil.nullToBlank(request.getParameter("bookPublisher"));
-	String imgFileName 		= StringUtil.nullToBlank(request.getParameter("imgFileName"));
+	MultipartRequest mr = new MultipartRequest(request, "C:\\eclipse\\workspace-web\\semiproject\\src\\main\\webapp\\img");
+	
+	int bookNo 				= StringUtil.stringToInt(mr.getParameter("bookNo"));
+	int categoryNo			= StringUtil.stringToInt(mr.getParameter("categoryNo"));
+	int paperBookPrice		= StringUtil.stringToInt(mr.getParameter("paperBookPrice"));
+	int bookPrice			= StringUtil.stringToInt(mr.getParameter("bookPrice"));
+	String title 			= StringUtil.nullToBlank(mr.getParameter("title"));
+	String writer 			= StringUtil.nullToBlank(mr.getParameter("writer"));
+	String bookIntroduce 	= StringUtil.nullToBlank(mr.getParameter("bookIntroduce"));
+	String bookPublisher 	= StringUtil.nullToBlank(mr.getParameter("bookPublisher"));
+	String imgFileName 		= StringUtil.nullToBlank(mr.getFilename("imgFileName"));
 	
 	// 도서객체를 생성해서 도서리스트 테이블에 저장
 	

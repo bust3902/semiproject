@@ -52,7 +52,7 @@
 			BookDto book = bookDao.getBookByNo(bookNo); 
 			
 			%>
-				<img src="/semiproject/img/book001.webp" style="height:200px; weight:200px; border:1px solid black;">
+				<img src="/semiproject/img/nofile.png" id="img" style="height:200px; weight:200px; border:1px solid black;">
 			</div>
 			<hr>
 		<form class="row mt-5" method="post" action="addproduct.jsp" enctype="multipart/form-data" onsubmit="return submitBoardForm()">
@@ -155,7 +155,6 @@ function submitBoardForm() {
 	}
 	return true;
 }
-
 </script>
 </body>
 </html>
