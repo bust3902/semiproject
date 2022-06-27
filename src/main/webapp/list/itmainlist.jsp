@@ -15,6 +15,7 @@
 <!-- 부트스트랩 CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
 <!-- 팀 CSS -->
 <link href="/semiproject/css/list.css" rel="stylesheet" />
 
@@ -37,7 +38,7 @@
 <jsp:include page="/common/header.jsp">
 	<jsp:param name="menu" value="board"/>
 </jsp:include>
-<div class="container mt-5" style="min-width:1094px;">
+<div class="container mt-5" style="min-width:1094px; max-width:1094px;">
 	<div class="row">
 		<%	
 			BookDao bookDao = BookDao.getInstance();
@@ -61,9 +62,9 @@
 		<div class="col-8">
 			<div class="row">
 			<!-- 메인 카테고리명(링크) -->
-				<div class="col nav-item mb-2">
-					<a href="itmainlist.jsp?categoryGroupNo=1100" class="link-dark nav-link">
-						<img src="/semiproject/img/display.svg" width="20" height="20" class="mb-1">
+				<div class="row mb-2" style="display: inline-block;">
+					<a href="itmainlist.jsp?categoryGroupNo=1100" style="text-decoration:none; color:black;">
+						<img src="/semiproject/img/display.svg" width="20" height="20" class="mb-2">
 							<strong style="font-size:20px"> 컴퓨터/IT</strong>
 					</a>
 				</div>
@@ -81,7 +82,7 @@
 			
 			
 			<!-- 인기신간 -->
-			<div class="row mt-5">
+			<div class="row mt-5 mb-3">
 				<div class="col-3 m-0 p-0"><strong style="font-size:17px;">컴퓨터/IT 인기 신간</strong></div>
 				<div class="col-7 m-0"><hr></div>
 				<div class="col-2">
@@ -114,6 +115,7 @@
 				<%
 					}
 				%>
+			</div>
 				
 				<!-- 베스트셀러 -->
 				<div class="row mt-5">
@@ -126,7 +128,6 @@
 					</div>
 				</div>
 					
-			</div>
 			<!-- 베스트셀러 책 출력 -->
 			<div class="row">
 				<%
@@ -152,8 +153,6 @@
 				%>
 			</div>
 		</div>
-		<!-- 너비 맞추기용 빈 공간 -->
-		<div class="col-1"></div>
 	</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
