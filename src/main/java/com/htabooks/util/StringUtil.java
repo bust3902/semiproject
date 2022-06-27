@@ -1,15 +1,16 @@
 package com.htabooks.util;
 
+import java.text.DecimalFormat;
+
 public class StringUtil {
 	
-
 	/**
 	 * value가 null이면 빈 문자열을 반환한다
 	 * @param value 텍스트
 	 * @return 빈 문자열 혹은 원래 문자열
 	 */
 	public static String nullToBlank(String value) {
-		return value == null ? "" : value.trim();	// trim()공백이 있을 필요 없다 
+		return value == null ? "" : value.trim();
 	}
 	
 	/**
@@ -79,5 +80,22 @@ public class StringUtil {
 		} catch (NumberFormatException e) {
 			return defaultValue;
 		}
+	}
+	
+	/**
+	 * int를 가격 표시 형태로 변환한다.
+	 * @param price
+	 * @return 가격 표시 형태
+	 */
+	public static String priceFormat(int price) {
+		DecimalFormat df = new DecimalFormat("#,###");
+		
+		return df.format(price); 
+	}
+	
+	public static String bookImgNoFormat(int no) {
+		DecimalFormat df = new DecimalFormat("000");
+		
+		return df.format(no);
 	}
 }

@@ -226,11 +226,11 @@
 
 				<a href="itmainlist.jsp?categoryGroupNo=1100" class="list-group-item show-category">컴퓨터/IT 전체</a>
 
-				<a href="#" class="list-group-item show-category">IT 비즈니스</a>
-				<a href="#" class="list-group-item show-category">개발/프로그래밍</a>
-				<a href="#" class="list-group-item show-category">컴퓨터/앱 활용</a>
-				<a href="#" class="list-group-item show-category">IT 자격증</a>
-				<a href="#" class="list-group-item show-category">IT 해외원서</a>
+				<a href="itsubmainlist.jsp?categoryNo=1102" class="list-group-item show-category">IT 비즈니스</a>
+				<a href="itsubmainlist.jsp?categoryNo=1103" class="list-group-item show-category">개발/프로그래밍</a>
+				<a href="itsubmainlist.jsp?categoryNo=1104" class="list-group-item show-category">컴퓨터/앱 활용</a>
+				<a href="itsubmainlist.jsp?categoryNo=1105" class="list-group-item show-category">IT 자격증</a>
+				<a href="itsubmainlist.jsp?categoryNo=1105" class="list-group-item show-category">IT 해외원서</a>
 			</div>
 			<div class="list-group d-none" id="sub-category-12">
 				<a href="#" class="list-group-item"></a>

@@ -1,3 +1,4 @@
+<%@page import="com.htabooks.vo.BookCategories"%>
 <%@page import="com.htabooks.dto.BookDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.htabooks.util.StringUtil"%>
@@ -15,6 +16,7 @@
 <!-- 부트스트랩 CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
 <!-- 팀 CSS -->
 <link href="/semiproject/css/list.css" rel="stylesheet" />
 
@@ -63,8 +65,8 @@
 	<div class="row">
 		<%
 			BookDao bookDao = BookDao.getInstance();
-
-			int categoryGroupNo = StringUtil.stringToInt(request.getParameter("categoryGroupNo"));
+			// 카테고리 번호 파라미터
+			int categoryNo = StringUtil.stringToInt(request.getParameter("categoryNo"));
 
 			// 책 출력방식 파라미터(리스트, 그리드 형식)
 			String viewStyle  = request.getParameter("view");
@@ -79,12 +81,14 @@
 			List<BookDto> listBookGrid = null;
 			
 			if (orderCategory.equals("new")) {
-				listBookList = bookDao.getNewBooks(categoryGroupNo);
-				listBookGrid = bookDao.getNewBooks(categoryGroupNo);
+				listBookList = bookDao.getSubNewBooks(categoryNo);
+				listBookGrid = bookDao.getSubNewBooks(categoryNo);
 			} else {
-				listBookList = bookDao.getNewBestBooks(categoryGroupNo);
-				listBookGrid = bookDao.getNewBestBooks(categoryGroupNo);
+				listBookList = bookDao.getSubNewBestBooks(categoryNo);
+				listBookGrid = bookDao.getSubNewBestBooks(categoryNo);
 			}
+
+			BookCategories subCategoryName = bookDao.getCategoryName(categoryNo);
 		%>
 		<div class="col-3">
 			<!-- 사이드바(카테고리 그룹) -->
@@ -98,9 +102,12 @@
 			<div class="row">
 			<!-- 메인 카테고리명 -->
 				<div class="row mb-2" style="display: inline-block;">
-					<a href="itmainlist.jsp?categoryGroupNo=1100" style="text-decoration:none; color:black;">
+					<a href="itmainlist.jsp?categoryGroupNo=<%=subCategoryName.getGroupNo() %>" style="text-decoration:none; color:black;">
 						<img src="/semiproject/img/display.svg" width="20" height="20" class="mb-2">
-							<strong style="font-size:20px"> 컴퓨터/IT</strong>
+							<strong style="font-size:19px"> 컴퓨터/IT ></strong>
+					</a>
+					<a href="itsubmainlist.jsp?categoryNo=<%=categoryNo %>" style="text-decoration:none; color:black;">
+						<strong style="font-size:18px"><%=subCategoryName.getName() %></strong>
 					</a>
 				</div>
 			</div>
@@ -108,10 +115,10 @@
 			<!-- 분류별 서브메뉴 -->
 			<div class="row mb-3 border-bottom">
 				<ul class="nav justify-content-start">
-					<li class="nav-item"><a href="itmainlist.jsp?categoryGroupNo=1100" class="nav-link p-2" style="color:gray">홈</a></li>
-					<li class="nav-item border-bottom border-primary border-3"><a href="itnewlist.jsp?categoryGroupNo=1100&order=best&view=list" class="nav-link p-2" style="color:gray">신간</a></li>
-					<li class="nav-item"><a href="itbestsellerlist.jsp?categoryGroupNo=1100&order=week&view=list" class="nav-link p-2" style="color:gray">베스트셀러</a></li>
-					<li class="nav-item"><a href="italllist.jsp?categoryGroupNo=1100&page=1&view=list" class="nav-link p-2" style="color:gray">전체</a></li>
+					<li class="nav-item"><a href="itsubmainlist.jsp?categoryNo=<%=categoryNo %>" class="nav-link p-2" style="color:gray">홈</a></li>
+					<li class="nav-item border-bottom border-primary border-3"><a href="itnewlist.jsp?categoryNo=<%=categoryNo %>&order=best&view=list" class="nav-link p-2" style="color:gray">신간</a></li>
+					<li class="nav-item"><a href="itsubbestsellerlist.jsp?categoryNo=<%=categoryNo %>&order=week&view=list" class="nav-link p-2" style="color:gray">베스트셀러</a></li>
+					<li class="nav-item"><a href="itsuballlist.jsp?categoryNo=<%=categoryNo %>&page=1&view=list" class="nav-link p-2" style="color:gray">전체</a></li>
 				</ul>
 			</div>
 
@@ -122,18 +129,18 @@
 						<!-- 책 정렬순서 선택 -->
 						<div class="col-10 p-0">
 							<ul class="nav justify-content-start m-0">
-								<li class="nav-item rank"><a href="itnewlist.jsp?categoryGroupNo=1100&order=best&view=<%=viewStyle %>" class="nav-link p-2" style="color:gray">인기순</a></li>
-								<li class="nav-item rank"><a href="itnewlist.jsp?categoryGroupNo=1100&order=new&view=<%=viewStyle %>" class="nav-link p-2" style="color:gray">최신순</a></li>
+								<li class="nav-item rank"><a href="itsubnewlist.jsp?categoryNo=<%=categoryNo %>&order=best&view=<%=viewStyle %>" class="nav-link p-2" style="color:gray">인기순</a></li>
+								<li class="nav-item rank"><a href="itsubnewlist.jsp?categoryNo=<%=categoryNo %>&order=new&view=<%=viewStyle %>" class="nav-link p-2" style="color:gray">최신순</a></li>
 							</ul>
 						</div>
 						
 						<!-- 리스트 보기형식 선택 -->
 						<div class="col-2 position-relative">
 							<div class="btn-group btn-group-sm position-absolute end-0" role="group">
-								<a class="btn btn-default border" href="itnewlist.jsp?categoryGroupNo=1100&order=<%=orderCategory %>&view=list" role="button">
+								<a class="btn btn-default border" href="itsubnewlist.jsp?categoryNo=<%=categoryNo %>&order=<%=orderCategory %>&view=list" role="button">
 									<span class="glyphicon glyphicon-th-list"></span>
 								</a>
-								<a class="btn btn-default border" href="itnewlist.jsp?categoryGroupNo=1100&order=<%=orderCategory %>&view=grid" role="button">
+								<a class="btn btn-default border" href="itsubnewlist.jsp?categoryNo=<%=categoryNo %>&order=<%=orderCategory %>&view=grid" role="button">
 									<span class="glyphicon glyphicon-th-large"></span>
 								</a>
 							</div>
