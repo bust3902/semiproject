@@ -1,0 +1,50 @@
+<%@page import="com.htabooks.dto.BookDto"%>
+<%@page import="com.htabooks.util.StringUtil"%>
+<%@page import="com.htabooks.dao.AdminDao"%>
+<%@page import="com.htabooks.dao.BookDao"%>
+<%@page import="com.htabooks.vo.Book"%>
+<%@page import="com.htabooks.vo.User"%>
+<%@page import="java.util.Date"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+// 상품 추가페이지
+
+	/* // 로그인 후 사용가능한 서비스 (세션에 저장된 관리자정보 조회)
+	User admin = (User) session.getAttribute("LOGINED_ADMIN");
+	if(admin == null){
+		response.sendRedirect("(사용자정보 오류 페이지)");
+		return; 
+} */
+	// 요청 파라미터에서 책번호,책제목,저자,설명,가격의 이름을 조회
+	
+	int bookNo 				= StringUtil.stringToInt(request.getParameter("bookNo"));
+	int categoryNo			= StringUtil.stringToInt(request.getParameter("categoryNo"));
+	int paperBookPrice		= StringUtil.stringToInt(request.getParameter("paperBookPrice"));
+	int bookPrice			= StringUtil.stringToInt(request.getParameter("bookPrice"));
+	String title 			= StringUtil.nullToBlank(request.getParameter("title"));
+	String writer 			= StringUtil.nullToBlank(request.getParameter("writer"));
+	String bookIntroduce 	= StringUtil.nullToBlank(request.getParameter("bookIntroduce"));
+	String bookPublisher 	= StringUtil.nullToBlank(request.getParameter("bookPublisher"));
+	String imgFileName 		= StringUtil.nullToBlank(request.getParameter("imgFileName"));
+	
+	// 도서객체를 생성해서 도서리스트 테이블에 저장
+	
+	BookDto book = new BookDto();
+	book.setNo(bookNo);	
+	book.setTitle(title);	
+	book.setCategoryNo(categoryNo);
+	book.setWriter(writer);	
+	book.setPaperBookPrice(paperBookPrice);
+	book.setBookPrice(bookPrice);	
+	book.setIntroduce(bookIntroduce);
+	book.setBookPublisher(bookPublisher);
+	book.setImgFileName(imgFileName);
+	// 상품 정보를 데이터베이스에 반영
+	
+	AdminDao adminDao = AdminDao.getInstance();
+	adminDao.insertBook(book);
+	
+	// 재요청 URL응답
+	response.sendRedirect("/semiproject/admin/product/productlist.jsp");
+%> 
