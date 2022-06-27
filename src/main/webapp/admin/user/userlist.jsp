@@ -20,8 +20,9 @@
 <body>
 <%
 		UserDao userDao = UserDao.getInstance();
+
 		int currentPage = StringUtil.stringToInt(request.getParameter("page"), 1);
-		int rows = StringUtil.stringToInt(request.getParameter("rows"),15);	
+		int rows = StringUtil.stringToInt(request.getParameter("rows"),10);	
 		String keyword = StringUtil.nullToBlank(request.getParameter("keyword"));
 		
 		// 전체 데이터 갯수 조회
@@ -58,18 +59,18 @@
 					<span><strong>회원 등급</strong></span>
 					<div class="col my-2">
 						<div class="custom-control custom-checkbox">
-							<input type="checkbox" name="grade" class="custom-control-input" onClick="selectAll(this)" />
-							<label class="custom-control-label" for="grade">전체</label>
-							<input type="checkbox" name="grade" class="custom-control-input" onClick="checkSelectAll()">
-							<label class="custom-control-label" for="grade">일반회원</label>
-							<input type="checkbox" name="grade" class="custom-control-input" onClick="checkSelectAll()">
-							<label class="custom-control-label" for="grade">차단된 회원</label>
-							<input type="checkbox" name="grade" class="custom-control-input" onClick="checkSelectAll()">
-							<label class="custom-control-label" for="grade">운영자</label>
+							<input type="checkbox" name="gradeCheck" class="custom-control-input" onClick="selectAll(this)" />
+							<label class="custom-control-label" for="gradeCheck">전체</label>
+							<input type="checkbox" name="gradeCheck" class="custom-control-input" onClick="checkSelectAll()">
+							<label class="custom-control-label" for="gradeCheck">일반회원</label>
+							<input type="checkbox" name="gradeCheck" class="custom-control-input" onClick="checkSelectAll()">
+							<label class="custom-control-label" for="gradeCheck">차단된 회원</label>
+							<input type="checkbox" name="gradeCheck" class="custom-control-input" onClick="checkSelectAll()">
+							<label class="custom-control-label" for="gradeCheck">운영자</label>
 						</div>
 					</div>
 				</div>
-				<form id="search-form" class="row g-3" method="get" action="userlist.jsp">
+				<form id="search-form" class="row g-3" method="post" action="userlist.jsp">
 					<input type="hidden" name="page" />
 					<input type="hidden" name="rows" />
 					
@@ -118,7 +119,7 @@
 						}else{
 							for(User user : userList){
 						%>
-						<tr class="table" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="button" style="cursor:pointer" >
+						<tr onclick="openModal('<%=user.getId() %>')">
 							<td><%=user.getNo() %></td>
 							<td><%=user.getName() %></td>
 							<td><%=user.getId() %></td>
@@ -155,69 +156,11 @@
 			</nav>
 				
 			</div>
-					<!-- 회원정보변경(modal) -->
-				<div class="modal fade modal-lg" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-				  	<div class="modal-dialog">
-					    <div class="modal-content">
-							<div class="modal-header">
-							  <h5 class="modal-title mt-3" id="staticBackdropLabel"><strong>회원정보변경</strong></h5>
-							</div>
-							<div class="modal-body">
-								<%
-								for(User user : userList){
-								%>
-								<div class="text-center">
-								  <img src="/semiproject/img/hong.jpg" style="height:200px; weight:200px;">
-								</div>
-								<div class="row my-3">
-									<h5><strong>회원정보</strong></h5><hr>
-									<div class="col-5">
-										<p><strong>전화번호</strong></p>
-											<input class="form-control my-1" type="text" value="<%=user.getNo() %>" disabled readonly>
-										<p><strong>등록일</strong></p>
-											<input class="form-control my-1" type="text" value="<%=user.getCreatedDate() %>" disabled readonly>
-									</div>
-									<div class="col">
-										<div class="custom-control custom-checkbox my-1">
-											<div class="user-group">
-												<p><strong>회원 그룹</strong></p>
-												<input type="radio" name="grade-checkbox" class="custom-control-input ">
-												<label class="custom-control-label" for="grade-checkbox">일반회원</label>
-												<input type="radio" name="grade-checkbox" class="custom-control-input ">
-												<label class="custom-control-label" for="grade-checkbox">차단회원</label>
-												<input type="radio" name="grade-checkbox" class="custom-control-input ">
-												<label class="custom-control-label" for="grade-checkbox">운영자</label>
-											</div>
-										</div>
-										<p><strong>세부사항</strong></p>
-											<input class="form-control my-1" type="text" value="댓글 경고 1회">
-									</div>
-								</div>
-								<div class="row">
-									<div class="textbox mt-3">
-											<p><strong>이름</strong></p>
-										<div class="form-floating mb-3">
-											<input type="text" class="form-control" id="userId" value="<%=user.getName() %>" placeholder="홍길동">
-											<label for="userId" class="col-form-label mx-2">name</label>
-										</div>
-											<p><strong>이메일</strong></p>
-										<div class="form-floating mb-3">
-											<input type="text" class="form-control" id="userEmail" value="<%=user.getEmail() %>" placeholder="email@example.com">
-											<label for="userEmail" class="col-form-label mx-2" >e-mail</label>
-										</div>
-									</div>
-								</div>
-								<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-									<button type="submit" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">취소</button>
-									<a href="updateuser.jsp"><button type="submit" class="btn btn-primary">변경</button></a>
-								</div>
-							<%
-							}
-							%>
-							</div>
-						</div>
-					</div>
-				</div>
+			<div>
+			<jsp:include page="modalUserInfo.jsp">
+				<jsp:param name="" value=""/>
+			</jsp:include>
+			</div>
 			</div>			
 		</div>
 	</div>
@@ -229,6 +172,33 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
+let modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+
+function openModal(id) {
+	document.getElementById("userId").value = id;
+	let xhr = new XMLHttpRequest();	
+	
+	xhr.onreadystatechange = function(){	
+		if(xhr.readyState === 4 && xhr.status ===200){
+			let Text = xhr.responseText;			
+			let data = JSON.parse(Text); 
+			
+			document.getElementById("createdDate").value = data.createdDate;
+			document.getElementById("tel").value = data.tel;
+			document.getElementById("memo").value = data.memo;
+			document.getElementById("userName").value = data.name;
+			document.getElementById("userEmail").value = data.email;
+		}
+	xhr.open("GET", 'modalUserInfo.jsp?id=' + id,'name='+ name);	
+	xhr.send();						
+	
+}
+	modal.show();
+	
+}
+
+
+
 function clickPageNo(pageNo){
 	document.querySelector("input[name=page]").value = pageNo;
 	document.getElementById("search-form").submit();
@@ -244,9 +214,9 @@ function updateUser(){
 }
 function checkSelectAll()  {
 	  const checkboxes 
-	    = document.querySelectorAll('input[name="grade"]');
+	    = document.querySelectorAll('input[name="gradeCheck"]');
 	  const checked 
-	    = document.querySelectorAll('input[name="grade"]:checked');
+	    = document.querySelectorAll('input[name="gradeCheck"]:checked');
 	  const selectAll 
 	    = document.querySelector('input[name="selectall"]');
 	  
@@ -260,7 +230,7 @@ function checkSelectAll()  {
 
 function selectAll(selectAll)  {
   const checkboxes 
-     = document.getElementsByName('grade');
+     = document.getElementsByName('gradeCheck');
   
   checkboxes.forEach((checkbox) => {
     checkbox.checked = selectAll.checked
