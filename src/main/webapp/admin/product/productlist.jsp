@@ -87,7 +87,7 @@
 						</div>
 						<div class="row my-1">
 							<span><strong>판매상태</strong></span>
-						<div class="col">1
+						<div class="col">
 							<div class="form-control text-center">
 								<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
 								<label class="form-check-label" for="flexRadioDefault1">판매중</label>
@@ -110,7 +110,7 @@
 					
 				</div>
 				<div class="row">
-					<form id="search-form" class="row g-3" method="post" action="productlist.jsp">
+					<form id="search-form" class="row g-3" method="get" action="productlist.jsp">
 					<div class="col-6 my-5">
 					<div class="input-group">
 						<button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">목록</button>
@@ -161,7 +161,6 @@
 								}else{
 									for(BookDto book : bookList){
 								%>
-															
 								<tr class="table" onclick="location.href='updateproductform.jsp?no=<%=book.getNo() %>&page=<%=pagination.getCurrentPage() %>'" style="cursor:pointer" >
 									<td><%=book.getNo() %></td>
 									<td><%=book.getTitle() %></td>
