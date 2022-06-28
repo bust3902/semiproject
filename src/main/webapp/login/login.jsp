@@ -1,7 +1,4 @@
-<%@page import="com.htabooks.dao.CartItemDao"%>
-<%@page import="com.htabooks.vo.CartItem"%>
-<%@page import="java.util.List"%>
-<%@page import="org.apache.commons.codec.digest.DigestUtils"%> 
+<%@page import="org.apache.commons.codec.digest.DigestUtils"%>
 <%@page import="com.htabooks.util.PasswordUtil"%>
 <%@page import="com.htabooks.vo.User"%>
 <%@page import="com.htabooks.dao.UserDao"%>
@@ -31,23 +28,8 @@ if(!savedUser.getPassword().equals(secretPassword)){
 
 session.setAttribute("LOGINED_USER", savedUser);
 
-// 세션에 있는 카트 목록 유저 카트에 병합하기
-@SuppressWarnings("unchecked")
-List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
-CartItemDao dao = CartItemDao.getInstance();
-
-for(CartItem item : cart) {
-	item.setUserNo(savedUser.getNo());
-	dao.insertCartItem(item);
-}
-cart.clear();
-
-// 리디렉트
-String redirect = request.getParameter("redirect");
-if (redirect != null) {
-	response.sendRedirect("../" + redirect);
-	return;
-}
 response.sendRedirect("../home.jsp");
+
+
 
 %>

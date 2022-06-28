@@ -41,7 +41,7 @@ height:100%;
 					<input type="text" class="form-control rounded-0 " name="id" placeholder="아이디"/>
 				</div>
 				<div class="p-0 m-0 ">
-					<input type="password" class="form-control rounded-0 " name="password" placeholder="비밀번호"/>
+					<input type="password" class="form-control rounded-0 " name="password" placeholder="비밀번호 "/>
 				</div>
 				
 				<%
