@@ -120,10 +120,10 @@
 			}
 			int currentPage = Integer.parseInt(pageNum);
 			// 오작동시 1페이지로 보냄
-			/* if (currentPage <= 0 || currentPage > totalPages) {
+			if (currentPage <= 0 || currentPage > totalPages) {
 				response.sendRedirect("itbestsellerlist.jsp?categoryGroupNo=1100&order=best&view=list&page=1");
 				return;
-			} */
+			}
 			
 			int currentBlock = (int) (Math.ceil((double) currentPage/pages));
 			
@@ -310,10 +310,8 @@
 							</ul>
 						</nav>
 					</div>
-
 				</div>
 			</div>
-			<div class="col-1"></div>
 		</div>	
 	</div>
 </div>
@@ -321,16 +319,5 @@
 <jsp:include page="../common/footer.jsp">
 	<jsp:param name="menu" value="board"/>
 </jsp:include>
-<script>
-/* function showGrid(event) {
-    document.querySelector('#grid').classList.remove("hidden");
-    document.querySelector('#list').classList.add("hidden");
-};
-
-function showList(event) {
-    document.querySelector('#list').classList.remove("hidden");
-    document.querySelector('#grid').classList.add("hidden");
-}; */
-</script>
 </body>
 </html>
