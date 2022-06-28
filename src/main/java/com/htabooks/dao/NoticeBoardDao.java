@@ -71,11 +71,12 @@ public class NoticeBoardDao {
 		});
 	}
 	
+	
 	// 검색하는 쿼리
 	public int getTotalRows(String keyword) throws SQLException {
-		String sql = "select count(*) cnt "
+		String sql = "select (*) cnt "
 				   + "from RIDI_NOTICE_BOARD "
-				   + "where NOTICE_BOARD_DELETED = 'N' and NOTICE_BOARD_TITLE like '%' || ? || '%' ";
+				   + "where NOTICE_BOARD_DELETED = 'N' and (NOTICE_BOARD_TITLE || NOTICE_BOARD_CONTENTS) like ('%' || ? || '%') ";
 		
 		return helper.selectOne(sql, rs -> {
 			return rs.getInt("cnt");
@@ -97,4 +98,6 @@ public class NoticeBoardDao {
 			return noticeBoard;
 		}, no);
 	}
+	
+	
 }

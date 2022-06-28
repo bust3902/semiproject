@@ -15,16 +15,19 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+<%
+
+%>
 
 <div class="container mt-3">
   <div class="row">
-   		<font class="col" size="8" color="#0d6efd"><strong>문의게시판</strong></font>
-   		<input class="col mt-2" type="text" id="myInput" onkeyup="myFunction()" placeholder="검색" title="Type in a name">
+   		<p class="col-9 fs-1 text-primary"><strong>문의 게시판</strong></p>
+   		<input class="col-3 mt-2" type="text" id="search" placeholder="검색">
    </div>
-  
+   
   <div class="mt-4 pt-4" id="collapse-content">
 	  <div class="mb-4 bg-success bg-opacity-25">
-		  <a href="#demo1" class="text-dark text-decoration-none ms-3 mt-2" data-bs-toggle="collapse" onclick="hideOthers(event)">책을 구매했는데 할인가가 아닌 정상가로 구매가 되었어요 1</a>
+		  <a href="#demo1" class="text-dark text-decoration-none ms-3 mt-2" data-bs-toggle="collapse" onclick="hideOthers(event)">이세용 │ 책을 구매했는데 할인가가 아닌 정상가로 구매가 되었어요 1</a>
 		  <div id="demo1" class="collapse ms-3 mt-3 me-3 pb-3">
 		  <hr>
 		    로그인하지 않은 상태로 비회원 구매를 하실 경우 할인가가 아닌 정상가로 구입되는 점 양해 바랍니다.
@@ -73,6 +76,7 @@
 	</nav>
 </div>
 </div>
+
 <script type="text/javascript">
 	// [a, a, a, a]
 	let collapseLinks = document.querySelectorAll("#collapse-content a");
@@ -106,7 +110,6 @@
 				link.click();
 			}
 		}
-			
 	}
 </script>
 
