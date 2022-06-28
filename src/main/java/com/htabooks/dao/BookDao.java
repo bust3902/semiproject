@@ -8,6 +8,11 @@ import com.htabooks.dto.BookDto;
 import com.htabooks.helper.DaoHelper;
 import com.htabooks.vo.BookCategories;
 
+/**
+ * 책 데이터 관련 DAO 클래스
+ * @author USER
+ *
+ */
 public class BookDao {
 	
 	/**
@@ -112,46 +117,6 @@ public class BookDao {
 			book.setBookPublisher(rs.getString("BOOK_PUBLISHER"));
 			return book;
 		} );
-		
-	}
-	
-	/**
-	 * 카테고리 그룹 번호, 카테고리 번호를 받아 카테고리별 판매량이 높은 책 10권의 데이터를 출력
-	 * @param categoryGroupNo 카테고리 그룹 번호
-	 * @param categoryNo 카테고리 번호
-	 * @return 판매량이 높은 책 10권의 데이터
-	 * @throws SQLException
-	 */
-	public List<BookDto> getBestSellerBooks(int categoryGroupNo, int categoryNo) throws SQLException{
-		String sql = "SELECT R.BOOK_NO, R.BOOK_TITLE, R.CATEGORY_NO, R.BOOK_WRITER, R.PAPER_BOOK_PRICE, "
-				   + "		 R.BOOK_PRICE, R.BOOK_INTRODUCE, R.BOOK_CREATED_DATE, R.BOOK_UPDATED_DATE, R.DISCOUNT_RATE, "
-				   + "		 R.IMG_FILE_NAME, R.BOOK_SALES_RATE, C.CATEGORY_GROUP_NO "
-				   + "FROM (SELECT BOOK_NO, BOOK_TITLE, CATEGORY_NO, BOOK_WRITER, PAPER_BOOK_PRICE, BOOK_PRICE, "
-				   + "			   BOOK_INTRODUCE, BOOK_CREATED_DATE, BOOK_UPDATED_DATE, DISCOUNT_RATE, IMG_FILE_NAME, BOOK_SALES_RATE "
-				   + "      FROM RIDI_BOOKS "
-				   + "      ORDER BY BOOK_SALES_RATE DESC) R, RIDI_BOOK_CATEGORIES C "
-				   + "WHERE R.CATEGORY_NO = C.CATEGORY_NO "
-				   + "AND CATEGORY_GROUP_NO = ? "
-				   + "AND R.CATEGORY_NO = ? "
-				   + "AND ROWNUM <= 10 ";
-		
-		return helper.selectList(sql, rs -> {
-			BookDto book = new BookDto();
-			book.setNo(rs.getInt("BOOK_NO"));
-			book.setTitle(rs.getString("BOOK_TITLE"));
-			book.setCategoryNo(rs.getInt("CATEGORY_NO"));
-			book.setWriter(rs.getString("BOOK_WRITER"));
-			book.setPaperBookPrice(rs.getInt("PAPER_BOOK_PRICE"));
-			book.setBookPrice(rs.getInt("BOOK_PRICE"));
-			book.setIntroduce(rs.getString("BOOK_INTRODUCE"));
-			book.setCreatedDate(rs.getDate("BOOK_CREATED_DATE"));
-			book.setUpdatedDate(rs.getDate("BOOK_UPDATED_DATE"));
-			book.setDiscountRate(rs.getInt("DISCOUNT_RATE"));
-			book.setImgFileName(rs.getString("IMG_FILE_NAME"));
-			book.setBookSalesRate(rs.getInt("BOOK_SALES_RATE"));
-			book.setCategoryGroupNo(rs.getInt("CATEGORY_GROUP_NO"));
-			return book;
-		}, categoryGroupNo, categoryNo);
 		
 	}
 	
@@ -513,23 +478,24 @@ public class BookDao {
 	}
 	
 	/**
-	 * 카테고리 그룹 번호, 카테고리 번호를 받아 신간 10권의 데이터를 출력
+	 * 카테고리 그룹 번호, 카테고리 번호를 받아 카테고리별 판매량이 높은 책 10권의 데이터를 출력
 	 * @param categoryGroupNo 카테고리 그룹 번호
 	 * @param categoryNo 카테고리 번호
-	 * @return 신간 10권의 데이터
+	 * @return 판매량이 높은 책 10권의 데이터
 	 * @throws SQLException
 	 */
-	public List<BookDto> getNewBooks(int categoryGroupNo, int categoryNo) throws SQLException{
+	public List<BookDto> getBestSellerBooks(int categoryGroupNo, int categoryNo) throws SQLException{
 		String sql = "SELECT R.BOOK_NO, R.BOOK_TITLE, R.CATEGORY_NO, R.BOOK_WRITER, R.PAPER_BOOK_PRICE, "
-				+ "		 R.BOOK_PRICE, R.BOOK_INTRODUCE, R.BOOK_CREATED_DATE, R.BOOK_UPDATED_DATE, R.DISCOUNT_RATE, "
-				+ "		 R.IMG_FILE_NAME, R.BOOK_SALES_RATE, C.CATEGORY_GROUP_NO "
-				+ "FROM (SELECT BOOK_NO, BOOK_TITLE, CATEGORY_NO, BOOK_WRITER, PAPER_BOOK_PRICE, BOOK_PRICE, "
-				+ "			   BOOK_INTRODUCE, BOOK_CREATED_DATE, BOOK_UPDATED_DATE, DISCOUNT_RATE, IMG_FILE_NAME, BOOK_SALES_RATE "
-				+ "      FROM RIDI_BOOKS "
-				+ "      ORDER BY BOOK_CREATED_DATE DESC) R, RIDI_BOOK_CATEGORIES C "
-				+ "WHERE ROWNUM <= 10 "
-				+ "AND CATEGORY_GROUP_NO = ?"
-				+ "AND CATEGORY_NO = ?";
+				   + "		 R.BOOK_PRICE, R.BOOK_INTRODUCE, R.BOOK_CREATED_DATE, R.BOOK_UPDATED_DATE, R.DISCOUNT_RATE, "
+				   + "		 R.IMG_FILE_NAME, R.BOOK_SALES_RATE, C.CATEGORY_GROUP_NO "
+				   + "FROM (SELECT BOOK_NO, BOOK_TITLE, CATEGORY_NO, BOOK_WRITER, PAPER_BOOK_PRICE, BOOK_PRICE, "
+				   + "			   BOOK_INTRODUCE, BOOK_CREATED_DATE, BOOK_UPDATED_DATE, DISCOUNT_RATE, IMG_FILE_NAME, BOOK_SALES_RATE "
+				   + "      FROM RIDI_BOOKS "
+				   + "      ORDER BY BOOK_SALES_RATE DESC) R, RIDI_BOOK_CATEGORIES C "
+				   + "WHERE R.CATEGORY_NO = C.CATEGORY_NO "
+				   + "AND CATEGORY_GROUP_NO = ? "
+				   + "AND R.CATEGORY_NO = ? "
+				   + "AND ROWNUM <= 10 ";
 		
 		return helper.selectList(sql, rs -> {
 			BookDto book = new BookDto();
@@ -548,7 +514,7 @@ public class BookDao {
 			book.setCategoryGroupNo(rs.getInt("CATEGORY_GROUP_NO"));
 			return book;
 		}, categoryGroupNo, categoryNo);
-
+		
 	}
 	
 	/**

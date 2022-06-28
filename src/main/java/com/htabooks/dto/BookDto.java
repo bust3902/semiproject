@@ -2,6 +2,11 @@ package com.htabooks.dto;
 
 import java.util.Date;
 
+/**
+ * 책 데이터와 책 카테고리 데이터를 위한 DTO 클래스
+ * @author USER
+ *
+ */
 public class BookDto {
 
 	private int no;
