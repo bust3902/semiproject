@@ -1,7 +1,8 @@
+<%@page import="com.htabooks.dao.QnaCategoriesDao"%>
+<%@page import="com.htabooks.dao.OftenQuestionsDao"%>
 <%@page import="com.htabooks.dao.NoticeBoardDao"%>
 <%@page import="com.htabooks.util.StringUtil"%>
 <%@page import="com.htabooks.vo.NoticeBoard"%>
-<%@page import="com.htabooks.dao.QnaCategoriesDao"%>
 <%@page import="com.htabooks.vo.OftenQuestions"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -23,16 +24,15 @@ a {
 </style>
 </head>
 <body>
-	<%
-	QnaCategoriesDao categoriesDao = QnaCategoriesDao.getInstance();
-	List<OftenQuestions> oftenQuestionsList = categoriesDao.getOftenQuestions();
+<%
+   QnaCategoriesDao categoriesDao = QnaCategoriesDao.getInstance();
+   List<OftenQuestions> oftenQuestionsList = categoriesDao.getOftenQuestions();
 
-	NoticeBoardDao noticeBoardDao = NoticeBoardDao.getInstance();
-	List<NoticeBoard> noticeBoardList = noticeBoardDao.getNoticeBoard(1, 3);
-	
-	String keyword = StringUtil.nullToBlank(request.getParameter("keyword"));
-	
-	%>
+   NoticeBoardDao noticeBoardDao = NoticeBoardDao.getInstance();
+   List<NoticeBoard> noticeBoardList = noticeBoardDao.getNoticeBoard(1, 3);
+   
+   String keyword = StringUtil.nullToBlank(request.getParameter("keyword"));
+   %>
 	<div class="container">
 		<div class="row bg-primary text-white">
 			<div class="col-8">
@@ -42,12 +42,13 @@ a {
 					</div>
 				</div>
 				<div class="row mt-1 ps-3 pt-2">
-					<form id="search-form" class="row g-3" method="get" action="qnaCategoriesBoard.jsp">
+					<form id="search-form" class="row g-3" method="get" action="SearchResultBoard.jsp">
 						<div class="col-9">
-							<input type="text" class="form-control" name="keyword" value="<%=keyword %>" />
+							<input type="hidden" name="page" />
+							<input type="text" class="form-control" name="keyword" value="<%=keyword %>" placeholder="검색" aria-label="검색" />
 						</div>
 						<div class="col-3">
-							<button type="button" class="btn btn-secondary" onclick="searchKeyword()">검색</button>
+							<button type="submit" class="btn btn-secondary">검색</button>
 						</div>
 					</form>
 				</div>
@@ -111,7 +112,7 @@ a {
 						data-bs-toggle="modal" data-bs-target="#question-modal">
 						1:1	문의하기
 					</button>
-					<a class="btn btn-outline-primary" href="a.jsp" role="button">문의게시판 보기</a>
+					<a class="btn btn-outline-primary" href="qnaBoard.jsp" role="button">문의게시판 보기</a>
 				</div>
 			</div>
 		</div>
@@ -157,10 +158,12 @@ a {
 	</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
+function clickPageNo(pageNo) {
+	document.querySelector("input[name=page]").value = pageNo;
+	document.getElementById("search-form").submit();
 
 function searchKeyword() {
 	document.querySelector("input[name=page]").value = 1;
-	document.querySelector("input[name=rows]").value = document.querySelector("select[name=rows]").value;
 	document.getElementById("search-form").submit();
 }
 
