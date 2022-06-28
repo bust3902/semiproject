@@ -12,6 +12,9 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<jsp:include page="../common/nav.jsp">
+	<jsp:param name="menu" value="board"/>
+</jsp:include>
 <%
 	//요청파라미터에서 게시글 번호를 조회한다.
 	int noticeBoardNo = StringUtil.stringToInt(request.getParameter("no"));
@@ -38,6 +41,9 @@
 	   	</div>
    </div>
 </div>
+<jsp:include page="../common/footer.jsp">
+<jsp:param name="menu" value="board"/>
+</jsp:include>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
