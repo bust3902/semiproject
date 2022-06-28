@@ -13,9 +13,13 @@
 </head>
 <body>
 <%
-int no = StringUtil.stringToInt(request.getParameter("no"));
+int oftenQCno = StringUtil.stringToInt(request.getParameter("no"));
+
 QnaCategoriesDao qnaCategoriesDao = QnaCategoriesDao.getInstance();
-OftenQuestions oftenQuestions = qnaCategoriesDao.getOftenQuestionsContents(no);
+OftenQuestions oftenQuestions = qnaCategoriesDao.getOftenQuestionsContents(oftenQCno);
+if (oftenQuestions == null) {
+	throw new RuntimeException("게시글 정보가 존재하지 않습니다.");
+}
 %>
 <div class="container">
    <div class="row">
