@@ -58,15 +58,14 @@
 	    	</div>
 	    </form>
 	    
-	    <%
-	    	if (user == null){
-	    %>
 		<div class="mx-2 mt-3">
-			<a href="/semiproject/login/loginform.jsp">
+			<a href="/semiproject/cart/mycart.jsp">
 				<img src="/semiproject/img/cart.svg" width="32" height="32" />
 			</a>
 		</div>
-		
+	    <%
+	    	if (user == null){
+	    %>
 		<div class="mx-2 mt-3" >
 
 			<a href="/semiproject/login/loginform.jsp">
@@ -75,13 +74,6 @@
 		</div>
 		
 		<%} else { %>
-		
-		<div class="mx-2 mt-3">
-			<a href="/semiproject/cart/mycart.jsp">
-				<img src="/semiproject/img/cart.svg" width="32" height="32" />
-			</a>
-		</div>
-		
 
 		<div class="mx-2 mt-3">
 			<a href="/semiproject/user/mypage.jsp">
@@ -92,7 +84,6 @@
 		<%
 		} 
 		%>
-
 	</div>
 </header>
     
