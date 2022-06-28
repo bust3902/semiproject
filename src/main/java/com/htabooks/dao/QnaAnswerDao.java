@@ -93,14 +93,13 @@ public class QnaAnswerDao {
 		});
 	}
 	
-	// 문의 답변 하기
-	public String qnaAnswer(String answer) throws SQLException {
+	// 문의 답변 하기(업데이트)
+	public void qnaAnswer(QnaAnswer qnaAnswer) throws SQLException {
 		String sql = "update RIDI_QNA "
-					+"set RIDI_QNA_ANSWER = ? "
-					+", RIDI_QNA_ANSWER_CHECK = ? "
+					+"set "
+					+"RIDI_QNA_ANSWER = ?, "
+					+"RIDI_QNA_ANSWER_CHECK = ? "
 					+"where RIDI_QNA_NO = ? ";
-		
-		return null;
-		
+		helper.update(sql, qnaAnswer.getAnswer(), qnaAnswer.getAnswerCheck(), qnaAnswer.getNo());
 	}
 }

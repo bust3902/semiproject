@@ -36,6 +36,7 @@
 	} else {
 		qnaAnswerList = qnaAnswerDao.getQnaAnswer(keyword, pagination.getBeginIndex(), pagination.getEndIndex());
 	}
+	
 %>
 <div class="container">
     <div class="mb-3">
@@ -49,7 +50,7 @@
 		  		</li>
 		  	</ul>
 		  </label>
-		  <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="답변 내용을 입력하세요">
+		  <input type="<%=qnaAnswer.getAnswer() %>" class="form-control" id="formGroupExampleInput2" placeholder="답변 내용을 입력하세요"></input>
 		  <div class="col-3">
 			<button type="button" class="btn btn-primary mt-1" onclick="searchKeyword();">확인</button>
 		  </div>
