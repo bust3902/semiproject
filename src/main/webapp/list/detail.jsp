@@ -56,7 +56,7 @@
 	<jsp:param name="menu" value="board"/>
 </jsp:include>
 
-<div class="container px-5" style="min-width:1094px;">
+<div class="container px-5 mt-5" style="min-width:1094px;">
 	<div class="row">
 		<%
 			BookDao bookDao = BookDao.getInstance();

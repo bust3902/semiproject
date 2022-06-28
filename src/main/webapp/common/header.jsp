@@ -58,6 +58,11 @@
 	    	</div>
 	    </form>
 	    
+		<div class="mx-4 mt-3">
+			<a href="/semiproject/list/mybooklist.jsp?keyword=&page=1">
+				<img src="/semiproject/img/files.svg" width="32" height="32" />
+			</a>
+		</div>
 		<div class="mx-2 mt-3">
 			<a href="/semiproject/cart/mycart.jsp">
 				<img src="/semiproject/img/cart.svg" width="32" height="32" />
