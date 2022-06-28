@@ -1,5 +1,4 @@
 <%@page import="java.util.List"%>
-<%@page import="com.htabooks.vo.CashPagination"%>
 <%@page import="com.htabooks.util.StringUtil"%>
 <%@page import="com.htabooks.dao.UserDao"%>
 <%@page import="com.htabooks.dao.CashHistoryDao"%>
