@@ -211,10 +211,10 @@ public class BookDao {
 				   + "			   BOOK_NO, BOOK_TITLE, CATEGORY_NO, BOOK_WRITER, PAPER_BOOK_PRICE, "
 				   + "             BOOK_PRICE, BOOK_INTRODUCE, BOOK_CREATED_DATE, BOOK_UPDATED_DATE, DISCOUNT_RATE, "
 				   + "             IMG_FILE_NAME, BOOK_SALES_RATE, BOOK_PUBLISHER, CATEGORY_GROUP_NO "
-				   + "             FROM RIDI_BOOKS "
-				   + "			   WHERE BOOK_CREATED_DATE BETWEEN TRUNC(SYSDATE) - 7 AND TRUNC(SYSDATE)) B, RIDI_BOOK_CATEGORIES C "
+				   + "      FROM RIDI_BOOKS "
+				   + "		WHERE CATEGORY_GROUP_NO = ? "
+				   + "		AND BOOK_CREATED_DATE BETWEEN TRUNC(SYSDATE) - 7 AND TRUNC(SYSDATE)) B, RIDI_BOOK_CATEGORIES C "
 				   + "WHERE B.CATEGORY_NO = C.CATEGORY_NO "
-				   + "AND B.CATEGORY_GROUP_NO = ? "
 				   + "AND ROW_NUMBER >= ? AND ROW_NUMBER <= ? ";
 		
 		return helper.selectList(sql, rs -> {
@@ -245,15 +245,15 @@ public class BookDao {
 	 * @throws SQLException
 	 */
 	public List<BookDto> getWeekBestSellerCnt(int categoryGroupNo) throws SQLException{
-		String sql = "SELECT BOOK_NO "
+		String sql = "SELECT B.BOOK_NO "
 				   + "FROM (SELECT ROW_NUMBER() OVER (ORDER BY BOOK_SALES_RATE DESC) ROW_NUMBER, "
 				   + "			   BOOK_NO, BOOK_TITLE, CATEGORY_NO, BOOK_WRITER, PAPER_BOOK_PRICE, "
 				   + "             BOOK_PRICE, BOOK_INTRODUCE, BOOK_CREATED_DATE, BOOK_UPDATED_DATE, DISCOUNT_RATE, "
 				   + "             IMG_FILE_NAME, BOOK_SALES_RATE, BOOK_PUBLISHER, CATEGORY_GROUP_NO "
-				   + "             FROM RIDI_BOOKS "
-				   + "			   WHERE BOOK_CREATED_DATE BETWEEN TRUNC(SYSDATE) - 7 AND TRUNC(SYSDATE)) B, RIDI_BOOK_CATEGORIES C "
-				   + "WHERE B.CATEGORY_NO = C.CATEGORY_NO "
-				   + "AND B.CATEGORY_GROUP_NO = ? ";
+				   + "      FROM RIDI_BOOKS "
+				   + "		WHERE CATEGORY_GROUP_NO = ? "
+				   + "		AND BOOK_CREATED_DATE BETWEEN TRUNC(SYSDATE) - 7 AND TRUNC(SYSDATE)) B, RIDI_BOOK_CATEGORIES C "
+				   + "WHERE B.CATEGORY_NO = C.CATEGORY_NO ";
 		
 		return helper.selectList(sql, rs -> {
 			BookDto book = new BookDto();
@@ -280,10 +280,10 @@ public class BookDao {
 				   + "			   BOOK_NO, BOOK_TITLE, CATEGORY_NO, BOOK_WRITER, PAPER_BOOK_PRICE, "
 				   + "             BOOK_PRICE, BOOK_INTRODUCE, BOOK_CREATED_DATE, BOOK_UPDATED_DATE, DISCOUNT_RATE, "
 				   + "             IMG_FILE_NAME, BOOK_SALES_RATE, BOOK_PUBLISHER, CATEGORY_GROUP_NO "
-				   + "             FROM RIDI_BOOKS "
-				   + "			   WHERE BOOK_CREATED_DATE BETWEEN TRUNC(SYSDATE) - 30 AND TRUNC(SYSDATE)) B, RIDI_BOOK_CATEGORIES C "
+				   + "      FROM RIDI_BOOKS "
+				   + "		WHERE CATEGORY_GROUP_NO = ? "
+				   + "		AND BOOK_CREATED_DATE BETWEEN TRUNC(SYSDATE) - 30 AND TRUNC(SYSDATE)) B, RIDI_BOOK_CATEGORIES C "
 				   + "WHERE B.CATEGORY_NO = C.CATEGORY_NO "
-				   + "AND B.CATEGORY_GROUP_NO = ? "
 				   + "AND ROW_NUMBER >= ? AND ROW_NUMBER <= ? ";
 		
 		return helper.selectList(sql, rs -> {
@@ -319,10 +319,10 @@ public class BookDao {
 				   + "			   BOOK_NO, BOOK_TITLE, CATEGORY_NO, BOOK_WRITER, PAPER_BOOK_PRICE, "
 				   + "             BOOK_PRICE, BOOK_INTRODUCE, BOOK_CREATED_DATE, BOOK_UPDATED_DATE, DISCOUNT_RATE, "
 				   + "             IMG_FILE_NAME, BOOK_SALES_RATE, BOOK_PUBLISHER, CATEGORY_GROUP_NO "
-				   + "             FROM RIDI_BOOKS "
-				   + "			   WHERE BOOK_CREATED_DATE BETWEEN TRUNC(SYSDATE) - 30 AND TRUNC(SYSDATE)) B, RIDI_BOOK_CATEGORIES C "
-				   + "WHERE B.CATEGORY_NO = C.CATEGORY_NO "
-				   + "AND B.CATEGORY_GROUP_NO = ? ";
+				   + "      FROM RIDI_BOOKS "
+				   + "		WHERE BOOK_CREATED_DATE BETWEEN TRUNC(SYSDATE) - 30 AND TRUNC(SYSDATE)"
+				   + "		AND CATEGORY_GROUP_NO = ?) B, RIDI_BOOK_CATEGORIES C "
+				   + "WHERE B.CATEGORY_NO = C.CATEGORY_NO ";
 		
 		return helper.selectList(sql, rs -> {
 			BookDto book = new BookDto();
@@ -350,9 +350,9 @@ public class BookDao {
 				   + "             BOOK_PRICE, BOOK_INTRODUCE, BOOK_CREATED_DATE, BOOK_UPDATED_DATE, DISCOUNT_RATE, "
 				   + "             IMG_FILE_NAME, BOOK_SALES_RATE, BOOK_PUBLISHER, CATEGORY_GROUP_NO "
 				   + "      FROM RIDI_BOOKS "
-				   + "		WHERE BOOK_SALES_RATE > 1000) B, RIDI_BOOK_CATEGORIES C "
+				   + "		WHERE CATEGORY_GROUP_NO = ? "
+				   + "		AND BOOK_SALES_RATE > 1000) B, RIDI_BOOK_CATEGORIES C "
 				   + "WHERE B.CATEGORY_NO = C.CATEGORY_NO "
-				   + "AND B.CATEGORY_GROUP_NO = ? "
 				   + "AND ROW_NUMBER >= ? AND ROW_NUMBER <= ? ";
 		
 		return helper.selectList(sql, rs -> {
@@ -385,8 +385,8 @@ public class BookDao {
 	public List<BookDto> getSteadySellerCnt(int categoryGroupNo) throws SQLException{
 		String sql = "SELECT BOOK_NO "
 				   + "FROM RIDI_BOOKS "
-				   + "WHERE BOOK_SALES_RATE > 1000 "
-				   + "AND CATEGORY_GROUP_NO = ? ";
+				   + "WHERE CATEGORY_GROUP_NO = ? "
+				   + "AND BOOK_SALES_RATE > 1000 ";
 		
 		return helper.selectList(sql, rs -> {
 			BookDto book = new BookDto();
