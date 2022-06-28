@@ -2,6 +2,7 @@ package com.htabooks.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.StringJoiner;
 
 import com.htabooks.dto.BookDto;
 import com.htabooks.helper.DaoHelper;
@@ -802,6 +803,25 @@ public class BookDao {
 			return book;
 		}, keyword);
 		
+	}
+	
+	/**
+	 * 판매량 증가시키기
+	 * @param bookNoList
+	 * @throws SQLException
+	 */
+	public void updateBookSalesRate(List<Integer> bookNoList) throws SQLException {
+		String sql = "UPDATE RIDI_BOOKS "
+				   + "SET BOOK_SALES_RATE = (BOOK_SALES_RATE + 500) "  // 수치는 임의로 설정했습니다.
+				   + "WHERE BOOK_NO in ";
+		
+		StringJoiner joiner = new StringJoiner(",");
+		for (int i = 0; i < bookNoList.size(); i++) {
+			joiner.add("?");
+		}
+		String sqlIn = "(" + joiner.toString() + ")";
+		
+		helper.update(sql+sqlIn, bookNoList.toArray());
 	}
 
 	

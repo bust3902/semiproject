@@ -1,3 +1,4 @@
+<%@page import="com.htabooks.dao.BookDao"%>
 <%@page import="com.htabooks.vo.CashHistory"%>
 <%@page import="com.htabooks.dao.CashHistoryDao"%>
 <%@page import="com.htabooks.dao.CartItemDao"%>
@@ -21,6 +22,7 @@
 	OrderItemDao orderItemDao = OrderItemDao.getInstance();
 	CartItemDao cartItemDao = CartItemDao.getInstance();
 	CashHistoryDao cashHistoryDao = CashHistoryDao.getInstance();
+	BookDao bookDao = BookDao.getInstance();
 	UserDao userDao = UserDao.getInstance();
 	// 로그인 여부 확인
 	User savedUser = (User) session.getAttribute("LOGINED_USER");
@@ -42,6 +44,12 @@
 	List<Integer> bookPriceList = new ArrayList<>();
 	for(String str : bookPriceStr) {
 		bookPriceList.add(StringUtil.stringToInt(str));
+	}
+	// bookNo
+	String[] bookNoStr = request.getParameterValues("bookNo");
+	List<Integer> bookNoList = new ArrayList<>();
+	for(String str : bookNoStr) {
+		bookNoList.add(StringUtil.stringToInt(str));
 	}
 	
 	// totalPrice 계산
@@ -74,6 +82,9 @@
 	for (int cartItemNo : itemNoList){
 		orderItemDao.insertOrderItem(new CartItem(cartItemNo), orderNo);
 	}
+	
+	// 책 판매량 증가시키기
+	bookDao.updateBookSalesRate(bookNoList);
 	
 	// 카트에서 구매내역 삭제
 	cartItemDao.deleteCartItems(itemNoList);

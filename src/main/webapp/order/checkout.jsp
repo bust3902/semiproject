@@ -200,6 +200,7 @@
 						<div class="cart_book_info w-100"> 
 							<div class="cart_book_text w-100 d-flex justify-content-between">
 								<div class="cart_book_metadata">
+									<input name="bookNo" type="hidden" value="<%=item.getBookNo() %>" />
 									<a href="../list/detail.jsp?bookNo=<%=item.getBookNo() %>">
 										<p class="fw-bold" style="font-size:14px;"><%=item.getTitle() %></p>
 									</a>
