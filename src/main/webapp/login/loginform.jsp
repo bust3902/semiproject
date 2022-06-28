@@ -29,6 +29,9 @@ height:100%;
 		<jsp:param name="menu" value="login"/>
 	</jsp:include>
 
+<%
+	String redirect = request.getParameter("redirect");
+%>
 
 <div class="container-fluid mb-5 bg-info" style="--bs-bg-opacity: .1;">
 
@@ -36,7 +39,7 @@ height:100%;
 		<div class="col-6 p-5">
 		
 		<!-- 아이디 / 비밀번호 입력 -->
-			<form class="" method="post" action="login.jsp" onsubmit="return submitLoginForm()">
+			<form class="" method="post" action="login.jsp?<%=redirect %>" onsubmit="return submitLoginForm()">
 				<div class="p-0 m-0">
 					<input type="text" class="form-control rounded-0 " name="id" placeholder="아이디"/>
 				</div>

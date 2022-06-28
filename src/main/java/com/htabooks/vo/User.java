@@ -2,6 +2,8 @@ package com.htabooks.vo;
 
 import java.util.Date;
 
+import javax.management.RuntimeErrorException;
+
 public class User {
 		private int no;
 		private String id;
@@ -97,6 +99,13 @@ public class User {
 
 		public void setCash(int cash) {
 			this.cash = cash;
+		}
+		//캐시 사용
+		public void useCash(int amount) {
+			if(amount > this.cash) {
+				throw new RuntimeException("유효하지 않은 접근입니다.");
+			}
+			this.cash -= amount;
 		}
 
 		public String getAdmin() {

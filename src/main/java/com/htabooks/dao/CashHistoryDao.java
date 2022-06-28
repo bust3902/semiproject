@@ -19,9 +19,8 @@ public class CashHistoryDao {
 	//DaoHelper 
 	private DaoHelper helper = DaoHelper.getInstance();
 	
-	
 	/**
-	 *  캐시 충전
+	 *  캐시 충전 및 사용
 	 * @param cashHistory 
 	 * @throws SQLException
 	 */
@@ -34,7 +33,7 @@ public class CashHistoryDao {
 		helper.insert(sql, cashHistory.getUser().getNo(), cashHistory.getReason(), cashHistory.getAmount(), cashHistory.getCurrentAmount());
 	}
 	
-	
+
 	/**
 	 * 캐시 변동 내역 조회 
 	 * @param userNo 유저 넘버 

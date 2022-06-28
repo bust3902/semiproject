@@ -6,11 +6,12 @@ import java.util.StringJoiner;
 
 import com.htabooks.helper.DaoHelper;
 import com.htabooks.vo.CartItem;
+import com.htabooks.vo.Order;
 
-public class CartItemDao {
-	private static CartItemDao instance = new CartItemDao();
-	private CartItemDao() {}
-	public static CartItemDao getInstance () { return instance; }
+public class OrderDao {
+	private static OrderDao instance = new OrderDao();
+	private OrderDao() {}
+	public static OrderDao getInstance () { return instance; }
 
 	DaoHelper helper = DaoHelper.getInstance();
 
@@ -67,14 +68,25 @@ public class CartItemDao {
 	}
 
 	/**
-	 * 카트 아이템 추가하기
+	 * 주문 추가하기
 	 * @throws SQLException 
 	 */
-	public void insertCartItem(CartItem item) throws SQLException {
-		String sql = "insert into ridi_cart_items (cart_item_no, user_no, book_no) "
-				+ "values (ridi_cartitems_seq.nextval, ?, ?) ";
+	public void insertOrder(Order order) throws SQLException {
+		String sql = "insert into ridi_orders (order_no, order_status, total_payment_price, user_no) "
+				+ "values (?, '결제완료', ?, ?) ";
 
-		helper.insert(sql, item.getUserNo(), item.getBookNo());
+		helper.insert(sql, order.getNo(), order.getTotalPaymentPrice(), order.getUserNo());
+	}
+	
+	/**
+	 * ORDER 시퀀스 값 얻기
+	 * @return ORDERS 시퀀스 값
+	 * @throws SQLException
+	 */
+	public int getOrderNo() throws SQLException {
+		String sql = "select ridi_orders_seq.nextval orderNo from dual";
+		
+		return helper.selectOne(sql, rs -> rs.getInt("orderNo"));
 	}
 
 	/**
@@ -84,8 +96,7 @@ public class CartItemDao {
 	 */
 	public void deleteCartItems(List<Integer> itemList) throws SQLException {
 		String sql = "update ridi_cart_items "
-				   + "set deleted = 'Y', "
-				   + "    cart_item_updated_date = sysdate "
+				   + "set deleted = 'Y' "
 				   + "where cart_item_no in ";
 		
 		StringJoiner joiner = new StringJoiner(",");
@@ -98,3 +109,4 @@ public class CartItemDao {
 	}
 	
 }
+

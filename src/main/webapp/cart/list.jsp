@@ -46,7 +46,9 @@ for (CartItem item : cart) {
 		<div class="cart_book_info w-100"> 
 			<div class="cart_book_text w-100 d-flex justify-content-between">
 				<div class="cart_book_metadata">
-					<p class="fs-6 fw-bold"><%=item.getTitle() %></p>
+					<a href="../list/detail.jsp?bookNo=<%=item.getBookNo() %>">
+						<p class="fs-6 fw-bold"><%=item.getTitle() %></p>
+					</a>
 					<span style="font-size:12px;"><%=item.getWriter() %></span>
 				</div>
 				<div class="cart_book_price d-flex flex-column justify-content-end align-items-end">
