@@ -1,7 +1,4 @@
-<%@page import="com.htabooks.dao.CartItemDao"%>
-<%@page import="com.htabooks.vo.CartItem"%>
-<%@page import="java.util.List"%>
-<%@page import="org.apache.commons.codec.digest.DigestUtils"%> 
+<%@page import="org.apache.commons.codec.digest.DigestUtils"%>
 <%@page import="com.htabooks.util.PasswordUtil"%>
 <%@page import="com.htabooks.vo.User"%>
 <%@page import="com.htabooks.dao.UserDao"%>

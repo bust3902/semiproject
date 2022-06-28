@@ -105,6 +105,10 @@
 				records = bookDao.getSteadySellerCnt(categoryGroupNo).size();
 			}
 			
+			if (records == 0) {
+				records +=1;
+			}
+			
 			
 			int totalPages = (int) (Math.ceil((double) records/rows));
 			
@@ -144,10 +148,10 @@
 			}
 
 		%>
-				<div class="col nav-item mb-2">
-					<!-- 메인 카테고리명 -->
-					<a href="itmainlist.jsp?categoryGroupNo=1100" class="link-dark nav-link">
-						<img src="/semiproject/img/display.svg" width="20" height="20" class="mb-1">
+				<!-- 메인 카테고리명 -->
+				<div class="row mb-2" style="display: inline-block;">
+					<a href="itmainlist.jsp?categoryGroupNo=1100" style="text-decoration:none; color:black;">
+						<img src="/semiproject/img/display.svg" width="20" height="20" class="mb-2">
 							<strong style="font-size:20px"> 컴퓨터/IT</strong>
 					</a>
 				</div>
@@ -179,13 +183,13 @@
 						<div class="col-10 p-0">
 							<ul class="nav justify-content-start m-0">
 								<li class="nav-item rank">
-									<a href="itbestsellerlist.jsp?categoryGroupNo=1100&order=week&page=1" class="nav-link p-2" style="color:gray">주간베스트셀러</a>
+									<a href="itbestsellerlist.jsp?categoryGroupNo=1100&order=week&view=<%=viewStyle %>&page=1" class="nav-link p-2" style="color:gray">주간베스트셀러</a>
 								</li>
 								<li class="nav-item rank">
-									<a href="itbestsellerlist.jsp?categoryGroupNo=1100&order=month&page=1" class="nav-link p-2" style="color:gray">월간베스트셀러</a>
+									<a href="itbestsellerlist.jsp?categoryGroupNo=1100&order=month&view=<%=viewStyle %>&page=1" class="nav-link p-2" style="color:gray">월간베스트셀러</a>
 								</li>
 								<li class="nav-item rank">
-									<a href="itbestsellerlist.jsp?categoryGroupNo=1100&order=steady&page=1" class="nav-link p-2" style="color:gray">스테디셀러</a>
+									<a href="itbestsellerlist.jsp?categoryGroupNo=1100&order=steady&view=<%=viewStyle %>&page=1" class="nav-link p-2" style="color:gray">스테디셀러</a>
 								</li>
 							</ul>
 						</div>
@@ -266,9 +270,9 @@
 							gridRankNum++;
 					%>
 					<div class="col mt-5">
-						<div class="row justify-content-center me-1 mb-3" style="text-weight:bold; font-size:20px;"><%=gridRankNum %></div>
 						<div class="card border-0" style="height:auto; width:120px;">
-							<a href="detail.jsp?bookNo=<%=book.getNo() %>">
+							<a href="detail.jsp?bookNo=<%=book.getNo() %>" style="text-decoration:none; color:black;">
+								<span class="row justify-content-center me-1 mb-3" style="text-weight:bold; font-size:20px;"><%=gridRankNum %></span>
 								<img src="../img/<%=book.getImgFileName() %>" class="card-img-top thumbnail" alt="...">
 							</a>
 							<div class="card-body p-0">
@@ -306,10 +310,8 @@
 							</ul>
 						</nav>
 					</div>
-
 				</div>
 			</div>
-			<div class="col-1"></div>
 		</div>	
 	</div>
 </div>
@@ -317,16 +319,5 @@
 <jsp:include page="../common/footer.jsp">
 	<jsp:param name="menu" value="board"/>
 </jsp:include>
-<script>
-/* function showGrid(event) {
-    document.querySelector('#grid').classList.remove("hidden");
-    document.querySelector('#list').classList.add("hidden");
-};
-
-function showList(event) {
-    document.querySelector('#list').classList.remove("hidden");
-    document.querySelector('#grid').classList.add("hidden");
-}; */
-</script>
 </body>
 </html>

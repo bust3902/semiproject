@@ -9,9 +9,24 @@
 <link href="images/Hfavicon.ico" rel="icon" type="image/x-icon" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<style>
+
+html, body {
+height:100%;
+}
+
+.container-fluid {
+height:100%;
+}
+
+input::placeholder {
+  font-size: 14px;
+}
+</style>
+<!-- 회원가입 페이지 -->
 <body>
 <jsp:include page="/common/navcenter.jsp">
-	<jsp:param name="menu" value="registerform"/>
+	<jsp:param name="menu" value="register"/>
 </jsp:include>
 <div class="container-fluid mb-5 bg-info" style="--bs-bg-opacity: .1;">
 
@@ -22,22 +37,23 @@
 			<div class="row justify-content-center bg-info" style="--bs-bg-opacity: .005;">
 				<div class="col-7 bg-light p-5" style="--bs-bg-opacity: .1;">
 				
+				<!-- 입력 폼 : 아이디 / 비밀번호 / 비밀번호 확인 / 이메일 주소 / 이름 -->
 					<form class=""  method="post" action="register.jsp" onsubmit="return goRegisterForm()">
 						
 						<div class="p-1">
 							<div class="p-0 m-0">
-								<input type="text" class="form-control rounded-0 " name="id" placeholder="아이디" onkeyup="idCheck();"/>
+								<input type="text" class="form-control rounded-0 " name="id" placeholder="아이디는 영소문자 + 숫자 + 언더바/하이픈 허용 4~20자리" maxlength = "21" onkeyup="idCheck();"/>
 								<div id="id-helper" class="form-text text-sm"></div>
 							</div>
 						</div>
 						
 						<div class="p-1">
 							<div class="p-0 m-0 ">
-								<input type="password" class="form-control rounded-0 " name="password" placeholder="비밀번호" onkeyup="passwordCheck1();"/>
+								<input type="password" class="form-control rounded-0 " name="password" placeholder="비밀번호는 영문 + 숫자 4~12자리" maxlength = "13" onkeyup="passwordCheck1();"/>
 							</div>
 						
 							<div class="p-0 m-0 ">
-								<input type="password" class="form-control rounded-0 " name="passwordcheck" placeholder="비밀번호 확인" onkeyup="passwordCheck2();"/>
+								<input type="password" class="form-control rounded-0 " name="passwordcheck" placeholder="비밀번호 확인" maxlength = "13" onkeyup="passwordCheck2();"/>
 									<div id="password-helper" class="form-text text-sm"></div>
 							</div>
 						</div>
@@ -56,14 +72,15 @@
 							</div>
 						</div>
 						
-						<div class="mb-1 p-1">
-							<small style="font-size:15px;" class="text-secondary">선택 입력</small>
+					<!-- 선택 입력 : 출생년도 / 성별 -->
+						<div class=" mt-1 ">
+							<small style="font-size:13px;" class="text-secondary">선택 입력</small>
 						</div>
 						
-						<div class="mb-1 p-1 row">
-							<div class=" pt-1"></div>
+						<div class="mb-2 row">
+							<div class=""></div>
 								<div class="col-6">
-									<input type="text" class="form-control rounded-0 " maxlength="4" name="birthDate" placeholder="출생년도"/>
+									<input type="text" class="form-control rounded-0 " maxlength="4" name="birthDate" placeholder="출생년도" onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');"/>
 								</div>
 							<div class="col-6">
 								<div class="btn-group w-100" role="group" aria-label="Basic radio toggle button group">
@@ -76,6 +93,7 @@
 							</div>
 						</div>
 							
+							<!-- 약관 체크박스 -->
 						 	<div class="mb-3 border p-2  bg-light text-secondary">
 						 		<div>
 						 			<div class="form-check form-check-inline">
@@ -117,8 +135,9 @@
 						 		
 						 	</div>
 						 	
+						 	<!-- 회원가입 버튼  -->
 						 	<div class="d-grid gap-2">
-						 		<button type="submit" class="btn btn-primary">회원가입완료</button>
+						 		<button type="submit" class="btn btn-primary">회원 가입 완료</button>
 						 	</div>
 						</form>
 				</div>
@@ -134,7 +153,7 @@
 		let isEmailChecked = false;
 		let isNameChecked = false;
 	
-	
+	/* 아이디 유효성 체크 */
 		function idCheck(){		
 			
 			let idHelperElement = document.querySelector("#id-helper");
@@ -144,28 +163,37 @@
 			let classList = idHelperElement.classList;					
 			classList.remove("text-danger", "text-success");
 			
-			if( idValue ===""){
+			let idRegExp = /^[a-z0-9_-]{4,20}$/; // 소문자 + 숫자 + 언더바/하이픈 허용 4~20자리
+			
+			if (idValue ===""){
 				classList.add("text-danger")							
 				idHelperElement.textContent = "아이디를 입력해주세요."		
 				isIdChecked = false;
-				return false;
+				return;
 				
 			}
 			
 			if (idValue.length <3){
 				classList.add("text-danger")
-				idHelperElement.textContent = "아이디는 3글자이상 20글자 영문/숫자 입력";
+				idHelperElement.textContent = "영어 소문자 + 숫자 + 언더바/하이픈 허용";
 				isIdChecked = false;
-				return false;
+				return;
 			}
 			
-			if(idValue.length >20){
+			if(idValue.length >21){
 				classList.add("text-danger")
-				idHelperElement.textContent = "아이디는 3글자이상 20글자 영문/숫자 입력";
+				idHelperElement.textContent = "영어 소문자 + 숫자 + 언더바/하이픈 허용";
 				isIdChecked = false;
-				return false;
+				return ;
 			}
 			
+			if (!idRegExp.test(idValue)) {
+				classList.add("text-danger")
+				idHelperElement.textContent = "유효한 아이디가 아닙니다.";
+				isIdChecked = false;
+				return;
+				
+			} 
 			
 			let xhr = new XMLHttpRequest();		
 			
@@ -186,10 +214,11 @@
 				}
 			}
 			xhr.open("GET", 'idCheck.jsp?id=' + idValue);	
-			xhr.send();						
+			xhr.send();		 	 	
 			
 		}
 		
+	/* 비밀번호 유효성 체크 */
 		function passwordCheck1(){
 			
 			let helperElement = document.querySelector("#password-helper");
@@ -199,13 +228,27 @@
 			let classList = helperElement.classList;					
 			classList.remove("text-danger", "text-success");
 			
-			let password1RegExp = /^[a-zA-z0-9]{4,12}$/;
+			let password1RegExp = /^[a-zA-z0-9]{4,12}$/;		// 영문/숫자 4글자 이상 12글자 이하만 가능하다 
 			
 			if (pwdValue === "") {
 				classList.add("text-danger")
 				helperElement.textContent = "비밀번호를 입력해주세요.";
 				isPwdChecked = false;
 				return;
+			}
+			
+			if (pwdValue.length <4){
+				classList.add("text-danger")
+				helperElement.textContent = "비밀번호는 4글자 이상 12글자 이하 영문/숫자";
+				isPwdChecked = false;
+				return ;
+			}
+			
+			if(pwdValue.length >=12){
+				classList.add("text-danger")
+				helperElement.textContent = "비밀번호는 4글자 이상 12글자 이하 영문/숫자";
+				isPwdChecked = false;
+				return ;
 			}
 			
 			if (!password1RegExp.test(pwdValue)) {
@@ -221,6 +264,7 @@
 			}
 		}
 		
+	/* 비밀번호 확인 */
 		function passwordCheck2(){
 			
 			let helperElement = document.querySelector("#password-helper");
@@ -253,6 +297,7 @@
 			}
 		}
 		
+	/* 이메일 유효성 체크 */
 		function emailCheck(){		
 			
 			let helperElement = document.querySelector("#email-helper");
@@ -280,12 +325,13 @@
 				return;
 				
 			} else {
-				classList.remove("text-danger")
-				helperElement.textContent = "";
+				classList.add("text-success")
+				helperElement.textContent = "사용 가능한 이메일 주소입니다.	";
 				return;
 			}
 		}
-			
+		
+	/* 이름 체크 */
 		function nameCheck(){
 			
 			let helperElement = document.querySelector("#name-helper");
@@ -295,7 +341,7 @@
 			let classList = helperElement.classList;					
 			classList.remove("text-danger", "text-success");
 			
-			let nameRegExp = /^[가-힣]{2,15}$/;
+			let nameRegExp = /^[가-힣]{2,15}$/;	// 한글만 가능 
 	
 			if(nameValue ===""){
 				classList.add("text-danger")
@@ -318,7 +364,8 @@
 			
 			
 		}
-			
+	
+	/* 전체 유효성 체크 */
 		function goRegisterForm() {
 			
 			let idField = document.querySelector("input[name=id]");

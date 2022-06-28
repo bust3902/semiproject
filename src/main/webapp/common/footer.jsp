@@ -7,9 +7,9 @@
 		<div class="row">
 			<div class="col-2">
 				<ul class="nav flex-column">
-					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"><img src="/semiproject/img/headset.svg" width="14" height="14" />  고객센터</a></li>
+					<li class="nav-item mb-2"><a href="/semiproject/userCenter/userCenterBoard.jsp" class="nav-link p-0 text-muted"><img src="/semiproject/img/headset.svg" width="14" height="14" />  고객센터</a></li>
 					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"></a></li>
-					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"><img src="/semiproject/img/volume-down.svg" width="20" height="24" class="mb-1"/>공지사항</a></li>
+					<li class="nav-item mb-2"><a href="/semiproject/userCenter/noticeBoard.jsp" class="nav-link p-0 text-muted"><img src="/semiproject/img/volume-down.svg" width="20" height="24" class="mb-1"/>공지사항</a></li>
 					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"></a></li>
 					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"></a></li>
 				</ul>

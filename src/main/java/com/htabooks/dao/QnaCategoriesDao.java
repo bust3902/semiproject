@@ -20,8 +20,9 @@ public class QnaCategoriesDao {
 	// 자주 묻는 질문 가져오기
 	public List<OftenQuestions> getOftenQuestions() throws SQLException {
 		String sql = "select OFTEN_NO, OFTEN_TITLE, OFTEN_CONTENTS, OFTEN_CREATED, OFTEN_DELETED "
-					+ "from RIDI_OFTEN_QUESTIONS ";
-			return helper.selectList(sql, rs -> {
+				   + "from RIDI_OFTEN_QUESTIONS ";
+	
+		return helper.selectList(sql, rs -> {
 			OftenQuestions oftenQuestions = new OftenQuestions();
 			oftenQuestions.setNo(rs.getInt("OFTEN_NO"));
 			oftenQuestions.setTitle(rs.getString("OFTEN_TITLE"));
@@ -34,9 +35,9 @@ public class QnaCategoriesDao {
 	}
 	
 	public OftenQuestions getOftenQuestionsContents(int no) throws SQLException {
-		String sql = "select often_no often_title, often_contents, often_created, often_deleted"
-					+ "from ridi_often_questions "
-					+ "where often_no = ? ";
+		String sql = "SELECT OFTEN_NO, OFTEN_TITLE, OFTEN_CONTENTS, OFTEN_CREATED, OFTEN_DELETED "
+					+ "FROM RIDI_OFTEN_QUESTIONS "
+					+ "WHERE OFTEN_NO = ? ";
 		return helper.selectOne(sql, rs -> {
 			
 			OftenQuestions oftenQuestions = new OftenQuestions();

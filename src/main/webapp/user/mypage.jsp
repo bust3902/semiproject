@@ -24,16 +24,18 @@
 
 <body>
 
-<%
-User user = (User) session.getAttribute("LOGINED_USER");
-
-UserDao userDao = UserDao.getInstance();
-user = userDao.getUserById(user.getId());
-%>
-
-	<div class="container justify-content-center ">
-		<div class="row">
-			<div class="col-3 ps-3 justify-content-center " style="width:20%;">
+	<!-- 로그인 된 유저 정보를 불러온다 -->
+	<%
+	User user = (User) session.getAttribute("LOGINED_USER");
+	
+	UserDao userDao = UserDao.getInstance();
+	user = userDao.getUserById(user.getId());
+	%>
+	
+	<!-- 사이드 메뉴 -->
+		<div class="container justify-content-center">
+			<div class="row ">
+							<div class="col-3 ps-3 justify-content-center " style="width:20%;">
 				<span class="h5 m-2" style="font-size:20px;"><strong>마이리디</strong></span>
 				<div class="border-bottom p-2 mt-1" style="font-size:17px;">
 					<a href="../user/mypage.jsp" class="text-decoration-none text-primary mx-2"> 
@@ -47,7 +49,8 @@ user = userDao.getUserById(user.getId());
 						</small>
 					</a>
 				</div>
-
+				
+				<!-- 사이드 메뉴 : 책 -->
 				<div class="mx-2 de-flex p-2 flex-col text-decoration-none text-secondary border-bottom" style="font-size:17px;">
 					<small>
 						<svg xmlns="http://www.w3.org/2000/svg" width="17"
@@ -68,6 +71,7 @@ user = userDao.getUserById(user.getId());
 					</div>
 				</div>
 
+				<!-- 사이드메뉴 : 구매/혜택 -->
 				<div class="mx-2 de-flex p-2 flex-col text-decoration-none text-secondary border-bottom" style="font-size:17px;">
 					<small> 
 						<svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -90,6 +94,8 @@ user = userDao.getUserById(user.getId());
 						<a href="" class="text-decoration-none text-secondary"><small>쿠폰</small></a>
 					</div>
 				</div>
+				
+				<!-- 사이드 메뉴 : 개인 -->
 				<div class=" mx-2 de-flex p-2 flex-col text-decoration-none text-secondary" style="font-size:17px;">
 					<small> 
 						<svg xmlns="http://www.w3.org/2000/svg" width="18"
@@ -106,7 +112,7 @@ user = userDao.getUserById(user.getId());
 						<a href="" class="text-decoration-none text-secondary"><small>내 리뷰 관리</small></a>
 					</div>
 					<div class="mx-3 my-1 mb-3 text-decoration-none text-secondary" style="font-size:17px;">
-						<a href="" class="text-decoration-none text-secondary"><small>결제 내역</small></a>
+						<a href="../cash/cashList.jsp" class="text-decoration-none text-secondary"><small>캐시 변동 내역</small></a>
 					</div>
 				</div>
 			</div>
@@ -138,7 +144,7 @@ user = userDao.getUserById(user.getId());
 									<div class="col text-center mb-3 text-primary"><%=user.getCash() %>원</div>
 									<div class="col text-center mb-3">
 										<small style="font-size: 13px;"> 
-											<a href="../cash/xxxx.jsp" class="text-decoration-none text-secondary">충전내역 >></a>
+											<a href="../cash/cashList.jsp" class="text-decoration-none text-secondary">충전내역 >></a>
 										</small>
 									</div>
 								</td>
@@ -238,6 +244,7 @@ user = userDao.getUserById(user.getId());
 	</div>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+		<!-- footer -->
 	<jsp:include page="/common/footer.jsp">
 		<jsp:param name="menu" value="mypage"/>
 	</jsp:include>

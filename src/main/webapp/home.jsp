@@ -23,9 +23,6 @@
 
 <!-- 팀 CSS -->
 <link href="/semiproject/css/home.css" rel="stylesheet" />
-<jsp:include page="/common/header.jsp">
-	<jsp:param name="menu" value="board"/>
-</jsp:include>
 
 </head>
 
@@ -49,6 +46,9 @@
 </style>
 
 <body>
+<jsp:include page="/common/header.jsp">
+	<jsp:param name="menu" value="board"/>
+</jsp:include>
 	<div class="container border-bottom mb-5" style="min-width:1094px;">
 		<div class="row">
 			<%
@@ -128,51 +128,6 @@
 		</div>
 	</div>
 	
-	<!-- MD's PICK CSS 오작동으로 테스트중 -->
-<!-- 	<div class="container mb-5">
-		<a href="list/itnewlist.jsp?categoryGroupNo=1100&order=best&view=list" class="nav-link text-muted mb-3"><span class="fs-2 text-dark fw-bold">화제의 신간 ></span></a>
-		<div class="row">
-			<div class="slider slide-show">
-			   <div class="img-wish">
-			       <img src="img/testBook01.jpg" >
-			       </div>
-			   <div class="img-wish">
-			       <img src="img/testBook01.jpg" >
-			       </div>
-			   <div class="img-wish">
-			       <img src="img/testBook01.jpg" >
-			       </div>
-			   <div class="img-wish">
-			       <img src="img/testBook01.jpg" >
-			       </div>
-			   <div class="img-wish">
-			       <img src="img/testBook01.jpg" >
-			       </div>
-			   <div class="img-wish">
-			       <img src="img/testBook01.jpg" >
-			       </div>
-			   <div class="img-wish">
-			       <img src="img/testBook02.jpg" >
-			       </div>
-			   <div class="img-wish">
-			       <img src="img/testBook02.jpg" >
-			       </div>
-			   <div class="img-wish">
-			       <img src="img/testBook02.jpg" >
-			       </div>
-			   <div class="img-wish">
-			       <img src="img/testBook02.jpg" >
-			       </div>
-			   <div class="img-wish">
-			       <img src="img/testBook02.jpg" >
-			       </div>
-				<div class="img-wish">
-					<img src="img/testBook02.jpg" >
-				</div>
-			</div>
-		</div>
-	</div> -->
-	
 	<!-- 화제의 신간 구간 -->
 	<div class="container">
 		<div class="row mb-3">
@@ -210,12 +165,4 @@
 	<jsp:param name="menu" value="board"/>
 </jsp:include>
 </body>
-<!-- slick 스크립트 -->
-<!-- <script>
-	$('.slide-show').slick({
-		infinite: true,
-		slidesToShow: 6,
-		slidesToScroll: 6
-	});
-</script> -->
 </html>

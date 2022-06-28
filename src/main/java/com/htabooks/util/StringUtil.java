@@ -3,6 +3,8 @@ package com.htabooks.util;
 import java.text.DecimalFormat;
 
 public class StringUtil {
+
+	
 	
 	/**
 	 * value가 null이면 빈 문자열을 반환한다

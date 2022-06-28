@@ -1,6 +1,6 @@
+<%@page import="com.htabooks.dao.OftenQuestionsDao"%>
 <%@page import="com.htabooks.util.StringUtil"%>
 <%@page import="com.htabooks.vo.OftenQuestions"%>
-<%@page import="com.htabooks.dao.QnaCategoriesDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,11 +12,16 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<%
-int no = StringUtil.stringToInt(request.getParameter("no"));
-QnaCategoriesDao qnaCategoriesDao = QnaCategoriesDao.getInstance();
-OftenQuestions oftenQuestions = qnaCategoriesDao.getOftenQuestionsContents(no);
-%>
+	<%
+		int oftenQCno = StringUtil.stringToInt(request.getParameter("no"));
+		
+		OftenQuestionsDao oftenQuestionsDao = OftenQuestionsDao.getInstance();
+		OftenQuestions oftenQuestions = oftenQuestionsDao.getOftenQuestionsContents(oftenQCno);
+
+		if (oftenQuestions == null) {
+			throw new RuntimeException("게시글 정보가 존재하지 않습니다.");
+		}
+	%>
 <div class="container">
    <div class="row">
 	   	<div class="col-12">

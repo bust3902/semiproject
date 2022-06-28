@@ -114,7 +114,7 @@
 					<div class="row my-5">
 						<div class="col-12 position-relative mb-5">
 							<div class="position-absolute end-0">
-								<button type="button" class="btn btn-default btn-lg">
+								<button type="button" onclick="location.href='/semiproject/cart/add.jsp?bookNo=<%=book.getNo() %>'" class="btn btn-default btn-lg">
 									<span class="glyphicon glyphicon-shopping-cart"></span>
 								</button>
 								<button class="btn btn-primary btn-lg"><span style="font-size:14px; font-weight:bold;">소장하기</span></button>

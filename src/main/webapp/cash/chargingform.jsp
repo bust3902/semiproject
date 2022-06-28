@@ -25,6 +25,7 @@
 
 <body>
 	
+	<!-- 로그인 된 유저 정보를 불러온다 -->
 	<%
 	User user = (User) session.getAttribute("LOGINED_USER");
 	// 로그인 안되었을 때 리디렉션
@@ -34,9 +35,11 @@
 	UserDao userDao = UserDao.getInstance();
 	user = userDao.getUserById(user.getId());
 	%>
+	
+	<!-- 사이드 메뉴 -->
 		<div class="container justify-content-center">
 			<div class="row ">
-							<div class="col-3 ps-3 justify-content-center" style="width:20%;">
+							<div class="col-3 ps-3 justify-content-center " style="width:20%;">
 				<span class="h5 m-2" style="font-size:20px;"><strong>마이리디</strong></span>
 				<div class="border-bottom p-2 mt-1" style="font-size:17px;">
 					<a href="../user/mypage.jsp" class="text-decoration-none text-primary mx-2"> 
@@ -50,7 +53,8 @@
 						</small>
 					</a>
 				</div>
-
+				
+				<!-- 사이드 메뉴 : 책 -->
 				<div class="mx-2 de-flex p-2 flex-col text-decoration-none text-secondary border-bottom" style="font-size:17px;">
 					<small>
 						<svg xmlns="http://www.w3.org/2000/svg" width="17"
@@ -71,6 +75,7 @@
 					</div>
 				</div>
 
+				<!-- 사이드메뉴 : 구매/혜택 -->
 				<div class="mx-2 de-flex p-2 flex-col text-decoration-none text-secondary border-bottom" style="font-size:17px;">
 					<small> 
 						<svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -93,6 +98,8 @@
 						<a href="" class="text-decoration-none text-secondary"><small>쿠폰</small></a>
 					</div>
 				</div>
+				
+				<!-- 사이드 메뉴 : 개인 -->
 				<div class=" mx-2 de-flex p-2 flex-col text-decoration-none text-secondary" style="font-size:17px;">
 					<small> 
 						<svg xmlns="http://www.w3.org/2000/svg" width="18"
@@ -109,11 +116,12 @@
 						<a href="" class="text-decoration-none text-secondary"><small>내 리뷰 관리</small></a>
 					</div>
 					<div class="mx-3 my-1 mb-3 text-decoration-none text-secondary" style="font-size:17px;">
-						<a href="" class="text-decoration-none text-secondary"><small>결제 내역</small></a>
+						<a href="../cash/cashList.jsp" class="text-decoration-none text-secondary"><small>캐시 변동 내역</small></a>
 					</div>
 				</div>
 			</div>
 				
+				<!-- 유저 정보 메인 창 -->
 				
 				<div class="col-7 justify-content-center ms-3 ">
 					<div class="border row border-dark border-2 pb-0">
@@ -121,27 +129,27 @@
 							<colgroup>
 								<col width="25%">
 								<col width="75%">
-								
 							</colgroup>
+							
+							<!-- 유저 정보 메인 창 : 아이디 + side menu -->
+							
 							<tbody>
 								<tr class="border-bottom ">
 									<td class="text-center p-3 table-primary" ><%=user.getId() %>님 
 									
-									<div class="mt-5 mb-1">
-									<small style="font-size: 15px;"> 
-												<a href="../cash/cash.jsp" class="text-decoration-none text-dark">내 정보 >></a>
-											</small></div>
-									<div class="mb-1">
-									<small style="font-size: 15px;"> 
-												<a href="../cash/xxxxx.jsp" class="text-decoration-none text-dark">캐시 변동 내역 >></a>
-											</small></div>
-									<div class="mb-4"> 
-									<small style="font-size: 15px;"> 
-												<a href="" class="text-decoration-none text-dark">주문 내역 >></a>
-											</small></div>
-									
-									
+										<div class="mt-5 mb-1">
+										<small style="font-size: 15px;"> 
+													<a href="../cash/cash.jsp" class="text-decoration-none text-dark">내 정보 >></a>
+												</small></div>
+										<div class="mb-1">
+										<small style="font-size: 15px;"> 
+													<a href="../cash/cashList.jsp" class="text-decoration-none text-dark">캐시 변동 내역 >></a>
+												</small></div>
 									</td>
+									
+								<!-- 캐시 충전 하기 -->
+								<!-- 금액을 입력하고 충전하기 버튼을 누른다 -->
+								
 									<td class="text-start  align-middle p-3 ">
 										<div class="mb-5 pb-2 border-bottom text-secondary" style="font-size:18px;">[ 캐시 충전하기 ]</div>
 										<div class="mb-2 text-danger" style="font-size:16px;"><strong>보유 캐시 : <%=user.getCash() %>원</strong></div>
@@ -160,16 +168,15 @@
 										</form>
 												<p class="text-secondary " style="font-size:13px;">1회 충전 최소 금액은 1000원, 최대 금액은 1,000,000원 입니다. </p>
 									</td>
-									
 								</tr>
-								
-								
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
 		</div>
+		
+		
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 			<script type="text/javascript">
@@ -184,7 +191,7 @@
 						return false;
 					}
 					
-					alert("충전이 완료되었습니다.	");
+					alert("충전이 완료되었습니다!");
 					return true;
 					
 				}

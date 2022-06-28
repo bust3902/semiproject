@@ -56,7 +56,7 @@
 <jsp:include page="/common/header.jsp">
 	<jsp:param name="menu" value="board"/>
 </jsp:include>
-<div class="container mt-5" style="min-width:1094px;">
+<div class="container mt-5" style="min-width:1094px; max-width:1094px;">
 	<div class="row">
 		<%
 			BookDao bookDao = BookDao.getInstance();
@@ -119,12 +119,12 @@
 		</div>
 		
 		<div class="col-8">
-			<!-- 메인 카테고리명 -->
 			<div class="row">
-				<div class="col nav-item mb-2">
-					<a href="itmainlist.jsp?categoryGroupNo=1100" class="link-dark nav-link">
-						<img src="/semiproject/img/display.svg" width="20" height="20" class="mb-1"> 
-							<strong style="font-size:20px">컴퓨터/IT</strong>
+				<!-- 메인 카테고리명 -->
+				<div class="row mb-2" style="display: inline-block;">
+					<a href="itmainlist.jsp?categoryGroupNo=1100" style="text-decoration:none; color:black;">
+						<img src="/semiproject/img/display.svg" width="20" height="20" class="mb-2">
+							<strong style="font-size:20px"> 컴퓨터/IT</strong>
 					</a>
 				</div>
 			</div>
