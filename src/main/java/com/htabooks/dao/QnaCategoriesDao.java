@@ -34,9 +34,9 @@ public class QnaCategoriesDao {
 	}
 	
 	public OftenQuestions getOftenQuestionsContents(int no) throws SQLException {
-		String sql = "select often_no often_title, often_contents, often_created, often_deleted"
-					+ "from ridi_often_questions "
-					+ "where often_no = ? ";
+		String sql = "SELECT OFTEN_NO, OFTEN_TITLE, OFTEN_CONTENTS, OFTEN_CREATED, OFTEN_DELETED "
+					+ "FROM RIDI_OFTEN_QUESTIONS "
+					+ "WHERE OFTEN_NO = ? ";
 		return helper.selectOne(sql, rs -> {
 			
 			OftenQuestions oftenQuestions = new OftenQuestions();
