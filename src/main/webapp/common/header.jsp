@@ -64,7 +64,7 @@
 		
 		<div class="mx-2 mt-3" >
 
-			<a href="/semiproject/user/mypage.jsp">
+			<a href="/semiproject/login/loginform.jsp">
 				<img src="/semiproject/img/person.svg" width="32" height="32" />
 			</a>
 		</div>
