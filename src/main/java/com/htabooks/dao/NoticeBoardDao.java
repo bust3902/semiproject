@@ -71,22 +71,15 @@ public class NoticeBoardDao {
 		});
 	}
 	
+	
 	// 검색하는 쿼리
-	public NoticeBoard getTotalRows(String keyword) throws SQLException {
-		String sql = "select *"
+	public int getTotalRows(String keyword) throws SQLException {
+		String sql = "select (*) cnt "
 				   + "from RIDI_NOTICE_BOARD "
 				   + "where NOTICE_BOARD_DELETED = 'N' and (NOTICE_BOARD_TITLE || NOTICE_BOARD_CONTENTS) like ('%' || ? || '%') ";
 		
 		return helper.selectOne(sql, rs -> {
-			
-			NoticeBoard noticeBoard = new NoticeBoard();
-			noticeBoard.setNo(rs.getInt("NOTICE_BOARD_NO"));
-			noticeBoard.setTitle(rs.getString("NOTICE_BOARD_TITLE"));
-			noticeBoard.setContents(DaoHelper.clobToString(rs.getClob("NOTICE_BOARD_CONTENTS")));
-			noticeBoard.setDeletedDate(rs.getString("NOTICE_BOARD_DELETED"));
-			noticeBoard.setCreatedDate(rs.getDate("NOTICE_BOARD_CREATED"));
-			
-			return noticeBoard;
+			return rs.getInt("cnt");
 		}, keyword);
 	}
 	
