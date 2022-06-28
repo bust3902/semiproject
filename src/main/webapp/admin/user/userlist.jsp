@@ -1,3 +1,4 @@
+<%@page import="com.google.gson.Gson"%>
 <%@page import="com.htabooks.dao.AdminDao"%>
 <%@page import="com.htabooks.vo.Pagination"%>
 <%@page import="com.htabooks.util.StringUtil"%>
@@ -26,12 +27,12 @@
 		int currentPage = StringUtil.stringToInt(request.getParameter("page"), 1);
 		int rows = StringUtil.stringToInt(request.getParameter("rows"),10);	
 		String keyword = StringUtil.nullToBlank(request.getParameter("keyword"));
+		String userId = StringUtil.nullToBlank(request.getParameter("userId"));
 		
 		// 전체 데이터 갯수 조회
 		int totalRows = userDao.getTotalRowsCount();
 		// 페이징처리에 필요한 정보를 제공하는 객체 생성
 		Pagination pagination = new Pagination(rows, totalRows, currentPage);
-		
 		
 		List<User> userList = null; 
 		if(keyword.isEmpty()){
@@ -39,7 +40,10 @@
 		}else{
 			userList = adminDao.getAllUsers(pagination.getBeginIndex(), pagination.getEndIndex(), keyword);
 		}
+		
+
 		%>
+		
 
 <div class="col-12">
 	<jsp:include page="../../common/adminheader.jsp"></jsp:include>
@@ -72,7 +76,7 @@
 						</div>
 					</div>
 				</div>
-				<form id="search-form" class="row g-3" method="post" action="userlist.jsp">
+				<form id="search-form" class="row g-3" method="get" action="userlist.jsp">
 					<input type="hidden" name="page" />
 					<input type="hidden" name="rows" />
 					
@@ -158,26 +162,81 @@
 			</nav>
 				
 			</div>
-			<div>
-			<jsp:include page="modalUserInfo.jsp">
-				<jsp:param name="" value=""/>
-			</jsp:include>
-			</div>
 			</div>			
 		</div>
 	</div>
 </div>
 </div>
+<div class="modal fade modal-lg" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<form action="updateUser.jsp" method="post"  >
+  	<div class="modal-dialog">
+	    <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title mt-3" id="staticBackdropLabel"><strong>회원정보변경</strong></h5>
+			</div>
+			<div class="modal-body">
+				<div class="text-center">
+				  <img id="" src="/semiproject/img/hong.jpg" style="height:200px; weight:200px;">
+				</div>
+				<div class="row my-3">
+					<h5><strong>회원정보</strong></h5><hr>
+					<div class="col-5">
+						<p><strong>아이디</strong></p>
+							<input class="form-control my-1 mt-2" name="userId" type="text" value="<%=userId %>"  readonly>
+						<p><strong>전화번호</strong></p>
+							<input class="form-control my-3" name="tel" type="text" value="000-0000-0000"  readonly>
+						<p><strong>등록일</strong></p>
+							<input class="form-control my-1" name="createdDate" type="text" value="" disabled readonly>
+					</div>
+					<div class="col">
+						<div class="custom-control custom-checkbox my-1">
+								<p><strong>회원 그룹</strong></p>
+								<input type="radio" id="grade" name="admin" class="custom-control-input " value="N" >
+								<label class="custom-control-label" for="admin">일반회원</label>
+								<input type="radio" id="grade" name="admin" class="custom-control-input" value="Y" >
+								<label class="custom-control-label" for="admin">운영자</label>
+								
+								<input type="checkbox" id="grade" name="reject" class="custom-control-input" value="Y" >
+								<label class="custom-control-label" for="reject">차단</label>
+						</div>
+						<p><strong>세부사항</strong></p>
+							<input class="form-control my-1" name="memo" type="text" value="댓글 경고 1회">
+							<p><strong>캐쉬</strong></p>
+							<input class="form-control my-1" name="userCash" type="text" value="">
+					</div>
+				</div>
+				<div class="row">
+					<p><strong>이름</strong></p>
+					<div class="form-floating mb-3">
+						<input type="text" class="form-control" name="userName" value="" >
+						<label for="userId" class="col-form-label mx-2">name</label>
+					</div>
+						<p><strong>이메일</strong></p>
+					<div class="form-floating mb-3">
+						<input type="text" class="form-control" name="userEmail" value="">
+						<label for="userEmail" class="col-form-label mx-2" >e-mail</label>
+					</div>
+				</div>
+				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">취소</button>
+					<button type="submit" class="btn btn-primary">변경</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+</div>
+
 <jsp:include page="../../common/footer.jsp">
 	<jsp:param name="menu" value="board"/>
 </jsp:include>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
+
 let modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
 
 function openModal(id) {
-	document.getElementById("userId").value = id;
 	let xhr = new XMLHttpRequest();	
 	
 	xhr.onreadystatechange = function(){	
@@ -185,18 +244,17 @@ function openModal(id) {
 			let Text = xhr.responseText;			
 			let data = JSON.parse(Text); 
 			
-			document.getElementById("createdDate").value = data.createdDate;
-			document.getElementById("tel").value = data.tel;
-			document.getElementById("memo").value = data.memo;
-			document.getElementById("userName").value = data.name;
-			document.getElementById("userEmail").value = data.email;
+			document.querySelector("input[name=userId]").value = id;
+			document.querySelector("input[name=createdDate]").value = data.createdDate;
+			document.querySelector("input[name=userName]").value = data.name;
+			document.querySelector("input[name=userEmail]").value = data.email;
+			document.querySelector("input[name=userCash]").value = data.cash;
+			
+			modal.show();
 		}
-	xhr.open("GET", 'modalUserInfo.jsp?id=' + id,'name='+ name);	
+	}
+	xhr.open("get", 'modalUserInfo.jsp?id=' + id);	
 	xhr.send();						
-	
-}
-	modal.show();
-	
 }
 
 
@@ -238,6 +296,20 @@ function selectAll(selectAll)  {
     checkbox.checked = selectAll.checked
   })
 }
-
+function submitBoardForm() {
+	let titleField = document.querySelector("input[name=userName]");
+	if (titleField.value === '') {
+		alert("이름은 필수입력값입니다.");
+		titleField.focus();
+		return false;
+	}
+	let contentField = document.querySelector("textarea[name=userEmail]");
+	if (contentField.value === '') {
+		alert("이메일은 필수입력값입니다.");
+		contentField.focus();
+		return false;
+	}
+	return true;
+}
 </script>
 </html>

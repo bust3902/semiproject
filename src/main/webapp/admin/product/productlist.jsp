@@ -39,6 +39,7 @@
 			bookList = adminDao.getAllBooks(pagination.getBeginIndex(), pagination.getEndIndex(), keyword);
 		}
 		%>
+		
 <div class="col-12">
 	<jsp:include page="../../common/adminheader.jsp"></jsp:include>
 </div>
@@ -87,14 +88,14 @@
 								</select>
 							</div>
 						</div>
-						<div class="row my-1">
+						<div class="row mt-5">
 							<span><strong>판매상태</strong></span>
 						<div class="col">
 							<div class="form-control text-center">
-								<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-								<label class="form-check-label" for="flexRadioDefault1">판매중</label>
-								<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-								<label class="form-check-label" for="flexRadioDefault2">판매중지</label>
+								<input class="form-check-input" type="radio" name="onSale" value="Y">
+								<label class="form-check-label" for="onSale">판매중</label>
+								<input class="form-check-input" type="radio" name="onSale" Value="N" checked>
+								<label class="form-check-label" for="onSale">판매중지</label>
 							</div>
 						</div>
 						</div>
@@ -103,9 +104,12 @@
 						<span><strong>상품등록일</strong></span>
 						<div class="row">
 							<div class="form-control mx-2 my-2">
-								<label>등록일</label>
-								<input id="datepicker" type="text">
-								<!--  강사님께 부트스트랩으로 날짜 표현가능한지 여쭙기 -->
+								<label for="date" class="col-sm-1 col-form-label">Date</label>
+								<div class="input-group date" id="datepicker" >
+									<input type="text" class="form-control" value="">
+									<span class="input-group-append">
+									</span>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -215,7 +219,20 @@
 </jsp:include>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+
 <script type="text/javascript">
+$(function(){
+	$('#datepicker').datepicker();
+});
+
+
 
 function clickPageNo(pageNo){
 	document.querySelector("input[name=page]").value = pageNo;

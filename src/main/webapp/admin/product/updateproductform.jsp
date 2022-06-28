@@ -43,7 +43,7 @@
 		<div class="col">
 		<%
 		// 파라미터 조회
-		int bookNo =StringUtil.stringToInt(request.getParameter("no"));
+		int bookNo = StringUtil.stringToInt(request.getParameter("no"));
 		int currentPage = StringUtil.stringToInt(request.getParameter("page"), 1);
 		
 		// 게시글 정보 조회
@@ -55,34 +55,33 @@
 		
 			<div class="title">상품정보변경</div>
 		</div>
-		<form class="row my-5" method="post" action="updateproduct.jsp" enctype="multipart/form-data">
+		<form class="row my-5" method="post" action="updateproduct.jsp" enctype="multipart/form-data" onsubmit="submitModifyForm()" >
+			<input type="hidden" name="no" value="<%=book.getNo() %>" />
+			<input type="hidden" name="page" value="<%=currentPage %>" />
+			
 			<div class="text-center my-3">
 				  <img src="/semiproject/img/<%=book.getImgFileName() %>" style="height:200px; weight:200px; border:1px solid black;">
 			</div>
 			<hr>
 			<div class="col-4 mt-2 mb-2">
 				<div class="form-floating mb-2">
-					<input type="text" class="form-control" name="bookNo" id="bookNo" value="<%=book.getNo()%>" disabled readonly>
-					<label for="bookNo">도서번호</label>
-				</div>
-				<div class="form-floating mb-2">
-					<input type="text" class="form-control" name="bookTitle" id="bookTitle" value="<%=book.getTitle()%>">
+					<input type="text" class="form-control" name="bookTitle"  value="<%=book.getTitle()%>">
 					<label for="bookTitle">도서명</label>
 				</div>
 				<div class="form-floating mb-2">
-					<input type="text" class="form-control" name="bookWriter" id="bookWriter" value="<%=book.getWriter()%>">
+					<input type="text" class="form-control" name="bookWriter" value="<%=book.getWriter()%>">
 					<label for="bookWriter">저자</label>
 				</div>
 				<div class="form-floating mb-2">
-					<input type="text" class="form-control" name="publisher" id="publisher" value="<%=book.getBookPublisher()%>">
+					<input type="text" class="form-control" name="publisher"  value="<%=book.getBookPublisher()%>">
 					<label for="publisher">출판사</label>
 				</div>
 				<div class="form-floating mb-2">
-					<input type="text" class="form-control" name="bookPrice" id="bookPrice" value="<%=book.getPaperBookPrice()%>">
+					<input type="text" class="form-control" name="bookPrice" value="<%=book.getPaperBookPrice()%>">
 					<label for="bookPrice">도서 가격</label>
 				</div>
 				<div class="form-floating mb-2">
-					<input type="text" class="form-control" name="bookDiscountPrice" id="bookDiscountPrice" value="<%=book.getBookPrice()%>">
+					<input type="text" class="form-control" name="bookDiscountPrice"  value="<%=book.getBookPrice()%>">
 					<label for="bookDiscountPrice">판매 가격</label>
 				</div>
 				<div class="form-floating mb-2">
@@ -96,7 +95,7 @@
 			<div class="col">
 				<div class="row">
 					<div class="col mt-2 mb-2">
-						<select class="form-select">
+						<select class="form-select" name="categoryGroupNo">
 							<option value="100">소설</option>
 							<option value="200">경영/경제</option>
 							<option value="300">인문/사회/역사</option>
@@ -107,12 +106,12 @@
 							<option value="800">과학</option>
 							<option value="900">과학</option>
 							<option value="1000">진로/교육/교재</option>
-							<option value="1100">컴퓨터/IT</option>
+							<option value="1100" selected>컴퓨터/IT</option>
 							<option value="1200">건강/다이어트</option>
 						</select>
 					</div>
 					<div class="col mt-2 mb-2">
-						<select class="form-select">
+						<select class="form-select" name="categoryNo">
 							<option selected>소분류</option>
 							<option value="1101">컴퓨터/IT전체</option>
 							<option value="1102">IT 비즈니스</option>
@@ -125,7 +124,7 @@
 					<div class="row">
 						<div class="col">
 							<div class="form-floating">
-								<textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 400px"></textarea>
+								<textarea class="form-control" placeholder="Leave a comment here" name="bookIntroduce" style="height: 400px"></textarea>
 								<label for="floatingTextarea2 " ><%=book.getIntroduce() %></label>
 							</div>
 						</div>	
@@ -134,10 +133,11 @@
 			</div>
 		<div class="row">
 			<div class="col my-3">
-				<input class="form-control form-control-sm" id="formFileSm" type="file">
+				<input class="form-control form-control-sm" name="imgFileName" id="formFileSm" type="file">
 				<div>
-					<button class="btn btn-primary mx-3 mt-2" type="submit" style="float:right;" value="">변경</button>
-					<button class="btn btn-outline-secondary  mt-2" type="submit"style="float:right;" value=""onclick="location.href='/semiproject/admin/product/productlist.jsp'">취소</button>
+					<button class="btn btn-primary mx-3 mt-2" type="submit" style="float:right;">변경</button>
+					<button class="btn btn-secondary  mt-2" type="button"style="float:right;" value=""onclick="location.href='/semiproject/admin/product/productlist.jsp'">취소</button>
+					<button class="btn btn-danger mx-3 mt-2" type="button" style="float:right;" onclick="location.href='/semiproject/admin/product/deleteproduct.jsp'">삭제</button>
 				</div>
 			</div>			
 		</div>
@@ -153,7 +153,19 @@ function submitModifyForm() {
 		titleField.focus();
 		return false;
 	}
-	let contentField = document.querySelector("textarea[name=content]");
+	let imgField = document.querySelector("input[name=imgFileName]");
+	if (imgField.value === '') {
+		alert("도서 사진은 필수입력값입니다.");
+		titleField.focus();
+		return false;
+	}
+	let categoryField = document.querySelector("input[name=categoryNo]");
+	if (categoryField.value === '') {
+		alert("카테고리번호는 필수입력값입니다.");
+		titleField.focus();
+		return false;
+	}
+	let contentField = document.querySelector("textarea[name=bookIntroduce]");
 	if (contentField.value === '') {
 		alert("내용은 필수입력값입니다.");
 		contentField.focus();

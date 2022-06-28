@@ -101,23 +101,23 @@ public class AdminDao {
 	 * @throws SQLException 데이터액세스 작업중 예외가 발생하면 이 예외를 던진다.
 	 */
 	public void updateUser(User user)throws SQLException{
-		String sql = "update ridi_Users "
+		String sql = "update RIDI_USERS "
 				   + "set "
-				   + "		user_id = ?, "
-				   + "		user_password = ?, "
-				   + "		user_email = ?, "
-				   + "		user_birth_date = ?, "	 
-				   + "		user_gender = ?, "
-				   + "		user_created_date = ?, " 
-				   + "		user_cash = ?, "
-				   + "		user_admin = ?, "
-				   + "		user_reject = ?, "
-				   + "		user_book_count = ?, "	 
-				   + "where user_no = ? ";
+				   + "		USER_ID = ?, "
+				   + "		USER_EMAIL = ?, "
+				   + "		USER_CASH = ?, "
+				   + "		USER_ADMIN = ?, "
+				   + "		USER_REJECT = ? "
+				   + "where USER_ID = ? ";
 		
-		helper.update(sql,user.getId(),user.getPassword(),user.getEmail(),user.getBirthDate(),user.getGender(),user.getCreatedDate(),user.getCash(),user.getAdmin(),user.getReject(),user.getBookCount(),user.getNo());
-				   
-	}
+		helper.update(sql,user.getId(),
+						user.getEmail(),
+						user.getCash(),
+						user.getAdmin(),
+						user.getReject(),
+						user.getId()
+						);
+		}
 
 	public BookDto getBookbyNo(int bookNo) throws SQLException{
 		String sql	= "select * "
@@ -139,10 +139,7 @@ public class AdminDao {
 			book.setImgFileName(rs.getString("IMG_FILE_NAME"));
 			book.setBookSalesRate(rs.getInt("BOOK_SALES_RATE"));
 			book.setBookPublisher(rs.getString("BOOK_PUBLISHER"));
-			book.setCategoryNo(rs.getInt("CATEGORY_NO"));
-			book.setCategoryName(rs.getString("CATEGORY_NAME"));
 			book.setCategoryGroupNo(rs.getInt("CATEGORY_GROUP_NO"));
-			book.setCategoryGroupName(rs.getString("CNAME"));
 			return book;
 		}, bookNo);
 		
@@ -151,7 +148,6 @@ public class AdminDao {
 	public void updateBook(BookDto book) throws SQLException{
 		String sql = "update ridi_books "
 				   + "set "
-				   + "		BOOK_NO = ?, "
 				   + "		BOOK_TITLE = ?, "
 				   + "		CATEGORY_NO = ?, "
 				   + "		BOOK_WRITER = ?, "
@@ -160,7 +156,14 @@ public class AdminDao {
 				   + "		BOOK_INTRODUCE = ?, "
 				   + "		IMG_FILE_NAME = ? "
 				   + "where book_no = ? ";
-		helper.update(sql, book.getTitle(),book.getCategoryNo(),book.getWriter(),book.getPaperBookPrice(),book.getBookPrice(),book.getIntroduce(),book.getImgFileName(),book.getNo());
+		helper.update(sql, book.getTitle(), 
+				          book.getCategoryNo(), 
+				          book.getWriter(),
+				          book.getPaperBookPrice(),
+				          book.getBookPrice(), 
+				          book.getIntroduce(), 
+				          book.getImgFileName(), 
+				          book.getNo());
 				   
 	}
 	
@@ -289,6 +292,13 @@ public class AdminDao {
 			
 		},beginIndex, endIndex, keyword);
 	}
+	
+	public void deletebook(BookDto book) throws SQLException{
+		String sql	= "DELETE FROM RIDI_BOOKS"
+					+ "WHERE BOOK_NO = ? ";
+		helper.delete(sql,book.getNo());
+	}
+	
 	// 알림메세지 보내기
 	
 	// 총 수익률내기 (책 구매 수익률) 총수익률을 기록할 vo파일 생성/ DB생성
