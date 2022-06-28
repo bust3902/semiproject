@@ -16,7 +16,7 @@ public class CashHistoryDao {
 	
 	private DaoHelper helper = DaoHelper.getInstance();
 	
-	// 캐시 충전 
+	// 캐시 충전 및 사용
 	public void insertCashHistory(CashHistory cashHistory) throws SQLException{
 		String sql = "insert into ridi_user_cash_histories "
 					+ "(cash_history_no, user_no, cash_history_reason, cash_amount, cash_current_amount )"
@@ -26,4 +26,5 @@ public class CashHistoryDao {
 		helper.insert(sql, cashHistory.getUser().getNo(), cashHistory.getReason(), cashHistory.getAmount(), cashHistory.getCurrentAmount());
 	}
 	
+
 }

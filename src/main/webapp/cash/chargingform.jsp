@@ -27,7 +27,10 @@
 	
 	<%
 	User user = (User) session.getAttribute("LOGINED_USER");
-	
+	// 로그인 안되었을 때 리디렉션
+	if (user == null) {
+		response.sendRedirect("../login/loginform.jsp");
+	}
 	UserDao userDao = UserDao.getInstance();
 	user = userDao.getUserById(user.getId());
 	%>

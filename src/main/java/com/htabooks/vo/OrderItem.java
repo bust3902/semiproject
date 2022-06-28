@@ -5,6 +5,8 @@ public class OrderItem {
 	int orderNo;
 	int bookNo;
 	int price;
+	
+	public OrderItem () {}
 	public int getNo() {
 		return no;
 	}

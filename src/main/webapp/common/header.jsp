@@ -6,6 +6,8 @@
 	String menu = request.getParameter("menu");
 
 	User user = (User) session.getAttribute("LOGINED_USER");
+	
+	String redirect = request.getParameter("redirect");
 %>
 
 <style>
@@ -27,8 +29,8 @@
 			<%
 				if (user == null) {
 			%>
-				<li class="nav-item"><a href="/semiproject/login/registerform.jsp" class="nav-link fs-5" style="color:gray">회원가입</a></li>
-				<li class="nav-item"><a href="/semiproject/login/loginform.jsp?<%=request.getParameter("redirect") %>" class="nav-link fs-5" style="color:gray">로그인</a></li>
+				<li class="nav-item"><a href="/semiproject/login/registerform.jsp" class="nav-link" style="color:gray">회원가입</a></li>
+				<li class="nav-item"><a href="/semiproject/login/loginform.jsp?<%=redirect %>" class="nav-link" style="color:gray">로그인</a></li>
 			<%
 				} else {
 			%>
@@ -62,7 +64,7 @@
 			</a>
 		</div>
 		
-		<div class="mx-2" >
+		<div class="mx-2 mt-3">
 
 			<a href="/semiproject/user/mypage.jsp">
 				<img src="/semiproject/img/person.svg" width="32" height="32" />

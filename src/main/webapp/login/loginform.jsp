@@ -18,14 +18,16 @@
 		<jsp:param name="menu" value="loginform"/>
 	</jsp:include>
 
+<%
+	String redirect = request.getParameter("redirect");
+%>
 
 <div class="container-fluid mb-5 bg-info" style="--bs-bg-opacity: .1;">
 
 	<div class="row justify-content-center">
 		<div class="col-6 p-5">
 		
-		
-			<form class="" method="post" action="login.jsp?redirect=<%=request.getParameter("redirect") %>" onsubmit="return submitLoginForm()">
+			<form class="" method="post" action="login.jsp?<%=redirect %>" onsubmit="return submitLoginForm()">
 				<div class="p-0 m-0">
 					<input type="text" class="form-control rounded-0 " name="id" placeholder="아이디"/>
 				</div>

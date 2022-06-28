@@ -4,14 +4,13 @@ import java.text.DecimalFormat;
 
 public class StringUtil {
 	
-
 	/**
 	 * value가 null이면 빈 문자열을 반환한다
 	 * @param value 텍스트
 	 * @return 빈 문자열 혹은 원래 문자열
 	 */
 	public static String nullToBlank(String value) {
-		return value == null ? "" : value.trim();	// trim()공백이 있을 필요 없다 
+		return value == null ? "" : value.trim();
 	}
 	
 	/**

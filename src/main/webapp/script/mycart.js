@@ -242,3 +242,11 @@ function deleteSelectedItems() {
   xhr.open("GET", url);
   xhr.send();
 }
+
+function submitCartForm() {
+  let checkedBoxes = document.querySelectorAll("input.check_one:checked");
+  if (confirm("선택하신 " + checkedBoxes.length + "권을 구매하시겠습니까?")) {
+    return true;
+  }
+  return false;
+}

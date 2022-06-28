@@ -8,6 +8,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 
+String redirect = request.getParameter("redirect");
 
 String id = request.getParameter("id");
 String password = request.getParameter("password");
@@ -33,17 +34,22 @@ session.setAttribute("LOGINED_USER", savedUser);
 
 // 세션에 있는 카트 목록 유저 카트에 병합하기
 @SuppressWarnings("unchecked")
-List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
+List<CartItem> sessionCart = (List<CartItem>) session.getAttribute("cart");
 CartItemDao dao = CartItemDao.getInstance();
+List<CartItem> userCart = dao.getCartItemsByUserNo(savedUser.getNo());
 
-for(CartItem item : cart) {
-	item.setUserNo(savedUser.getNo());
-	dao.insertCartItem(item);
+if (sessionCart != null) {
+	for(CartItem item : sessionCart) {
+		if (!userCart.contains(item)) {
+		item.setUserNo(savedUser.getNo());
+		dao.insertCartItem(item);
+		}
+	}
+	sessionCart.clear();
 }
-cart.clear();
 
 // 리디렉트
-String redirect = request.getParameter("redirect");
+
 if (redirect != null) {
 	response.sendRedirect("../" + redirect);
 	return;

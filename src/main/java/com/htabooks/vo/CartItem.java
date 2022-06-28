@@ -14,7 +14,10 @@ public class CartItem {
 	private int discountRate;
 	private Date createdDate;
 
-
+	public CartItem(){}
+	public CartItem(int no) {
+		this.no = no;
+	}
 
 	public int getNo() {
 		return no;
@@ -72,4 +75,19 @@ public class CartItem {
 		this.createdDate = createdDate;
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(bookNo);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CartItem other = (CartItem) obj;
+		return bookNo == other.bookNo;
+	}
 }

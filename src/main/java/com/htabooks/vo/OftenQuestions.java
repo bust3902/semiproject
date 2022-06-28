@@ -2,15 +2,15 @@ package com.htabooks.vo;
 
 import java.util.Date;
 
-public class NoticeBoard {
+public class OftenQuestions {
 
 	private int no;
 	private String title;
 	private String contents;
-	private String deletedDate;
-	private Date createdDate;
+	private Date created;
+	private Date deleted;
 	
-	public NoticeBoard() {}
+	public OftenQuestions() {}
 
 	public int getNo() {
 		return no;
@@ -36,20 +36,20 @@ public class NoticeBoard {
 		this.contents = contents;
 	}
 
-	public String getDeletedDate() {
-		return deletedDate;
+	public Date getCreated() {
+		return created;
 	}
 
-	public void setDeletedDate(String deletedDate) {
-		this.deletedDate = deletedDate;
+	public void setCreated(Date created) {
+		this.created = created;
 	}
 
-	public Date getCreatedDate() {
-		return createdDate;
+	public Date getDeleted() {
+		return deleted;
 	}
 
-	public void setCreatedDate(Date createdDateDate) {
-		this.createdDate = createdDate;
+	public void setDeleted(Date deleted) {
+		this.deleted = deleted;
 	}
 	
 	

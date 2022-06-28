@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.htabooks.vo.CartItem;
-
 /**
  * 데이터베이스 엑세스 헬프 클래스다.
  * @author lee_e
@@ -193,7 +191,7 @@ public class DaoHelper {
 				pstmt.setString(position++, obj.toString());
 			} else if (obj instanceof Date) {
 				pstmt.setDate(position++, new java.sql.Date(((Date) obj).getTime()));
-			} 
+			}
 		}
 		return pstmt;
 	}
