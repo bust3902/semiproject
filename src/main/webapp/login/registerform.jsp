@@ -98,12 +98,12 @@ input::placeholder {
 						 		<div>
 						 			<div class="form-check form-check-inline">
 							 			<label class="form-check-label"for="agree_all"><small>모두 동의합니다.	</small>
-							 				<input class="form-check-input" type="checkbox" name="agree_all" id="agree_all"></label>
+							 				<input class="form-check-input" type="checkbox" name="selectall" value="selectall" onclick="selectAll(this)"></label>
 							 		</div>
 						 			<div></div>
 						 		
 							 		<div class="form-check form-check-inline">
-							 			<input class="form-check-input" type="checkbox" name="agree" value="1">
+							 			<input class="form-check-input" type="checkbox" name="agree" value="1" onclick="checkSelectAll()">
 							 				<label class="form-check-label"><small>이용약관 동의(필수)</small></label>
 							 		</div>
 							 			<a href="" class="float-end text-decoration-none text-secondary" ><small>약관 보기> </small></a>
@@ -111,14 +111,14 @@ input::placeholder {
 						 		
 						 		<div>
 							 		<div class="form-check form-check-inline">
-							 			<input class="form-check-input" type="checkbox" name="agree" value="2">
+							 			<input class="form-check-input" type="checkbox" name="agree" value="2" onclick="checkSelectAll()">
 							 			<label class="form-check-label"><small>개인 정보 수집 및 이용 동의(필수)</small></label>
 							 		</div>
 							 		<a href="" class="float-end text-decoration-none text-secondary" ><small>약관 보기> </small></a>
 						 		</div>
 						 		<div>
 							 		<div class="form-check form-check-inline">
-							 			<input class="form-check-input" type="checkbox" name="agree" value="3">
+							 			<input class="form-check-input" type="checkbox" name="agree" value="3" onclick="checkSelectAll()">
 							 			<label class="form-check-label"><small>이벤트, 혜택 알림 수신 동의(선택)</small></label>
 							 		</div>
 							 		<a href="" class="float-end text-decoration-none text-secondary select_disable" ><small>약관 보기> </small></a>
@@ -126,7 +126,7 @@ input::placeholder {
 						 		
 						 		<div>
 							 		<div class="form-check form-check-inline">
-							 			<input class="form-check-input" type="checkbox" name="agree" value="4">
+							 			<input class="form-check-input" type="checkbox" name="agree" value="4" onclick="checkSelectAll()">
 							 			<label class="form-check-label"><small>성별, 생년 정보 제공 동의(선택)</small></label>
 							 		</div>
 							 		<a href="" class="float-end text-decoration-none text-secondary select_disable" ><small>약관 보기> </small></a>
@@ -361,8 +361,35 @@ input::placeholder {
 				helperElement.textContent = "";
 				return;
 			}
-			
-			
+		}
+	
+	/* 체크박스 선택과 해제 */
+		function checkSelectAll()  {
+		  // 전체 체크박스
+		  const checkboxes 
+		    = document.querySelectorAll('input[name="agree"]');
+		  // 선택된 체크박스
+		  const checked 
+		    = document.querySelectorAll('input[name="agree"]:checked');
+		  // select all 체크박스
+		  const selectAll 
+		    = document.querySelector('input[name="selectall"]');
+		  // 체크박스가 체크된 박스 갯수와 같으면 
+		  if(checkboxes.length === checked.length)  {
+		    selectAll.checked = true;		// 다 체크 돼 
+		  }else {
+		    selectAll.checked = false;		// 다 체크 해제 돼 
+		  }
+		
+		}
+		
+		function selectAll(selectAll)  {
+		  const checkboxes 
+		     = document.getElementsByName('agree');
+		  
+		  checkboxes.forEach((checkbox) => {
+		    checkbox.checked = selectAll.checked
+		  })
 		}
 	
 	/* 전체 유효성 체크 */
