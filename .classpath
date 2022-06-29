@@ -11,6 +11,8 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="lib" path="C:/eclipse/workspace-web/semiproject/src/main/webapp/WEB-INF/lib/gson-2.9.0.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/workspace-web/semiproject/src/main/webapp/WEB-INF/lib/commons-codec-1.15.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/workspace-web/semiproject/src/main/webapp/WEB-INF/lib/ojdbc11.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

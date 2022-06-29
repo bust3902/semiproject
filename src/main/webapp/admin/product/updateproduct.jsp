@@ -19,32 +19,28 @@
 	} */
 	
 
-	// 요청 파라미터에서 도서 번호와 페이지 번호를 조회
-	int bookNo = StringUtil.stringToInt(request.getParameter("no"));
-	int currentPage = StringUtil.stringToInt(request.getParameter("page"));
 	
-	// 도서번호에 해당하는 게시글 정보 조회
+	
+	MultipartRequest mr = new MultipartRequest(request, "C:\\eclipse\\workspace-web\\semiproject\\src\\main\\webapp\\img");
+	// 요청 파라미터에서 도서 번호와 페이지 번호를 조회
+	int bookNo = StringUtil.stringToInt(mr.getParameter("no"));
+	int currentPage = StringUtil.stringToInt(mr.getParameter("page"), 1);
+	
+	// 도서번호에 해당하는 도서 정보 조회
+	
 	AdminDao adminDao = AdminDao.getInstance();
 	BookDto book = adminDao.getBookbyNo(bookNo);
 	
-	MultipartRequest mr = new MultipartRequest(request, "C:\\eclipse\\workspace-web\\semiproject\\src\\main\\webapp\\img");
-	
-	// 상품 번호에 해당하는 게시글이 없으면 재요청 URL 보내기
-		if(book == null){
-			throw new RuntimeException("상품 정보가 존재하지 않습니다.");
-		}
-		
-	
 	// 요청파라미터에서 수정된 책제목,저자,설명,가격,수량, 업로드된 파일의 이름을 갱신한다.
 	int categoryNo			= StringUtil.stringToInt(mr.getParameter("categoryNo"));
-	int paperBookPrice		= StringUtil.stringToInt(mr.getParameter("paperBookPrice"));
-	int bookPrice			= StringUtil.stringToInt(mr.getParameter("bookPrice"));
-	String title 			= StringUtil.nullToBlank(mr.getParameter("title"));
-	String writer 			= StringUtil.nullToBlank(mr.getParameter("writer"));
+	int categoryGroupNo		= StringUtil.stringToInt(mr.getParameter("categoryGroupNo"));
+	int paperBookPrice		= StringUtil.stringToInt(mr.getParameter("bookPrice"));
+	int bookPrice			= StringUtil.stringToInt(mr.getParameter("bookDiscountPrice"));
+	String title 			= StringUtil.nullToBlank(mr.getParameter("bookTitle"));
+	String writer 			= StringUtil.nullToBlank(mr.getParameter("bookWriter"));
 	String bookIntroduce 	= StringUtil.nullToBlank(mr.getParameter("bookIntroduce"));
-	String bookPublisher 	= StringUtil.nullToBlank(mr.getParameter("bookPublisher"));
+	String bookPublisher 	= StringUtil.nullToBlank(mr.getParameter("publisher"));
 	String imgFileName 		= StringUtil.nullToBlank(mr.getFilename("imgFileName"));
-
 	
 	// 조회된 상품정보의 제목과 내용을 갱신
 	book.setCategoryNo(categoryNo);
@@ -60,5 +56,5 @@
 	adminDao.updateBook(book);
 	
 	// 재요청 URL응답
-	response.sendRedirect("(재요청받을 URL)");
+	response.sendRedirect("productlist.jsp?page="+currentPage);
 %>

@@ -88,7 +88,7 @@
 			<div class="col">
 				<div class="row">
 					<div class="col mt-2 mb-2">
-						<select class="form-select" name="categoryNo">
+						<select class="form-select" name="categoryGroupNo">
 							<option selected="selected" disabled="disabled">대분류</option>
 								<option value="100">소설</option>
 								<option value="200">경영/경제</option>
@@ -105,7 +105,7 @@
 						</select>
 					</div>
 					<div class="col mt-2 mb-2">
-						<select class="form-select">
+						<select class="form-select" name="categoryNo">
 							<option selected="selected" disabled="disabled">소분류</option>
 								<option value="1101">컴퓨터/IT전체</option>
 								<option value="1102">IT 비즈니스</option>

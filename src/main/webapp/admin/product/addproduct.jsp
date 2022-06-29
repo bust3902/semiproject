@@ -25,6 +25,7 @@
 	int categoryNo			= StringUtil.stringToInt(mr.getParameter("categoryNo"));
 	int paperBookPrice		= StringUtil.stringToInt(mr.getParameter("paperBookPrice"));
 	int bookPrice			= StringUtil.stringToInt(mr.getParameter("bookPrice"));
+	int categoryGroupNo		= StringUtil.stringToInt(mr.getParameter("categoryGroupNo"));
 	String title 			= StringUtil.nullToBlank(mr.getParameter("title"));
 	String writer 			= StringUtil.nullToBlank(mr.getParameter("writer"));
 	String bookIntroduce 	= StringUtil.nullToBlank(mr.getParameter("bookIntroduce"));
@@ -37,6 +38,7 @@
 	book.setNo(bookNo);	
 	book.setTitle(title);	
 	book.setCategoryNo(categoryNo);
+	book.setCategoryGroupNo(categoryGroupNo);
 	book.setWriter(writer);	
 	book.setPaperBookPrice(paperBookPrice);
 	book.setBookPrice(bookPrice);	
