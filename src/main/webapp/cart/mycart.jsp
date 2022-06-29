@@ -20,7 +20,6 @@
 <body>
 <jsp:include page="../common/header.jsp">
 	<jsp:param name="menu" value="cart"/>
-	<jsp:param name="redirect" value="redirect=cart/mycart.jsp"/>
 </jsp:include>
 <div class="container">
 

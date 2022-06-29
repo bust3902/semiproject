@@ -23,7 +23,6 @@
 <body>
 <jsp:include page="../common/header.jsp">
 	<jsp:param name="menu" value="order"/>
-	<jsp:param name="redirect" value="redirect=order/checkout.jsp"/>
 </jsp:include>
 <div class="container">
 
@@ -35,8 +34,8 @@
 	User savedUser = (User) session.getAttribute("LOGINED_USER");
 	
 	if (savedUser == null) {
-		// 로그인 페이지로 리디렉션
-		response.sendRedirect("../login/loginform.jsp?redirection=order/checkout.jsp");
+		// 로그인 페이지로 포워드
+		response.sendRedirect("../login/loginform.jsp?redirect=" + StringUtil.encodeRedirectURL(request));
 		return;
 	}
 	// 유저 정보 최신화

@@ -1,6 +1,10 @@
 package com.htabooks.util;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.DecimalFormat;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 public class StringUtil {
 
@@ -99,5 +103,10 @@ public class StringUtil {
 		DecimalFormat df = new DecimalFormat("000");
 		
 		return df.format(no);
+	}
+	
+	public static String encodeRedirectURL(HttpServletRequest request) throws UnsupportedEncodingException {
+		String redirect = request.getRequestURL().toString() +"?"+ request.getQueryString();
+		return URLEncoder.encode(redirect, "UTF-8");
 	}
 }
