@@ -124,8 +124,8 @@
 					<div class="row">
 						<div class="col">
 							<div class="form-floating">
-								<textarea class="form-control" placeholder="Leave a comment here" name="bookIntroduce" style="height: 400px"></textarea>
-								<label for="floatingTextarea2 " ><%=book.getIntroduce() %></label>
+								<textarea class="form-control" placeholder="Leave a comment here" name="bookIntroduce" style="height: 400px"><%=book.getIntroduce() %></textarea>
+								<label for="floatingTextarea2 " >내용을 입력하세요</label>
 							</div>
 						</div>	
 					</div>			
@@ -145,40 +145,50 @@
 		</div>
 	</div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js">
-function submitModifyForm() {
-	let titleField = document.querySelector("input[name=bookTitle]");
-	if (titleField.value === '') {
-		alert("제목은 필수 입력 값입니다.");
-		titleField.focus();
-		return false;
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+
+	function submitModifyForm() {
+		let titleField = document.querySelector("input[name=bookTitle]");
+		if (titleField.value === '') {
+			alert("제목은 필수 입력 값입니다.");
+			titleField.focus();
+			return false;
+		}
+		let imgField = document.querySelector("input[name=imgFileName]");
+		if (imgField.value === '') {
+			alert("도서 사진은 필수 입력 값입니다.");
+			titleField.focus();
+			return false;
+		}
+		let categroupField = document.querySelector("input[name=categoryGroupNo]");
+		if (categroupField.value === '') {
+			alert("카테고리번호는 필수 입력 값입니다.");
+			categroupField.focus();
+			return false;
+		}
+		let categoryField = document.querySelector("input[name=categoryNo]");
+		if (categoryField.value === '') {
+			alert("카테고리번호는 필수 입력 값입니다.");
+			categoryField.focus();
+			return false;
+		}
+		let bookPriceField = document.querySelector("input[name=bookPrice]");
+		if (bookPriceField.value === '') {
+			alert("도서가격은 필수 입력 값입니다.");
+			bookPrice.focus();
+			return false;
+		}
+		let contentsField = document.querySelector("textarea[name=bookIntroduce]");
+		if (contentsField.value === '') {
+			alert("내용은 필수 입력 값입니다.");
+			contentsField.focus();
+			return false;
+		}else
+		
+		alert("회원정보 변경 완료.");
+		return true;
 	}
-	let imgField = document.querySelector("input[name=imgFileName]");
-	if (imgField.value === '') {
-		alert("도서 사진은 필수 입력 값입니다.");
-		titleField.focus();
-		return false;
-	}
-	let categoryField = document.querySelector("input[name=categoryGroupNo]");
-	if (categoryField.value === '') {
-		alert("카테고리번호는 필수 입력 값입니다.");
-		titleField.focus();
-		return false;
-	}
-	let categoryField = document.querySelector("input[name=categoryNo]");
-	if (categoryField.value === '') {
-		alert("카테고리번호는 필수 입력 값입니다.");
-		titleField.focus();
-		return false;
-	}
-	let contentField = document.querySelector("input[name=bookPrice]");
-	if (contentField.value === '') {
-		alert("도서가격은 필수 입력 값입니다..");
-		contentField.focus();
-		return false;
-	}
-	return true;
-}
 </script>
 </body>
 </html>

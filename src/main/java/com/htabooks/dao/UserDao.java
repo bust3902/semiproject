@@ -1,7 +1,6 @@
 package com.htabooks.dao;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import com.htabooks.helper.DaoHelper;
 import com.htabooks.vo.User;
@@ -86,63 +85,7 @@ public class UserDao {
 		});
 	}
 	
-	public List<User> getAllUsers(int beginIndex, int endIndex)throws SQLException{
-		String sql	= "SELECT 	USER_NO, USER_ID, USER_PASSWORD, USER_EMAIL, USER_BIRTH_DATE, USER_GENDER, "
-					+ "			USER_CREATED_DATE,USER_CASH,USER_ADMIN,USER_REJECT,USER_BOOK_COUNT,USER_NAME,USER_UPDATED_DATE "
-					+ "FROM (SELECT ROW_NUMBER() OVER (ORDER BY USER_NO ASC) ROW_NUMBER, "
-					+ "			USER_NO, USER_ID, USER_PASSWORD, USER_EMAIL, USER_BIRTH_DATE, USER_GENDER,"
-					+ "			USER_CREATED_DATE, USER_CASH, USER_ADMIN, USER_REJECT, USER_BOOK_COUNT, USER_NAME, USER_UPDATED_DATE "
-					+ "		FROM RIDI_USERS ) "
-					+ "WHERE ROW_NUMBER >= ? AND ROW_NUMBER <= ? ";
-		
-		return helper.selectList(sql, rs -> {
-			User user = new User();
-			user.setNo(rs.getInt("USER_NO"));
-			user.setId(rs.getString("USER_ID"));
-			user.setPassword(rs.getString("USER_PASSWORD"));
-			user.setEmail(rs.getString("user_email"));
-			user.setBirthDate(rs.getString("USER_BIRTH_DATE"));
-			user.setGender(rs.getString("USER_GENDER"));
-			user.setCreatedDate(rs.getDate("USER_CREATED_DATE"));
-			user.setCash(rs.getInt("USER_CASH"));
-			user.setAdmin(rs.getString("USER_ADMIN"));
-			user.setReject(rs.getString("USER_REJECT"));
-			user.setBookCount(rs.getInt("USER_BOOK_COUNT"));
-			user.setName(rs.getString("USER_NAME"));
-			
-			return user;
-			
-		},beginIndex,endIndex);
-	}
-	public List<User> getAllUsers(int beginIndex, int endIndex, String keyword)throws SQLException{
-		String sql	= "SELECT 	USER_NO, USER_ID, USER_PASSWORD, USER_EMAIL, USER_BIRTH_DATE, USER_GENDER, USER_CREATED_DATE, USER_CASH, USER_ADMIN,"
-					+ "			USER_REJECT, USER_BOOK_COUNT, USER_NAME, USER_UPDATED_DATE "
-					+ "FROM (SELECT ROW_NUMBER() OVER(ORDER BY USER_NO ASC) ROW_NUMBER, "
-					+ "				USER_NO, USER_ID, USER_PASSWORD, USER_EMAIL, USER_BIRTH_DATE, USER_GENDER, "
-					+ "				USER_CREATED_DATE, USER_CASH, USER_ADMIN, USER_REJECT, USER_BOOK_COUNT, USER_NAME, USER_UPDATED_DATE  "
-					+ "		FROM RIDI_USERS ) "
-					+ "WHERE ROW_NUMBER >= ? AND ROW_NUMBER <= ? "
-					+ "AND USER_NAME LIKE '%' || ? || '%' ";
-		
-		return helper.selectList(sql, rs -> {
-			User user = new User();
-			user.setNo(rs.getInt("user_no"));
-			user.setId(rs.getString("user_id"));
-			user.setPassword(rs.getString("user_password"));
-			user.setName(rs.getString("user_name"));
-			user.setEmail(rs.getString("user_email"));
-			
-			user.setBirthDate(rs.getString("user_birth_date"));
-			user.setGender(rs.getString("user_gender"));
-			user.setCreatedDate(rs.getDate("user_created_date"));
-			user.setCash(rs.getInt("user_cash"));
-			user.setAdmin(rs.getString("user_admin"));
-			user.setReject(rs.getString("user_reject"));
-			user.setBookCount(rs.getInt("user_book_count"));
-			
-			return user;
-			
-		},beginIndex, endIndex, keyword);
-	}
+	
+	
 }
 	

@@ -168,7 +168,7 @@
 </div>
 </div>
 <div class="modal fade modal-lg" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-<form action="updateUser.jsp" method="post"  >
+<form action="updateUser.jsp" method="post" onsubmit="return submitUserForm()" >
   	<div class="modal-dialog">
 	    <div class="modal-content">
 			<div class="modal-header">
@@ -296,7 +296,7 @@ function selectAll(selectAll)  {
     checkbox.checked = selectAll.checked
   })
 }
-function submitBoardForm() {
+function submitUserForm() {
 	let titleField = document.querySelector("input[name=userName]");
 	if (titleField.value === '') {
 		alert("이름은 필수입력값입니다.");
