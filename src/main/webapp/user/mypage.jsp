@@ -1,3 +1,6 @@
+<%@page import="com.htabooks.vo.CartItem"%>
+<%@page import="java.util.List"%>
+<%@page import="com.htabooks.dao.CartItemDao"%>
 <%@page import="com.htabooks.dao.UserDao"%>
 <%@page import="com.htabooks.dao.CashHistoryDao"%>
 <%@page import="com.htabooks.vo.CashHistory"%>
@@ -30,6 +33,10 @@
 	
 	UserDao userDao = UserDao.getInstance();
 	user = userDao.getUserById(user.getId());
+	
+	//카트 불러오기
+	CartItemDao cartItemDao = CartItemDao.getInstance();
+	List<CartItem> cart = cartItemDao.getCartItemsByUserNo(user.getNo());
 	%>
 	
 	<!-- 사이드 메뉴 -->
@@ -82,7 +89,7 @@
 						<strong>구매/혜택</strong>
 					</small>
 					<div class="mx-3 my-1" style="font-size:17px;">
-						<a href="" class="text-decoration-none text-secondary"><small>결제 내역</small></a>
+						<a href="orders.jsp" class="text-decoration-none text-secondary"><small>결제 내역</small></a>
 					</div>
 					<div class="mx-3 my-1 text-decoration-none text-secondary" style="font-size:17px;">
 						<a href="../cash/chargingform.jsp" class="text-decoration-none text-secondary"><small>리디캐시</small></a>
@@ -202,7 +209,7 @@
 									<div class="col text-center m-2" style="font-size: 16px;">
 										<strong>카트</strong>
 									</div>
-									<div class="col text-center mb-4">-- 권</div>
+									<div class="col text-center mb-4 text-primary"><%=cart.size() %> 권</div>
 								</td>
 								<td class="text-center align-middle p-4">
 									<svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" fill="currentColor" class="bi bi-suit-heart" viewBox="0 0 16 16">

@@ -33,11 +33,16 @@
 	User user = userDao.getUserById(savedUser.getId());
 	
 	// 파라미터 받기
+	boolean isBuy = "buy".equals(request.getParameter("action"));
+	System.out.println(isBuy);
+	
 	// itemNo (cart)
-	String[] itemNoStr = request.getParameterValues("itemNo");
 	List<Integer> itemNoList = new ArrayList<>();
-	for(String str : itemNoStr) {
-		itemNoList.add(StringUtil.stringToInt(str));
+	if (!isBuy) {
+		String[] itemNoStr = request.getParameterValues("itemNo");
+		for(String str : itemNoStr) {
+			itemNoList.add(StringUtil.stringToInt(str));
+		}
 	}
 	// bookPrice
 	String[] bookPriceStr = request.getParameterValues("bookPrice");
@@ -63,34 +68,43 @@
 	userDao.updateUser(user);
 	// cash history 생성, db에 insert
 	CashHistory history = new CashHistory();
-	history.setUser(user);
-	history.setAmount(totalPrice);
-	history.setCurrentAmount(user.getCash());
-	history.setReason("캐시 사용");
+		history.setUser(user);
+		history.setAmount(totalPrice);
+		history.setCurrentAmount(user.getCash());
+		history.setReason("캐시 사용");
 	cashHistoryDao.insertCashHistory(history);
 	
 	// order 객체 생성
 	int orderNo = orderDao.getOrderNo();
-	Order order = new Order();
-	order.setNo(orderNo);
-	order.setUserNo(user.getNo());
-	order.setTotalPaymentPrice(totalPrice);
-	// db에 order insert
+		Order order = new Order();
+		order.setNo(orderNo);
+		order.setUserNo(user.getNo());
+		order.setTotalPaymentPrice(totalPrice);
 	orderDao.insertOrder(order);
 	
 	// db에 orderItem insert
-	for (int cartItemNo : itemNoList){
-		orderItemDao.insertOrderItem(new CartItem(cartItemNo), orderNo);
+	if(isBuy) {
+		OrderItem item = new OrderItem();
+			item.setOrderNo(orderNo);
+			item.setBookNo(bookNoList.get(0));
+			item.setPrice(bookPriceList.get(0));
+		orderItemDao.insertOrderItem(item);
+	}
+	else {
+		for (int cartItemNo : itemNoList){
+			orderItemDao.insertOrderItem(cartItemNo, orderNo);
+		}
 	}
 	
 	// 책 판매량 증가시키기
 	bookDao.updateBookSalesRate(bookNoList);
 	
 	// 카트에서 구매내역 삭제
-	cartItemDao.deleteCartItems(itemNoList);
-	
-	response.sendRedirect("../home.jsp");
-	//response.sendRedirect("complete.jsp");
+	if (!isBuy) {
+		cartItemDao.deleteCartItems(itemNoList);
+	}
+	// 구매 완료 화면으로 리디렉트
+	response.sendRedirect("complete.jsp?orderNo="+orderNo);
 	
 %>
 

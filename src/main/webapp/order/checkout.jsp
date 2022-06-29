@@ -1,3 +1,5 @@
+<%@page import="com.htabooks.dto.BookDto"%>
+<%@page import="com.htabooks.dao.BookDao"%>
 <%@page import="com.htabooks.dao.UserDao"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="com.htabooks.util.StringUtil"%>
@@ -26,6 +28,8 @@
 <div class="container">
 
 <%	
+	CartItemDao cartItemDao = CartItemDao.getInstance();
+	BookDao bookDao = BookDao.getInstance();
 	UserDao userDao = UserDao.getInstance();
 	// 로그인 여부 확인
 	User savedUser = (User) session.getAttribute("LOGINED_USER");
@@ -39,24 +43,36 @@
 	User user = userDao.getUserById(savedUser.getId());
 	
 	// 파라미터 획득
-	String[] itemNoStr = request.getParameterValues("itemNo");
+	String action = request.getParameter("action");
+	// 변수 정의
+	BookDto book = new BookDto();
 	List<Integer> itemNoList = new ArrayList<>();
-	for(String str : itemNoStr) {
-		itemNoList.add(StringUtil.stringToInt(str));
+	boolean isBuy = "buy".equals(action);
+	// 바로 구매일 때
+	if(isBuy) {
+		int bookNo = StringUtil.stringToInt(request.getParameter("bookNo"));
+		if(bookNo == 0) {
+			throw new RuntimeException("유효하지 않은 접근입니다.");
+		}
+		book = bookDao.getBookByNo(bookNo);
+	}
+	// 장바구니 구매일 때
+	else{
+		String[] itemNoStr = request.getParameterValues("itemNo");
+		for(String str : itemNoStr) {
+			itemNoList.add(StringUtil.stringToInt(str));
+		}
 	}
 	// 유저 카트 불러오기
-	CartItemDao cartItemDao = CartItemDao.getInstance();
 	List<CartItem> cart = cartItemDao.getCartItemsByUserNo(user.getNo());
 
-	//System.out.println(user.getName());
-	//System.out.println(user.getCash());
 %>
 
 <section class="mx-auto mb-5">
 
 	<div class="cart_wrapper mt-3">
-		<h5 class="mb-2">주문 목록<span class="ms-2 fs-6 fw-bold opacity-50"><%=itemNoList.size() %></span></h5>
-		
+		<h5 class="mb-2">주문 목록<span class="ms-2 fs-6 fw-bold opacity-50"><%=isBuy ? 1 : itemNoList.size() %></span></h5>
+
 		<form method="post" action="order.jsp" onsubmit="return submitCheckout()">
 		
 			<!-- 결제 정보 -->
@@ -188,9 +204,40 @@
 			
 			<!-- 주문 목록 -->
 			<div class="cart_book_list border-top border-opacity-50">
+			<% if(isBuy) { %>
+					<input name="action" type="hidden" value="buy" />
+					<div class="cart_book d-flex py-4 border-bottom border-opacity-50">
+						<div class="thumbnail_with_checkbox me-3">
+							<a href="../list/detail.jsp?bookNo=<%=book.getNo() %>"><img src="../img/<%=book.getImgFileName() %>" class="book_img" /></a>
+						</div>
+						<div class="cart_book_info w-100"> 
+							<div class="cart_book_text w-100 d-flex justify-content-between">
+								<div class="cart_book_metadata">
+									<input name="bookNo" type="hidden" value="<%=book.getNo() %>" />
+									<a href="../list/detail.jsp?bookNo=<%=book.getNo() %>">
+										<p class="fw-bold" style="font-size:14px;"><%=book.getTitle() %></p>
+									</a>
+									<span style="font-size:12px;"><%=book.getWriter() %></span>
+								</div>
+								<div class="cart_book_price d-flex flex-column justify-content-end align-items-end">
+									<div>
+										<span class="text-danger"><%=book.getDiscountRate() > 0 ? book.getDiscountRate()+"%↓" : ""%></span>
+										<span id="book_price_<%=book.getBookPrice() %>" class="book-price fw-bold ps-1" style="color: var(--main-color)" data-book-price="<%=book.getBookPrice() %>"><%=StringUtil.priceFormat(book.getBookPrice())%>원</span>
+									</div>
+									<input name="bookPrice" type="hidden" value="<%=book.getBookPrice() %>" />
+								</div> 
+							</div>
+							<div class="p-2 mt-2 pdf-warning">
+								<img src="../img/pdf-warning.png" width="15px" />
+								<span>PDF파일입니다.<b>독서노트</b> 기능과 <b>글자크기</b> 조정 기능이 제한됩니다.</span>
+							</div>
+						</div>
+					</div>
+			
 				<%
-				for (CartItem item : cart) {
-					if (itemNoList.contains(item.getNo())) {
+				} else {
+					for (CartItem item : cart) {
+						if (itemNoList.contains(item.getNo())) {
 				%>
 					<div class="cart_book d-flex py-4 border-bottom border-opacity-50">
 						<input name="itemNo" type="hidden" value="<%=item.getNo() %>">
@@ -222,15 +269,14 @@
 					</div>
 				<%
 					}
+				  }
 				}
 				%>				
 			</div>
-			
 		</form>
 	</div>
 	
 </section>
-<input class="is_logined" type="hidden" value="<%= user != null ? "y" : "" %>" />
 
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>

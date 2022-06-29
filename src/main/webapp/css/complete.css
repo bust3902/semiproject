@@ -1,0 +1,17 @@
+@charset "UTF-8";
+@import "variables.css";
+@import "font.css";
+
+.box {
+	min-height:100px;
+}
+
+.list-group {
+	width:85%;
+}
+.list-group p {
+	font-size:12px;
+}
+.list-group small {
+	font-size:10px;
+}
