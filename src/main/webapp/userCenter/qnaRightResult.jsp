@@ -37,7 +37,7 @@
 				<div class="col mt-3">
 					<button type="button" class="btn btn-outline-primary"
 						data-bs-toggle="modal" data-bs-target="#question-modal">
-						<a href="a.jsp">문의게시판 보기</a>
+						<a href="qnaBoard.jsp">문의게시판 보기</a>
 					</button>
 				</div>
 			</div>

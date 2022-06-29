@@ -17,33 +17,24 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<%
-	int currentPage = StringUtil.stringToInt(request.getParameter("page"), 1);
-	int rows = StringUtil.stringToInt(request.getParameter("rows"), 10);	
-	String keyword = StringUtil.nullToBlank(request.getParameter("keyword"));
-	
-	QnaAnswerDao qnaAnswerDao = QnaAnswerDao.getInstance();
-	
-	int totalRows = 0;
-	if (keyword.isEmpty()) {
-		totalRows = qnaAnswerDao.getTotalRwos();
-	} else {
-		totalRows = qnaAnswerDao.getTotalRwos(keyword);
-	}
-	
-	Pagination pagination = new Pagination(rows, totalRows, currentPage);
-	
-	List<QnaAnswer> qnaAnswerList = null;
-	if (keyword.isEmpty()) {
-		qnaAnswerList = qnaAnswerDao.getQnaAnswer(pagination.getBeginIndex(), pagination.getEndIndex());
-	} else {
-		qnaAnswerList = qnaAnswerDao.getQnaAnswer(keyword, pagination.getBeginIndex(), pagination.getEndIndex());
-	}
-%>
+<jsp:include page="../common/nav.jsp">
+	<jsp:param name="menu" value="board"/>
+</jsp:include>
+	<%
+		int currentPage = StringUtil.stringToInt(request.getParameter("page"), 1);
+		int rows = StringUtil.stringToInt(request.getParameter("rows"), 10);	
+		
+		QnaAnswerDao qnaAnswerDao = QnaAnswerDao.getInstance();
+		
+		int totalRows = qnaAnswerDao.getTotalRwos();
+		Pagination pagination = new Pagination(rows, totalRows, currentPage);
+		
+		List<QnaAnswer> qnaAnswerList = qnaAnswerDao.getQnaAnswer(pagination.getBeginIndex(), pagination.getEndIndex());
+	%>
 
 <div class="container mt-3">
   <div class="row">
-   		<p class="col-9 fs-1 text-primary"><strong>문의 게시판</strong></p>
+   		<p class="col-9 pt-4 mt-4 fs-1 text-primary"><strong>문의 게시판</strong></p>
    </div>
    
   <div class="mt-4 pt-4 " id="collapse-content">
@@ -67,26 +58,29 @@
   </div>
   
 <nav>
-		<ul class="pagination justify-content-center">
-			<li class="page-item">
-				<a class="page-link <%=pagination.getCurrentPage() == 1 ? "disabled" : "" %>" href="javascript:clickPageNo(<%=pagination.getCurrentPage() - 1 %>)">이전</a>
-			</li>
-	<%
-		for (int num = pagination.getBeginPage(); num <= pagination.getEndPage(); num++) {
-	%>
-			<li class="page-item">
-				<a class="page-link <%=pagination.getCurrentPage() == num ? "active" : "" %>" href="javascript:clickPageNo(<%=num %>)"><%=num %></a>
-			</li>
-	<%
-		}
-	%>
-			<li class="page-item">
-				<a class="page-link <%=pagination.getCurrentPage() == pagination.getTotalPages() ? "disabled" : "" %>" href="javascript:clickPageNo(<%=pagination.getCurrentPage() + 1 %>)">다음</a>
-			</li>
-		</ul>
-	</nav>
+			<ul class="pagination justify-content-center">
+				<li class="page-item">
+					<a class="page-link <%=pagination.getCurrentPage() == 1 ? "disabled" : "" %>" href="qnaBoard.jsp?page=<%=pagination.getCurrentPage() - 1 %>">이전</a>
+				</li>
+		<%
+			for (int num = pagination.getBeginPage(); num <= pagination.getEndPage(); num++) {
+		%>
+				<li class="page-item">
+					<a class="page-link <%=pagination.getCurrentPage() == num ? "active" : "" %>" href="qnaBoard.jsp?page=<%=num %>"><%=num %></a>
+				</li>
+		<%
+			}
+		%>
+				<li class="page-item">
+					<a class="page-link <%=pagination.getCurrentPage() == pagination.getTotalPages() ? "disabled" : "" %>" href="qnaBoard.jsp?page=<%=pagination.getCurrentPage() + 1 %>">다음</a>
+				</li>
+			</ul>
+		</nav>
 </div>
-
+<jsp:include page="../common/footer.jsp">
+	<jsp:param name="menu" value="board"/>
+</jsp:include>
+</body>
 <script type="text/javascript">
 	// [a, a, a, a]
 	let collapseLinks = document.querySelectorAll("#collapse-content a");
@@ -121,17 +115,5 @@
 			}
 		}
 	}
-	
-	function clickPageNo(pageNo) {
-		document.querySelector("input[name=page]").value = pageNo;
-		document.getElementById("search-form").submit();
-	}
-	
-	function searchKeyword() {
-		document.querySelector("input[name=page]").value = 1;
-		document.getElementById("search-form").submit();
-	}
 </script>
-
-</body>
 </html>

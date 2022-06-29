@@ -12,6 +12,9 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<jsp:include page="../common/nav.jsp">
+	<jsp:param name="menu" value="board"/>
+</jsp:include>
 	<%
 		int oftenQCno = StringUtil.stringToInt(request.getParameter("no"));
 		
@@ -32,10 +35,13 @@
    </div>
    <div class="row">
 	   	<div class="col">
-	   		<p class="col-12 fs-4" id="contents"><%=oftenQuestions.getContents() %></p>
+	   		<p class="col-12"><%=oftenQuestions.getHtmlContent() %></p>
 	   	</div>
    </div>
 </div>
+<jsp:include page="../common/footer.jsp">
+<jsp:param name="menu" value="board"/>
+</jsp:include>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

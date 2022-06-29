@@ -37,7 +37,7 @@
    </div>
    <div class="row">
 	   	<div class="col">
-	   		<p class="col-12 fs-4" id="contents"><%=noticeBoard.getContents() %></p>
+	   		<p class="" id="contents"><%=noticeBoard.getHtmlContent() %></p>
 	   	</div>
    </div>
 </div>

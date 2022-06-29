@@ -24,6 +24,9 @@ a {
 </style>
 </head>
 <body>
+<jsp:include page="../common/nav.jsp">
+	<jsp:param name="menu" value="board"/>
+</jsp:include>
 <%
    QnaCategoriesDao categoriesDao = QnaCategoriesDao.getInstance();
    List<OftenQuestions> oftenQuestionsList = categoriesDao.getOftenQuestions();
@@ -34,14 +37,14 @@ a {
    String keyword = StringUtil.nullToBlank(request.getParameter("keyword"));
    %>
 	<div class="container">
-		<div class="row bg-primary text-white">
+		<div class="row bg-primary text-white pt-4">
 			<div class="col-8">
-				<div class="row mt-5 ps-3">
+				<div class="row mt-4 pt-4 ps-3">
 					<div class="col-12">
 						<h1 class="fs-2">검색으로 문제를 빠르게 해결하세요!</h1>
 					</div>
 				</div>
-				<div class="row mt-1 ps-3 pt-2">
+				<div class="row mt-2 ps-4">
 					<form id="search-form" class="row g-3" method="get" action="SearchResultBoard.jsp">
 						<div class="col-9">
 							<input type="hidden" name="page" />
@@ -156,6 +159,9 @@ a {
 			</div>
 		</div>
 	</div>
+<jsp:include page="../common/footer.jsp">
+<jsp:param name="menu" value="board"/>
+</jsp:include>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
 function clickPageNo(pageNo) {

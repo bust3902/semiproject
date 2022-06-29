@@ -14,47 +14,37 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<%
-	int currentPage = StringUtil.stringToInt(request.getParameter("page"), 1);
-	int rows = StringUtil.stringToInt(request.getParameter("rows"), 5);	
-	String keyword = StringUtil.nullToBlank(request.getParameter("keyword"));
-	
-	QnaAnswerDao qnaAnswerDao = QnaAnswerDao.getInstance();
-	
-	int totalRows = 0;
-	if (keyword.isEmpty()) {
-		totalRows = qnaAnswerDao.getTotalRwos();
-	} else {
-		totalRows = qnaAnswerDao.getTotalRwos(keyword);
-	}
-	
-	Pagination pagination = new Pagination(rows, totalRows, currentPage);
-	
-	List<QnaAnswer> qnaAnswerList = null;
-	if (keyword.isEmpty()) {
-		qnaAnswerList = qnaAnswerDao.getQnaAnswer(pagination.getBeginIndex(), pagination.getEndIndex());
-	} else {
-		qnaAnswerList = qnaAnswerDao.getQnaAnswer(keyword, pagination.getBeginIndex(), pagination.getEndIndex());
-	}
-	
-%>
+	<%
+		int currentPage = StringUtil.stringToInt(request.getParameter("page"), 1);
+		int rows = StringUtil.stringToInt(request.getParameter("rows"), 5);	
+		
+		QnaAnswerDao qnaAnswerDao = QnaAnswerDao.getInstance();
+		
+		int totalRows = qnaAnswerDao.getTotalRwos("n");		
+		Pagination pagination = new Pagination(rows, totalRows, currentPage);
+		
+		List<QnaAnswer>qnaAnswerList = qnaAnswerDao.getQnaAnswer("n", pagination.getBeginIndex(), pagination.getEndIndex());
+	%>
 <div class="container">
     <div class="mb-3">
     <%
 	  	for (QnaAnswer qnaAnswer :  qnaAnswerList) {
 	%>
+		 <form method="post" action="answer.jsp" name="page" id="search-form">
+		  <input type="hidden" name="no"  value="<%=qnaAnswer.getNo() %>">
 		  <label for="formGroupExampleInput2" class="form-label mt-3">
-		  	<ul class="list-group">
+		  	<ul class="list-group" id="search-form">
 		  		<li>
 				  <%=qnaAnswer.getName() %>│<%=qnaAnswer.getContents() %>
 		  		</li>
 		  	</ul>
 		  </label>
-		  <input type="<%=qnaAnswer.getAnswer() %>" class="form-control" id="formGroupExampleInput2" placeholder="답변 내용을 입력하세요"></input>
+		  <input type="<%=qnaAnswer.getAnswer() %>" class="form-control" name="answer" id="formGroupExampleInput2" placeholder="답변 내용을 입력하세요"></input>
 		  <div class="col-3">
-			<button type="button" class="btn btn-primary mt-1" onclick="searchKeyword();">확인</button>
+			<button type="submit" class="btn btn-primary mt-1">확인</button>
 		  </div>
 		  <br>
+		  </form>
 	<%
 	  	}
 	%>
@@ -62,33 +52,26 @@
 	<nav>
 			<ul class="pagination justify-content-center">
 				<li class="page-item">
-					<a class="page-link <%=pagination.getCurrentPage() == 1 ? "disabled" : "" %>" href="javascript:clickPageNo(<%=pagination.getCurrentPage() - 1 %>)">이전</a>
+					<a class="page-link <%=pagination.getCurrentPage() == 1 ? "disabled" : "" %>" href="qnaAnswerBoard.jsp?page=<%=pagination.getCurrentPage() - 1 %>">이전</a>
 				</li>
 		<%
 			for (int num = pagination.getBeginPage(); num <= pagination.getEndPage(); num++) {
 		%>
 				<li class="page-item">
-					<a class="page-link <%=pagination.getCurrentPage() == num ? "active" : "" %>" href="javascript:clickPageNo(<%=num %>)"><%=num %></a>
+					<a class="page-link <%=pagination.getCurrentPage() == num ? "active" : "" %>" href="qnaAnswerBoard.jsp?page=<%=num %>"><%=num %></a>
 				</li>
 		<%
 			}
 		%>
 				<li class="page-item">
-					<a class="page-link <%=pagination.getCurrentPage() == pagination.getTotalPages() ? "disabled" : "" %>" href="javascript:clickPageNo(<%=pagination.getCurrentPage() + 1 %>)">다음</a>
+					<a class="page-link <%=pagination.getCurrentPage() == pagination.getTotalPages() ? "disabled" : "" %>" href="qnaAnswerBoard.jsp?page=<%=pagination.getCurrentPage() + 1 %>">다음</a>
 				</li>
 			</ul>
 		</nav>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">	
-	function clickPageNo(pageNo) {
-		document.querySelector("input[name=page]").value = pageNo;
-		document.getElementById("search-form").submit();
-	}
-	function searchKeyword() {
-		document.querySelector("input[name=page]").value = 1;
-		document.getElementById("search-form").submit();
-	}
+	
 </script>
 </body>
 </html>
