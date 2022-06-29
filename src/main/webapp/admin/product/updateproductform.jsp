@@ -6,11 +6,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%-- <%
-    	//세션에서 로그인된 관리자정보를 조회한다.
+	/* // 로그인 후 사용가능한 서비스(세션에 저장된 관리자정보 조회)
 	User admin = (User) session.getAttribute("LOGINED_ADMIN");
-	if (admin == null) {
-		throw new RuntimeException("관리자 페이지는 관리자 로그인 후 사용가능한 서비스 입니다.");
-	}
+	if(admin ==null){
+		throw new RuntimeException("상품 수정은 관리자만 사용가능한 서비스 입니다.");
+	} */
+	
 %>   --%>  
 <!DOCTYPE html>
 <html>
@@ -124,8 +125,8 @@
 					<div class="row">
 						<div class="col">
 							<div class="form-floating">
-								<textarea class="form-control" placeholder="Leave a comment here" name="bookIntroduce" style="height: 400px"></textarea>
-								<label for="floatingTextarea2 " ><%=book.getIntroduce() %></label>
+								<textarea class="form-control" placeholder="Leave a comment here" name="bookIntroduce" style="height: 400px"><%=book.getIntroduce() %></textarea>
+								<label for="floatingTextarea2 " >내용을 입력하세요</label>
 							</div>
 						</div>	
 					</div>			
@@ -133,7 +134,7 @@
 			</div>
 		<div class="row">
 			<div class="col my-3">
-				<input class="form-control form-control-sm" name="imgFileName" id="formFileSm" type="file">
+				<input class="form-control form-control-sm" name="imgFileName" id="formFileSm" type="file" onchange="previewImage(event)">
 				<div>
 					<button class="btn btn-primary mx-3 mt-2" type="submit" style="float:right;">변경</button>
 					<button class="btn btn-secondary  mt-2" type="button"style="float:right;" value=""onclick="location.href='/semiproject/admin/product/productlist.jsp'">취소</button>
@@ -145,40 +146,56 @@
 		</div>
 	</div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js">
-function submitModifyForm() {
-	let titleField = document.querySelector("input[name=bookTitle]");
-	if (titleField.value === '') {
-		alert("제목은 필수 입력 값입니다.");
-		titleField.focus();
-		return false;
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+function previewImage(event) {
+	let file = document.getElementById("formFileSm").files[0];
+	if (file) {
+		document.getElementById("img").src = URL.createObjectURL(file);
 	}
-	let imgField = document.querySelector("input[name=imgFileName]");
-	if (imgField.value === '') {
-		alert("도서 사진은 필수 입력 값입니다.");
-		titleField.focus();
-		return false;
-	}
-	let categoryField = document.querySelector("input[name=categoryGroupNo]");
-	if (categoryField.value === '') {
-		alert("카테고리번호는 필수 입력 값입니다.");
-		titleField.focus();
-		return false;
-	}
-	let categoryField = document.querySelector("input[name=categoryNo]");
-	if (categoryField.value === '') {
-		alert("카테고리번호는 필수 입력 값입니다.");
-		titleField.focus();
-		return false;
-	}
-	let contentField = document.querySelector("input[name=bookPrice]");
-	if (contentField.value === '') {
-		alert("도서가격은 필수 입력 값입니다..");
-		contentField.focus();
-		return false;
-	}
-	return true;
+	
 }
+	function submitModifyForm() {
+		let titleField = document.querySelector("input[name=bookTitle]");
+		if (titleField.value === '') {
+			alert("제목은 필수 입력 값입니다.");
+			titleField.focus();
+			return false;
+		}
+		let imgField = document.querySelector("input[name=imgFileName]");
+		if (imgField.value === '') {
+			alert("도서 사진은 필수 입력 값입니다.");
+			titleField.focus();
+			return false;
+		}
+		let categroupField = document.querySelector("input[name=categoryGroupNo]");
+		if (categroupField.value === '') {
+			alert("카테고리번호는 필수 입력 값입니다.");
+			categroupField.focus();
+			return false;
+		}
+		let categoryField = document.querySelector("input[name=categoryNo]");
+		if (categoryField.value === '') {
+			alert("카테고리번호는 필수 입력 값입니다.");
+			categoryField.focus();
+			return false;
+		}
+		let bookPriceField = document.querySelector("input[name=bookPrice]");
+		if (bookPriceField.value === '') {
+			alert("도서가격은 필수 입력 값입니다.");
+			bookPrice.focus();
+			return false;
+		}
+		let contentsField = document.querySelector("textarea[name=bookIntroduce]");
+		if (contentsField.value === '') {
+			alert("내용은 필수 입력 값입니다.");
+			contentsField.focus();
+			return false;
+		}else
+		
+		alert("회원정보 변경 완료.");
+		return true;
+	}
 </script>
 </body>
 </html>

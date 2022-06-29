@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.htabooks.dto.BookDto;
 import com.htabooks.helper.DaoHelper;
-import com.htabooks.vo.Book;
 import com.htabooks.vo.User;
 
 public class AdminDao {
@@ -33,28 +32,6 @@ public class AdminDao {
 		helper.insert(sql,book.getTitle(),book.getCategoryNo(),book.getWriter(),book.getPaperBookPrice(),book.getBookPrice(),book.getIntroduce(),book.getBookPublisher(),book.getImgFileName() );
 	}
 	
-	
-	// 상품정보 수정 - > updateproductform.jsp ->updateproduct.jsp
-	
-	/**
-	 * 상품정보 수정
-	 * @param book 상품정보
-	 * @throws SQLException 데이터액세스 작업중 예외가발생하면 이 예외를 던진다.
-	 */
-	public void updateItem(Book book)throws SQLException{
-		String sql = "update ridi_books  "
-				   + "set "
-				   + "		book_title = ?, "
-				   + "		category_no = ?, "
-				   + "		book_writer = ?, "
-				   + "		paper_book_price = ?, "
-				   + "		book_price = ?, "
-				   + "		book_introduce = ?, "
-				   + "		book_created_date = sysdate, "
-				   + "		book_updated_date = sysdate, "
-				   + "where book_no = ? ";
-		helper.update(sql,book.getTitle(),book.getCategoryNo(),book.getWriter(),book.getPaperBookPrice(),book.getBookPrice(),book.getIntroduce(),book.getNo());
-	}
 	
 	
 	

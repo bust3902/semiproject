@@ -44,6 +44,7 @@
 	
 	// 조회된 상품정보의 제목과 내용을 갱신
 	book.setCategoryNo(categoryNo);
+	book.setCategoryGroupNo(categoryGroupNo);
 	book.setPaperBookPrice(paperBookPrice);
 	book.setBookPrice(bookPrice);	
 	book.setTitle(title);	
