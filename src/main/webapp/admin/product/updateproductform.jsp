@@ -61,7 +61,7 @@
 			<input type="hidden" name="page" value="<%=currentPage %>" />
 			
 			<div class="text-center my-3">
-				  <img src="/semiproject/img/<%=book.getImgFileName() %>" style="height:200px; weight:200px; border:1px solid black;">
+				  <img src="/semiproject/img/<%=book.getImgFileName() %>" id="img"style="height:200px; weight:200px; border:1px solid black;">
 			</div>
 			<hr>
 			<div class="col-4 mt-2 mb-2">
@@ -114,7 +114,7 @@
 					<div class="col mt-2 mb-2">
 						<select class="form-select" name="categoryNo">
 							<option selected>소분류</option>
-							<option value="1101">컴퓨터/IT전체</option>
+							<option value="1101" selected>컴퓨터/IT전체</option>
 							<option value="1102">IT 비즈니스</option>
 							<option value="1103">개발/프로그래밍</option>
 							<option value="1104">컴퓨터/앱 활용</option>
@@ -138,7 +138,6 @@
 				<div>
 					<button class="btn btn-primary mx-3 mt-2" type="submit" style="float:right;">변경</button>
 					<button class="btn btn-secondary  mt-2" type="button"style="float:right;" value=""onclick="location.href='/semiproject/admin/product/productlist.jsp'">취소</button>
-					<button class="btn btn-danger mx-3 mt-2" type="button" style="float:right;" onclick="location.href='/semiproject/admin/product/deleteproduct.jsp'">삭제</button>
 				</div>
 			</div>			
 		</div>

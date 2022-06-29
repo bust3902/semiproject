@@ -111,11 +111,12 @@
 						<span><strong>상품등록일</strong></span>
 						<div class="row">
 							<div class="form-control mx-2 my-2">
-								<label for="date" class="col-sm-1 col-form-label">Date</label>
-								<div class="input-group date" id="datepicker" >
-									<input type="text" class="form-control" value="">
-									<span class="input-group-append">
-									</span>
+								<div class="form-floating mb-2">
+									<input type="date" class="form-control my-2" name="showBeginDate" placeholder="등록일">
+									<label for="showBeginDate">등록기간</label>
+								</div>
+								<div class="form-floating mb-2">
+									<input type="date" class="form-control my-2" name="showLastDate" placeholder="등록 종료">
 								</div>
 							</div>
 						</div>
