@@ -172,13 +172,13 @@
 </div>
 </div>
 <div class="modal fade modal-lg" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-<form action="updateUser.jsp" method="post" onsubmit="return submitUserForm()" >
   	<div class="modal-dialog">
 	    <div class="modal-content">
 			<div class="modal-header">
 			  <h5 class="modal-title mt-3" id="staticBackdropLabel"><strong>회원정보변경</strong></h5>
 			</div>
 			<div class="modal-body">
+			<form action="updateUser.jsp" method="post" onsubmit="return submitUserForm()" >
 				<div class="text-center">
 				  <img id="" src="/semiproject/img/hong.jpg" style="height:200px; weight:200px;">
 				</div>
@@ -226,10 +226,10 @@
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">취소</button>
 					<button type="submit" class="btn btn-primary">변경</button>
 				</div>
+			</form>
 			</div>
 		</div>
 	</div>
-</form>
 </div>
 
 <jsp:include page="../../common/footer.jsp">
