@@ -6,11 +6,12 @@ import java.util.StringJoiner;
 
 import com.htabooks.helper.DaoHelper;
 import com.htabooks.vo.CartItem;
+import com.htabooks.vo.OrderItem;
 
-public class CartItemDao {
-	private static CartItemDao instance = new CartItemDao();
-	private CartItemDao() {}
-	public static CartItemDao getInstance () { return instance; }
+public class OrderItemDao {
+	private static OrderItemDao instance = new OrderItemDao();
+	private OrderItemDao() {}
+	public static OrderItemDao getInstance () { return instance; }
 
 	DaoHelper helper = DaoHelper.getInstance();
 
@@ -67,14 +68,17 @@ public class CartItemDao {
 	}
 
 	/**
-	 * 카트 아이템 추가하기
+	 * 주문 아이템 추가하기
 	 * @throws SQLException 
 	 */
-	public void insertCartItem(CartItem item) throws SQLException {
-		String sql = "insert into ridi_cart_items (cart_item_no, user_no, book_no) "
-				+ "values (ridi_cartitems_seq.nextval, ?, ?) ";
+	public void insertOrderItem(CartItem cartItem, int orderNo) throws SQLException {
+		String sql = "insert into ridi_order_items (order_item_no, order_no, book_no, order_item_price) "
+				   + "select ridi_orderitems_seq.nextval, ?, b.book_no, b.book_price "
+				   + "from ridi_books b, ridi_cart_items c "
+				   + "where b.book_no = c.book_no "
+				   + "and c.cart_item_no = ? ";
 
-		helper.insert(sql, item.getUserNo(), item.getBookNo());
+		helper.insert(sql, orderNo, cartItem.getNo());
 	}
 
 	/**
@@ -84,8 +88,7 @@ public class CartItemDao {
 	 */
 	public void deleteCartItems(List<Integer> itemList) throws SQLException {
 		String sql = "update ridi_cart_items "
-				   + "set deleted = 'Y', "
-				   + "    cart_item_updated_date = sysdate "
+				   + "set deleted = 'Y' "
 				   + "where cart_item_no in ";
 		
 		StringJoiner joiner = new StringJoiner(",");
@@ -98,3 +101,4 @@ public class CartItemDao {
 	}
 	
 }
+

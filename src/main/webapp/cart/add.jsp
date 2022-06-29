@@ -44,12 +44,13 @@
 	*/
 	else {
 		// 해당 상품 이미 있는지 확인하기
-		CartItem item = cartItemDao.generateCartItemsByBookNo(bookNo);
-		if (item != null) {
-			
+		List<CartItem> cart = cartItemDao.getCartItemsByUserNo(user.getNo());
+		for(CartItem item : cart) {
+			if (item.getBookNo() == bookNo)
+				throw new RuntimeException("이미 카트에 있는 책입니다.");
 		}
 		// 카트 아이템 담기
-		item = new CartItem();
+		CartItem item = new CartItem();
 		item.setUserNo(user.getNo());
 		item.setBookNo(bookNo);
 		

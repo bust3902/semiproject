@@ -6,7 +6,7 @@
    <nav class="navbar navbar-expand-lg navbar-light bg-info border-bottom " style="--bs-bg-opacity: .1;">
   	<div class="container-fluid bg-light justify-content-center bg-info " style="--bs-bg-opacity: .1; ">
    	 <a class="navbar-brand text-primary" style="text-opacity: .1;" href="/semiproject/home.jsp">
-   <strong>HTA</strong>
+   <strong style="color:#00AFFF;">HTA</strong>
     </a>
   </div>
 </nav>

@@ -6,6 +6,8 @@
 	String menu = request.getParameter("menu");
 
 	User user = (User) session.getAttribute("LOGINED_USER");
+	
+	String redirect = request.getParameter("redirect");
 %>
 
 <style>
@@ -28,7 +30,7 @@
 				if (user == null) {
 			%>
 				<li class="nav-item"><a href="/semiproject/login/registerform.jsp" class="nav-link" style="color:gray">회원가입</a></li>
-				<li class="nav-item"><a href="/semiproject/login/loginform.jsp?<%=request.getParameter("redirect") %>" class="nav-link" style="color:gray">로그인</a></li>
+				<li class="nav-item"><a href="/semiproject/login/loginform.jsp?<%=redirect %>" class="nav-link" style="color:gray">로그인</a></li>
 			<%
 				} else {
 			%>
@@ -56,19 +58,37 @@
 	    	</div>
 	    </form>
 	    
+		<div class="mx-4 mt-3">
+			<a href="/semiproject/list/mybooklist.jsp?keyword=&page=1">
+				<img src="/semiproject/img/files.svg" width="32" height="32" />
+			</a>
+		</div>
 		<div class="mx-2 mt-3">
 			<a href="/semiproject/cart/mycart.jsp">
 				<img src="/semiproject/img/cart.svg" width="32" height="32" />
 			</a>
 		</div>
-		
+	    <%
+	    	if (user == null){
+	    %>
 		<div class="mx-2 mt-3" >
 
+			<a href="/semiproject/login/loginform.jsp">
+				<img src="/semiproject/img/person.svg" width="32" height="32" />
+			</a>
+		</div>
+		
+		<%} else { %>
+
+		<div class="mx-2 mt-3">
 			<a href="/semiproject/user/mypage.jsp">
 				<img src="/semiproject/img/person.svg" width="32" height="32" />
 			</a>
 		</div>
-
+		
+		<%
+		} 
+		%>
 	</div>
 </header>
     

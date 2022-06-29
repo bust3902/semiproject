@@ -19,9 +19,8 @@ public class CashHistoryDao {
 	//DaoHelper 
 	private DaoHelper helper = DaoHelper.getInstance();
 	
-	
 	/**
-	 *  캐시 충전
+	 *  캐시 충전 및 사용
 	 * @param cashHistory 
 	 * @throws SQLException
 	 */
@@ -34,9 +33,9 @@ public class CashHistoryDao {
 		helper.insert(sql, cashHistory.getUser().getNo(), cashHistory.getReason(), cashHistory.getAmount(), cashHistory.getCurrentAmount());
 	}
 	
-	
+
 	/**
-	 * 캐시 변동 내역 조회 
+	 * 캐시 변동 내역 조회 (페이징 처리)
 	 * @param userNo 유저 넘버 
 	 * @param beginIndex 첫번째 페이지 
 	 * @param endIndex 마지막 페이지 
@@ -97,8 +96,14 @@ public class CashHistoryDao {
 			return cashHistory;
 		}, userNo);
 	}
-	
-	
+
+	/**
+	 * userNo로 캐시 변동 내역 조회 (페이징 처리)
+	 * @param beginIndex
+	 * @param endIndex
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<CashHistory> getCashHistories(int beginIndex, int endIndex) throws SQLException {
 		String sql = "select cash_history_no, cash_history_updated_date, cash_amount, cash_history_reason, user_no "
 				+ "   from (select h.cash_history_no, h.cash_history_updated_date ,h.cash_amount, h.cash_history_reason, h.user_no, "
@@ -125,7 +130,7 @@ public class CashHistoryDao {
 		}
 	
 	/**
-	 * 캐시 충전 내역 조회
+	 * 전체 캐시 충전 내역 갯수 조회
 	 * @return
 	 * @throws SQLException
 	 */
@@ -137,6 +142,23 @@ public class CashHistoryDao {
 			return helper.selectOne(sql, rs-> {
 				return rs.getInt("cnt");
 			});
+		
+	}
+	/**
+	 * userNo로 전체 캐시 충전 내역 갯수 조회
+	 * @param userNo
+	 * @return
+	 * @throws SQLException
+	 */
+		public int getTotalRows(int userNo) throws SQLException {
+			String sql = "select count(*) cnt "
+					+ "from ridi_user_cash_histories "
+					+ "where cash_amount > 1 "
+					+ "and user_no =? ";
+			
+			return helper.selectOne(sql, rs-> {
+				return rs.getInt("cnt");
+			},userNo);
 		
 	}
 }

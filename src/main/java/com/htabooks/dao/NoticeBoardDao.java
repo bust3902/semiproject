@@ -19,12 +19,13 @@ public class NoticeBoardDao {
 	
 	public List<NoticeBoard> getNoticeBoard(int beginIndex, int endIndex) throws SQLException {
 		String sql = "SELECT  NOTICE_BOARD_NO, NOTICE_BOARD_TITLE, NOTICE_BOARD_CONTENTS, NOTICE_BOARD_DELETED, NOTICE_BOARD_CREATED "
-					+ "FROM (SELECT ROW_NUMBER() OVER (ORDER BY NOTICE_BOARD_NO DESC) RN, NOTICE_BOARD_NO, NOTICE_BOARD_TITLE, NOTICE_BOARD_CONTENTS, NOTICE_BOARD_DELETED, NOTICE_BOARD_CREATED "
+					+ "FROM (SELECT ROW_NUMBER() OVER (ORDER BY NOTICE_BOARD_NO DESC) ROW_NUMBER, NOTICE_BOARD_NO, "
+					+ "				NOTICE_BOARD_TITLE, NOTICE_BOARD_CONTENTS, NOTICE_BOARD_DELETED, NOTICE_BOARD_CREATED "
 					+ "      FROM RIDI_NOTICE_BOARD "
 					+ "      WHERE NOTICE_BOARD_DELETED  = 'N') "
-					+ "WHERE RN >= ? AND RN <= ? ";
+					+ "WHERE ROW_NUMBER >= ? AND ROW_NUMBER <= ? ";
 		// 상자						// 도구
-		List<NoticeBoard> noticeList = helper.selectList(sql, rs -> {
+		return helper.selectList(sql, rs -> {
 			// 삼자에 담을 것들
 			NoticeBoard noticeBoard = new NoticeBoard();
 			noticeBoard.setNo(rs.getInt("NOTICE_BOARD_NO"));
@@ -35,18 +36,19 @@ public class NoticeBoardDao {
 			// 상자에 담을 것 보여준다.
 			return noticeBoard;
 		}, beginIndex, endIndex);
-			return noticeList;
 	}
 			
 			
-	public List<NoticeBoard> getNoticeBoard(int beginIndex, int endIndex, String keyword) throws SQLException {
+	public List<NoticeBoard> getNoticeBoard(String keyword, int beginIndex, int endIndex) throws SQLException {
 		String sql = "SELECT  NOTICE_BOARD_NO, NOTICE_BOARD_TITLE, NOTICE_BOARD_CONTENTS, NOTICE_BOARD_DELETED, NOTICE_BOARD_CREATED "
-					+ "FROM (SELECT ROW_NUMBER() OVER (ORDER BY NOTICE_BOARD_NO DESC) RN, NOTICE_BOARD_NO, NOTICE_BOARD_TITLE, NOTICE_BOARD_CONTENTS, NOTICE_BOARD_DELETED, NOTICE_BOARD_CREATED "
-					+ "      FROM RIDI_NOTICE_BOARD "
-					+ "      WHERE NOTICE_BOARD_DELETED  = 'N') "
-					+ "WHERE RN >= ? AND RN <= ? ";
+				   + "FROM (SELECT ROW_NUMBER() OVER (ORDER BY NOTICE_BOARD_NO DESC) ROW_NUMBER, NOTICE_BOARD_NO, "
+				   + "			   NOTICE_BOARD_TITLE, NOTICE_BOARD_CONTENTS, NOTICE_BOARD_DELETED, NOTICE_BOARD_CREATED "
+				   + "      FROM RIDI_NOTICE_BOARD "
+				   + "      WHERE (NOTICE_BOARD_TITLE || NOTICE_BOARD_CONTENTS) LIKE ('%' || ? || '%') "
+				   + "		AND NOTICE_BOARD_DELETED  = 'N') "
+				   + "WHERE ROW_NUMBER >= ? AND ROW_NUMBER <= ? ";
 		// 상자						// 도구
-		List<NoticeBoard> list = helper.selectList(sql, rs -> {
+		return helper.selectList(sql, rs -> {
 			// 삼자에 담을 것들
 			NoticeBoard noticeBoard = new NoticeBoard();
 			noticeBoard.setNo(rs.getInt("NOTICE_BOARD_NO"));
@@ -56,9 +58,7 @@ public class NoticeBoardDao {
 			noticeBoard.setCreatedDate(rs.getDate("NOTICE_BOARD_CREATED"));
 			// 상자에 담을 것 보여준다.
 			return noticeBoard;
-		}, beginIndex, endIndex, keyword);
-			// 리스트 반환
-			return list;
+		}, keyword, beginIndex, endIndex);
 	}
 	
 	public int getTotalRows() throws SQLException {
@@ -74,8 +74,10 @@ public class NoticeBoardDao {
 	// 검색하는 쿼리
 	public int getTotalRows(String keyword) throws SQLException {
 		String sql = "select count(*) cnt "
+				   + "from (select NOTICE_BOARD_NO, NOTICE_BOARD_TITLE, NOTICE_BOARD_CONTENTS, NOTICE_BOARD_DELETED, NOTICE_BOARD_CREATED "
 				   + "from RIDI_NOTICE_BOARD "
-				   + "where NOTICE_BOARD_DELETED = 'N' and NOTICE_BOARD_TITLE like '%' || ? || '%' ";
+				   + "where NOTICE_BOARD_DELETED = 'N' "
+				   + "and (NOTICE_BOARD_TITLE || NOTICE_BOARD_CONTENTS) like ('%' || ? || '%')) ";
 		
 		return helper.selectOne(sql, rs -> {
 			return rs.getInt("cnt");
@@ -97,4 +99,24 @@ public class NoticeBoardDao {
 			return noticeBoard;
 		}, no);
 	}
+	
+	
+	public List<NoticeBoard> getSearchNoticeBoard(String keyword) throws SQLException {
+		String sql = "SELECT NOTICE_BOARD_NO, NOTICE_BOARD_TITLE, NOTICE_BOARD_CONTENTS, NOTICE_BOARD_DELETED, NOTICE_BOARD_CREATED "
+				   + "FROM RIDI_NOTICE_BOARD "
+				   + "WHERE NOTICE_BOARD_DELETED  = 'N' "
+				   + "AND (NOTICE_BOARD_TITLE || NOTICE_BOARD_CONTENTS) LIKE ('%' || ? || '%') ";
+
+		return helper.selectList(sql, rs -> {
+			NoticeBoard noticeBoard = new NoticeBoard();
+			noticeBoard.setNo(rs.getInt("NOTICE_BOARD_NO"));
+			noticeBoard.setTitle(rs.getString("NOTICE_BOARD_TITLE"));
+			noticeBoard.setContents(DaoHelper.clobToString(rs.getClob("NOTICE_BOARD_CONTENTS")));
+			noticeBoard.setDeletedDate(rs.getString("NOTICE_BOARD_DELETED"));
+			noticeBoard.setCreatedDate(rs.getDate("NOTICE_BOARD_CREATED"));
+			// 상자에 담을 것 보여준다.
+			return noticeBoard;
+		}, keyword);
+	}
+	
 }

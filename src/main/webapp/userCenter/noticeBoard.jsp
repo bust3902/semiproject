@@ -17,8 +17,10 @@
 </style> 
 </head>
 <body>
+<jsp:include page="../common/nav.jsp">
+	<jsp:param name="menu" value="board"/>
+</jsp:include>
 	<%
-
 		int currentPage = StringUtil.stringToInt(request.getParameter("page"), 1);
 		int rows = StringUtil.stringToInt(request.getParameter("rows"), 5);	
 		String keyword = StringUtil.nullToBlank(request.getParameter("keyword"));
@@ -39,11 +41,10 @@
 		if (keyword.isEmpty()) { 
 			noticeBoardList = noticeBoardDao.getNoticeBoard(pagination.getBeginIndex(), pagination.getEndIndex());
 		} else {
-			noticeBoardList = noticeBoardDao.getNoticeBoard(pagination.getBeginIndex(), pagination.getEndIndex(), keyword);
+			noticeBoardList = noticeBoardDao.getNoticeBoard(keyword, pagination.getBeginIndex(), pagination.getEndIndex());
 		}
 	%>
 <div class="container">
-
    	<div class="row">
    		<div class="col-8 mt-4 pt-4">
    			<h1 class="text-primary">공지사항</h1>
@@ -51,13 +52,13 @@
   		<div class="col-4 mt-4 pt-4">
         	<nav class="navbar">
         		<div class="container-fluid" style="justify-content:end">
-		    		<form class="row row-cols-lg-auto g-3 align-items-center" id="search-form" action="noticeBoard.jsp">
+		    		<form class="row row-cols-lg-auto g-3 align-items-center" method="get" id="search-form" action="noticeBoard.jsp">
 		    			<div class="col-12">
 							<input type="hidden" name="page" />
-			      			<input class="form-control" type="search" placeholder="검색" aria-label="검색">
+			      			<input class="form-control" type="text" name="keyword" value="<%=keyword %>" placeholder="검색" aria-label="검색">
 		    			</div>
 		    			<div class="col-12">
-		      				<button class="btn btn-outline-success" type="submit">검색</button>
+		      				<button type="button" class="btn btn-outline-success" onclick="searchKeyword();">검색</button>
 		    			</div>
 		    		</form>
 		  		</div>
@@ -97,12 +98,20 @@
 		</nav>
 	</div>
 </div>
+<jsp:include page="../common/footer.jsp">
+	<jsp:param name="menu" value="board"/>
+</jsp:include>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">	
 	function clickPageNo(pageNo) {
 		document.querySelector("input[name=page]").value = pageNo;
 		document.getElementById("search-form").submit();
 	}
+	function searchKeyword() {
+		document.querySelector("input[name=page]").value = 1;
+		document.getElementById("search-form").submit();
+	}
 </script>
+
 </body>
 </html>

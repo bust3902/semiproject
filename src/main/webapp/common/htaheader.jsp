@@ -49,7 +49,7 @@
  <header class="py-2 mb-4 mt-2 ">
 	<div class="container d-flex flex-wrap justify-content-center mt-1" style="min-width:1150px;">
 		<a href="/semiproject/home.jsp" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-decoration-none" style="font-family: 'Kanit', sans-serif; font-size:34px; font-weight:bold;">
-	    	<strong class="bi me-2 text-primary" style="font-size:35px;">HTA</strong>
+	    	<strong class="bi me-2" style="font-size:35px; color:#00AFFF;">HTA</strong>
 	    </a>
 	   
 		<%
