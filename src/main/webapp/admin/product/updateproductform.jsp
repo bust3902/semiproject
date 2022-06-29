@@ -134,7 +134,7 @@
 			</div>
 		<div class="row">
 			<div class="col my-3">
-				<input class="form-control form-control-sm" name="imgFileName" id="formFileSm" type="file">
+				<input class="form-control form-control-sm" name="imgFileName" id="formFileSm" type="file" onchange="previewImage(event)">
 				<div>
 					<button class="btn btn-primary mx-3 mt-2" type="submit" style="float:right;">변경</button>
 					<button class="btn btn-secondary  mt-2" type="button"style="float:right;" value=""onclick="location.href='/semiproject/admin/product/productlist.jsp'">취소</button>
@@ -148,7 +148,13 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
-
+function previewImage(event) {
+	let file = document.getElementById("formFileSm").files[0];
+	if (file) {
+		document.getElementById("img").src = URL.createObjectURL(file);
+	}
+	
+}
 	function submitModifyForm() {
 		let titleField = document.querySelector("input[name=bookTitle]");
 		if (titleField.value === '') {

@@ -32,6 +32,7 @@
 	String bookPublisher 	= StringUtil.nullToBlank(mr.getParameter("bookPublisher"));
 	String imgFileName 		= StringUtil.nullToBlank(mr.getFilename("imgFileName"));
 	
+	
 	// 도서객체를 생성해서 도서리스트 테이블에 저장
 	
 	BookDto book = new BookDto();
