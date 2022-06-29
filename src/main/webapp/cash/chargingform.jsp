@@ -86,7 +86,7 @@
 						<strong>구매/혜택</strong>
 					</small>
 					<div class="mx-3 my-1" style="font-size:17px;">
-						<a href="" class="text-decoration-none text-secondary"><small>결제 내역</small></a>
+						<a href="../user/orders.jsp" class="text-decoration-none text-secondary"><small>결제 내역</small></a>
 					</div>
 					<div class="mx-3 my-1 text-decoration-none text-secondary" style="font-size:17px;">
 						<a href="../cash/chargingform.jsp" class="text-decoration-none text-secondary"><small>리디캐시</small></a>

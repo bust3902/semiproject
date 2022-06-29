@@ -10,16 +10,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bootstrap demo</title>
+<title>HTA BOOKS</title>
+<link href="../img/Hfavicon.ico" rel="icon" type="image/x-icon" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-<style type="text/css"> 
-	a { text-decoration:none } 
-</style> 
-</head>
-<body>
+<link href="/semiproject/css/home.css" rel="stylesheet" />
 <jsp:include page="../common/nav.jsp">
 	<jsp:param name="menu" value="board"/>
 </jsp:include>
+</head>
+<style type="text/css"> 
+	a { text-decoration:none } 
+</style> 
+<body>
 	<%
 		int currentPage = StringUtil.stringToInt(request.getParameter("page"), 1);
 		int rows = StringUtil.stringToInt(request.getParameter("rows"), 5);	
