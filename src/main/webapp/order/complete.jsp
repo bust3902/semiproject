@@ -1,4 +1,3 @@
-
 <%@page import="com.htabooks.vo.OrderItem"%>
 <%@page import="java.util.List"%>
 <%@page import="com.htabooks.util.StringUtil"%>
@@ -68,7 +67,7 @@
 		    </div>		  
 		  </div>
 		</div>
-		<button type="button" class="btn btn-secondary" onclick="location.href='../userCenter/userCenterBoard.jsp'">내 주문 ></button>	
+		<button type="button" class="btn btn-secondary" onclick="location.href='../user/orders.jsp'">내 주문 ></button>	
 	</div>
 	<div class="col-8">
 		<div class="row h-75 d-flex flex-column justify-content-center align-items-center text-center">
