@@ -6,6 +6,8 @@
     pageEncoding="UTF-8"%>
 <%
 	// 요청파라미터값을 조회한다.
+	String redirect = request.getParameter("redirect");
+
 	String id = request.getParameter("id");
 	String password = request.getParameter("password");
 	
@@ -13,14 +15,14 @@
 	// 아이디로 관리자 정보를 조회한다.
 	User saveAdmin = adminDao.getAdminById(id);
 	if (saveAdmin == null) {
-		response.sendRedirect("../login/loginform.jsp?fail=invalid");
+		response.sendRedirect("/semiproject/admin/loginform.jsp?fail=invalid");
 		return;
 	}
 	
 	String secretPassword = PasswordUtil.generateSecretPassword(id, password);
 	// 비밀번호가 일치하는지 확인한다.
 	if (!saveAdmin.getPassword().equals(secretPassword)) {
-		response.sendRedirect("../login/loginform.jsp?fail=invalid");
+		response.sendRedirect("/semiproject/admin/loginform.jsp?fail=invalid");
 		return;
 	}
 	

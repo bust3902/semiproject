@@ -5,14 +5,14 @@
 <%@page import="com.htabooks.vo.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <%
-	/* // 로그인 후 사용가능한 서비스(세션에 저장된 관리자정보 조회)
-	User admin = (User) session.getAttribute("LOGINED_ADMIN");
-	if(admin ==null){
+<%
+	 // 로그인 후 사용가능한 서비스(세션에 저장된 관리자정보 조회)
+	User adminAccount = (User) session.getAttribute("LOGINED_ADMIN");
+	if(adminAccount ==null){
 		throw new RuntimeException("상품 수정은 관리자만 사용가능한 서비스 입니다.");
-	} */
+	}
 	
-%>   --%>  
+%>  
 <!DOCTYPE html>
 <html>
 <head>
