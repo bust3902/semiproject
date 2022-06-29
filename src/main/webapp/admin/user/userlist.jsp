@@ -41,9 +41,13 @@
 			userList = adminDao.getAllUsers(pagination.getBeginIndex(), pagination.getEndIndex(), keyword);
 		}
 		
+	//세션에서 로그인된 관리자정보를 조회한다.
+	User adminAccount = (User) session.getAttribute("LOGINED_ADMIN");
+	if (adminAccount == null) {
+		throw new RuntimeException("관리자 페이지는 관리자 로그인 후 사용가능한 서비스 입니다.");
+	}
 
 		%>
-		
 
 <div class="col-12">
 	<jsp:include page="../../common/adminheader.jsp"></jsp:include>
@@ -108,6 +112,7 @@
 				        <th>아이디</th>
 				        <th>이메일</th>
 				        <th>성별</th>
+				        <th>운영진</th>
 				        <th>차단상태</th>
 				        <th>cash</th>
 				        <th>소장책</th>
@@ -131,6 +136,7 @@
 							<td><%=user.getId() %></td>
 							<td><%=user.getEmail() %></td>
 							<td><%=user.getGender() %></td>
+							<td><%=user.getAdmin() %></td>
 							<td><%=user.getReject() %></td>
 							<td><%=user.getCash() %></td>
 							<td><%=user.getBookCount() %></td>
@@ -168,13 +174,13 @@
 </div>
 </div>
 <div class="modal fade modal-lg" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-<form action="updateUser.jsp" method="post"  >
   	<div class="modal-dialog">
 	    <div class="modal-content">
 			<div class="modal-header">
 			  <h5 class="modal-title mt-3" id="staticBackdropLabel"><strong>회원정보변경</strong></h5>
 			</div>
 			<div class="modal-body">
+			<form action="updateUser.jsp" method="post" onsubmit="return submitUserForm()" >
 				<div class="text-center">
 				  <img id="" src="/semiproject/img/hong.jpg" style="height:200px; weight:200px;">
 				</div>
@@ -191,12 +197,13 @@
 					<div class="col">
 						<div class="custom-control custom-checkbox my-1">
 								<p><strong>회원 그룹</strong></p>
-								<input type="radio" id="grade" name="admin" class="custom-control-input " value="N" >
+								<input type="radio" id="grade" name="admin" class="custom-control-input " value="N">
 								<label class="custom-control-label" for="admin">일반회원</label>
-								<input type="radio" id="grade" name="admin" class="custom-control-input" value="Y" >
+								<input type="radio" id="grade" name="admin" class="custom-control-input" value="Y">
 								<label class="custom-control-label" for="admin">운영자</label>
 								
-								<input type="checkbox" id="grade" name="reject" class="custom-control-input" value="Y" >
+								<input type="checkbox" id="grade" name="reject" class="custom-control-input" value="Y">
+								<input type="hidden" id="grade" name="reject" class="custom-control-input" value="N">
 								<label class="custom-control-label" for="reject">차단</label>
 						</div>
 						<p><strong>세부사항</strong></p>
@@ -221,10 +228,10 @@
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">취소</button>
 					<button type="submit" class="btn btn-primary">변경</button>
 				</div>
+			</form>
 			</div>
 		</div>
 	</div>
-</form>
 </div>
 
 <jsp:include page="../../common/footer.jsp">
@@ -296,20 +303,28 @@ function selectAll(selectAll)  {
     checkbox.checked = selectAll.checked
   })
 }
-function submitBoardForm() {
+function submitUserForm() {
 	let titleField = document.querySelector("input[name=userName]");
 	if (titleField.value === '') {
 		alert("이름은 필수입력값입니다.");
 		titleField.focus();
 		return false;
 	}
-	let contentField = document.querySelector("textarea[name=userEmail]");
-	if (contentField.value === '') {
+	let emailField = document.querySelector("input[name=userEmail]");
+	if (emailField.value === '') {
 		alert("이메일은 필수입력값입니다.");
-		contentField.focus();
+		emailField.focus();
+		return false;
+	}
+	let adminField = document.querySelector("input[name=admin]");
+	if (adminField.value === 'null') {
+		alert("회원그룹은 필수 선택값입니다.");
+		adminField.focus();
 		return false;
 	}
 	return true;
 }
+
+
 </script>
 </html>

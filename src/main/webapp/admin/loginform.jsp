@@ -29,6 +29,9 @@ height:100%;
 		<jsp:param name="menu" value="login"/>
 	</jsp:include>
 
+<%
+	String redirect = request.getParameter("redirect");
+%>
 
 <div class="container-fluid mb-5 bg-info" style="--bs-bg-opacity: .1;">
 
@@ -36,7 +39,7 @@ height:100%;
 		<div class="col-6 p-5">
 		
 		<!-- 아이디 / 비밀번호 입력 -->
-			<form class="" method="post" action="/semiproject/login/login.jsp" onsubmit="return submitLoginForm()">
+			<form class="" method="post" action="login.jsp?<%=redirect %>" onsubmit="return submitLoginForm()">
 				<div class="p-0 m-0">
 					<input type="text" class="form-control rounded-0 " name="id" placeholder="아이디"/>
 				</div>
@@ -63,7 +66,7 @@ height:100%;
   				<svg class="bi flex-shrink-0 me-2" width="22" height="22" role="img" aria-label="Danger:">
   					<use xlink:href="#exclamation-triangle-fill"/>
   				</svg>
-  					<div><small>아이디 혹은 비밀번호를 다시 입력해보겠니!!!!!</small></div>
+  					<div><small>관리자가 아니거나 로그인정보가 틀립니다.</small></div>
 			</div>
 			
 				<%
@@ -84,21 +87,10 @@ height:100%;
 			 	
 			 	<!-- 로그인 / 회원가입 버튼 -->
 			 	<div class="d-grid gap-2">
-			 		<button type="submit" class="btn btn-primary">로그인</button>
-			 		<a href="registerform.jsp" class="btn btn-outline-secondary">회원가입</a>
+			 		<button type="submit" class="btn btn-primary">관리자 로그인</button>
+			 		<a href="/semiproject/login/registerform.jsp" class="btn btn-outline-secondary">회원가입</a>
 			 	</div>
-			 <% // 되돌아갈 페이지
-			 	String redirect = request.getParameter("redirect");
-			 	if(redirect != null) {
-			 %>
-			 <input name="redirect" type="hidden" value="<%=redirect %>"/>
-			 <%
-			 	} else {
-			 %>
-			 <input name="redirect" type="hidden" value="<%=request.getHeader("Referer") %>"/>
-			 <%
-			 	}
-			 %> 
+			 	
 			</form>
 		</div>
 	</div>

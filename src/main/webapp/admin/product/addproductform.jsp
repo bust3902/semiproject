@@ -4,13 +4,13 @@
 <%@page import="com.htabooks.vo.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <%
+<%
     	//세션에서 로그인된 관리자정보를 조회한다.
-	User admin = (User) session.getAttribute("LOGINED_ADMIN");
-	if (admin == null) {
+	User adminAccount = (User) session.getAttribute("LOGINED_ADMIN");
+	if (adminAccount == null) {
 		throw new RuntimeException("관리자 페이지는 관리자 로그인 후 사용가능한 서비스 입니다.");
 	}
-%>   --%>  
+%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,7 +52,7 @@
 			BookDto book = bookDao.getBookByNo(bookNo); 
 			
 			%>
-				<img src="/semiproject/img/nofile.png" id="img" style="height:200px; weight:200px; border:1px solid black;">
+				<img src="#" id="img" style="height:200px; weight:200px; border:1px solid black;">
 			</div>
 			<hr>
 		<form class="row mt-5" method="post" action="addproduct.jsp" enctype="multipart/form-data" onsubmit="return submitBoardForm()">
@@ -127,7 +127,7 @@
 			</div>
 			<div class="row">
 				<div class="col my-3">
-					<input class="form-control form-control-sm" name="imgFileName" id="formFileSm" type="file">
+					<input class="form-control form-control-sm" name="imgFileName" id="formFileSm" type="file" onchange="previewImage(event)">
 					<div>
 						<button class="btn btn-primary mx-3 mt-2" type="submit" style="float:right;" value="">등록</button>
 						<button class="btn btn-outline-secondary  mt-2" type="reset"style="float:right;" value="" >초기화</button>
@@ -139,7 +139,16 @@
 		</div>
 	</div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+function previewImage(event) {
+	let file = document.getElementById("formFileSm").files[0];
+	if (file) {
+		document.getElementById("img").src = URL.createObjectURL(file);
+	}
+	
+}
+
 function submitBoardForm() {
 	let titleField = document.querySelector("input[name=title]");
 	if (titleField.value === '') {

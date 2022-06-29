@@ -1,6 +1,9 @@
-<%@page import="java.util.List"%>
-<%@page import="com.htabooks.vo.CashPagination"%>
 <%@page import="com.htabooks.util.StringUtil"%>
+<%@page import="com.htabooks.dto.OrderDto"%>
+<%@page import="com.htabooks.dao.OrderDao"%>
+<%@page import="com.htabooks.vo.CartItem"%>
+<%@page import="java.util.List"%>
+<%@page import="com.htabooks.dao.CartItemDao"%>
 <%@page import="com.htabooks.dao.UserDao"%>
 <%@page import="com.htabooks.dao.CashHistoryDao"%>
 <%@page import="com.htabooks.vo.CashHistory"%>
@@ -11,33 +14,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<link href="../img/Hfavicon.ico" rel="icon" type="image/x-icon" />
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/semiproject2/css/home.css" rel="stylesheet" />
-	
-	<jsp:include page="/common/htaheader.jsp">
-		<jsp:param name="menu" value="cashList" />
-	</jsp:include>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HTA BOOKS</title>
+<link href="../img/Hfavicon.ico" rel="icon" type="image/x-icon" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/semiproject/css/home.css" rel="stylesheet" />
+</head>
+
+<jsp:include page="../common/htaheader.jsp">
+	<jsp:param name="menu" value="mypage" />
+</jsp:include>
 
 </head>
-<style>
-
-a:active { color: red; }
-</style>
-
-<!-- 보유 캐시[충전하기] / 날짜 / 캐시 충전 여부 / 충전금액 을 포함하는 cashList 페이지 이다.   -->
 
 <body>
 
-	<!-- 로그인 된 유저 정보 조회 -->
+	<!-- 로그인 된 유저 정보를 불러온다 -->
 	<%
 	User user = (User) session.getAttribute("LOGINED_USER");
+	if (user == null) {
+		response.sendRedirect("../login/loginform.jsp");
+		return;
+	}
 	
 	UserDao userDao = UserDao.getInstance();
 	user = userDao.getUserById(user.getId());
+	
+	//카트 불러오기
+	CartItemDao cartItemDao = CartItemDao.getInstance();
+	List<CartItem> cart = cartItemDao.getCartItemsByUserNo(user.getNo());
+	
+	// 주문 목록 불러오기
+	OrderDao orderDao = OrderDao.getInstance();
+	List<OrderDto> orders = orderDao.getOrdersByUserNo(user.getNo());
 	%>
 	
 	<!-- 사이드 메뉴 -->
@@ -90,7 +100,7 @@ a:active { color: red; }
 						<strong>구매/혜택</strong>
 					</small>
 					<div class="mx-3 my-1" style="font-size:17px;">
-						<a href="../user/orders.jsp" class="text-decoration-none text-secondary"><small>결제 내역</small></a>
+						<a href="orders.jsp" class="text-decoration-none text-secondary"><small>결제 내역</small></a>
 					</div>
 					<div class="mx-3 my-1 text-decoration-none text-secondary" style="font-size:17px;">
 						<a href="../cash/chargingform.jsp" class="text-decoration-none text-secondary"><small>리디캐시</small></a>
@@ -124,132 +134,48 @@ a:active { color: red; }
 					</div>
 				</div>
 			</div>
-				
-				<!-- 유저 정보 메인 창 -->
-				
-				<div class="col-7 justify-content-center ms-3 ">
-					<div class="border row border-dark border-2 pb-0">
-						<table class="table table-borderless mb-0" >
-							<colgroup>
-								<col width="25%">
-								<col width="75%">
-							</colgroup>
-							
-							<!-- 유저 정보 메인 창 : 아이디 + side menu -->
-							
-							<tbody>
-								<tr class="border-bottom ">
-									<td class="text-center p-3 table-primary" ><%=user.getId() %>님 
-									
-										<div class="mt-5 mb-1">
-										<small style="font-size: 15px;"> 
-													<a href="../cash/cash.jsp" class="text-decoration-none text-dark">내 정보 >></a>
-												</small></div>
-										<div class="mb-1">
-										<small style="font-size: 15px;"> 
-													<a href="../cash/cashList.jsp" class="text-decoration-none text-dark">캐시 변동 내역 >></a>
-												</small></div>
-									</td>
-									
-									<td class="text-start align-middle p-3 px-4 ">
-										<div class="mt-1 mb-5 text-danger" style="font-size:16px; font-weight:bold">보유캐시 : <%=user.getCash() %> 원
-											<a href="../cash/chargingform.jsp" class="btn btn-outline-primary btn-sm" style="font-size:13px;">충전하기</a>
-										</div>
-										
-										<% 
-										 
-										 
-										int no = StringUtil.stringToInt(request.getParameter("no"));
-									   	
-								   		
-										CashHistoryDao cashHistoryDao = CashHistoryDao.getInstance();
-										
-										// 페이지 내비게이션 출력에 필요한 총 페이지 갯수 구하기
-										
-										
-										// 한 화면에 출력할 데이터 행의 갯수 정하기 
-										int rows = 6;
-										// 총 충전내역 갯수 조회
-										int records = cashHistoryDao.getTotalRows(user.getNo());
-									   	// 총 페이지 갯수 계산
-									   	int pages = (int)(Math.ceil((double) records/rows));
-									   	
-									   	// 요청한 페이지 번호 조회 
-									   	int currentPage = StringUtil.stringToInt(request.getParameter("page"), 1);
-									   	//페이지번호가 올바르지 않으면 1페이지를 다시 요청하는 URL을 응답으로 보낸다.
-									   
-										// 요청한 페이지 번호로 조회구간 계산하기 
-									   	int beginIndex = (currentPage-1)*rows +1;
-									   	int endIndex = currentPage*rows;
-									   	
-										// 요청한 페이지에 해당하는 목록 조회 
-										List<CashHistory> cashHistoryList = cashHistoryDao.getCashHistories(user.getNo(), beginIndex, endIndex);
-										
-										
-										%>  
-										
-										 
-										 
-										<table class="table " style="font-size:14px;">
-											<colgroup>
-												<col width="40%">
-												<col width="30%">
-												<col width="30%">
-												
-											</colgroup>
-											<thead>
-												<tr class=" border-bottom ">
-													<th>날짜</th>
-													<th>구분</th>
-													<th>금액</th>
-													
-												</tr>
-											</thead>
-											<tbody class="table-group-divider" style="border-none;">
-											
-										 <%for (CashHistory cashHistory : cashHistoryList) {%>
-										
-										<tr>
-											<td><%=cashHistory.getUpdatedDate() %></td>
-											<td><%=cashHistory.getReason() %></td>
-											<td><%=cashHistory.getAmount() %>원</td>
-										</tr>
-										
-										 <%
-										}
-										%> 
-										
-									</tbody>
-									
-								<div class="row" >
-									<div class="col">
-									<nav aria-label="Page navigation example">
-									  <ul class="pagination justify-content-end pagination-sm">
-									    <li class="page-item"><a class="page-link" <%=currentPage == 1 ? "disabled" :"" %> href="cashList.jsp?page=<%=currentPage -1 %>">이전</a></li>
-									<%
-									for (int num=1; num<= pages; num++){
-									%> 
-									    <li class="page-item"><a class="page-link" href="cashList.jsp?page=<%=num %>"><%=num %></a></li>
-								<%} %> 
-									    <li class="page-item"><a class="page-link" <%=currentPage >= pages ? "disabled" :"" %>href="cashList.jsp?page=<%=currentPage +1 %>">다음</a></li>
-									  </ul>
-									</nav>
-									
-									</div>
-								</div>
-								
-									</table>
-									</td>
-							</tbody>
-						</table>
-					</div>
-				</div>
+			
+			
+			<div class="col-7 justify-content-center ms-3">
+				<h4>결제 내역</h4>
+				<table class="table table-hover">
+						<colgroup>
+							<col width="20%" />
+							<col width="*%" />
+							<col width="20%" />
+							<col width="20%" />
+						</colgroup>
+					<thead class="">
+						<tr class="table-secondary text-center">
+							<th scope="col">구매일</th>
+							<th scope="col">결제 내역</th>
+							<th scope="col">주문금액</th>
+							<th scope="col">결제 수단</th>
+						</tr>
+					</thead>
+					<tbody>
+					<%
+					  for (OrderDto order : orders) {
+					%>
+						<tr class="text-center">
+							<td><%=order.getCreatedDate() %></td>
+							<td><%=order.getBookTitle() %> <%=order.getBookCount() > 1 ? "외 "+(order.getBookCount()-1)+" 권" : ""%></td>
+							<td><%=StringUtil.priceFormat(order.getTotalPrice()) %>원</td>
+							<td>리디 캐시</td>
+						</tr>
+					<%
+					  }
+					%>					
+					</tbody>
+				</table>
 			</div>
 		</div>
+	</div>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-		<jsp:include page="/common/footer.jsp">
-		<jsp:param name="menu" value="cash"/>
+		<!-- footer -->
+	<jsp:include page="/common/footer.jsp">
+		<jsp:param name="menu" value="mypage"/>
 	</jsp:include>
 </body>
 </html>

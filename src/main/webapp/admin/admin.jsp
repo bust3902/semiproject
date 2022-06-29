@@ -1,11 +1,17 @@
+<%@page import="com.htabooks.vo.User"%>
+<%@page import="com.htabooks.util.StringUtil"%>
+<%@page import="com.htabooks.vo.Pagination"%>
+<%@page import="com.htabooks.vo.QuestionsBoard"%>
+<%@page import="java.util.List"%>
+<%@page import="com.htabooks.dao.QuestionsBoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" errorPage="" %>
 <%
-   /*  	//세션에서 로그인된 관리자정보를 조회한다.
-	User user = (User) session.getAttribute("LOGINED_ADMIN");
-	if (user == null) {
+    	//세션에서 로그인된 관리자정보를 조회한다.
+	User adminAccount = (User) session.getAttribute("LOGINED_ADMIN");
+	if (adminAccount == null) {
 		throw new RuntimeException("관리자 페이지는 관리자 로그인 후 사용가능한 서비스 입니다.");
-	} */
+	} 
 %>
 <!DOCTYPE html>
 <html>
@@ -74,7 +80,7 @@
 						<tr class="table" onclick="location.href='/semiproject/admin/admin.jsp'" style="cursor:pointer">
 							<td>2</td>
 							<td>이완용</td>
-							<td>삭제된 문의내용입니다.</td>
+							<td>차단된 회원입니다.</td>
 							<td>2022.06.15</td>
 							
 							
@@ -87,7 +93,7 @@
 						</tr>
 						<tr class="table" onclick="location.href='/semiproject/admin/admin.jsp'" style="cursor:pointer">
 							<td>4</td>
-							<td>을지문덕</td>
+							<td>강감찬</td>
 							<td>행복하세요 :]</td>
 							<td>2022.06.17</td>
 						</tr>

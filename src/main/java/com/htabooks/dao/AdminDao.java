@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.htabooks.dto.BookDto;
 import com.htabooks.helper.DaoHelper;
-import com.htabooks.vo.Book;
 import com.htabooks.vo.User;
 
 public class AdminDao {
@@ -34,49 +33,28 @@ public class AdminDao {
 	}
 	
 	
-	// 상품정보 수정 - > updateproductform.jsp ->updateproduct.jsp
-	
-	/**
-	 * 상품정보 수정
-	 * @param book 상품정보
-	 * @throws SQLException 데이터액세스 작업중 예외가발생하면 이 예외를 던진다.
-	 */
-	public void updateItem(Book book)throws SQLException{
-		String sql = "update ridi_books  "
-				   + "set "
-				   + "		book_title = ?, "
-				   + "		category_no = ?, "
-				   + "		book_writer = ?, "
-				   + "		paper_book_price = ?, "
-				   + "		book_price = ?, "
-				   + "		book_introduce = ?, "
-				   + "		book_created_date = sysdate, "
-				   + "		book_updated_date = sysdate, "
-				   + "where book_no = ? ";
-		helper.update(sql,book.getTitle(),book.getCategoryNo(),book.getWriter(),book.getPaperBookPrice(),book.getBookPrice(),book.getIntroduce(),book.getNo());
-	}
-	
 	
 	
 	public User getAdminById(String id) throws SQLException{
-		String sql="select * "
-				+ "from ridi_users "
-				+ "where user_id= ? "
-				+ "and user_admin='y'";
+		String sql="SELECT * "
+				+ "FROM RIDI_USERS "
+				+ "where USER_ID= ? "
+				+ "AND USER_ADMIN='Y'";
 		
 		return helper.selectOne(sql, rs -> {
 			User user = new User();
-			user.setNo(rs.getInt("user_no"));
-			user.setId(rs.getString("user_id"));
-			user.setPassword(rs.getString("user_password"));
-			user.setEmail(rs.getString("user_email"));
-			user.setBirthDate(rs.getString("user_birthDate"));
-			user.setGender(rs.getString("user_gender"));
-			user.setCreatedDate(rs.getDate("user_createdDate"));
-			user.setCash(rs.getInt("user_cash"));
-			user.setAdmin(rs.getString("user_admin"));
-			user.setReject(rs.getString("user_reject"));
-			user.setBookCount(rs.getInt("user_bookCount"));
+			user.setNo(rs.getInt("USER_NO"));
+			user.setId(rs.getString("USER_ID"));
+			user.setPassword(rs.getString("USER_PASSWORD"));
+			user.setEmail(rs.getString("USER_EMAIL"));
+			user.setBirthDate(rs.getString("USER_BIRTH_DATE"));
+			user.setGender(rs.getString("USER_GENDER"));
+			user.setCreatedDate(rs.getDate("USER_CREATED_DATE"));
+			user.setCash(rs.getInt("USER_CASH"));
+			user.setAdmin(rs.getString("USER_ADMIN"));
+			user.setReject(rs.getString("USER_REJECT"));
+			user.setBookCount(rs.getInt("USER_BOOK_COUNT"));
+			user.setName(rs.getString("USER_NAME"));
 			
 			return user;
 			

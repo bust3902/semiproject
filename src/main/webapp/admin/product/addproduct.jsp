@@ -11,12 +11,11 @@
 <%
 // 상품 추가페이지
 
-	/* // 로그인 후 사용가능한 서비스 (세션에 저장된 관리자정보 조회)
-	User admin = (User) session.getAttribute("LOGINED_ADMIN");
-	if(admin == null){
-		response.sendRedirect("(사용자정보 오류 페이지)");
-		return; 
-} */
+	// 로그인 후 사용가능한 서비스 (세션에 저장된 관리자정보 조회)
+	User adminAccount = (User) session.getAttribute("LOGINED_ADMIN");
+	if (adminAccount == null) {
+	throw new RuntimeException("관리자 페이지는 관리자 로그인 후 사용가능한 서비스 입니다.");
+	}
 	// 요청 파라미터에서 책번호,책제목,저자,설명,가격의 이름을 조회
 	
 	MultipartRequest mr = new MultipartRequest(request, "C:\\eclipse\\workspace-web\\semiproject\\src\\main\\webapp\\img");
@@ -31,6 +30,7 @@
 	String bookIntroduce 	= StringUtil.nullToBlank(mr.getParameter("bookIntroduce"));
 	String bookPublisher 	= StringUtil.nullToBlank(mr.getParameter("bookPublisher"));
 	String imgFileName 		= StringUtil.nullToBlank(mr.getFilename("imgFileName"));
+	
 	
 	// 도서객체를 생성해서 도서리스트 테이블에 저장
 	

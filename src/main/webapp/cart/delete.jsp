@@ -55,7 +55,6 @@
 				failCount++;
 			}
 		}
-		
 		if (failCount == 0) {
 			String jsonText = "{\"success\":true}";
 			out.write(jsonText);

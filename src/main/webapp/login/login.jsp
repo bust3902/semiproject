@@ -48,12 +48,7 @@ if (sessionCart != null) {
 	sessionCart.clear();
 }
 
-// 리디렉트
-
-if (redirect != null) {
-	response.sendRedirect("../" + redirect);
-	return;
-}
-response.sendRedirect("../home.jsp");
+// 기존 페이지로 리다이렉트
+response.sendRedirect(redirect);
 
 %>
