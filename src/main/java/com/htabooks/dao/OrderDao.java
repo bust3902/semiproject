@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.StringJoiner;
 
+import com.htabooks.dto.OrderDto;
 import com.htabooks.helper.DaoHelper;
 import com.htabooks.vo.CartItem;
 import com.htabooks.vo.Order;
@@ -16,30 +17,29 @@ public class OrderDao {
 	DaoHelper helper = DaoHelper.getInstance();
 
 	/**
-	 * 유저 번호로 카트 아이템 가져오기
+	 * 유저 번호로 주문 정보 가져오기
 	 * @throws SQLException 
 	 */
-	public List<CartItem> getCartItemsByUserNo(int no) throws SQLException {
-		String sql = "select c.cart_item_no, c.user_no, c.book_no, b.book_title, b.book_writer, b.paper_book_price, "
-				+ "b.book_price, b.discount_rate, c.cart_item_created_date "
-				+ "from ridi_cart_items c, ridi_books b "
-				+ "where c.user_no = ? "
+	public List<OrderDto> getOrdersByUserNo(int no) throws SQLException {
+		String sql = "with title_and_count "
+				+ "as (select order_no, book_no, count(*) over (partition by order_no) book_cnt, row_number() over (partition by order_no order by book_no) rnum "
+				+ "    from ridi_order_items) "
+				+ "select o.order_no, o.order_created_date, b.book_title, c.book_cnt, o.total_payment_price "
+				+ "from ridi_orders o, title_and_count c, ridi_books b "
+				+ "where rnum = 1 "
+				+ "and o.order_no = c.order_no "
 				+ "and c.book_no = b.book_no "
-				+ "and c.deleted = 'N' ";
+				+ "and o.user_no = ? ";
 
 		return helper.selectList(sql, rs -> {
-			CartItem item = new CartItem();
-			item.setNo(rs.getInt("cart_item_no"));
-			item.setUserNo(rs.getInt("user_no"));
-			item.setBookNo(rs.getInt("book_no"));
-			item.setTitle(rs.getString("book_title"));
-			item.setWriter(rs.getString("book_writer"));
-			item.setPaperBookPrice(rs.getInt("paper_book_price"));
-			item.setBookPrice(rs.getInt("book_price"));
-			item.setDiscountRate(rs.getInt("discount_rate"));
-			item.setCreatedDate(rs.getDate("cart_item_created_date"));
+			OrderDto order = new OrderDto();
+			order.setOrderNo(rs.getInt("order_no"));
+			order.setCreatedDate(rs.getDate("order_created_date"));
+			order.setBookTitle(rs.getString("book_title"));
+			order.setBookCount(rs.getInt("book_cnt"));
+			order.setTotalPrice(rs.getInt("total_payment_price"));
 
-			return item;
+			return order;
 		}, no);
 	}
 

@@ -1,3 +1,6 @@
+<%@page import="com.htabooks.util.StringUtil"%>
+<%@page import="com.htabooks.dto.OrderDto"%>
+<%@page import="com.htabooks.dao.OrderDao"%>
 <%@page import="com.htabooks.vo.CartItem"%>
 <%@page import="java.util.List"%>
 <%@page import="com.htabooks.dao.CartItemDao"%>
@@ -30,6 +33,10 @@
 	<!-- 로그인 된 유저 정보를 불러온다 -->
 	<%
 	User user = (User) session.getAttribute("LOGINED_USER");
+	if (user == null) {
+		response.sendRedirect("../login/loginform.jsp");
+		return;
+	}
 	
 	UserDao userDao = UserDao.getInstance();
 	user = userDao.getUserById(user.getId());
@@ -37,6 +44,10 @@
 	//카트 불러오기
 	CartItemDao cartItemDao = CartItemDao.getInstance();
 	List<CartItem> cart = cartItemDao.getCartItemsByUserNo(user.getNo());
+	
+	// 주문 목록 불러오기
+	OrderDao orderDao = OrderDao.getInstance();
+	List<OrderDto> orders = orderDao.getOrdersByUserNo(user.getNo());
 	%>
 	
 	<!-- 사이드 메뉴 -->
@@ -143,12 +154,18 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<th>구매일</th>
-							<th>결제 내역</th>
-							<th>주문금액</th>
-							<th>결제 수단</th>
-						</tr>					
+					<%
+					  for (OrderDto order : orders) {
+					%>
+						<tr class="text-center">
+							<td><%=order.getCreatedDate() %></td>
+							<td><%=order.getBookTitle() %> <%=order.getBookCount() > 1 ? "외 "+(order.getBookCount()-1)+" 권" : ""%></td>
+							<td><%=StringUtil.priceFormat(order.getTotalPrice()) %>원</td>
+							<td>리디 캐시</td>
+						</tr>
+					<%
+					  }
+					%>					
 					</tbody>
 				</table>
 			</div>

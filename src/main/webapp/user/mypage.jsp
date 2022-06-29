@@ -30,6 +30,10 @@
 	<!-- 로그인 된 유저 정보를 불러온다 -->
 	<%
 	User user = (User) session.getAttribute("LOGINED_USER");
+	if (user == null) {
+		response.sendRedirect("../login/loginform.jsp");
+		return;
+	}
 	
 	UserDao userDao = UserDao.getInstance();
 	user = userDao.getUserById(user.getId());

@@ -34,7 +34,6 @@
 	
 	// 파라미터 받기
 	boolean isBuy = "buy".equals(request.getParameter("action"));
-	System.out.println(isBuy);
 	
 	// itemNo (cart)
 	List<Integer> itemNoList = new ArrayList<>();
