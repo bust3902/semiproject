@@ -22,7 +22,7 @@
 			<%
 				if (admin == null) {
 			%>
-		    	<li class="nav-item"><a href="../login/loginform.jsp" class="nav-link" style="color:gray">로그인</a></li>
+		    	<li class="nav-item"><a href="/semiproject/admin/loginform.jsp" class="nav-link" style="color:gray">로그인</a></li>
 			<%
 				} else {
 			%>

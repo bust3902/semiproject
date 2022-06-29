@@ -43,7 +43,11 @@
 		
 
 		%>
-		
+		<!-- //세션에서 로그인된 관리자정보를 조회한다.
+	User admin = (User) session.getAttribute("LOGINED_ADMIN");
+	if (admin == null) {
+		throw new RuntimeException("관리자 페이지는 관리자 로그인 후 사용가능한 서비스 입니다.");
+	} -->
 
 <div class="col-12">
 	<jsp:include page="../../common/adminheader.jsp"></jsp:include>
@@ -191,12 +195,13 @@
 					<div class="col">
 						<div class="custom-control custom-checkbox my-1">
 								<p><strong>회원 그룹</strong></p>
-								<input type="radio" id="grade" name="admin" class="custom-control-input " value="N" >
+								<input type="radio" id="grade" name="admin" class="custom-control-input " value="N">
 								<label class="custom-control-label" for="admin">일반회원</label>
-								<input type="radio" id="grade" name="admin" class="custom-control-input" value="Y" >
+								<input type="radio" id="grade" name="admin" class="custom-control-input" value="Y">
 								<label class="custom-control-label" for="admin">운영자</label>
 								
-								<input type="checkbox" id="grade" name="reject" class="custom-control-input" value="Y" >
+								<input type="checkbox" id="grade" name="reject" class="custom-control-input" value="Y">
+								<input type="hidden" id="grade" name="reject" class="custom-control-input" value="N">
 								<label class="custom-control-label" for="reject">차단</label>
 						</div>
 						<p><strong>세부사항</strong></p>
@@ -303,10 +308,16 @@ function submitUserForm() {
 		titleField.focus();
 		return false;
 	}
-	let contentField = document.querySelector("textarea[name=userEmail]");
-	if (contentField.value === '') {
+	let emailField = document.querySelector("input[name=userEmail]");
+	if (emailField.value === '') {
 		alert("이메일은 필수입력값입니다.");
-		contentField.focus();
+		emailField.focus();
+		return false;
+	}
+	let adminField = document.querySelector("input[name=admin]");
+	if (adminField.value === 'null') {
+		alert("회원그룹은 필수 선택값입니다.");
+		adminField.focus();
 		return false;
 	}
 	return true;

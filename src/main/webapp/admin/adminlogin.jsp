@@ -11,23 +11,23 @@
 	
 	AdminDao adminDao = AdminDao.getInstance();
 	// 아이디로 관리자 정보를 조회한다.
-	User adminAcount = adminDao.getAdminById(id);
-	if (adminAcount == null) {
-		response.sendRedirect("");
+	User saveAdmin = adminDao.getAdminById(id);
+	if (saveAdmin == null) {
+		response.sendRedirect("../login/loginform.jsp?fail=invalid");
 		return;
 	}
 	
 	String secretPassword = PasswordUtil.generateSecretPassword(id, password);
 	// 비밀번호가 일치하는지 확인한다.
-	if (!adminAcount.getPassword().equals(secretPassword)) {
-		response.sendRedirect("");
+	if (!saveAdmin.getPassword().equals(secretPassword)) {
+		response.sendRedirect("../login/loginform.jsp?fail=invalid");
 		return;
 	}
 	
 	
 	// 세션객체에 사용자정보를 저장한다.
-	session.setAttribute("LOGINED_ADMIN", adminAcount);
+	session.setAttribute("LOGINED_ADMIN", saveAdmin);
 	
 	// 재요청URL을 응답으로 보낸다.
-	response.sendRedirect("../home.jsp");
+	response.sendRedirect("/semiproject/admin/admin.jsp");
 %>

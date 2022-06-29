@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.htabooks.dto.BookDto;
 import com.htabooks.helper.DaoHelper;
-import com.htabooks.vo.Book;
 import com.htabooks.vo.User;
 
 public class AdminDao {

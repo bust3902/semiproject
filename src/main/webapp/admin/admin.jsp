@@ -1,3 +1,8 @@
+<%@page import="com.htabooks.util.StringUtil"%>
+<%@page import="com.htabooks.vo.Pagination"%>
+<%@page import="com.htabooks.vo.QuestionsBoard"%>
+<%@page import="java.util.List"%>
+<%@page import="com.htabooks.dao.QuestionsBoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" errorPage="" %>
 <%
