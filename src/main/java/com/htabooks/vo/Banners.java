@@ -8,6 +8,7 @@ public class Banners {
 	private String imageName;
 	private Date showBeginDate;
 	private Date showLastDate;
+	private String address;
 	
 	public Banners() {}
 
@@ -43,5 +44,11 @@ public class Banners {
 		this.showLastDate = showLastDate;
 	}
 	
+	public String getAddress() {
+		return address;
+	}
 	
+	public void setAddress(String address) {
+		this.address = address;
+	}
 }
