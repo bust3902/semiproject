@@ -156,10 +156,46 @@ function submitBoardForm() {
 		titleField.focus();
 		return false;
 	}
-	let contentField = document.querySelector("textarea[name=content]");
-	if (contentField.value === '') {
-		alert("내용은 필수입력값입니다.");
-		contentField.focus();
+	let writerField = document.querySelector("input[name=writer]");
+	if (writerField.value === '') {
+		alert("저자는 필수입력값입니다.");
+		writerField.focus();
+		return false;
+	}
+	let paperBookPriceField = document.querySelector("input[name=paperBookPrice]");
+	if (paperBookPriceField.value === '') {
+		alert("도서 가격은 필수입력값입니다.");
+		paperBookPriceField.focus();
+		return false;
+	}
+	let bookPriceField = document.querySelector("input[name=bookPrice]");
+	if (bookPriceField.value === '') {
+		alert("판매가격은 필수입력값입니다.");
+		bookPriceField.focus();
+		return false;
+	}
+	let categoryGroupNoField = document.querySelector("input[name=categoryGroupNo]");
+	if (categoryGroupNoField.value === '') {
+		alert("대분류 카테고리는 필수선택값입니다.");
+		categoryGroupNoField.focus();
+		return false;
+	}
+	let categoryNoField = document.querySelector("input[name=categoryNo]");
+	if (categoryNoField.value === '') {
+		alert("소분류 카테고리는 필수선택값입니다.");
+		categoryNoField.focus();
+		return false;
+	}
+	let imgFileNameField = document.querySelector("input[name=imgFileName]");
+	if (imgFileNameField.value === '') {
+		alert("도서 이미지를 첨부해주세요.");
+		imgFileNameField.focus();
+		return false;
+	}
+	let bookIntroduceField = document.querySelector("textarea[name=bookIntroduce]");
+	if (bookIntroduceField.value === '') {
+		alert("내용은 필수 입력값입니다.");
+		bookIntroduceField.focus();
 		return false;
 	}
 	return true;
