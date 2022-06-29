@@ -41,13 +41,13 @@
 			userList = adminDao.getAllUsers(pagination.getBeginIndex(), pagination.getEndIndex(), keyword);
 		}
 		
+	//세션에서 로그인된 관리자정보를 조회한다.
+	User adminAccount = (User) session.getAttribute("LOGINED_ADMIN");
+	if (adminAccount == null) {
+		throw new RuntimeException("관리자 페이지는 관리자 로그인 후 사용가능한 서비스 입니다.");
+	}
 
 		%>
-		<!-- //세션에서 로그인된 관리자정보를 조회한다.
-	User admin = (User) session.getAttribute("LOGINED_ADMIN");
-	if (admin == null) {
-		throw new RuntimeException("관리자 페이지는 관리자 로그인 후 사용가능한 서비스 입니다.");
-	} -->
 
 <div class="col-12">
 	<jsp:include page="../../common/adminheader.jsp"></jsp:include>
@@ -112,6 +112,7 @@
 				        <th>아이디</th>
 				        <th>이메일</th>
 				        <th>성별</th>
+				        <th>운영진</th>
 				        <th>차단상태</th>
 				        <th>cash</th>
 				        <th>소장책</th>
@@ -135,6 +136,7 @@
 							<td><%=user.getId() %></td>
 							<td><%=user.getEmail() %></td>
 							<td><%=user.getGender() %></td>
+							<td><%=user.getAdmin() %></td>
 							<td><%=user.getReject() %></td>
 							<td><%=user.getCash() %></td>
 							<td><%=user.getBookCount() %></td>

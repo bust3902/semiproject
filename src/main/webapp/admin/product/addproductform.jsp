@@ -4,13 +4,13 @@
 <%@page import="com.htabooks.vo.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <%
+<%
     	//세션에서 로그인된 관리자정보를 조회한다.
-	User admin = (User) session.getAttribute("LOGINED_ADMIN");
-	if (admin == null) {
+	User adminAccount = (User) session.getAttribute("LOGINED_ADMIN");
+	if (adminAccount == null) {
 		throw new RuntimeException("관리자 페이지는 관리자 로그인 후 사용가능한 서비스 입니다.");
 	}
-%>   --%>  
+%>  
 <!DOCTYPE html>
 <html>
 <head>
