@@ -105,6 +105,10 @@
 				records = bookDao.getSteadySellerCnt(categoryGroupNo).size();
 			}
 			
+			if (records == 0) {
+				records +=1;
+			}
+			
 			
 			int totalPages = (int) (Math.ceil((double) records/rows));
 			
@@ -306,10 +310,8 @@
 							</ul>
 						</nav>
 					</div>
-
 				</div>
 			</div>
-			<div class="col-1"></div>
 		</div>	
 	</div>
 </div>
@@ -317,16 +319,5 @@
 <jsp:include page="../common/footer.jsp">
 	<jsp:param name="menu" value="board"/>
 </jsp:include>
-<script>
-/* function showGrid(event) {
-    document.querySelector('#grid').classList.remove("hidden");
-    document.querySelector('#list').classList.add("hidden");
-};
-
-function showList(event) {
-    document.querySelector('#list').classList.remove("hidden");
-    document.querySelector('#grid').classList.add("hidden");
-}; */
-</script>
 </body>
 </html>

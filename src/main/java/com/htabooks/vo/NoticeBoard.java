@@ -31,6 +31,13 @@ public class NoticeBoard {
 	public String getContents() {
 		return contents;
 	}
+	
+	public String getHtmlContent() {
+		if (contents == null) {
+			return "";
+		}
+		return contents.replace(System.lineSeparator(), "<br />");
+	}
 
 	public void setContents(String contents) {
 		this.contents = contents;
@@ -51,6 +58,5 @@ public class NoticeBoard {
 	public void setCreatedDate(Date createdDateDate) {
 		this.createdDate = createdDate;
 	}
-	
 	
 }

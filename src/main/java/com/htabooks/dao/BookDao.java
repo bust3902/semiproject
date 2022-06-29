@@ -2,11 +2,17 @@ package com.htabooks.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.StringJoiner;
 
 import com.htabooks.dto.BookDto;
 import com.htabooks.helper.DaoHelper;
 import com.htabooks.vo.BookCategories;
 
+/**
+ * 책 데이터 관련 DAO 클래스
+ * @author USER
+ *
+ */
 public class BookDao {
 	
 	/**
@@ -115,46 +121,6 @@ public class BookDao {
 	}
 	
 	/**
-	 * 카테고리 그룹 번호, 카테고리 번호를 받아 카테고리별 판매량이 높은 책 10권의 데이터를 출력
-	 * @param categoryGroupNo 카테고리 그룹 번호
-	 * @param categoryNo 카테고리 번호
-	 * @return 판매량이 높은 책 10권의 데이터
-	 * @throws SQLException
-	 */
-	public List<BookDto> getBestSellerBooks(int categoryGroupNo, int categoryNo) throws SQLException{
-		String sql = "SELECT R.BOOK_NO, R.BOOK_TITLE, R.CATEGORY_NO, R.BOOK_WRITER, R.PAPER_BOOK_PRICE, "
-				   + "		 R.BOOK_PRICE, R.BOOK_INTRODUCE, R.BOOK_CREATED_DATE, R.BOOK_UPDATED_DATE, R.DISCOUNT_RATE, "
-				   + "		 R.IMG_FILE_NAME, R.BOOK_SALES_RATE, C.CATEGORY_GROUP_NO "
-				   + "FROM (SELECT BOOK_NO, BOOK_TITLE, CATEGORY_NO, BOOK_WRITER, PAPER_BOOK_PRICE, BOOK_PRICE, "
-				   + "			   BOOK_INTRODUCE, BOOK_CREATED_DATE, BOOK_UPDATED_DATE, DISCOUNT_RATE, IMG_FILE_NAME, BOOK_SALES_RATE "
-				   + "      FROM RIDI_BOOKS "
-				   + "      ORDER BY BOOK_SALES_RATE DESC) R, RIDI_BOOK_CATEGORIES C "
-				   + "WHERE R.CATEGORY_NO = C.CATEGORY_NO "
-				   + "AND CATEGORY_GROUP_NO = ? "
-				   + "AND R.CATEGORY_NO = ? "
-				   + "AND ROWNUM <= 10 ";
-		
-		return helper.selectList(sql, rs -> {
-			BookDto book = new BookDto();
-			book.setNo(rs.getInt("BOOK_NO"));
-			book.setTitle(rs.getString("BOOK_TITLE"));
-			book.setCategoryNo(rs.getInt("CATEGORY_NO"));
-			book.setWriter(rs.getString("BOOK_WRITER"));
-			book.setPaperBookPrice(rs.getInt("PAPER_BOOK_PRICE"));
-			book.setBookPrice(rs.getInt("BOOK_PRICE"));
-			book.setIntroduce(rs.getString("BOOK_INTRODUCE"));
-			book.setCreatedDate(rs.getDate("BOOK_CREATED_DATE"));
-			book.setUpdatedDate(rs.getDate("BOOK_UPDATED_DATE"));
-			book.setDiscountRate(rs.getInt("DISCOUNT_RATE"));
-			book.setImgFileName(rs.getString("IMG_FILE_NAME"));
-			book.setBookSalesRate(rs.getInt("BOOK_SALES_RATE"));
-			book.setCategoryGroupNo(rs.getInt("CATEGORY_GROUP_NO"));
-			return book;
-		}, categoryGroupNo, categoryNo);
-		
-	}
-	
-	/**
 	 * 카테고리 그룹 번호를 받아 카테고리별 한주간 판매량이 높은 책의 데이터를 출력
 	 * @param categoryGroupNo 카테고리 그룹 번호
 	 * @return 한주간 판매량이 높은 책의 데이터
@@ -211,10 +177,10 @@ public class BookDao {
 				   + "			   BOOK_NO, BOOK_TITLE, CATEGORY_NO, BOOK_WRITER, PAPER_BOOK_PRICE, "
 				   + "             BOOK_PRICE, BOOK_INTRODUCE, BOOK_CREATED_DATE, BOOK_UPDATED_DATE, DISCOUNT_RATE, "
 				   + "             IMG_FILE_NAME, BOOK_SALES_RATE, BOOK_PUBLISHER, CATEGORY_GROUP_NO "
-				   + "             FROM RIDI_BOOKS "
-				   + "			   WHERE BOOK_CREATED_DATE BETWEEN TRUNC(SYSDATE) - 7 AND TRUNC(SYSDATE)) B, RIDI_BOOK_CATEGORIES C "
+				   + "      FROM RIDI_BOOKS "
+				   + "		WHERE CATEGORY_GROUP_NO = ? "
+				   + "		AND BOOK_CREATED_DATE BETWEEN TRUNC(SYSDATE) - 7 AND TRUNC(SYSDATE)) B, RIDI_BOOK_CATEGORIES C "
 				   + "WHERE B.CATEGORY_NO = C.CATEGORY_NO "
-				   + "AND B.CATEGORY_GROUP_NO = ? "
 				   + "AND ROW_NUMBER >= ? AND ROW_NUMBER <= ? ";
 		
 		return helper.selectList(sql, rs -> {
@@ -245,15 +211,15 @@ public class BookDao {
 	 * @throws SQLException
 	 */
 	public List<BookDto> getWeekBestSellerCnt(int categoryGroupNo) throws SQLException{
-		String sql = "SELECT BOOK_NO "
+		String sql = "SELECT B.BOOK_NO "
 				   + "FROM (SELECT ROW_NUMBER() OVER (ORDER BY BOOK_SALES_RATE DESC) ROW_NUMBER, "
 				   + "			   BOOK_NO, BOOK_TITLE, CATEGORY_NO, BOOK_WRITER, PAPER_BOOK_PRICE, "
 				   + "             BOOK_PRICE, BOOK_INTRODUCE, BOOK_CREATED_DATE, BOOK_UPDATED_DATE, DISCOUNT_RATE, "
 				   + "             IMG_FILE_NAME, BOOK_SALES_RATE, BOOK_PUBLISHER, CATEGORY_GROUP_NO "
-				   + "             FROM RIDI_BOOKS "
-				   + "			   WHERE BOOK_CREATED_DATE BETWEEN TRUNC(SYSDATE) - 7 AND TRUNC(SYSDATE)) B, RIDI_BOOK_CATEGORIES C "
-				   + "WHERE B.CATEGORY_NO = C.CATEGORY_NO "
-				   + "AND B.CATEGORY_GROUP_NO = ? ";
+				   + "      FROM RIDI_BOOKS "
+				   + "		WHERE CATEGORY_GROUP_NO = ? "
+				   + "		AND BOOK_CREATED_DATE BETWEEN TRUNC(SYSDATE) - 7 AND TRUNC(SYSDATE)) B, RIDI_BOOK_CATEGORIES C "
+				   + "WHERE B.CATEGORY_NO = C.CATEGORY_NO ";
 		
 		return helper.selectList(sql, rs -> {
 			BookDto book = new BookDto();
@@ -280,10 +246,10 @@ public class BookDao {
 				   + "			   BOOK_NO, BOOK_TITLE, CATEGORY_NO, BOOK_WRITER, PAPER_BOOK_PRICE, "
 				   + "             BOOK_PRICE, BOOK_INTRODUCE, BOOK_CREATED_DATE, BOOK_UPDATED_DATE, DISCOUNT_RATE, "
 				   + "             IMG_FILE_NAME, BOOK_SALES_RATE, BOOK_PUBLISHER, CATEGORY_GROUP_NO "
-				   + "             FROM RIDI_BOOKS "
-				   + "			   WHERE BOOK_CREATED_DATE BETWEEN TRUNC(SYSDATE) - 30 AND TRUNC(SYSDATE)) B, RIDI_BOOK_CATEGORIES C "
+				   + "      FROM RIDI_BOOKS "
+				   + "		WHERE CATEGORY_GROUP_NO = ? "
+				   + "		AND BOOK_CREATED_DATE BETWEEN TRUNC(SYSDATE) - 30 AND TRUNC(SYSDATE)) B, RIDI_BOOK_CATEGORIES C "
 				   + "WHERE B.CATEGORY_NO = C.CATEGORY_NO "
-				   + "AND B.CATEGORY_GROUP_NO = ? "
 				   + "AND ROW_NUMBER >= ? AND ROW_NUMBER <= ? ";
 		
 		return helper.selectList(sql, rs -> {
@@ -319,10 +285,10 @@ public class BookDao {
 				   + "			   BOOK_NO, BOOK_TITLE, CATEGORY_NO, BOOK_WRITER, PAPER_BOOK_PRICE, "
 				   + "             BOOK_PRICE, BOOK_INTRODUCE, BOOK_CREATED_DATE, BOOK_UPDATED_DATE, DISCOUNT_RATE, "
 				   + "             IMG_FILE_NAME, BOOK_SALES_RATE, BOOK_PUBLISHER, CATEGORY_GROUP_NO "
-				   + "             FROM RIDI_BOOKS "
-				   + "			   WHERE BOOK_CREATED_DATE BETWEEN TRUNC(SYSDATE) - 30 AND TRUNC(SYSDATE)) B, RIDI_BOOK_CATEGORIES C "
-				   + "WHERE B.CATEGORY_NO = C.CATEGORY_NO "
-				   + "AND B.CATEGORY_GROUP_NO = ? ";
+				   + "      FROM RIDI_BOOKS "
+				   + "		WHERE BOOK_CREATED_DATE BETWEEN TRUNC(SYSDATE) - 30 AND TRUNC(SYSDATE)"
+				   + "		AND CATEGORY_GROUP_NO = ?) B, RIDI_BOOK_CATEGORIES C "
+				   + "WHERE B.CATEGORY_NO = C.CATEGORY_NO ";
 		
 		return helper.selectList(sql, rs -> {
 			BookDto book = new BookDto();
@@ -350,9 +316,9 @@ public class BookDao {
 				   + "             BOOK_PRICE, BOOK_INTRODUCE, BOOK_CREATED_DATE, BOOK_UPDATED_DATE, DISCOUNT_RATE, "
 				   + "             IMG_FILE_NAME, BOOK_SALES_RATE, BOOK_PUBLISHER, CATEGORY_GROUP_NO "
 				   + "      FROM RIDI_BOOKS "
-				   + "		WHERE BOOK_SALES_RATE > 1000) B, RIDI_BOOK_CATEGORIES C "
+				   + "		WHERE CATEGORY_GROUP_NO = ? "
+				   + "		AND BOOK_SALES_RATE > 1000) B, RIDI_BOOK_CATEGORIES C "
 				   + "WHERE B.CATEGORY_NO = C.CATEGORY_NO "
-				   + "AND B.CATEGORY_GROUP_NO = ? "
 				   + "AND ROW_NUMBER >= ? AND ROW_NUMBER <= ? ";
 		
 		return helper.selectList(sql, rs -> {
@@ -385,8 +351,8 @@ public class BookDao {
 	public List<BookDto> getSteadySellerCnt(int categoryGroupNo) throws SQLException{
 		String sql = "SELECT BOOK_NO "
 				   + "FROM RIDI_BOOKS "
-				   + "WHERE BOOK_SALES_RATE > 1000 "
-				   + "AND CATEGORY_GROUP_NO = ? ";
+				   + "WHERE CATEGORY_GROUP_NO = ? "
+				   + "AND BOOK_SALES_RATE > 1000 ";
 		
 		return helper.selectList(sql, rs -> {
 			BookDto book = new BookDto();
@@ -512,23 +478,24 @@ public class BookDao {
 	}
 	
 	/**
-	 * 카테고리 그룹 번호, 카테고리 번호를 받아 신간 10권의 데이터를 출력
+	 * 카테고리 그룹 번호, 카테고리 번호를 받아 카테고리별 판매량이 높은 책 10권의 데이터를 출력
 	 * @param categoryGroupNo 카테고리 그룹 번호
 	 * @param categoryNo 카테고리 번호
-	 * @return 신간 10권의 데이터
+	 * @return 판매량이 높은 책 10권의 데이터
 	 * @throws SQLException
 	 */
-	public List<BookDto> getNewBooks(int categoryGroupNo, int categoryNo) throws SQLException{
+	public List<BookDto> getBestSellerBooks(int categoryGroupNo, int categoryNo) throws SQLException{
 		String sql = "SELECT R.BOOK_NO, R.BOOK_TITLE, R.CATEGORY_NO, R.BOOK_WRITER, R.PAPER_BOOK_PRICE, "
-				+ "		 R.BOOK_PRICE, R.BOOK_INTRODUCE, R.BOOK_CREATED_DATE, R.BOOK_UPDATED_DATE, R.DISCOUNT_RATE, "
-				+ "		 R.IMG_FILE_NAME, R.BOOK_SALES_RATE, C.CATEGORY_GROUP_NO "
-				+ "FROM (SELECT BOOK_NO, BOOK_TITLE, CATEGORY_NO, BOOK_WRITER, PAPER_BOOK_PRICE, BOOK_PRICE, "
-				+ "			   BOOK_INTRODUCE, BOOK_CREATED_DATE, BOOK_UPDATED_DATE, DISCOUNT_RATE, IMG_FILE_NAME, BOOK_SALES_RATE "
-				+ "      FROM RIDI_BOOKS "
-				+ "      ORDER BY BOOK_CREATED_DATE DESC) R, RIDI_BOOK_CATEGORIES C "
-				+ "WHERE ROWNUM <= 10 "
-				+ "AND CATEGORY_GROUP_NO = ?"
-				+ "AND CATEGORY_NO = ?";
+				   + "		 R.BOOK_PRICE, R.BOOK_INTRODUCE, R.BOOK_CREATED_DATE, R.BOOK_UPDATED_DATE, R.DISCOUNT_RATE, "
+				   + "		 R.IMG_FILE_NAME, R.BOOK_SALES_RATE, C.CATEGORY_GROUP_NO "
+				   + "FROM (SELECT BOOK_NO, BOOK_TITLE, CATEGORY_NO, BOOK_WRITER, PAPER_BOOK_PRICE, BOOK_PRICE, "
+				   + "			   BOOK_INTRODUCE, BOOK_CREATED_DATE, BOOK_UPDATED_DATE, DISCOUNT_RATE, IMG_FILE_NAME, BOOK_SALES_RATE "
+				   + "      FROM RIDI_BOOKS "
+				   + "      ORDER BY BOOK_SALES_RATE DESC) R, RIDI_BOOK_CATEGORIES C "
+				   + "WHERE R.CATEGORY_NO = C.CATEGORY_NO "
+				   + "AND CATEGORY_GROUP_NO = ? "
+				   + "AND R.CATEGORY_NO = ? "
+				   + "AND ROWNUM <= 10 ";
 		
 		return helper.selectList(sql, rs -> {
 			BookDto book = new BookDto();
@@ -547,7 +514,7 @@ public class BookDao {
 			book.setCategoryGroupNo(rs.getInt("CATEGORY_GROUP_NO"));
 			return book;
 		}, categoryGroupNo, categoryNo);
-
+		
 	}
 	
 	/**
@@ -874,6 +841,25 @@ public class BookDao {
 			return book;
 		}, keyword);
 		
+	}
+	
+	/**
+	 * 판매량 증가시키기
+	 * @param bookNoList
+	 * @throws SQLException
+	 */
+	public void updateBookSalesRate(List<Integer> bookNoList) throws SQLException {
+		String sql = "UPDATE RIDI_BOOKS "
+				   + "SET BOOK_SALES_RATE = (BOOK_SALES_RATE + 500) "  // 수치는 임의로 설정했습니다.
+				   + "WHERE BOOK_NO in ";
+		
+		StringJoiner joiner = new StringJoiner(",");
+		for (int i = 0; i < bookNoList.size(); i++) {
+			joiner.add("?");
+		}
+		String sqlIn = "(" + joiner.toString() + ")";
+		
+		helper.update(sql+sqlIn, bookNoList.toArray());
 	}
 
 	// 서브페이지 

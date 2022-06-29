@@ -19,6 +19,9 @@ height:100%;
 height:100%;
 }
 
+input::placeholder {
+  font-size: 14px;
+}
 </style>
 <!-- 회원가입 페이지 -->
 <body>
@@ -39,18 +42,18 @@ height:100%;
 						
 						<div class="p-1">
 							<div class="p-0 m-0">
-								<input type="text" class="form-control rounded-0 " name="id" placeholder="아이디" onkeyup="idCheck();"/>
+								<input type="text" class="form-control rounded-0 " name="id" placeholder="아이디는 영소문자 + 숫자 + 언더바/하이픈 허용 4~20자리" maxlength = "21" onkeyup="idCheck();"/>
 								<div id="id-helper" class="form-text text-sm"></div>
 							</div>
 						</div>
 						
 						<div class="p-1">
 							<div class="p-0 m-0 ">
-								<input type="password" class="form-control rounded-0 " name="password" placeholder="비밀번호" onkeyup="passwordCheck1();"/>
+								<input type="password" class="form-control rounded-0 " name="password" placeholder="비밀번호는 영문 + 숫자 4~12자리" maxlength = "13" onkeyup="passwordCheck1();"/>
 							</div>
 						
 							<div class="p-0 m-0 ">
-								<input type="password" class="form-control rounded-0 " name="passwordcheck" placeholder="비밀번호 확인" onkeyup="passwordCheck2();"/>
+								<input type="password" class="form-control rounded-0 " name="passwordcheck" placeholder="비밀번호 확인" maxlength = "13" onkeyup="passwordCheck2();"/>
 									<div id="password-helper" class="form-text text-sm"></div>
 							</div>
 						</div>
@@ -77,7 +80,7 @@ height:100%;
 						<div class="mb-2 row">
 							<div class=""></div>
 								<div class="col-6">
-									<input type="text" class="form-control rounded-0 " maxlength="4" name="birthDate" placeholder="출생년도"/>
+									<input type="text" class="form-control rounded-0 " maxlength="4" name="birthDate" placeholder="출생년도" onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');"/>
 								</div>
 							<div class="col-6">
 								<div class="btn-group w-100" role="group" aria-label="Basic radio toggle button group">
@@ -162,39 +165,35 @@ height:100%;
 			
 			let idRegExp = /^[a-z0-9_-]{4,20}$/; // 소문자 + 숫자 + 언더바/하이픈 허용 4~20자리
 			
-			if( idValue ===""){
+			if (idValue ===""){
 				classList.add("text-danger")							
 				idHelperElement.textContent = "아이디를 입력해주세요."		
 				isIdChecked = false;
-				return false;
+				return;
 				
 			}
 			
 			if (idValue.length <3){
 				classList.add("text-danger")
-				idHelperElement.textContent = "아이디는 4글자 이상 20글자 이하 소문자 + 숫자 + 언더바/하이픈 허용";
+				idHelperElement.textContent = "영어 소문자 + 숫자 + 언더바/하이픈 허용";
 				isIdChecked = false;
-				return false;
+				return;
 			}
 			
-			if(idValue.length >20){
+			if(idValue.length >21){
 				classList.add("text-danger")
-				idHelperElement.textContent = "아이디는 4글자 이상 20글자 이하 소문자 + 숫자 + 언더바/하이픈 허용";
+				idHelperElement.textContent = "영어 소문자 + 숫자 + 언더바/하이픈 허용";
 				isIdChecked = false;
-				return false;
+				return ;
 			}
 			
 			if (!idRegExp.test(idValue)) {
 				classList.add("text-danger")
 				idHelperElement.textContent = "유효한 아이디가 아닙니다.";
-				isPwdChecked = false;
+				isIdChecked = false;
 				return;
 				
-			} else {
-				classList.remove("text-danger")
-				idHelperElement.textContent = "";
-				return;
-			}
+			} 
 			
 			let xhr = new XMLHttpRequest();		
 			
@@ -215,7 +214,7 @@ height:100%;
 				}
 			}
 			xhr.open("GET", 'idCheck.jsp?id=' + idValue);	
-			xhr.send();						
+			xhr.send();		 	 	
 			
 		}
 		
@@ -242,14 +241,14 @@ height:100%;
 				classList.add("text-danger")
 				helperElement.textContent = "비밀번호는 4글자 이상 12글자 이하 영문/숫자";
 				isPwdChecked = false;
-				return false;
+				return ;
 			}
 			
-			if(pwdValue.length >12){
+			if(pwdValue.length >=12){
 				classList.add("text-danger")
 				helperElement.textContent = "비밀번호는 4글자 이상 12글자 이하 영문/숫자";
 				isPwdChecked = false;
-				return false;
+				return ;
 			}
 			
 			if (!password1RegExp.test(pwdValue)) {
@@ -326,8 +325,8 @@ height:100%;
 				return;
 				
 			} else {
-				classList.remove("text-danger")
-				helperElement.textContent = "";
+				classList.add("text-success")
+				helperElement.textContent = "사용 가능한 이메일 주소입니다.	";
 				return;
 			}
 		}

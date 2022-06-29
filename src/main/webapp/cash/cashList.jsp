@@ -16,7 +16,7 @@
 	
 	<link href="../img/Hfavicon.ico" rel="icon" type="image/x-icon" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/semiproject/css/home.css" rel="stylesheet" />
+	<link href="/semiproject2/css/home.css" rel="stylesheet" />
 	
 	<jsp:include page="/common/htaheader.jsp">
 		<jsp:param name="menu" value="cashList" />
@@ -32,7 +32,7 @@ a:active { color: red; }
 
 <body>
 
-	<!-- 로그인 된 유저 정보를 불러온다 -->
+	<!-- 로그인 된 유저 정보 조회 -->
 	<%
 	User user = (User) session.getAttribute("LOGINED_USER");
 	
@@ -160,12 +160,31 @@ a:active { color: red; }
 										 
 										 
 										int no = StringUtil.stringToInt(request.getParameter("no"));
-								   		//int currentPage = StringUtil.stringToInt(request.getParameter("page"),1);
-										int rows = StringUtil.stringToInt(request.getParameter("rows"),10);	//default값 
+									   	
 								   		
 										CashHistoryDao cashHistoryDao = CashHistoryDao.getInstance();
 										
-										List<CashHistory> cashHistoryList = cashHistoryDao.getCashHistoriesByNo(user.getNo());
+										// 페이지 내비게이션 출력에 필요한 총 페이지 갯수 구하기
+										
+										
+										// 한 화면에 출력할 데이터 행의 갯수 정하기 
+										int rows = 6;
+										// 총 충전내역 갯수 조회
+										int records = cashHistoryDao.getTotalRows(user.getNo());
+									   	// 총 페이지 갯수 계산
+									   	int pages = (int)(Math.ceil((double) records/rows));
+									   	
+									   	// 요청한 페이지 번호 조회 
+									   	int currentPage = StringUtil.stringToInt(request.getParameter("page"), 1);
+									   	//페이지번호가 올바르지 않으면 1페이지를 다시 요청하는 URL을 응답으로 보낸다.
+									   
+										// 요청한 페이지 번호로 조회구간 계산하기 
+									   	int beginIndex = (currentPage-1)*rows +1;
+									   	int endIndex = currentPage*rows;
+									   	
+										// 요청한 페이지에 해당하는 목록 조회 
+										List<CashHistory> cashHistoryList = cashHistoryDao.getCashHistories(user.getNo(), beginIndex, endIndex);
+										
 										
 										%>  
 										
@@ -201,9 +220,26 @@ a:active { color: red; }
 										%> 
 										
 									</tbody>
+									
+								<div class="row" >
+									<div class="col">
+									<nav aria-label="Page navigation example">
+									  <ul class="pagination justify-content-end pagination-sm">
+									    <li class="page-item"><a class="page-link" <%=currentPage == 1 ? "disabled" :"" %> href="cashList.jsp?page=<%=currentPage -1 %>">이전</a></li>
+									<%
+									for (int num=1; num<= pages; num++){
+									%> 
+									    <li class="page-item"><a class="page-link" href="cashList.jsp?page=<%=num %>"><%=num %></a></li>
+								<%} %> 
+									    <li class="page-item"><a class="page-link" <%=currentPage >= pages ? "disabled" :"" %>href="cashList.jsp?page=<%=currentPage +1 %>">다음</a></li>
+									  </ul>
+									</nav>
+									
+									</div>
+								</div>
+								
 									</table>
 									</td>
-								
 							</tbody>
 						</table>
 					</div>
