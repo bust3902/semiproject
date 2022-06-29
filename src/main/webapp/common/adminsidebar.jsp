@@ -99,7 +99,7 @@
 			      <!-- 사이드바 메뉴목록5 -->
 				<ul class="list-group">
 			    	<li class="list-group-item"><a href="#">광고 요청</a></li>
-			       	<li class="list-group-item"><a href="#">광고 등록</a></li>
+			       	<li class="list-group-item"><a href="/semiproject/admin/banner/addbannerform.jsp">광고 등록</a></li>
 			    </ul>
 			</div>
 			  <!-- 패널 타이틀6 -->

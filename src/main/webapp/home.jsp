@@ -1,3 +1,5 @@
+<%@page import="com.htabooks.vo.Banners"%>
+<%@page import="com.htabooks.dao.BannerDao"%>
 <%@page import="com.htabooks.dto.BookDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.htabooks.util.StringUtil"%>
@@ -11,11 +13,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HTA BOOKS</title>
 <link href="img/Hfavicon.ico" rel="icon" type="image/x-icon" />
-
-<!-- slick CSS, JS -->
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
 <!-- 부트스트랩 CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -53,6 +50,7 @@
 		<div class="row">
 			<%
 				BookDao bookDao = BookDao.getInstance();
+				BannerDao bannerDao = BannerDao.getInstance();
 				// 카테고리 그룹 파라미터
 				int categoryGroupNo = StringUtil.stringToInt(request.getParameter("categoryGroupNo"));
 				
@@ -60,6 +58,9 @@
 				List<BookDto> books = bookDao.getHomeBest();
 				// 신간 목록
 				List<BookDto> newbooks = bookDao.getHomeNew();
+				
+				List<Banners> banners = bannerDao.getBanner();
+				int length = banners.size();
 			%>
 			<div class="col-2 mb-3"><span class="fw-bolder" style="font-size:24px; color:#00AFFF;">도서</span></div>
 			<div class="col-8 mb-3"></div>
@@ -69,24 +70,30 @@
 		</div>
 	</div>
 
-	<div id="carouselExampleCaptions" class="carousel slide container mb-5" data-bs-ride="carousel">
+	<div id="carouselExampleCaptions" class="carousel slide container mb-5" data-bs-ride="true">
 		<div class="carousel-indicators">
-		    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-		    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-		    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+			<%
+				for (int i = 0; i < length; i++) {
+			%>
+		    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<%=i %>" class="<%=i == 0 ? "active" : "" %>" aria-current="true"></button>
+		    <%
+				}
+		    %>
 		</div>
 		
 		<!-- 배너 캐러셀 -->
 		<div class="carousel-inner">
-		    <div class="carousel-item active">
-				<a href="list/detail.jsp?bookNo=10"><img src="img/banner01.jpg" class="d-block w-100" alt="..." style="border-radius: 10px;"></a>
+			<%
+				int loopCount = 0;
+				for (Banners banner : banners) {
+			%>
+		    <div class="carousel-item <%=loopCount == 0 ? "active" : "" %>">
+				<a href="<%=banner.getAddress() %>"><img src="img/<%=banner.getImageName() %>" class="d-block w-100" alt="..." style="border-radius: 10px;"></a>
 			</div>
-			<div class="carousel-item">
-				<a href="list/detail.jsp?bookNo=6"><img src="img/banner02.jpg" class="d-block w-100" alt="..." style="border-radius: 10px;"></a>
-			</div>
-			<div class="carousel-item">
-				<a href="list/detail.jsp?bookNo=1"><img src="img/banner03.jpg" class="d-block w-100" alt="..." style="border-radius: 10px;"></a>
-			</div>
+			<%
+				loopCount++;
+				}
+			%>
 		</div>
 		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
 			<span class="carousel-control-prev-icon" aria-hidden="true"></span>

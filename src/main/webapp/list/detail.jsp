@@ -71,7 +71,7 @@
 		<div class="col-10">
 			<div class="row">
 				<div class="col-3">
-					<img src="../img/<%=book.getImgFileName() %>" style="height:auto; width:200px;">
+					<img src="../img/<%=book.getImgFileName() %>" style="height:auto; width:200px;" onclick="window.open(this.src)">
 				</div>
 				<div class="col-8 mx-3">
 					<div class="row">
