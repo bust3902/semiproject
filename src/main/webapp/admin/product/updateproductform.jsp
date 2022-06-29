@@ -55,7 +55,7 @@
 		
 			<div class="title">상품정보변경</div>
 		</div>
-		<form class="row my-5" method="post" action="updateproduct.jsp" enctype="multipart/form-data" onsubmit="submitModifyForm()" >
+		<form class="row my-5" method="post" action="updateproduct.jsp" enctype="multipart/form-data" onsubmit="return submitModifyForm()" >
 			<input type="hidden" name="no" value="<%=book.getNo() %>" />
 			<input type="hidden" name="page" value="<%=currentPage %>" />
 			
@@ -147,27 +147,33 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js">
 function submitModifyForm() {
-	let titleField = document.querySelector("input[name=title]");
+	let titleField = document.querySelector("input[name=bookTitle]");
 	if (titleField.value === '') {
-		alert("제목은 필수입력값입니다.");
+		alert("제목은 필수 입력 값입니다.");
 		titleField.focus();
 		return false;
 	}
 	let imgField = document.querySelector("input[name=imgFileName]");
 	if (imgField.value === '') {
-		alert("도서 사진은 필수입력값입니다.");
+		alert("도서 사진은 필수 입력 값입니다.");
+		titleField.focus();
+		return false;
+	}
+	let categoryField = document.querySelector("input[name=categoryGroupNo]");
+	if (categoryField.value === '') {
+		alert("카테고리번호는 필수 입력 값입니다.");
 		titleField.focus();
 		return false;
 	}
 	let categoryField = document.querySelector("input[name=categoryNo]");
 	if (categoryField.value === '') {
-		alert("카테고리번호는 필수입력값입니다.");
+		alert("카테고리번호는 필수 입력 값입니다.");
 		titleField.focus();
 		return false;
 	}
-	let contentField = document.querySelector("textarea[name=bookIntroduce]");
+	let contentField = document.querySelector("input[name=bookPrice]");
 	if (contentField.value === '') {
-		alert("내용은 필수입력값입니다.");
+		alert("도서가격은 필수 입력 값입니다..");
 		contentField.focus();
 		return false;
 	}
