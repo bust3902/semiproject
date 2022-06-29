@@ -26,13 +26,35 @@ public class QnaAnswerDao {
 		helper.insert(sql, qnaAnswer.getName(), qnaAnswer.getContents(), qnaAnswer.getAnswer(), qnaAnswer.getAnswerCheck(), qnaAnswer.getCreated(), qnaAnswer.getCategory());
 	}
 	
+	// answer.jsp에서 사용한 dao이다. 
+	public QnaAnswer getQnaAnswer(int no) throws SQLException {
+		String sql = "select RIDI_QNA_NO, RIDI_QNA_NAME, RIDI_QNA_CONTENTS, RIDI_QNA_ANSWER, RIDI_QNA_ANSWER_CHECK, RIDI_QNA_CREATED, RIDI_QNA_CATEGORY "
+					+ "from RIDI_QNA "
+					+ "where RIDI_QNA_NO = ? ";
+		return helper.selectOne(sql, rs -> {
+			
+			QnaAnswer qnaAnswer = new QnaAnswer();
+			qnaAnswer.setNo(rs.getInt("RIDI_QNA_NO"));
+			qnaAnswer.setName(rs.getString("RIDI_QNA_NAME"));
+			qnaAnswer.setContents(rs.getString("RIDI_QNA_CONTENTS"));
+			qnaAnswer.setAnswer(rs.getString("RIDI_QNA_ANSWER"));
+			qnaAnswer.setAnswerCheck(rs.getString("RIDI_QNA_ANSWER_CHECK"));
+			qnaAnswer.setCreated(rs.getDate("RIDI_QNA_CREATED"));
+			qnaAnswer.setCategory(rs.getInt("RIDI_QNA_CATEGORY"));
+			
+			return qnaAnswer;
+		}, no);
+			
+	}
+	
+	
 	// 문의게시판 목록 불러오기
 	public List<QnaAnswer> getQnaAnswer(int beginIndex, int endIndex) throws SQLException {
 		String sql = "select RIDI_QNA_NO, RIDI_QNA_NAME, RIDI_QNA_CONTENTS, RIDI_QNA_ANSWER, RIDI_QNA_ANSWER_CHECK, RIDI_QNA_CREATED, RIDI_QNA_CATEGORY "
 					+ "from (select ROW_NUMBER() over (order by RIDI_QNA_NO DESC) RN, RIDI_QNA_NO, RIDI_QNA_NAME, RIDI_QNA_CONTENTS, "
 					+ "RIDI_QNA_ANSWER, RIDI_QNA_ANSWER_CHECK, RIDI_QNA_CREATED, RIDI_QNA_CATEGORY "
 					+ "from RIDI_QNA) "
-					+ "where RN >= ? AND RN <= ? ";
+					+ "where RN >= ? AND RN <= ?  ";
 		return helper.selectList(sql, rs -> {
 			
 			QnaAnswer qnaAnswer = new QnaAnswer();
@@ -50,12 +72,13 @@ public class QnaAnswerDao {
 	}
 	
 	
-	public List<QnaAnswer> getQnaAnswer(String keyword, int beginIndex, int endIndex) throws SQLException {
+	public List<QnaAnswer> getQnaAnswer(String status, int beginIndex, int endIndex) throws SQLException {
 		String sql = "select RIDI_QNA_NO, RIDI_QNA_NAME, RIDI_QNA_CONTENTS, RIDI_QNA_ANSWER, RIDI_QNA_ANSWER_CHECK, RIDI_QNA_CREATED, RIDI_QNA_CATEGORY "
 				+ "from (select ROW_NUMBER() over (order by RIDI_QNA_NO DESC) RN, RIDI_QNA_NO, RIDI_QNA_NAME, RIDI_QNA_CONTENTS, "
-				+ "RIDI_QNA_ANSWER, RIDI_QNA_ANSWER_CHECK, RIDI_QNA_CREATED, RIDI_QNA_CATEGORY "
-				+ "from RIDI_QNA) "
-				+ "where RN >= ? AND RN <= ? ";
+				+ "      RIDI_QNA_ANSWER, RIDI_QNA_ANSWER_CHECK, RIDI_QNA_CREATED, RIDI_QNA_CATEGORY "
+				+ "      from RIDI_QNA"
+				+ "      where RIDI_QNA_ANSWER_CHECK = ? ) "
+				+ "where RN >= ? AND RN <= ?  ";
 		return helper.selectList(sql, rs -> {
 			
 			QnaAnswer qnaAnswer = new QnaAnswer();
@@ -68,19 +91,19 @@ public class QnaAnswerDao {
 			qnaAnswer.setCategory(rs.getInt("RIDI_QNA_CATEGORY"));
 			
 			return qnaAnswer;
-		}, keyword, beginIndex, endIndex);
+		}, status, beginIndex, endIndex);
 		
 	}
 	
 	
-	public int getTotalRwos(String keyword) throws SQLException {
+	public int getTotalRwos(String status) throws SQLException {
 		String sql = "select count(*) cnt "
 				+ "from RIDI_QNA "
-				+ "where RIDI_QNA_NAME || RIDI_QNA_CONTENTS LIKE ('%' || ? || '%') ";
+				+ "where RIDI_QNA_ANSWER_CHECK = ? ";
 		
 		return helper.selectOne(sql, rs -> {
 			return rs.getInt("cnt");
-		}, keyword);
+		}, status);
 	}
 	
 	
@@ -94,12 +117,12 @@ public class QnaAnswerDao {
 	}
 	
 	// 문의 답변 하기(업데이트)
-	public void qnaAnswer(QnaAnswer qnaAnswer) throws SQLException {
+	public void updateAnswer(QnaAnswer qnaAnswer) throws SQLException {
 		String sql = "update RIDI_QNA "
 					+"set "
 					+"RIDI_QNA_ANSWER = ?, "
-					+"RIDI_QNA_ANSWER_CHECK = ? "
+					+"RIDI_QNA_ANSWER_CHECK = 'y' "
 					+"where RIDI_QNA_NO = ? ";
-		helper.update(sql, qnaAnswer.getAnswer(), qnaAnswer.getAnswerCheck(), qnaAnswer.getNo());
+		helper.update(sql, qnaAnswer.getAnswer(), qnaAnswer.getNo());
 	}
 }

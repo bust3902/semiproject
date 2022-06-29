@@ -22,7 +22,7 @@
 </jsp:include>
 	<%
 		int currentPage = StringUtil.stringToInt(request.getParameter("page"), 1);
-		int rows = StringUtil.stringToInt(request.getParameter("rows"), 5);	
+		int rows = StringUtil.stringToInt(request.getParameter("rows"), 10);	
 		String keyword = StringUtil.nullToBlank(request.getParameter("keyword"));
 		
 		NoticeBoardDao noticeBoardDao = NoticeBoardDao.getInstance();
