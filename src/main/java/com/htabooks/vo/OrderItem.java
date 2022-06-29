@@ -4,6 +4,8 @@ public class OrderItem {
 	int no;
 	int orderNo;
 	int bookNo;
+	String bookTitle;
+	String bookWriter;
 	int price;
 	
 	public OrderItem () {}
@@ -30,6 +32,18 @@ public class OrderItem {
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	public String getBookTitle() {
+		return bookTitle;
+	}
+	public void setBookTitle(String bookTitle) {
+		this.bookTitle = bookTitle;
+	}
+	public String getBookWriter() {
+		return bookWriter;
+	}
+	public void setBookWriter(String bookWriter) {
+		this.bookWriter = bookWriter;
 	}
 	
 	

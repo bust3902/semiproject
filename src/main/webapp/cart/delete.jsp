@@ -55,7 +55,7 @@
 				failCount++;
 			}
 		}
-		
+		System.out.println(cart);
 		if (failCount == 0) {
 			String jsonText = "{\"success\":true}";
 			out.write(jsonText);

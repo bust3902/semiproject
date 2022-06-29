@@ -122,7 +122,7 @@ function getCartItemsList() {
 
       // 카트가 비어있을 때
       if (count == 0) {
-        let formEl = document.querySelector("form");
+        let formEl = document.querySelector("section form");
 
         bookCountSpan.textContent = "";
         formEl.innerHTML =
@@ -245,8 +245,13 @@ function deleteSelectedItems() {
 
 function submitCartForm() {
   let checkedBoxes = document.querySelectorAll("input.check_one:checked");
+  if (checkedBoxes.length === 0) {
+    alert("책을 선택해 주세요.");
+    return false;
+  }
   if (confirm("선택하신 " + checkedBoxes.length + "권을 구매하시겠습니까?")) {
     return true;
+  } else {
+    return false;
   }
-  return false;
 }
